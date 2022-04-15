@@ -324,6 +324,12 @@
 						"", INTERRUPT_ACTION | INTERRUPT_MOVE | INTERRUPT_STUNNED | INTERRUPT_ACT)
 			else
 				user.visible_message("<span class='alert'>The [src]'s graphics port isn't ready to accept [I] yet.</span>")
+		else if (istype(I, /obj/item/electronics/board))
+			user.visible_message("<span class='notice'>The [src] [pick("eagerly", "cautiously", "hungrily", "messily")] [pick("nibbles", "chews", "consumes", "eats")] the [I]!</span>")
+			playsound(src.loc,"sound/items/eatfood.ogg", rand(10,50), 1)
+			eat_twitch(src)
+			changeHealth(1, user)
+			qdel(I)
 		else
 			return ..()
 
