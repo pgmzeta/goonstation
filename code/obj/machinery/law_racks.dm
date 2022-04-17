@@ -736,6 +736,17 @@
 				src.visible_message("<span class='alert'><b>The [src] makes a brief fizzing noise!</b></span>")
 			return true
 
+	custom_suicide = TRUE
+	suicide(var/mob/user as mob)
+		if (!src.user_can_suicide(user))
+			return FALSE
+		src.visible_message("<span class='alert'><b>[user] sticks [his_or_her(user)] tongue in one of the [src]'s module slots!</b></span>")
+		user.shock(ignore_gloves=TRUE)
+		user.unequip_all()
+		playsound(src, 'sound/machines/cruiser_warp.ogg', 70, extrarange=3)
+		dothepixelthing(user)
+		return TRUE
+
 /particles/rack_smoke
 	icon = 'icons/effects/effects.dmi'
 	icon_state = list("smoke")
