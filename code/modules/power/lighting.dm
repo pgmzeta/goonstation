@@ -462,6 +462,116 @@ TYPEINFO(/obj/item/light_parts)
 			icon_state = "runway50"
 			base_state = "runway5"
 
+	taxi_station
+		connected_dock = COMSIG_DOCK_TAXI_STATION
+
+		delay2
+			icon_state = "runway20"
+			base_state = "runway2"
+		delay3
+			icon_state = "runway30"
+			base_state = "runway3"
+		delay4
+			icon_state = "runway40"
+			base_state = "runway4"
+		delay5
+			icon_state = "runway50"
+			base_state = "runway5"
+
+	taxi_diner
+		connected_dock = COMSIG_DOCK_TAXI_DINER
+
+		delay2
+			icon_state = "runway20"
+			base_state = "runway2"
+		delay3
+			icon_state = "runway30"
+			base_state = "runway3"
+		delay4
+			icon_state = "runway40"
+			base_state = "runway4"
+		delay5
+			icon_state = "runway50"
+			base_state = "runway5"
+	taxi_mining
+		connected_dock = COMSIG_DOCK_TAXI_MINING
+
+		delay2
+			icon_state = "runway20"
+			base_state = "runway2"
+		delay3
+			icon_state = "runway30"
+			base_state = "runway3"
+		delay4
+			icon_state = "runway40"
+			base_state = "runway4"
+		delay5
+			icon_state = "runway50"
+			base_state = "runway5"
+
+	bus_diner
+		connected_dock = COMSIG_DOCK_BUS_DINER
+
+		delay2
+			icon_state = "runway20"
+			base_state = "runway2"
+		delay3
+			icon_state = "runway30"
+			base_state = "runway3"
+		delay4
+			icon_state = "runway40"
+			base_state = "runway4"
+		delay5
+			icon_state = "runway50"
+			base_state = "runway5"
+
+	bus_owlery
+		connected_dock = COMSIG_DOCK_BUS_OWLERY
+
+		delay2
+			icon_state = "runway20"
+			base_state = "runway2"
+		delay3
+			icon_state = "runway30"
+			base_state = "runway3"
+		delay4
+			icon_state = "runway40"
+			base_state = "runway4"
+		delay5
+			icon_state = "runway50"
+			base_state = "runway5"
+	bus_mining
+		connected_dock = COMSIG_DOCK_BUS_MINING
+
+		delay2
+			icon_state = "runway20"
+			base_state = "runway2"
+		delay3
+			icon_state = "runway30"
+			base_state = "runway3"
+		delay4
+			icon_state = "runway40"
+			base_state = "runway4"
+		delay5
+			icon_state = "runway50"
+			base_state = "runway5"
+
+	bus_schweet
+		connected_dock = COMSIG_DOCK_BUS_SCHWEET
+
+		delay2
+			icon_state = "runway20"
+			base_state = "runway2"
+		delay3
+			icon_state = "runway30"
+			base_state = "runway3"
+		delay4
+			icon_state = "runway40"
+			base_state = "runway4"
+		delay5
+			icon_state = "runway50"
+			base_state = "runway5"
+
 // Traffic lights on/off is signal controlled; light switches should not affect us.
 /obj/machinery/light/traffic_light/power_change()
 	if(src.loc)

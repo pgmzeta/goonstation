@@ -488,6 +488,9 @@
 /obj/machinery/computer/airbr/trader_right
 	connected_dock = COMSIG_DOCK_TRADER_EAST
 
+/obj/machinery/computer/airbr/taxi_station
+	connected_dock = COMSIG_DOCK_TAXI_STATION
+
 /* -------------------- Button -------------------- */
 /obj/machinery/airbr_test_button
 	name = "Airbridge Button"

@@ -125,7 +125,28 @@
 		/// The diner trading area
 		#define COMSIG_DOCK_TRADER_DINER "trader_diner"
 
+	// ----  Old Fortuna Taxi Shuttle ----
+		/// Station Taxi Dock
+		#define COMSIG_DOCK_TAXI_STATION "taxi_station"
 
+		/// Diner Taxi Dock
+		#define COMSIG_DOCK_TAXI_DINER "taxi_diner"
+
+		/// Mining Outpost Taxi Dock
+		#define COMSIG_DOCK_TAXI_MINING "taxi_mining"
+
+	// ---- John's Bus ----
+		/// Diner Bus Dock
+		#define COMSIG_DOCK_BUS_DINER "bus_diner"
+
+		/// Owlery Bus Dock
+		#define COMSIG_DOCK_BUS_OWLERY "bus_owlery"
+
+		/// Mining Outpost Bus Dock
+		#define COMSIG_DOCK_BUS_MINING "bus_mining"
+
+		/// Juicer Schweet's Bus Dock
+		#define COMSIG_DOCK_BUS_SCHWEET "bus_schweet"
 
 // ---- Light stuff, used by /datum/component/loctargeting/simple_light, .../sm_light, and .../medium_light ----
 /// Send to a thing to enable component lights on it
