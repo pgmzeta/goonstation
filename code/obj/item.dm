@@ -574,6 +574,12 @@
 
 	return 1
 
+/obj/item/proc/get_mousedrop_stackables(atom/movable/O as obj, mob/user as mob)
+	. = list()
+	for(var/obj/item/other in view(1, user))
+		if (other != src && check_valid_stack(other))
+			. += other
+
 /obj/item/proc/split_stack(var/toRemove)
 	if(toRemove >= amount || toRemove < 1) return null
 	var/obj/item/P = new src.type(src.loc)
@@ -592,25 +598,21 @@
 			failed_stack(O, user)
 			return
 
-		var/added = 0
-		var/staystill = user.loc
-		var/stack_result = 0
+		// filter our stackables first
+		var/stackables = get_mousedrop_stackables(src, user)
+		if (!length(stackables))
+			return
 
 		before_stack(O, user)
 
-		for(var/obj/item/other in view(1,user))
-			stack_result = stack_item(other)
-			if (!stack_result)
-				continue
-			else
-				sleep(0.3 SECONDS)
-				added += stack_result
-				if (user.loc != staystill) break
-				if (src.amount >= max_stack)
-					failed_stack(O, user)
-					return
+		actions.start(new /datum/action/bar/private/icon/mousedrop_stack(
+			// jank but better than the parent bar disappearing before the children do
+			duration = (ITEM_STACK_DURATION * 2) * length(stackables),
+			stack=src,
+			items_to_stack=stackables,
+		), user)
 
-		after_stack(O, user, added)
+		after_stack(O, user)
 
 #define src_exists_inside_user_or_user_storage (src.loc == user || (istype(src.loc, /obj/item/storage) && src.loc.loc == user))
 

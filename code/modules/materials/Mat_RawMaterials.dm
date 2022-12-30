@@ -69,7 +69,7 @@
 				user.put_in_hand(src)
 			boutput(user, "<span class='notice'>You add the material to the stack. It now has [src.amount] pieces.</span>")
 
-	mouse_drop(over_object, src_location, over_location) //src dragged onto over_object
+	mouse_drop(atom/over_object, src_location, over_location) //src dragged onto over_object
 		if (isobserver(usr))
 			boutput(usr, "<span class='alert'>Quit that! You're dead!</span>")
 			return
@@ -85,10 +85,10 @@
 				boutput(usr, "<span class='alert'>You're too far away from it to do that.</span>")
 				return
 
-		if (istype(over_object,/obj/item/material_piece)) //piece to piece, doesnt matter if in hand or not.
+		if (istype(over_object,/obj/item/material_piece) && isturf(over_object.loc)) //piece to piece only if on ground
 			var/obj/item/targetObject = over_object
 			if(targetObject.stack_item(src))
-				usr.visible_message("<span class='notice'>[usr.name] stacks \the [src]!</span>")
+				usr.visible_message("<span class='notice'>[usr.name] stacks \the [src] into a pile of [targetObject.amount]!</span>")
 		else if(isturf(over_object)) //piece to turf. piece loc doesnt matter.
 			if(src.amount > 1) //split stack.
 				usr.visible_message("<span class='notice'>[usr.name] splits the stack of [src]!</span>")

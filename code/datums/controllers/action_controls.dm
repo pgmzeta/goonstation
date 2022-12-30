@@ -2081,6 +2081,81 @@ var/datum/action_controller/actions
 				usr = owner
 				over_object.Attackby(target, owner, params)
 
+/datum/action/bar/private/icon/mousedrop_stack
+	interrupt_flags = INTERRUPT_MOVE | INTERRUPT_ACT | INTERRUPT_STUNNED
+	id = "mousedrop_stack"
+	var/obj/item/stack
+	var/list/obj/item/items_to_stack
+
+	New(list/obj/item/items_to_stack, obj/item/stack, duration)
+		..()
+		src.duration = duration
+		src.items_to_stack = items_to_stack
+		src.stack = stack
+
+		src.icon = stack.icon
+		src.icon_state = stack.icon_state
+
+	onUpdate()
+		..()
+		if(stack == null || owner == null)
+			interrupt(INTERRUPT_ALWAYS)
+			return
+
+	onStart()
+		..()
+		if(stack == null || owner == null)
+			interrupt(INTERRUPT_ALWAYS)
+			return
+		for (var/item_to_add in src.items_to_stack)
+			if(!actions.start_and_wait( new /datum/action/bar/icon/mousedrop_stack_per_item(
+					stack=src.stack,
+					to_add=item_to_add,
+				),
+				owner
+			))
+				interrupt(INTERRUPT_ALWAYS)
+				return
+			if (src.stack.amount >= src.stack.max_stack)
+				src.stack.failed_stack(src.stack, owner)
+				interrupt(INTERRUPT_ALWAYS)
+				return
+
+
+/datum/action/bar/icon/mousedrop_stack_per_item
+	duration = ITEM_STACK_DURATION
+	interrupt_flags = INTERRUPT_MOVE | INTERRUPT_ACT | INTERRUPT_STUNNED | INTERRUPT_ACTION
+	id = "mousedrop_stack_per_item"
+	bar_on_owner = FALSE
+	var/obj/item/stack
+	var/obj/item/to_add
+
+	New(obj/item/to_add, obj/item/stack)
+		..()
+		src.to_add = to_add
+		src.stack = stack
+
+		src.icon = to_add.icon
+		src.icon_state = to_add.icon_state
+		src.place_to_put_bar = to_add
+
+	onUpdate()
+		..()
+		if(BOUNDS_DIST(owner, to_add) > 0 || stack == null || to_add == null || owner == null)
+			interrupt(INTERRUPT_ALWAYS)
+			return
+
+	onStart()
+		..()
+		if(BOUNDS_DIST(owner, to_add) > 0 || stack == null || to_add == null || owner == null)
+			interrupt(INTERRUPT_ALWAYS)
+			return
+
+	onEnd()
+		..()
+		stack.stack_item(to_add)
+
+
 /// general purpose action to anchor or unanchor stuff
 /datum/action/bar/icon/anchor_or_unanchor
 	id = "table_tool_interact"

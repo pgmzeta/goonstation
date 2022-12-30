@@ -211,3 +211,6 @@
 #define ATTACK_FULLY_HIDDEN 1
 /// No attack message is shown and no particles are displayed, but the animation of the attacker still plays (genetics analyzer, autoinjectors)
 #define ATTACK_PARTIALLY_HIDDEN 2
+
+/// Duration of each stack, when stacking multiple items
+#define ITEM_STACK_DURATION 0.3 SECONDS
