@@ -1,0 +1,216 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/map/light/graveyard,
+/turf/unsimulated/floor/auto/dirt,
+/area/space)
+"b" = (
+/obj/map/light/graveyard,
+/obj/landmark/pocket/portal,
+/turf/unsimulated/floor/auto/dirt,
+/area/space)
+"f" = (
+/turf/unsimulated/wall/auto/adventure/overgrown1,
+/area/space)
+"i" = (
+/obj/map/light/graveyard,
+/obj/landmark/pocket/loot,
+/turf/unsimulated/floor/auto/dirt,
+/area/space)
+"p" = (
+/turf/unsimulated/grasstodirt{
+	dir = 9
+	},
+/area/space)
+"x" = (
+/obj/map/light/graveyard,
+/obj/tombstone/memorial,
+/turf/unsimulated/floor/auto/dirt,
+/area/space)
+"A" = (
+/obj/map/light/graveyard,
+/obj/tombstone/memorial,
+/turf/unsimulated/grasstodirt{
+	dir = 1
+	},
+/area/space)
+"F" = (
+/obj/tree1{
+	dir = 1
+	},
+/obj/stone{
+	dir = 6
+	},
+/turf/unsimulated/floor/auto/dirt,
+/area/space)
+"O" = (
+/obj/map/light/graveyard,
+/obj/landmark/pocket/critter,
+/turf/unsimulated/floor/auto/dirt,
+/area/space)
+"W" = (
+/obj/tombstone/memorial,
+/turf/unsimulated/grasstodirt{
+	dir = 1
+	},
+/area/space)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+b
+a
+a
+a
+a
+a
+F
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(4,1,1) = {"
+f
+f
+f
+f
+a
+a
+f
+a
+"}
+(5,1,1) = {"
+f
+f
+f
+a
+a
+a
+f
+f
+"}
+(6,1,1) = {"
+f
+i
+a
+a
+a
+a
+a
+f
+"}
+(7,1,1) = {"
+A
+a
+a
+x
+a
+a
+a
+a
+"}
+(8,1,1) = {"
+A
+a
+a
+x
+a
+O
+a
+a
+"}
+(9,1,1) = {"
+A
+a
+a
+x
+a
+a
+a
+a
+"}
+(10,1,1) = {"
+A
+O
+a
+x
+a
+a
+a
+a
+"}
+(11,1,1) = {"
+W
+a
+a
+a
+a
+a
+f
+i
+"}
+(12,1,1) = {"
+p
+a
+a
+a
+a
+a
+f
+f
+"}
+(13,1,1) = {"
+f
+a
+a
+a
+f
+f
+f
+f
+"}
+(14,1,1) = {"
+a
+a
+a
+a
+f
+a
+a
+a
+"}
+(15,1,1) = {"
+a
+a
+a
+a
+a
+a
+b
+a
+"}
+(16,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+"}

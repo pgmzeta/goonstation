@@ -503,7 +503,7 @@ ABSTRACT_TYPE(/area) // don't instantiate this directly dummies, use /area/space
 	expandable = 0
 	ambient_light = rgb(79, 164, 184)
 	dont_log_combat = TRUE
-	// filler_turf = "/turf/unsimulated/floor/setpieces/gauntlet"
+	filler_turf = "/turf/unsimulated/floor/setpieces/gauntlet"
 
 	fullbright
 		ambient_light = null

@@ -1,0 +1,230 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/unsimulated/martian/floor,
+/area/space)
+"j" = (
+/obj/indestructible/shuttle_corner{
+	desc = "Grody. How long has this been here?";
+	dir = 9;
+	icon = 'icons/turf/walls_martian.dmi';
+	icon_state = "diagonal";
+	name = "withered wall"
+	},
+/turf/unsimulated/martian/floor,
+/area/space)
+"l" = (
+/obj/critter/martian/soldier/dead,
+/turf/unsimulated/martian/floor,
+/area/space)
+"r" = (
+/obj/landmark/pocket/critter,
+/turf/unsimulated/martian/floor,
+/area/space)
+"v" = (
+/obj/overlay{
+	desc = "The corpse of a long dead space thing.";
+	icon = 'icons/misc/hstation.dmi';
+	icon_state = "marscorpse";
+	name = "dead martian"
+	},
+/turf/unsimulated/martian/floor,
+/area/space)
+"w" = (
+/obj/critter/martian/warrior/dead,
+/turf/unsimulated/martian/floor,
+/area/space)
+"A" = (
+/turf/unsimulated/wall/auto/adventure/martian/exterior,
+/area/space)
+"I" = (
+/obj/indestructible/shuttle_corner{
+	desc = "Grody. How long has this been here?";
+	dir = 6;
+	icon = 'icons/turf/walls_martian.dmi';
+	icon_state = "diagonal";
+	name = "withered wall"
+	},
+/turf/unsimulated/martian/floor,
+/area/space)
+"N" = (
+/obj/critter/martian/psychic/dead,
+/turf/unsimulated/martian/floor,
+/area/space)
+"S" = (
+/obj/indestructible/shuttle_corner{
+	desc = "Grody. How long has this been here?";
+	dir = 9;
+	icon = 'icons/turf/walls_martian.dmi';
+	icon_state = "diagonal";
+	name = "withered wall"
+	},
+/obj/indestructible/shuttle_corner{
+	desc = "Grody. How long has this been here?";
+	dir = 9;
+	icon = 'icons/turf/walls_martian.dmi';
+	icon_state = "diagonal";
+	name = "withered wall"
+	},
+/turf/unsimulated/martian/floor,
+/area/space)
+
+(1,1,1) = {"
+a
+a
+a
+a
+A
+A
+A
+A
+"}
+(2,1,1) = {"
+a
+a
+a
+v
+a
+a
+a
+A
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(4,1,1) = {"
+l
+I
+A
+A
+A
+A
+a
+w
+"}
+(5,1,1) = {"
+I
+A
+S
+a
+a
+a
+a
+a
+"}
+(6,1,1) = {"
+A
+a
+a
+a
+a
+a
+a
+A
+"}
+(7,1,1) = {"
+A
+a
+N
+a
+a
+a
+A
+A
+"}
+(8,1,1) = {"
+a
+a
+a
+A
+A
+A
+A
+A
+"}
+(9,1,1) = {"
+a
+a
+A
+j
+a
+a
+a
+A
+"}
+(10,1,1) = {"
+a
+a
+A
+w
+a
+a
+v
+a
+"}
+(11,1,1) = {"
+r
+a
+A
+a
+a
+A
+a
+a
+"}
+(12,1,1) = {"
+a
+a
+A
+a
+a
+A
+a
+a
+"}
+(13,1,1) = {"
+a
+a
+A
+a
+a
+A
+a
+l
+"}
+(14,1,1) = {"
+a
+a
+a
+a
+a
+A
+a
+a
+"}
+(15,1,1) = {"
+a
+N
+a
+a
+A
+A
+a
+a
+"}
+(16,1,1) = {"
+A
+a
+a
+a
+A
+a
+a
+a
+"}

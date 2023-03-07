@@ -1,0 +1,191 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/unsimulated/floor/red,
+/area/space)
+"i" = (
+/turf/unsimulated/floor/redblack{
+	dir = 4
+	},
+/area/space)
+"l" = (
+/turf/unsimulated/floor/redblack{
+	dir = 10
+	},
+/area/space)
+"n" = (
+/turf/unsimulated/floor/darkpurple,
+/area/space)
+"y" = (
+/turf/unsimulated/floor/redblack{
+	dir = 1
+	},
+/area/space)
+"A" = (
+/turf/unsimulated/floor/redblack{
+	dir = 8
+	},
+/area/space)
+"F" = (
+/turf/unsimulated/floor/redblack,
+/area/space)
+"H" = (
+/turf/unsimulated/floor/redblack{
+	dir = 9
+	},
+/area/space)
+"J" = (
+/turf/unsimulated/floor/black,
+/area/space)
+"X" = (
+/turf/unsimulated/floor/darkblue,
+/area/space)
+"Z" = (
+/turf/unsimulated/floor/redblack{
+	dir = 5
+	},
+/area/space)
+
+(1,1,1) = {"
+J
+J
+J
+n
+n
+J
+J
+J
+X
+X
+J
+J
+J
+J
+J
+J
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+y
+J
+J
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+y
+J
+J
+"}
+(4,1,1) = {"
+A
+A
+l
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+y
+J
+J
+"}
+(5,1,1) = {"
+J
+J
+F
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+Z
+i
+i
+"}
+(6,1,1) = {"
+J
+J
+F
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(7,1,1) = {"
+J
+J
+F
+a
+a
+a
+a
+a
+a
+a
+H
+A
+A
+A
+A
+A
+"}
+(8,1,1) = {"
+J
+J
+J
+n
+n
+J
+J
+J
+X
+X
+J
+J
+J
+J
+J
+J
+"}

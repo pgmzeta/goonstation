@@ -258,3 +258,47 @@
 /datum/pocket_dimension_theme/maints
 	ground_turf = /turf/unsimulated/floor/plating/random
 	lighting = /obj/map/light/graveyard
+
+
+/turf/unsimulated/floor/pocket
+#ifdef IN_MAP_EDITOR
+	icon = 'icons/effects/VR.dmi'
+	icon_state = "gauntfloorDefault"
+#endif
+
+/turf/unsimulated/wall/auto/pocket
+#ifdef IN_MAP_EDITOR
+	icon = 'icons/turf/walls_destiny.dmi'
+#endif
+
+/obj/landmark/pocket
+/obj/landmark/pocket/portal
+#ifdef IN_MAP_EDITOR
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "anom"
+#endif
+/obj/landmark/pocket/critter
+#ifdef IN_MAP_EDITOR
+	icon = 'icons/misc/critter.dmi'
+	icon_state = "lavacrab"
+#endif
+/obj/landmark/pocket/loot
+#ifdef IN_MAP_EDITOR
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "itemspawn"
+#endif
+/obj/landmark/pocket/light
+#ifdef IN_MAP_EDITOR
+	icon = 'icons/effects/mapeditor.dmi'
+	icon_state = "lightG"
+#endif
+/obj/landmark/pocket/decoration
+#ifdef IN_MAP_EDITOR
+	icon = 'icons/obj/hydroponics/plants_crop.dmi'
+	icon_state = "TreeDogwood-G2"
+#endif
+/obj/landmark/pocket/hazard
+#ifdef IN_MAP_EDITOR
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "buildeffect"
+#endif
