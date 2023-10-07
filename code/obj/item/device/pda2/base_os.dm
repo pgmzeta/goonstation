@@ -887,6 +887,7 @@
 
 						if (alert == MGA_CRISIS)
 							displayMessage += " <span class='alert'>(CRISIS ALERT)</span>"
+							src.master.update_overlay("crisis")
 						else if (alert)
 							displayMessage += " ([uppertext(alert)])"
 

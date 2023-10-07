@@ -756,6 +756,7 @@
 			src.overlay_images = list()
 			overlay_images["idle"] = image('icons/obj/items/pda.dmi', "screen-idle")
 			overlay_images["alert"] = image('icons/obj/items/pda.dmi', "screen-message")
+			overlay_images["crisis"] = image('icons/obj/items/pda.dmi', "screen-crisis")
 
 		for (var/k in src.overlay_images)
 			src.overlay_images[k].color = bg
