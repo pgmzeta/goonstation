@@ -111,6 +111,7 @@ var/datum/preMapLoad/preMapLoad = new
 #include "code\datums\pronouns.dm"
 #include "code\datums\rand.dm"
 #include "code\datums\recipes.dm"
+#include "code\datums\rules.dm"
 #include "code\datums\savefile.dm"
 #include "code\datums\sims.dm"
 #include "code\datums\special_r.dm"
