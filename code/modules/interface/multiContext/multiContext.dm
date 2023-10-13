@@ -208,6 +208,8 @@
 				flick(action.flick_on_click, src)
 			if (action.close_clicked)
 				user.closeContextActions()
+		else
+			user.closeContextActions()
 
 	disposing()
 		if(ishuman(user))
