@@ -71,116 +71,181 @@ var/global/list/job_start_locations = list()
 	icon = 'icons/map-editing/job_start.dmi'
 
 // Command
-
-/obj/landmark/start/job/captain
+/obj/landmark/start/job/command
+/obj/landmark/start/job/command/captain
 	name = "Captain"
 	icon_state = "captain"
 
-/obj/landmark/start/job/head_of_personnel
+/obj/landmark/start/job/command/head_of_personnel
 	name = "Head of Personnel"
 	icon_state = "head_of_personnel"
 
-/obj/landmark/start/job/head_of_security
+/obj/landmark/start/job/command/head_of_security
 	name = "Head of Security"
 	icon_state = "head_of_security"
 
-/obj/landmark/start/job/medical_director
+/obj/landmark/start/job/command/medical_director
 	name = "Medical Director"
 	icon_state = "medical_director"
 
-/obj/landmark/start/job/research_director
+/obj/landmark/start/job/command/research_director
 	name = "Research Director"
 	icon_state = "research_director"
 
-/obj/landmark/start/job/chief_engineer
+/obj/landmark/start/job/command/chief_engineer
 	name = "Chief Engineer"
 	icon_state = "chief_engineer"
 
-// Civillian
+/obj/landmark/start/job/command/supply_manager
+	name = "Supply Manager"
+	icon_state = "template" // [ ] icon_state
 
-/obj/landmark/start/job/assistant
+// Crew Services
+/obj/landmark/start/job/services
+/obj/landmark/start/job/services/assistant
 	name = "Staff Assistant"
 	icon_state = "assistant"
 
-/obj/landmark/start/job/clown
-	name = "Clown"
-	icon_state = "clown"
-
-/obj/landmark/start/job/chef
-	name = "Chef"
-	icon_state = "chef"
-
-/obj/landmark/start/job/bartender
-	name = "Bartender"
-	icon_state = "bartender"
-
-/obj/landmark/start/job/botanist
-	name = "Botanist"
-	icon_state = "botanist"
-
-/obj/landmark/start/job/rancher
-	name = "Rancher"
-	icon_state = "rancher"
-
-/obj/landmark/start/job/janitor
+/obj/landmark/start/job/services/janitor
 	name = "Janitor"
 	icon_state = "janitor"
 
-/obj/landmark/start/job/chaplain
+/obj/landmark/start/job/services/clown
+	name = "Clown"
+	icon_state = "clown"
+
+/obj/landmark/start/job/services/chaplain
 	name = "Chaplain"
 	icon_state = "chaplain"
 
-// Engineering
+/obj/landmark/start/job/services/chef
+	name = "Chef"
+	icon_state = "chef"
 
-/obj/landmark/start/job/engineer
-	name = "Engineer"
-	icon_state = "engineer"
+/obj/landmark/start/job/services/bartender
+	name = "Bartender"
+	icon_state = "bartender"
 
-/obj/landmark/start/job/miner
+/obj/landmark/start/job/services/waiter
+	name = "Waiter"
+	icon_state = "template" // [ ] icon_state
+
+/obj/landmark/start/job/services/sous_chef
+	name = "Sous-chef"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/services/mime
+	name = "Mime"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/services/hairdresser
+	name = "Hairdresser"
+/obj/landmark/start/job/services/coach
+	name = "Coach"
+/obj/landmark/start/job/services/journalist
+	name = "Journalist"
+/obj/landmark/start/job/services/union_rep
+	name = "Union Rep"
+
+// Supply
+/obj/landmark/start/job/supply
+/obj/landmark/start/job/supply/courier
+/obj/landmark/start/job/supply/botanist
+	name = "Botanist"
+	icon_state = "botanist"
+/obj/landmark/start/job/supply/rancher
+	name = "Rancher"
+	icon_state = "rancher"
+
+/obj/landmark/start/job/supply/miner
 	name = "Miner"
 	icon_state = "miner"
-
-/obj/landmark/start/job/quartermaster
+/obj/landmark/start/job/supply/quatermaster
 	name = "Quartermaster"
 	icon_state = "quartermaster"
 
-// Med/Sci
+/obj/landmark/start/job/supply/angler
+	name = "Angler"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/supply/beekeeper
+	name = "Apiculturist"
+	icon_state = "template" // [ ] icon_state
 
-/obj/landmark/start/job/medical_doctor
-	name = "Medical Doctor"
+// Engineering
+/obj/landmark/start/job/engineering
+	icon_state = "engineer"
+/obj/landmark/start/job/engineering/technician
+	name = "Technician"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/engineering/electrician
+	name = "Electrician"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/engineering/mechanic
+	name = "Mechanic"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/engineering/structure
+	name = "Structural"
+	icon_state = "template" // [ ] icon_state
+
+// Medical
+/obj/landmark/start/job/medical
 	icon_state = "medical_doctor"
+/obj/landmark/start/job/medical/nurse
+	name = "Nurse"
+	icon_state = "template" // [ ] icon_state
 
-/obj/landmark/start/job/geneticist
+/obj/landmark/start/job/medical/doctor
+	name = "Doctor"
+	icon_state = "medical_doctor"// [ ] icon_state
+/obj/landmark/start/job/medical/surgeon
+	name = "Surgeon"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/medical/geneticist
 	name = "Geneticist"
 	icon_state = "geneticist"
-
-/obj/landmark/start/job/roboticist
+/obj/landmark/start/job/medical/roboticist
 	name = "Roboticist"
 	icon_state = "roboticist"
+/obj/landmark/start/job/medical/pharmacist
+	name = "Pharmacist"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/medical/psychologist
+	name = "Psychologist"
+	icon_state = "template" // [ ] icon_state
 
-/obj/landmark/start/job/scientist
-	name = "Scientist"
+/obj/landmark/start/job/science
 	icon_state = "scientist"
+/obj/landmark/start/job/science/chemist
+	name = "Chemist"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/science/toxins
+	name = "Toxins"
+	icon_state = "template" // [ ] icon_state
 
-// Security
-/obj/landmark/start/job/security_officer
-	name = "Security Officer"
-	icon_state = "security_officer"
+/obj/landmark/start/job/science/
+	name = "Astrophysicist"
+	icon_state = "template" // [ ] icon_state
+/obj/landmark/start/job/science/artifact
+	name = "Xeno-Archeologist"
+	icon_state = "template" // [ ] icon_state
 
-/obj/landmark/start/job/security_assistant
-	name = "Security Assistant"
+/obj/landmark/start/job/security/attendant
+	name = "Attendant"
 	icon_state = "security_assistant"
 
-/obj/landmark/start/job/detective
+/obj/landmark/start/job/security/officer
+	name = "Officer"
+	icon_state = "security_officer"
+
+/obj/landmark/start/job/security/detective
 	name = "Detective"
 	icon_state = "detective"
 
 // Silicons
-/obj/landmark/start/job/AI
+/obj/landmark/start/job/silicon
+/obj/landmark/start/job/silicon/AI
 	name = "AI"
 	icon_state = "ai"
 
-/obj/landmark/start/job/cyborg
+/obj/landmark/start/job/silicon/cyborg
 	name = "Cyborg"
 	icon_state = "cyborg"
 
