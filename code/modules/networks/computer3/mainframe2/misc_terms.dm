@@ -100,6 +100,12 @@
 
 		..()
 
+/obj/machinery/networked/bullet_act(obj/projectile/P)
+	. = ..()
+	if (!(P.proj_data.damage_type in list(D_KINETIC, D_PIERCING, D_SLASHING)))
+		return
+	var/obj/effects/device_debris/E = new /obj/effects/device_debris(get_turf(src))
+	E.set_angle(P.xo, P.yo)
 
 TYPEINFO(/obj/machinery/networked/storage)
 	mats = 12
@@ -5012,3 +5018,36 @@ TYPEINFO(/obj/machinery/networked/test_apparatus)
 			lastSignal = anInput
 
 #undef _FIELD_LABELS
+
+/obj/effects/device_debris
+	particles = new/particles/device_debris
+
+	New()
+		. = ..()
+		SPAWN(0.5 SECONDS)
+			src.particles?.spawning = 0
+			sleep(src.particles?.lifespan)
+			qdel(src)
+
+	proc/set_angle(xo, yo)
+		src.particles?.position = list(8*xo, 8*yo + 8, 0)
+		src.particles?.velocity = generator("box", list(30*xo - 0.5, 20*yo - 0.5, 0), list(40*xo + 0.5, 25*yo + 0.5, 0), UNIFORM_RAND)
+
+/particles/device_debris
+	icon = 'icons/obj/electronics.dmi'
+	icon_state = list("capacitor1"=1, "capacitor2"=1, "diode2"=1, "resistor1"=1, "resistor2"=1)
+	width = 100
+	height = 100
+	count = 3
+	spawning = 3
+	bound1 = list(-48, -48, -1000)
+	bound2 = list(48, 48, 1000)
+	gravity = list(0, -0.1, 0)
+	lifespan = generator("num", 8, 10)
+	fade = 3
+	fadein = 0
+	position = list(0, 0, 0)
+	scale = generator("box", list(0.4,0.4,0), list(0.6,0.6,0), NORMAL_RAND)
+	rotation = generator("num", -30, 30, UNIFORM_RAND)
+	spin = generator("num", -5, 5)
+	friction = generator("num", 0.7, 0.8)
