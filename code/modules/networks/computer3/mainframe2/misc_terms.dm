@@ -5031,23 +5031,22 @@ TYPEINFO(/obj/machinery/networked/test_apparatus)
 
 	proc/set_angle(xo, yo)
 		src.particles?.position = list(8*xo, 8*yo + 8, 0)
-		src.particles?.velocity = generator("box", list(30*xo - 0.5, 20*yo - 0.5, 0), list(40*xo + 0.5, 25*yo + 0.5, 0), UNIFORM_RAND)
+		src.particles?.velocity = generator("box", list(20*xo - 0.5, 20*yo - 0.5, 0), list(30*xo + 0.5, 25*yo + 0.5, 0), UNIFORM_RAND)
 
 /particles/device_debris
 	icon = 'icons/obj/electronics.dmi'
-	icon_state = list("capacitor1"=1, "capacitor2"=1, "diode2"=1, "resistor1"=1, "resistor2"=1)
+	icon_state = list("capacitor1"=1, "capacitor3"=1, "diode1"=1, "diode2"=1, "diode3"=1)
 	width = 100
 	height = 100
 	count = 3
 	spawning = 3
-	bound1 = list(-48, -48, -1000)
-	bound2 = list(48, 48, 1000)
-	gravity = list(0, -0.1, 0)
+	bound1 = list(-128, -128, -1000)
+	bound2 = list(128, 128, 1000)
 	lifespan = generator("num", 8, 10)
 	fade = 3
 	fadein = 0
 	position = list(0, 0, 0)
-	scale = generator("box", list(0.4,0.4,0), list(0.6,0.6,0), NORMAL_RAND)
+	scale = generator("box", list(0.6,0.6,0), list(0.8,0.8,0), NORMAL_RAND)
 	rotation = generator("num", -30, 30, UNIFORM_RAND)
 	spin = generator("num", -5, 5)
-	friction = generator("num", 0.7, 0.8)
+	friction = generator("num", 0.6, 0.8)
