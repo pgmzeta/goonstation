@@ -6,6 +6,14 @@
 		..()
 		setProperty("rangedprot", 1.5)
 
+/obj/item/clothing/suit/hazard/paramedic/armored/prenerf
+	name = "pre-nerf armored paramedic suit"
+	desc = "<i style='color:pink'>My beloved...</i>"
+
+	setupProperties()
+		..()
+		setProperty("rangedprot", 1.5)
+
 /obj/critter/domestic_bee/aloe_bee
 	name = "weird bee"
 	desc = "Thrives in wet climates."
