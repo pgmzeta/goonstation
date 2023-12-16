@@ -1580,6 +1580,8 @@ ABSTRACT_TYPE(/obj/item/implant/revenge)
 	var/sneaky = 0
 	tooltip_flags = REBUILD_DIST
 
+	HELP_MESSAGE_OVERRIDE("Click on it with <b>Grab Intent</b> while in-hand to eject a loaded implant.")
+
 	New()
 		..()
 		src.update()
@@ -1676,6 +1678,14 @@ ABSTRACT_TYPE(/obj/item/implant/revenge)
 	attack_self(mob/user)
 		. = ..()
 		src.imp?.AttackSelf(user)
+
+	attack_hand(mob/user)
+		if (GET_DIST(user, src) == 0 && user.a_intent == INTENT_GRAB)
+			if (user.l_hand == src || user.r_hand == src)
+				user.put_in_hand_or_drop(src.imp)
+				src.imp = null
+				src.update()
+		. = ..()
 
 /datum/action/bar/icon/implanter
 	duration = 20
