@@ -429,6 +429,7 @@ ADMIN_INTERACT_PROCS(/obj/whitehole, proc/admin_activate)
 		),
 		"botany" = list(
 			"randomplant" = 100,
+			"hotbox" = 50,
 			/obj/item/reagent_containers/food/snacks/plant/tomato = 100,
 			/obj/item/reagent_containers/food/snacks/ingredient/egg/bee = 100,
 			/obj/item/plant/herb/cannabis/spawnable = 80,
@@ -1003,6 +1004,15 @@ ADMIN_INTERACT_PROCS(/obj/whitehole, proc/admin_activate)
 					gas.radgas += rand(100, 500)
 				if(prob(20))
 					gas.temperature += rand(100, 3000)
+				var/turf/T = get_turf(src)
+				T.assume_air(gas)
+			if("hotbox")
+				var/datum/gas_mixture/gas = new
+				gas.hotbox += rand(10, 100)
+				if(prob(20))
+					gas.hotbox += rand(100, 500)
+				if(prob(20))
+					gas.temperature += rand(100, 420)
 				var/turf/T = get_turf(src)
 				T.assume_air(gas)
 			if("flockconverted")

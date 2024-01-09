@@ -26,6 +26,7 @@
 		list(varname = "carbon_dioxide", friend_name = "CO2", safe_min=0, safe_max=9, good_min=0, good_max=2),
 		list(varname = "toxins", friend_name = "Plasma", safe_min=0, safe_max=8, good_min=0, good_max=0.4), //you start taking damage a 0.4, but it caps out at 8kpa
 		list(varname = "farts", friend_name = "Farts", safe_min=0, safe_max=16.9, good_min=0, good_max=6.9),
+		list(varname = "hotbox", friend_name = "Weed", safe_min=0, safe_max=16.9, good_min=0, good_max=4.2),
 		list(varname = "radgas", friend_name = "Fallout", safe_min=0, safe_max=6, good_min=0, good_max=0.1), //any fallout is bad, but it caps out ~6kpa
 		list(varname = "nitrous_oxide", friend_name = "N2O", safe_min=0, safe_max=INFINITY, good_min=0, good_max=0.1),
 	//	list(varname = "oxygen_agent_b", friend_name = "Unknown", safe_min=0, safe_max=INFINITY, good_min=0, good_max=INFINITY),
