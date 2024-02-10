@@ -401,8 +401,9 @@
 				if (ispath(new_type, /obj/item/parts/human_parts/arm) || ispath(new_type, /obj/item/parts/robot_parts/arm) || ispath(new_type, /obj/item/parts/artifact_parts/arm))
 					var/l_held_item
 					if (src.l_arm)
-						if (no_drop && src.holder.l_hand)
-							l_held_item = src.holder.l_hand
+						if (istype(src.holder.l_hand))
+							if (no_drop && !istype(src.holder.l_hand, /obj/item/grab))
+								l_held_item = src.holder.l_hand
 						src.l_arm.delete()
 					src.l_arm = new new_type(src.holder)
 					if (l_held_item)
@@ -422,8 +423,9 @@
 				if (ispath(new_type, /obj/item/parts/human_parts/arm) || ispath(new_type, /obj/item/parts/robot_parts/arm) || ispath(new_type, /obj/item/parts/artifact_parts/arm))
 					var/r_held_item
 					if (src.r_arm)
-						if (no_drop && src.holder.r_hand)
-							r_held_item = src.holder.r_hand
+						if (istype(src.holder.r_hand))
+							if (no_drop && !istype(src.holder.r_hand, /obj/item/grab))
+								r_held_item = src.holder.r_hand
 						src.r_arm.delete()
 					src.r_arm = new new_type(src.holder)
 					if (r_held_item)
