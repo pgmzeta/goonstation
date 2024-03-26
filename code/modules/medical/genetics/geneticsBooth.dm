@@ -309,16 +309,19 @@ TYPEINFO(/obj/machinery/genetics_booth)
 						if (account["current_money"] >= selected_product.cost)
 							account["current_money"] -= selected_product.cost
 
-							//add to genetecists budget etc
-							if (selected_product.registered_sale_id)
-								account = FindBankAccountByName(selected_product.registered_sale_id)
-								if (account)
-									account["current_money"] += selected_product.cost/2
-									wagesystem.research_budget += selected_product.cost/2
-								else
-									wagesystem.research_budget += selected_product.cost
+							var/list/accounts = list()
+
+							if(selected_product.registered_sale_id)
+								// sneaky, you get your team's money
+								accounts += FindBankAccountByName(selected_product.registered_sale_id)
 							else
-								wagesystem.research_budget += selected_product.cost
+								// director gets a bigger cut
+								accounts += FindBankAccountsByJobs("Medical Director", "Medical Director", "Geneticist")
+
+							if(length(accounts))
+								for (var/datum/db_record/account in accounts)
+									account["current_money"] += selected_product.cost/2
+							wagesystem.research_budget += selected_product.cost/2
 
 							for (var/mob/O in hearers(src, null))
 								//if (src.glitchy_slogans)
