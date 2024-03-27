@@ -315,7 +315,7 @@ TYPEINFO(/obj/machinery/genetics_booth)
 								accounts += FindBankAccountByName(selected_product.registered_sale_id)
 							else
 								// director gets a bigger cut
-								accounts += FindBankAccountsByJobs("Medical Director", "Medical Director", "Geneticist")
+								accounts += FindBankAccountsByJobs(list("Medical Director", "Medical Director", "Geneticist"))
 
 							// no accounts or not enough to split
 							if(!length(accounts) || (abs(selected_product.cost) < length(accounts)))
