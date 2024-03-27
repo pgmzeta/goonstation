@@ -312,16 +312,21 @@ TYPEINFO(/obj/machinery/genetics_booth)
 							var/list/accounts = list()
 
 							if(selected_product.registered_sale_id)
-								// sneaky, you get your team's money
 								accounts += FindBankAccountByName(selected_product.registered_sale_id)
 							else
 								// director gets a bigger cut
 								accounts += FindBankAccountsByJobs("Medical Director", "Medical Director", "Geneticist")
 
-							if(length(accounts))
-								for (var/datum/db_record/account in accounts)
-									account["current_money"] += selected_product.cost/2
-							wagesystem.research_budget += selected_product.cost/2
+							// no accounts or not enough to split
+							if(!length(accounts) || (abs(selected_product.cost) < length(accounts)))
+								wagesystem.research_budget += selected_product.cost
+							else
+								var/split_funds = selected_product.cost/2
+								var/per_account = round(split_funds/length(accounts))
+								for (var/datum/db_record/pay_to in accounts)
+									pay_to["current_money"] += per_account
+									split_funds -= per_account
+								wagesystem.research_budget += (selected_product.cost / 2) + split_funds // add any remainder from floored split
 
 							for (var/mob/O in hearers(src, null))
 								//if (src.glitchy_slogans)

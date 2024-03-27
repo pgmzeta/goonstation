@@ -66,14 +66,20 @@
 			qdel(DNA)
 		else
 			src.Attackhand(user)
-	else
-		var/obj/item/card/id/ID = get_id_card(W)
-		if (istype(ID))
-			registered_id = ID.registered
-			user.show_text("You swipe the ID on [src]. You will now receive a cut from gene booth sales.", "blue")
-			return
+		return
 
-		..()
+	var/obj/item/card/id/ID = get_id_card(W)
+	if (istype(ID))
+		src.registered_id = ID.registered
+		user.show_text(SPAN_NOTICE("You swipe the ID on [src]. You will now receive a bigger cut from gene booth sales."))
+		return
+
+	if (ispulsingtool(W) && src.registered_id)
+		src.registered_id = null
+		user.show_text(SPAN_NOTICE("Registered ID removed."))
+		// no return, we need the parent ispulsingtool check to reset equipment connections
+
+	..()
 
 
 /obj/machinery/computer/genetics/proc/activated_bonus(mob/user as mob)
