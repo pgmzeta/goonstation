@@ -8,7 +8,7 @@ TYPEINFO(/obj/machinery/ghost_catcher)
 /obj/machinery/ghost_catcher
 	name = "ghost catcher"
 	desc = "It catches ghosts! Read the name gosh I shouldn't have to explain everything to you."
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	icon = 'icons/mob/ghost_drone.dmi'
 	icon_state = "ghostcatcher0"
@@ -33,12 +33,12 @@ TYPEINFO(/obj/machinery/ghost_catcher)
 			return ..()
 
 		if (!assess_ghostdrone_eligibility(M))
-			out(G, "<span class='bold alert'>You are ineligible for ghostdrones!</span>")
+			boutput(G, "<span class='bold alert'>You are ineligible for ghostdrones!</span>")
 			return ..()
 
 		var/position = find_ghostdrone_position(M)
 		if (position)
-			out(G, "<span class='bold alert'>You are already #[position] in the ghostdrone queue!</span>")
+			boutput(G, "<span class='bold alert'>You are already #[position] in the ghostdrone queue!</span>")
 			return ..()
 
 		. = ..()
@@ -48,7 +48,7 @@ TYPEINFO(/obj/machinery/ghost_catcher)
 
 			ghostdrone_candidates += M
 			position = length(ghostdrone_candidates)
-			out(G, "<span class='bold notice'>You have been added to the ghostdrone queue. Now position #[position].</span>")
+			boutput(G, "<span class='bold notice'>You have been added to the ghostdrone queue. Now position #[position].</span>")
 
 	process()
 		..()
@@ -82,13 +82,13 @@ TYPEINFO(/obj/machinery/ghost_catcher)
 				ghostdrone_candidates.Cut(i, (i--) + 1) //This looks like bullshit (and it is). It removes whatever is at position i in the list and subtracts 1 from i.
 				if(istype(M))
 					//Notify M that they've been punted due to ineligibility
-					out(M.current, "<span class='bold alert'>You were removed from the ghostdrone queue due to ineligibility!</span>")
+					boutput(M.current, "<span class='bold alert'>You were removed from the ghostdrone queue due to ineligibility!</span>")
 			else if(!.) //We have not yet selected a candidate, pick this one and dequeue
 				. = M
 				ghostdrone_candidates.Cut(i, (i--) + 1)
 			else
 				//Let them know that the queue has moved
-				out(M.current, "<span class='bold notice'>You are now position #[i] in the ghostdrone queue.</span>")
+				boutput(M.current, "<span class='bold notice'>You are now position #[i] in the ghostdrone queue.</span>")
 
 /proc/assess_ghostdrone_eligibility(var/datum/mind/M)
 	if(!istype(M))
@@ -107,7 +107,7 @@ TYPEINFO(/obj/machinery/ghost_catcher)
 	if (G.client.player)
 		var/round_num = G.client.player.get_rounds_participated()
 		if (!isnull(round_num) && round_num < 20)
-			boutput(G, "<span class='alert'>You only have [round_num] rounds played. You need 20 rounds to play this role.")
+			boutput(G, SPAN_ALERT("You only have [round_num] rounds played. You need 20 rounds to play this role."))
 			return FALSE
 
 	if (!G.can_respawn_as_ghost_critter())
@@ -115,7 +115,7 @@ TYPEINFO(/obj/machinery/ghost_catcher)
 
 	return TRUE
 
-#define GHOSTDRONE_BUILD_INTERVAL 1000
+#define GHOSTDRONE_BUILD_INTERVAL 100 SECONDS
 
 var/global/ghostdrone_factory_working = null // will be set to the current instance of a drone assembly when the first factory makes one, then set to null when it arrives at a recharger
 var/global/last_ghostdrone_build_time = 0
@@ -128,7 +128,7 @@ TYPEINFO(/obj/machinery/ghostdrone_factory)
 /obj/machinery/ghostdrone_factory
 	name = "drone factory"
 	desc = "A slightly mysterious looking factory that spits out weird looking drones every so often. Why not."
-	anchored = 1
+	anchored = ANCHORED
 	density = 0
 	icon = 'icons/mob/ghost_drone.dmi'
 	icon_state = "factory10"
@@ -140,7 +140,7 @@ TYPEINFO(/obj/machinery/ghostdrone_factory)
 	var/list/obj/machinery/conveyor/conveyors = list()
 	var/list/obj/machinery/drone_recharger/factory/factory_rechargers = list()
 	var/working = 0 // are we currently doing something to a drone piece?
-	var/work_time = 20 // how long do_work()'s animation and sound effect loop runs
+	var/work_time = 20 SECONDS // how long do_work()'s animation and sound effect loop runs
 	var/worked_time = 0 // how long the current work cycle has run
 	var/single_system = 0 // for destiny, does this only need one machine in order to make all the parts?
 
@@ -196,10 +196,10 @@ TYPEINFO(/obj/machinery/ghostdrone_factory)
 			return ..()
 		src.start_work(G)
 
-	process()
+	process(mult)
 		..()
 		if (working && src.current_assembly)
-			worked_time ++
+			worked_time += (TIME - src.last_process)
 			if (work_time - worked_time <= 0)
 				src.stop_work()
 				return
@@ -221,12 +221,14 @@ TYPEINFO(/obj/machinery/ghostdrone_factory)
 			if (src.factory_section == 1 || src.single_system)
 				if (!ticker) // game ain't started
 					return
-				if (world.timeofday >= (last_ghostdrone_build_time + GHOSTDRONE_BUILD_INTERVAL))
+				if (TIME >= (last_ghostdrone_build_time + GHOSTDRONE_BUILD_INTERVAL))
 					src.start_work()
 			else
 				var/obj/item/ghostdrone_assembly/G = locate() in get_turf(src)
 				if (G && G.stage == (src.factory_section - 1))
 					src.start_work(G)
+		else if (TIME >= (last_ghostdrone_build_time + 2 * GHOSTDRONE_BUILD_INTERVAL)) //Last assembly didn't arrive at a charger but is overdue to
+			ghostdrone_factory_working = null //Restart the system (so the factory isn't permabricked if someone steals the drone assembly)
 
 	proc/start_work(var/obj/item/ghostdrone_assembly/G)
 		if (!src.factory_rechargers.len)
@@ -256,7 +258,7 @@ TYPEINFO(/obj/machinery/ghostdrone_factory)
 			ghostdrone_factory_working = src.current_assembly // if something happens to the assembly, for whatever, reason this should become null, I guess?
 			src.working = 1
 			src.icon_state = "factory[src.factory_section]1"
-			last_ghostdrone_build_time = world.timeofday
+			last_ghostdrone_build_time = TIME
 
 		if (!src.current_assembly)
 			src.working = 0
@@ -283,7 +285,7 @@ TYPEINFO(/obj/machinery/ghostdrone_factory)
 			src.current_assembly.stage = src.single_system ? 3 : src.factory_section
 			src.current_assembly.icon_state = "drone-stage[src.current_assembly.stage]"
 			src.current_assembly.set_loc(get_turf(src))
-			playsound(src, 'sound/machines/warning-buzzer.ogg', 50, 1)
+			playsound(src, 'sound/machines/warning-buzzer.ogg', 50, TRUE)
 			src.visible_message("[src] ejects [src.current_assembly]!")
 			src.current_assembly = null
 
@@ -343,7 +345,7 @@ TYPEINFO(/obj/machinery/ghostdrone_conveyor_sensor)
 /obj/machinery/ghostdrone_conveyor_sensor
 	name = "conveyor sensor"
 	desc = "A small sensor that pauses the conveyors it's attached to until it receives a signal to start them again."
-	anchored = 1
+	anchored = ANCHORED
 	density = 0
 	icon = 'icons/obj/recycling.dmi'
 	icon_state = "stopper1"
@@ -413,6 +415,7 @@ TYPEINFO(/obj/machinery/ghostdrone_conveyor_sensor)
 	name = "Ghost Drone Factory"
 	icon_state = "cloner"
 	requires_power = 0
+	occlude_foreground_parallax_layers = TRUE
 	#ifdef UNDERWATER_MAP
 	color = OCEAN_COLOR
 	#endif

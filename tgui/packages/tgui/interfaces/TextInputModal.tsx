@@ -7,8 +7,7 @@
 
 import { Loader } from './common/Loader';
 import { InputButtons, Validator } from './common/InputButtons';
-import { useBackend, useSharedState } from '../backend';
-import { KEY_ENTER } from 'common/keycodes';
+import { useBackend, useLocalState } from '../backend';
 import { Box, Input, Section, Stack, TextArea } from '../components';
 import { Window } from '../layouts';
 
@@ -20,6 +19,7 @@ import { Window } from '../layouts';
    timeout: number;
    title: string;
    allowEmpty: boolean;
+   theme: string;
  };
 
 export const TextInputModal = (_, context) => {
@@ -32,9 +32,10 @@ export const TextInputModal = (_, context) => {
     timeout,
     title,
     allowEmpty,
+    theme,
   } = data;
-  const [input, setInput] = useSharedState(context, 'input', placeholder);
-  const [inputIsValid, setInputIsValid] = useSharedState<Validator>(
+  const [input, setInput] = useLocalState(context, 'input', placeholder);
+  const [inputIsValid, setInputIsValid] = useLocalState<Validator>(
     context,
     'inputIsValid',
     { isValid: allowEmpty || !!message, error: null }
@@ -50,7 +51,7 @@ export const TextInputModal = (_, context) => {
      = 130 + Math.ceil(message.length / 5) + (multiline ? 75 : 0);
 
   return (
-    <Window title={title} width={325} height={windowHeight}>
+    <Window title={title} width={325} height={windowHeight} theme={theme || 'nanotrasen'}>
       {timeout && <Loader value={timeout} />}
       <Window.Content>
         <Section fill>
@@ -86,9 +87,8 @@ const InputArea = (props, context) => {
           autoFocus
           fluid
           onInput={(event) => onType(event)}
-          onKeyDown={(event) => {
-            const keyCode = window.event ? event.which : event.keyCode;
-            if (keyCode === KEY_ENTER && inputIsValid) {
+          onEnter={() => {
+            if (inputIsValid) {
               act('submit', { entry: input });
             }
           }}
@@ -104,12 +104,8 @@ const InputArea = (props, context) => {
           autoFocus
           height="100%"
           onInput={(event) => onType(event)}
-          onKeyDown={(event) => {
-            const keyCode = window.event ? event.which : event.keyCode;
-            if (keyCode === KEY_ENTER && inputIsValid) {
-
-              act('submit', { entry: input });
-            }
+          onEnter={() => {
+            act('submit', { entry: input });
           }}
           placeholder="Type something..."
           value={input}

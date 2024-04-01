@@ -16,13 +16,14 @@ TYPEINFO(/obj/machinery/manufacturer)
 	icon_state = "fab-general"
 	var/icon_base = "general" //! This is used to make icon state changes cleaner by setting it to "fab-[icon_base]"
 	density = TRUE
-	anchored = TRUE
+	anchored = ANCHORED
 	power_usage = 200
 	// req_access is used to lock out specific featurs and not limit deconstruciton therefore DECON_NO_ACCESS is required
 	req_access = list(access_heads)
 	event_handler_flags = NO_MOUSEDROP_QOL
 	deconstruct_flags = DECON_SCREWDRIVER | DECON_WRENCH | DECON_WELDER | DECON_WIRECUTTERS | DECON_MULTITOOL | DECON_NO_ACCESS
 	flags = NOSPLASH | FLUID_SUBMERGE
+	layer = STORAGE_LAYER
 
 	// General stuff
 	var/health = 100
@@ -62,9 +63,12 @@ TYPEINFO(/obj/machinery/manufacturer)
 	var/obj/item/disk/data/floppy/manudrive = null
 	var/list/resource_amounts = list()
 	var/list/materials_in_use = list()
+	var/list/stored_materials_by_id = list()
 
 	// Production options
 	var/search = null
+	var/category = null
+	var/list/categories = list("Tool", "Clothing", "Resource", "Component", "Machinery", "Miscellaneous", "Downloaded")
 	var/accept_blueprints = TRUE
 	var/list/available = list() //! A list of every option available in this unit subtype by default
 	var/list/download = list() //! Options gained from scanned blueprints
@@ -159,28 +163,27 @@ TYPEINFO(/obj/machinery/manufacturer)
 			. += " [supplemental_desc]"
 		if (src.health < 100)
 			if (src.health < 50)
-				. += "<br><span class='alert'>It's rather badly damaged. It probably needs some wiring replaced inside.</span>"
+				. += "<br>[SPAN_ALERT("It's rather badly damaged. It probably needs some wiring replaced inside.")]"
 			else
-				. += "<br><span class='alert'>It's a bit damaged. It looks like it needs some welding done.</span>"
+				. += "<br>[SPAN_ALERT("It's a bit damaged. It looks like it needs some welding done.")]"
 
 		if	(status & BROKEN)
-			. += "<br><span class='alert'>It seems to be damaged beyond the point of operability!</span>"
+			. += "<br>[SPAN_ALERT("It seems to be damaged beyond the point of operability!")]"
 		if	(status & NOPOWER)
-			. += "<br><span class='alert'>It seems to be offline.</span>"
+			. += "<br>[SPAN_ALERT("It seems to be offline.")]"
 
 		switch(src.dismantle_stage)
 			if(1)
-				. += "<br><span class='alert'>It's partially dismantled. To deconstruct it, use a crowbar. To repair it, use a wrench.</span>"
+				. += "<br>[SPAN_ALERT("It's partially dismantled. To deconstruct it, use a crowbar. To repair it, use a wrench.")]"
 			if(2)
-				. += "<br><span class='alert'>It's partially dismantled. To deconstruct it, use wirecutters. To repair it, add reinforced metal.</span>"
+				. += "<br>[SPAN_ALERT("It's partially dismantled. To deconstruct it, use wirecutters. To repair it, add reinforced metal.")]"
 			if(3)
-				. += "<br><span class='alert'>It's partially dismantled. To deconstruct it, use a wrench. To repair it, add some cable.</span>"
+				. += "<br>[SPAN_ALERT("It's partially dismantled. To deconstruct it, use a wrench. To repair it, add some cable.")]"
 
 	process(mult)
 		if (status & NOPOWER)
 			return
 
-		power_usage = src.active_power_consumption + 200 * mult
 		..()
 
 		if (src.mode == "working")
@@ -197,10 +200,10 @@ TYPEINFO(/obj/machinery/manufacturer)
 			if (src.time_left < 1)
 				src.output_loop(src.queue[1])
 				SPAWN(0)
-					if (src.queue.len < 1)
+					if (length(src.queue) < 1)
 						src.manual_stop = 0
 						playsound(src.loc, src.sound_happy, 50, 1)
-						src.visible_message("<span class='notice'>[src] finishes its production queue.</span>")
+						src.visible_message(SPAN_NOTICE("[src] finishes its production queue."))
 						src.mode = "ready"
 						src.build_icon()
 		*/
@@ -215,7 +218,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 		if (length(src.queue) < 1)
 			src.manual_stop = 0
 			playsound(src.loc, src.sound_happy, 50, 1)
-			src.visible_message("<span class='notice'>[src] finishes its production queue.</span>")
+			src.visible_message(SPAN_NOTICE("[src] finishes its production queue."))
 			src.mode = "ready"
 			src.build_icon()
 
@@ -233,7 +236,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 		return
 
 	blob_act(power)
-		src.take_damage(rand(power * 0.5, power * 1.5))
+		src.take_damage(randfloat(power * 0.5, power * 1.5))
 
 	meteorhit()
 		src.take_damage(rand(15,45))
@@ -248,7 +251,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 		var/damage = 0
 		damage = round(((P.power/3)*P.proj_data.ks_ratio), 1.0)
 
-		if(src.material) src.material.triggerOnBullet(src, src, P)
+		src.material_trigger_on_bullet(src, P)
 
 		if (!damage)
 			return
@@ -307,7 +310,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 			#info {
 				position: absolute;
 				right: 0.5em;
-				top: 0;
+				top: 50px;
 				width: 25%;
 				padding: 0.5em;
 				}
@@ -315,9 +318,33 @@ TYPEINFO(/obj/machinery/manufacturer)
 			#products {
 				position: absolute;
 				left: 0;
-				top: 0;
+				top:50px;
 				width: 73%;
 				padding: 0.25em;
+			}
+			.tabs {
+				position:fixed;
+				background-color: inherit;
+				z-index:1;
+				top: 0;
+				left: 0;
+			}
+			.tabs a {
+				background-color: inherit;
+				float: left;
+				border: none;
+				outline: none;
+				padding: 14px 16px;
+                margin-left: 10px;
+                margin-top: 6px;
+                margin-bottom: 6px;
+				border-radius: 5px;
+			}
+			.tabs a:hover {
+				background-color: #ddd;
+			}
+			.tabs a.active {
+				background-color: #ccc;
 			}
 
 			.queue, .product {
@@ -454,7 +481,11 @@ TYPEINFO(/obj/machinery/manufacturer)
 			user.Browse(dat, "window=manufact;size=750x500")
 			onclose(user, "manufact")
 			return
-
+		dat += "<div class='tabs'>"
+		for (var/category in list("All") + src.categories)
+			var/actual_category = category == "All" ? null : category
+			dat += "<a [actual_category == src.category ? "class='active" : ""]' href='?src=\ref[src];category=[category]'>[category]</a>"
+		dat += "</div>"
 		dat += "<div id='products'>"
 
 		// Get the list of stuff we can print ...
@@ -470,8 +501,10 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 			if (istext(src.search) && !findtext(A.name, src.search, 1, null))
 				continue
+			else if (istext(src.category) && src.category != A.category)
+				continue
 
-			can_be_made = (mats_used.len >= A.item_paths.len)
+			can_be_made = (length(mats_used) >= A.item_paths.len)
 			if(delete_allowed && src.download.Find(A))
 				delete_link = {"<span class='delete' onclick='delete_product("\ref[A]");'>DELETE</span>"}
 
@@ -518,6 +551,8 @@ TYPEINFO(/obj/machinery/manufacturer)
 		dat += "</div><div id='info'>"
 		dat += build_material_list(user)
 
+		//Search
+		dat += " <A href='?src=\ref[src];search=1'>(Search: \"[istext(src.search) ? html_encode(src.search) : "----"]\")</A><BR>"
 		// This is not re-formatted yet just b/c i don't wanna mess with it
 		dat +="<B>Scanned Card:</B> <A href='?src=\ref[src];card=1'>([src.scan])</A><BR>"
 		if(scan)
@@ -587,32 +622,32 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 			if (href_list["eject"])
 				if (src.mode != "ready")
-					boutput(usr, "<span class='alert'>You cannot eject materials while the unit is working.</span>")
+					boutput(usr, SPAN_ALERT("You cannot eject materials while the unit is working."))
 				else
 					var/mat_id = href_list["eject"]
 					var/ejectamt = 0
 					var/turf/ejectturf = get_turf(usr)
 					for(var/obj/item/O in src.contents)
-						if (O.material && O.material.mat_id == mat_id)
+						if (O.material && O.material.getID() == mat_id)
 							if (!ejectamt)
 								ejectamt = input(usr,"How many material pieces do you want to eject?","Eject Materials") as num
 								if (ejectamt <= 0 || src.mode != "ready" || BOUNDS_DIST(src, usr) > 0 || !isnum_safe(ejectamt))
 									break
 								if (round(ejectamt) != ejectamt)
-									boutput(usr, "<span class='alert'>You can only eject a whole number of a material</span>")
+									boutput(usr, SPAN_ALERT("You can only eject a whole number of a material"))
 									break
 							if (!ejectturf)
 								break
 							if (ejectamt > O.amount)
 								playsound(src.loc, src.sound_grump, 50, 1)
-								boutput(usr, "<span class='alert'>There's not that much material in [name]. It has ejected what it could.</span>")
+								boutput(usr, SPAN_ALERT("There's not that much material in [name]. It has ejected what it could."))
 								ejectamt = O.amount
 							src.update_resource_amount(mat_id, -ejectamt * 10) // ejectamt will always be <= actual amount
 							if (ejectamt == O.amount)
 								O.set_loc(get_output_location(O))
 							else
 								var/obj/item/material_piece/P = new O.type
-								P.setMaterial(copyMaterial(O.material))
+								P.setMaterial(O.material)
 								P.change_stack_amount(ejectamt - P.amount)
 								O.change_stack_amount(-ejectamt)
 								P.set_loc(get_output_location(O))
@@ -622,7 +657,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 				var/upperbound = src.hacked ? MAX_SPEED_HACKED : MAX_SPEED
 				var/given_speed = text2num(href_list["speed"])
 				if (src.mode == "working")
-					boutput(usr, "<span class='alert'>You cannot alter the speed setting while the unit is working.</span>")
+					boutput(usr, SPAN_ALERT("You cannot alter the speed setting while the unit is working."))
 				else if (given_speed >= 1 && given_speed <= upperbound)
 					src.speed = given_speed
 				else
@@ -650,7 +685,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 			if (href_list["removefromQ"])
 				var/operation = text2num_safe(href_list["removefromQ"])
 				if (!isnum(operation) || length(src.queue) < 1 || operation > length(src.queue))
-					boutput(usr, "<span class='alert'>Invalid operation.</span>")
+					boutput(usr, SPAN_ALERT("Invalid operation."))
 					return
 
 				if(world.time < last_queue_op + 5) //Anti-spam to prevent people lagging the server with autoclickers
@@ -664,12 +699,24 @@ TYPEINFO(/obj/machinery/manufacturer)
 			if (href_list["repeat"])
 				src.repeat = !src.repeat
 
+			if (href_list["search"])
+				src.search = input("Enter text to search for in schematics.","Manufacturing Unit") as null|text
+				if (length(src.search) == 0)
+					src.search = null
+
+			if (href_list["category"])
+				var/category = href_list["category"]
+				if (category == "All")
+					src.category = null
+				else if (category in src.categories)
+					src.category = category
+
 			if (href_list["continue"])
 				if (length(src.queue) < 1)
-					boutput(usr, "<span class='alert'>Cannot find any items in queue to continue production.</span>")
+					boutput(usr, SPAN_ALERT("Cannot find any items in queue to continue production."))
 					return
 				if (!check_enough_materials(src.queue[1]))
-					boutput(usr, "<span class='alert'>Insufficient usable materials to manufacture first item in queue.</span>")
+					boutput(usr, SPAN_ALERT("Insufficient usable materials to manufacture first item in queue."))
 				else
 					src.begin_work(0)
 
@@ -681,11 +728,11 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 			if (href_list["delete"])
 				if(!src.allowed(usr))
-					boutput(usr, "<span class='alert'>Access denied.</span>")
+					boutput(usr, SPAN_ALERT("Access denied."))
 					return
 				var/datum/manufacture/I = locate(href_list["disp"])
 				if (!istype(I,/datum/manufacture/mechanics/))
-					boutput(usr, "<span class='alert'>Cannot delete this schematic.</span>")
+					boutput(usr, SPAN_ALERT("Cannot delete this schematic."))
 					return
 				last_queue_op = world.time
 				if(tgui_alert(usr, "Are you sure you want to remove [I.name] from the [src]?", "Confirmation", list("Yes", "No")) == "Yes")
@@ -706,9 +753,9 @@ TYPEINFO(/obj/machinery/manufacturer)
 					return
 
 				if (!check_enough_materials(I))
-					boutput(usr, "<span class='alert'>Insufficient usable materials to manufacture that item.</span>")
+					boutput(usr, SPAN_ALERT("Insufficient usable materials to manufacture that item."))
 				else if (length(src.queue) >= MAX_QUEUE_LENGTH)
-					boutput(usr, "<span class='alert'>Manufacturer queue length limit reached.</span>")
+					boutput(usr, SPAN_ALERT("Manufacturer queue length limit reached."))
 				else
 					src.queue += I
 					if (src.mode == "ready")
@@ -806,7 +853,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 				else
 					src.temp = null
 				if (src.scan.registered in FrozenAccounts)
-					boutput(usr, "<span class='alert'>Your account cannot currently be liquidated due to active borrows.</span>")
+					boutput(usr, SPAN_ALERT("Your account cannot currently be liquidated due to active borrows."))
 					return
 				var/datum/db_record/account = null
 				account = FindBankAccountByName(src.scan.registered)
@@ -826,12 +873,8 @@ TYPEINFO(/obj/machinery/manufacturer)
 							account["current_money"] -= total
 							storage.eject_ores(ore, get_output_location(), quantity, transmit=1, user=usr)
 
-							 // This next bit is stolen from PTL Code
-							var/list/accounts = \
-								data_core.bank.find_records("job", "Chief Engineer") + \
-								data_core.bank.find_records("job", "Chief Engineer") + \
-								data_core.bank.find_records("job", "Engineer")
-
+							 // Chief gets a bigger cut
+							var/list/accounts = FindBankAccountsByJobs(list("Chief Engineer", "Chief Engineer", "Miner"))
 
 							var/datum/signal/minerSignal = get_free_signal()
 							minerSignal.source = src
@@ -869,7 +912,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 		if (!src.hacked)
 			src.hacked = TRUE
 			if(user)
-				boutput(user, "<span class='notice'>You remove the [src]'s product locks!</span>")
+				boutput(user, SPAN_NOTICE("You remove the [src]'s product locks!"))
 			return TRUE
 		return FALSE
 
@@ -884,43 +927,43 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 		if (istype(W, /obj/item/paper/manufacturer_blueprint))
 			if (!src.accept_blueprints)
-				boutput(user, "<span class='alert'>This manufacturer unit does not accept blueprints.</span>")
+				boutput(user, SPAN_ALERT("This manufacturer unit does not accept blueprints."))
 				return
 			var/obj/item/paper/manufacturer_blueprint/BP = W
 			if (src.malfunction && prob(75))
-				src.visible_message("<span class='alert'>[src] emits a [pick(src.text_flipout_adjective)] [pick(src.text_flipout_noun)]!</span>")
+				src.visible_message(SPAN_ALERT("[src] emits a [pick(src.text_flipout_adjective)] [pick(src.text_flipout_noun)]!"))
 				playsound(src.loc, pick(src.sounds_malfunction), 50, 1)
-				boutput(user, "<span class='alert'>The manufacturer mangles and ruins the blueprint in the scanner! What the fuck?</span>")
+				boutput(user, SPAN_ALERT("The manufacturer mangles and ruins the blueprint in the scanner! What the fuck?"))
 				qdel(BP)
 				return
 			if (!BP.blueprint)
-				src.visible_message("<span class='alert'>[src] emits a grumpy buzz!</span>")
+				src.visible_message(SPAN_ALERT("[src] emits a grumpy buzz!"))
 				playsound(src.loc, src.sound_grump, 50, 1)
-				boutput(user, "<span class='alert'>The manufacturer rejects the blueprint. Is something wrong with it?</span>")
+				boutput(user, SPAN_ALERT("The manufacturer rejects the blueprint. Is something wrong with it?"))
 				return
 			for (var/datum/manufacture/mechanics/M in (src.available + src.download))
 				if(istype(M) && istype(BP.blueprint, /datum/manufacture/mechanics))
 					var/datum/manufacture/mechanics/BPM = BP.blueprint
 					if(M.frame_path == BPM.frame_path)
-						src.visible_message("<span class='alert'>[src] emits an irritable buzz!</span>")
+						src.visible_message(SPAN_ALERT("[src] emits an irritable buzz!"))
 						playsound(src.loc, src.sound_grump, 50, 1)
-						boutput(user, "<span class='alert'>The manufacturer rejects the blueprint, as it already knows it.</span>")
+						boutput(user, SPAN_ALERT("The manufacturer rejects the blueprint, as it already knows it."))
 						return
 				else if (BP.blueprint.name == M.name)
-					src.visible_message("<span class='alert'>[src] emits an irritable buzz!</span>")
+					src.visible_message(SPAN_ALERT("[src] emits an irritable buzz!"))
 					playsound(src.loc, src.sound_grump, 50, 1)
-					boutput(user, "<span class='alert'>The manufacturer rejects the blueprint, as it already knows it.</span>")
+					boutput(user, SPAN_ALERT("The manufacturer rejects the blueprint, as it already knows it."))
 					return
 			BP.dropped(user)
 			src.download += BP.blueprint
-			src.visible_message("<span class='alert'>[src] emits a pleased chime!</span>")
+			src.visible_message(SPAN_ALERT("[src] emits a pleased chime!"))
 			playsound(src.loc, src.sound_happy, 50, 1)
-			boutput(user, "<span class='notice'>The manufacturer accepts and scans the blueprint.</span>")
+			boutput(user, SPAN_NOTICE("The manufacturer accepts and scans the blueprint."))
 			qdel(BP)
 			return
 
 		else if (istype(W, /obj/item/satchel))
-			user.visible_message("<span class='notice'>[user] uses [src]'s automatic loader on [W]!</span>", "<span class='notice'>You use [src]'s automatic loader on [W].</span>")
+			user.visible_message(SPAN_NOTICE("[user] uses [src]'s automatic loader on [W]!"), SPAN_NOTICE("You use [src]'s automatic loader on [W]."))
 			var/amtload = 0
 			for (var/obj/item/M in W.contents)
 				if (!istype(M,src.base_material_class))
@@ -928,8 +971,8 @@ TYPEINFO(/obj/machinery/manufacturer)
 				src.load_item(M)
 				amtload++
 			W:UpdateIcon()
-			if (amtload) boutput(user, "<span class='notice'>[amtload] materials loaded from [W]!</span>")
-			else boutput(user, "<span class='alert'>No materials loaded!</span>")
+			if (amtload) boutput(user, SPAN_NOTICE("[amtload] materials loaded from [W]!"))
+			else boutput(user, SPAN_ALERT("No materials loaded!"))
 
 		else if (isscrewingtool(W))
 			if (!src.panel_open)
@@ -948,16 +991,16 @@ TYPEINFO(/obj/machinery/manufacturer)
 				if (choice == "Load it in")
 					do_action = 1
 			if (do_action == 1)
-				user.visible_message("<span class='notice'>[user] loads [W] into the [src].</span>", "<span class='notice'>You load [W] into the [src].</span>")
+				user.visible_message(SPAN_NOTICE("[user] loads [W] into the [src]."), SPAN_NOTICE("You load [W] into the [src]."))
 				src.load_item(W,user)
 			else
 				if (src.health < 50)
-					boutput(user, "<span class='alert'>It's too badly damaged. You'll need to replace the wiring first.</span>")
+					boutput(user, SPAN_ALERT("It's too badly damaged. You'll need to replace the wiring first."))
 				else if(W:try_weld(user, 1))
 					src.take_damage(-10)
 					user.visible_message("<b>[user]</b> uses [W] to repair some of [src]'s damage.")
 					if (src.health == 100)
-						boutput(user, "<span class='notice'><b>[src] looks fully repaired!</b></span>")
+						boutput(user, SPAN_NOTICE("<b>[src] looks fully repaired!</b>"))
 
 		else if (istype(W,/obj/item/cable_coil) && src.panel_open)
 			var/obj/item/cable_coil/C = W
@@ -969,18 +1012,18 @@ TYPEINFO(/obj/machinery/manufacturer)
 				if (choice == "Load it in")
 					do_action = 1
 			if (do_action == 1)
-				user.visible_message("<span class='notice'>[user] loads [C] into the [src].</span>", "<span class='notice'>You load [C] into the [src].</span>")
+				user.visible_message(SPAN_NOTICE("[user] loads [C] into the [src]."), SPAN_NOTICE("You load [C] into the [src]."))
 				src.load_item(C,user)
 			else
 				if (src.health >= 50)
-					boutput(user, "<span class='alert'>The wiring is fine. You need to weld the external plating to do further repairs.</span>")
+					boutput(user, SPAN_ALERT("The wiring is fine. You need to weld the external plating to do further repairs."))
 				else
 					C.use(1)
 					src.take_damage(-10)
 					user.visible_message("<b>[user]</b> uses [C] to repair some of [src]'s cabling.")
 					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 					if (src.health >= 50)
-						boutput(user, "<span class='notice'>The wiring is fully repaired. Now you need to weld the external plating.</span>")
+						boutput(user, SPAN_NOTICE("The wiring is fully repaired. Now you need to weld the external plating."))
 
 		else if (iswrenchingtool(W))
 			var/do_action = 0
@@ -991,7 +1034,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 				if (choice == "Load it in")
 					do_action = 1
 			if (do_action == 1)
-				user.visible_message("<span class='notice'>[user] loads [W] into the [src].</span>", "<span class='notice'>You load [W] into the [src].</span>")
+				user.visible_message(SPAN_NOTICE("[user] loads [W] into the [src]."), SPAN_NOTICE("You load [W] into the [src]."))
 				src.load_item(W,user)
 			else
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -1023,8 +1066,9 @@ TYPEINFO(/obj/machinery/manufacturer)
 			playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 			src.dismantle_stage = 3
 			src.status |= NOPOWER
-			var/obj/item/cable_coil/cut/C = new /obj/item/cable_coil/cut(src.loc)
+			var/obj/item/cable_coil/C = new /obj/item/cable_coil(src.loc)
 			C.amount = 1
+			C.UpdateIcon()
 			src.build_icon()
 
 		else if (istype(W,/obj/item/sheet/steel/reinforced) && src.dismantle_stage == 2)
@@ -1036,19 +1080,20 @@ TYPEINFO(/obj/machinery/manufacturer)
 		else if (istype(W,/obj/item/cable_coil) && src.dismantle_stage == 3)
 			user.visible_message("<b>[user]</b> adds cabling to [src].")
 			src.dismantle_stage = 2
-			qdel(W)
+			var/obj/item/cable_coil/C = W
+			C.use(1)
 			src.status &= ~NOPOWER
 			src.shock(user,100)
 			src.build_icon()
 
 		else if (istype(W,/obj/item/reagent_containers/glass))
 			if (W.cant_drop)
-				boutput(user, "<span class='alert'>You cannot put the [W] into [src]!</span>")
+				boutput(user, SPAN_ALERT("You cannot put the [W] into [src]!"))
 				return
 			if (src.beaker)
-				boutput(user, "<span class='alert'>There's already a receptacle in the machine. You need to remove it first.</span>")
+				boutput(user, SPAN_ALERT("There's already a receptacle in the machine. You need to remove it first."))
 			else
-				boutput(user, "<span class='notice'>You insert [W].</span>")
+				boutput(user, SPAN_NOTICE("You insert [W]."))
 				W.set_loc(src)
 				src.beaker = W
 				if (user && W)
@@ -1057,7 +1102,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 		else if (istype(W,/obj/item/disk/data/floppy))
 			if (src.manudrive)
-				boutput(user, "<span class='alert'>You swap out the disk in the manufacturer with a different one.</span>")
+				boutput(user, SPAN_ALERT("You swap out the disk in the manufacturer with a different one."))
 				src.eject_manudrive(user)
 				src.manudrive = W
 				if (user && W)
@@ -1066,7 +1111,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 				for (var/datum/computer/file/manudrive/MD in src.manudrive.root.contents)
 					src.drive_recipes = MD.drivestored
 			else
-				boutput(user, "<span class='notice'>You insert [W].</span>")
+				boutput(user, SPAN_NOTICE("You insert [W]."))
 				W.set_loc(src)
 				src.manudrive = W
 				if (user && W)
@@ -1077,12 +1122,12 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 
 		else if (istype(W,/obj/item/sheet/) || (istype(W,/obj/item/cable_coil/ || (istype(W,/obj/item/raw_material/ )))))
-			boutput(user, "<span class='alert'>The fabricator rejects the [W]. You'll need to refine them in a reclaimer first.</span>")
+			boutput(user, SPAN_ALERT("The fabricator rejects the [W]. You'll need to refine them in a reclaimer first."))
 			playsound(src.loc, src.sound_grump, 50, 1)
 			return
 
 		else if (istype(W, src.base_material_class) && src.accept_loading(user))
-			user.visible_message("<span class='notice'>[user] loads [W] into [src].</span>", "<span class='notice'>You load [W] into [src].</span>")
+			user.visible_message(SPAN_NOTICE("[user] loads [W] into [src]."), SPAN_NOTICE("You load [W] into [src]."))
 			src.load_item(W,user)
 
 		else if (src.panel_open && (issnippingtool(W) || ispulsingtool(W)))
@@ -1114,69 +1159,65 @@ TYPEINFO(/obj/machinery/manufacturer)
 		src.updateUsrDialog()
 
 	proc/scan_card(obj/item/I)
-		if (istype(I, /obj/item/device/pda2))
-			var/obj/item/device/pda2/P = I
-			if(P.ID_card)
-				I = P.ID_card
-		if (istype(I, /obj/item/card/id))
-			var/obj/item/card/id/ID = I
-			boutput(usr, "<span class='notice'>You swipe the ID card in the card reader.</span>")
+		var/obj/item/card/id/ID = get_id_card(I)
+		if (istype(ID))
+			boutput(usr, SPAN_NOTICE("You swipe the ID card in the card reader."))
 			var/datum/db_record/account = null
 			account = FindBankAccountByName(ID.registered)
 			if(account)
 				var/enterpin = usr.enter_pin("Card Reader")
 				if (enterpin == ID.pin)
-					boutput(usr, "<span class='notice'>Card authorized.</span>")
+					boutput(usr, SPAN_NOTICE("Card authorized."))
 					src.scan = ID
 					return TRUE
 				else
-					boutput(usr, "<span class='alert'>Pin number incorrect.</span>")
+					boutput(usr, SPAN_ALERT("Pin number incorrect."))
 					src.scan = null
 			else
-				boutput(usr, "<span class='alert'>No bank account associated with this ID found.</span>")
+				boutput(usr, SPAN_ALERT("No bank account associated with this ID found."))
 				src.scan = null
 		return FALSE
 
 	mouse_drop(over_object, src_location, over_location)
 		if(!isliving(usr))
-			boutput(usr, "<span class='alert'>Only living mobs are able to set the manufacturer's output target.</span>")
+			boutput(usr, SPAN_ALERT("Only living mobs are able to set the manufacturer's output target."))
 			return
 
 		if(BOUNDS_DIST(over_object, src) > 0)
-			boutput(usr, "<span class='alert'>The manufacturing unit is too far away from the target!</span>")
+			boutput(usr, SPAN_ALERT("The manufacturing unit is too far away from the target!"))
 			return
 
 		if(BOUNDS_DIST(over_object, usr) > 0)
-			boutput(usr, "<span class='alert'>You are too far away from the target!</span>")
+			boutput(usr, SPAN_ALERT("You are too far away from the target!"))
 			return
 
 		if (istype(over_object,/obj/storage/crate/))
 			var/obj/storage/crate/C = over_object
 			if (C.locked || C.welded)
-				boutput(usr, "<span class='alert'>You can't use a currently unopenable crate as an output target.</span>")
+				boutput(usr, SPAN_ALERT("You can't use a currently unopenable crate as an output target."))
 			else
 				src.output_target = over_object
-				boutput(usr, "<span class='notice'>You set the manufacturer to output to [over_object]!</span>")
+				boutput(usr, SPAN_NOTICE("You set the manufacturer to output to [over_object]!"))
 
 		else if (istype(over_object,/obj/storage/cart/))
 			var/obj/storage/cart/C = over_object
 			if (C.locked || C.welded)
-				boutput(usr, "<span class='alert'>You can't use a currently unopenable cart as an output target.</span>")
+				boutput(usr, SPAN_ALERT("You can't use a currently unopenable cart as an output target."))
 			else
 				src.output_target = over_object
-				boutput(usr, "<span class='notice'>You set the manufacturer to output to [over_object]!</span>")
+				boutput(usr, SPAN_NOTICE("You set the manufacturer to output to [over_object]!"))
 
 		else if (istype(over_object,/obj/table/) || istype(over_object,/obj/rack/))
 			var/obj/O = over_object
 			src.output_target = O.loc
-			boutput(usr, "<span class='notice'>You set the manufacturer to output on top of [O]!</span>")
+			boutput(usr, SPAN_NOTICE("You set the manufacturer to output on top of [O]!"))
 
 		else if (istype(over_object,/turf/simulated/floor/) || istype(over_object,/turf/unsimulated/floor/))
 			src.output_target = over_object
-			boutput(usr, "<span class='notice'>You set the manufacturer to output to [over_object]!</span>")
+			boutput(usr, SPAN_NOTICE("You set the manufacturer to output to [over_object]!"))
 
 		else
-			boutput(usr, "<span class='alert'>You can't use that as an output target.</span>")
+			boutput(usr, SPAN_ALERT("You can't use that as an output target."))
 		return
 
 	MouseDrop_T(atom/movable/O as mob|obj, mob/user)
@@ -1184,15 +1225,15 @@ TYPEINFO(/obj/machinery/manufacturer)
 			return
 
 		if(!isliving(user))
-			boutput(user, "<span class='alert'>Only living mobs are able to use the manufacturer's quick-load feature.</span>")
+			boutput(user, SPAN_ALERT("Only living mobs are able to use the manufacturer's quick-load feature."))
 			return
 
 		if (!istype(O,/obj/))
-			boutput(user, "<span class='alert'>You can't quick-load that.</span>")
+			boutput(user, SPAN_ALERT("You can't quick-load that."))
 			return
 
 		if(BOUNDS_DIST(O, user) > 0)
-			boutput(user, "<span class='alert'>You are too far away!</span>")
+			boutput(user, SPAN_ALERT("You are too far away!"))
 			return
 
 
@@ -1201,24 +1242,24 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 		if (istype(O, /obj/storage/crate/) || istype(O, /obj/storage/cart/) && src.accept_loading(user,1))
 			if (O:welded || O:locked)
-				boutput(user, "<span class='alert'>You cannot load from a container that cannot open!</span>")
+				boutput(user, SPAN_ALERT("You cannot load from a container that cannot open!"))
 				return
 
-			user.visible_message("<span class='notice'>[user] uses [src]'s automatic loader on [O]!</span>", "<span class='notice'>You use [src]'s automatic loader on [O].</span>")
+			user.visible_message(SPAN_NOTICE("[user] uses [src]'s automatic loader on [O]!"), SPAN_NOTICE("You use [src]'s automatic loader on [O]."))
 			var/amtload = 0
 			for (var/obj/item/M in O.contents)
 				if (!istype(M,src.base_material_class))
 					continue
 				src.load_item(M)
 				amtload++
-			if (amtload) boutput(user, "<span class='notice'>[amtload] materials loaded from [O]!</span>")
-			else boutput(user, "<span class='alert'>No material loaded!</span>")
+			if (amtload) boutput(user, SPAN_NOTICE("[amtload] materials loaded from [O]!"))
+			else boutput(user, SPAN_ALERT("No material loaded!"))
 
 		else if (isitem(O) && src.accept_loading(user,1))
-			user.visible_message("<span class='notice'>[user] begins quickly stuffing materials into [src]!</span>")
+			user.visible_message(SPAN_NOTICE("[user] begins quickly stuffing materials into [src]!"))
 			var/staystill = user.loc
 			for(var/obj/item/M in view(1,user))
-				if (!O)
+				if (!O || QDELETED(M) || !isturf(M.loc))
 					continue
 				if (!istype(M,O.type))
 					continue
@@ -1226,12 +1267,10 @@ TYPEINFO(/obj/machinery/manufacturer)
 					continue
 				if (O.loc == user)
 					continue
-				if (O in user.contents)
-					continue
 				src.load_item(M)
 				sleep(0.5)
 				if (user.loc != staystill) break
-			boutput(user, "<span class='notice'>You finish stuffing materials into [src]!</span>")
+			boutput(user, SPAN_NOTICE("You finish stuffing materials into [src]!"))
 
 		else ..()
 
@@ -1570,9 +1609,11 @@ TYPEINFO(/obj/machinery/manufacturer)
 		if (pattern == "ALL") // anything at all
 			return TRUE
 		if (pattern == "ORG|RUB")
-			return mat.material_flags & MATERIAL_RUBBER || mat.material_flags & MATERIAL_ORGANIC
+			return mat.getMaterialFlags() & MATERIAL_RUBBER || mat.getMaterialFlags() & MATERIAL_ORGANIC
 		if (pattern == "RUB")
-			return mat.material_flags & MATERIAL_RUBBER
+			return mat.getMaterialFlags() & MATERIAL_RUBBER
+		if (pattern == "WOOD")
+			return mat.getMaterialFlags() & MATERIAL_WOOD
 		else if (copytext(pattern, 4, 5) == "-") // wildcard
 			var/firstpart = copytext(pattern, 1, 4)
 			var/secondpart = text2num_safe(copytext(pattern, 5))
@@ -1581,7 +1622,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 				// go ahead and clean it up a bit
 				if ("MET")
 
-					if (mat.material_flags & MATERIAL_METAL)
+					if (mat.getMaterialFlags() & MATERIAL_METAL)
 						// maux hardness = 15
 						// bohr hardness = 33
 						switch(secondpart)
@@ -1592,7 +1633,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 							else
 								return TRUE
 				if ("CRY")
-					if (mat.material_flags & MATERIAL_CRYSTAL)
+					if (mat.getMaterialFlags() & MATERIAL_CRYSTAL)
 
 						switch(secondpart)
 							if(2)
@@ -1610,9 +1651,9 @@ TYPEINFO(/obj/machinery/manufacturer)
 				if ("INS")
 					switch(secondpart)
 						if(2)
-							return mat.getProperty("electrical") <= 2 && (mat.material_flags & (MATERIAL_CLOTH | MATERIAL_RUBBER))
+							return mat.getProperty("electrical") <= 2 && (mat.getMaterialFlags() & (MATERIAL_CLOTH | MATERIAL_RUBBER))
 						else
-							return mat.getProperty("electrical") <= 4 && (mat.material_flags & (MATERIAL_CLOTH | MATERIAL_RUBBER))
+							return mat.getProperty("electrical") <= 4 && (mat.getMaterialFlags() & (MATERIAL_CLOTH | MATERIAL_RUBBER))
 				if ("DEN")
 					switch(secondpart)
 						if(2)
@@ -1620,7 +1661,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 						else
 							return mat.getProperty("density") >= 4
 				if ("POW")
-					if (mat.material_flags & MATERIAL_ENERGY)
+					if (mat.getMaterialFlags() & MATERIAL_ENERGY)
 						switch(secondpart)
 							if(3)
 								return mat.getProperty("radioactive") >= 5 //soulsteel and erebite basically
@@ -1629,8 +1670,10 @@ TYPEINFO(/obj/machinery/manufacturer)
 							else
 								return TRUE
 				if ("FAB")
-					return mat.material_flags & (MATERIAL_CLOTH | MATERIAL_RUBBER | MATERIAL_ORGANIC)
-		else if (pattern == mat.mat_id) // specific material id
+					return mat.getMaterialFlags() & (MATERIAL_CLOTH | MATERIAL_RUBBER | MATERIAL_ORGANIC)
+				if ("GEM")
+					return istype(mat, /datum/material/crystal/gemstone)
+		else if (pattern == mat.getID()) // specific material id
 			return TRUE
 		return FALSE
 
@@ -1644,7 +1687,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 			for (var/mat_id in mats_available)
 				if (mats_available[mat_id] < amount)
 					continue
-				var/datum/material/mat = getMaterial(mat_id)
+				var/datum/material/mat = src.get_our_material(mat_id)
 				if (match_material_pattern(pattern, mat)) // TODO: refactor proc cuz this is bad
 					mats_used[pattern] = mat_id
 					mats_available[mat_id] -= amount
@@ -1654,7 +1697,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 	proc/check_enough_materials(datum/manufacture/M)
 		var/list/mats_used = get_materials_needed(M)
-		if (mats_used.len == M.item_paths.len) // we have enough materials, so return the materials list, else return null
+		if (length(mats_used) == M.item_paths.len) // we have enough materials, so return the materials list, else return null
 			return mats_used
 
 	proc/remove_materials(datum/manufacture/M)
@@ -1665,7 +1708,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 				var/amount = M.item_amounts[i]
 				src.update_resource_amount(mat_id, -amount)
 				for (var/obj/item/I in src.contents)
-					if (I.material && istype(I, src.base_material_class) && I.material.mat_id == mat_id)
+					if (I.material && istype(I, src.base_material_class) && I.material.getID() == mat_id)
 						var/target_amount = round(src.resource_amounts[mat_id] / 10)
 						if (!target_amount)
 							src.contents -= I
@@ -1687,7 +1730,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 			src.mode = "halt"
 			src.error = "Corrupted entry purged from production queue."
 			src.queue -= src.queue[1]
-			src.visible_message("<span class='alert'>[src] emits an angry buzz!</span>")
+			src.visible_message(SPAN_ALERT("[src] emits an angry buzz!"))
 			playsound(src.loc, src.sound_grump, 50, 1)
 			src.build_icon()
 			return
@@ -1698,7 +1741,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 			src.mode = "halt"
 			src.error = "Corrupted entry purged from production queue."
 			src.queue -= src.queue[1]
-			src.visible_message("<span class='alert'>[src] emits an angry buzz!</span>")
+			src.visible_message(SPAN_ALERT("[src] emits an angry buzz!"))
 			playsound(src.loc, src.sound_grump, 50, 1)
 			src.build_icon()
 			return
@@ -1714,7 +1757,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 			if (!mats_used)
 				src.mode = "halt"
 				src.error = "Insufficient usable materials to continue queue production."
-				src.visible_message("<span class='alert'>[src] emits an angry buzz!</span>")
+				src.visible_message(SPAN_ALERT("[src] emits an angry buzz!"))
 				playsound(src.loc, src.sound_grump, 50, 1)
 				src.build_icon()
 				return
@@ -1736,23 +1779,25 @@ TYPEINFO(/obj/machinery/manufacturer)
 				src.time_left *= 1.5
 			src.time_left /= src.speed
 
+		var/datum/computer/file/manudrive/manudrive_file = null
 		if(src.manudrive)
 			if(src.queue[1] in src.drive_recipes)
 				var/obj/item/disk/data/floppy/ManuD = src.manudrive
 				for (var/datum/computer/file/manudrive/MD in ManuD.root.contents)
-					if(MD.fablimit == 0)
+					if(MD.fablimit != -1 && MD.fablimit - MD.num_working <= 0)
 						src.mode = "halt"
 						src.error = "The inserted ManuDrive is unable to operate further."
 						src.queue = list()
 						return
 					else
-						MD.fablimit -= 1
+						MD.num_working++
+					manudrive_file = MD
 
 		playsound(src.loc, src.sound_beginwork, 50, 1, 0, 3)
 		src.mode = "working"
 		src.build_icon()
 
-		src.action_bar = actions.start(new/datum/action/bar/manufacturer(src, src.time_left), src)
+		src.action_bar = actions.start(new/datum/action/bar/manufacturer(src, src.time_left, manudrive_file), src)
 
 
 	proc/output_loop(datum/manufacture/M)
@@ -1760,7 +1805,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 		if (!istype(M,/datum/manufacture/))
 			return
 
-		if (M.item_outputs.len <= 0)
+		if (length(M.item_outputs) <= 0)
 			return
 		var/mcheck = check_enough_materials(M)
 		if(mcheck)
@@ -1785,7 +1830,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 		else
 			src.mode = "halt"
 			src.error = "Insufficient usable materials to continue queue production."
-			src.visible_message("<span class='alert'>[src] emits an angry buzz!</span>")
+			src.visible_message(SPAN_ALERT("[src] emits an angry buzz!"))
 			playsound(src.loc, src.sound_grump, 50, 1)
 			src.build_icon()
 
@@ -1839,9 +1884,9 @@ TYPEINFO(/obj/machinery/manufacturer)
 		if (status & BROKEN || status & NOPOWER || !src.malfunction)
 			return
 		animate_shake(src,5,rand(3,8),rand(3,8))
-		src.visible_message("<span class='alert'>[src] makes [pick(src.text_flipout_adjective)] [pick(src.text_flipout_noun)]!</span>")
+		src.visible_message(SPAN_ALERT("[src] makes [pick(src.text_flipout_adjective)] [pick(src.text_flipout_noun)]!"))
 		playsound(src.loc, pick(src.sounds_malfunction), 50, 2)
-		if (prob(15) && src.contents.len > 4 && src.mode != "working")
+		if (prob(15) && length(src.contents) > 4 && src.mode != "working")
 			var/to_throw = rand(1,4)
 			var/obj/item/X = null
 			while(to_throw > 0)
@@ -1922,14 +1967,14 @@ TYPEINFO(/obj/machinery/manufacturer)
 	<tbody>
 		"}
 		for(var/mat_id in src.resource_amounts)
-			var/datum/material/mat = getMaterial(mat_id)
+			var/datum/material/mat = src.get_our_material(mat_id)
 			dat += {"
 		<tr>
-			<td><a href='?src=\ref[src];eject=[mat_id]' class='buttonlink'>&#9167;</a>  [mat]</td>
+			<td><a href='?src=\ref[src];eject=[url_encode(mat_id)]' class='buttonlink'>&#9167;</a>  [mat]</td>
 			<td class='r'>[src.resource_amounts[mat_id]/10]</td>
 		</tr>
 			"}
-		if (dat.len == 1)
+		if (length(dat) == 1)
 			dat += {"
 		<tr>
 			<td colspan='2' class='c'>No materials loaded.</td>
@@ -1967,7 +2012,8 @@ TYPEINFO(/obj/machinery/manufacturer)
 			<td class='r'>[current_reagent.volume] units</td>
 		</tr>
 				"}
-
+		if (QDELETED(src.beaker))
+			src.beaker = null
 		if (src.beaker)
 			dat += {"
 		<tr><th colspan='2'>Container</th></tr>
@@ -2080,7 +2126,10 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 	proc/eject_manudrive(mob/living/user)
 		src.drive_recipes = null
-		user.put_in_hand_or_drop(manudrive)
+		if (GET_DIST(user, src) <= 1)
+			user.put_in_hand_or_drop(manudrive)
+		else
+			manudrive.set_loc(src.loc)
 		src.manudrive = null
 
 	proc/load_item(obj/item/O, mob/living/user)
@@ -2094,12 +2143,12 @@ TYPEINFO(/obj/machinery/manufacturer)
 		if (istype(O, src.base_material_class) && O.material)
 			var/obj/item/material_piece/P = O
 			for(var/obj/item/material_piece/M in src.contents)
-				if (istype(M, P) && M.material && isSameMaterial(M.material, P.material))
+				if (istype(M, P) && M.material && M.material.isSameMaterial(P.material))
 					M.change_stack_amount(P.amount)
-					src.update_resource_amount(M.material.mat_id, P.amount * 10)
+					src.update_resource_amount(M.material.getID(), P.amount * 10, M.material)
 					qdel(P)
 					return
-			src.update_resource_amount(P.material.mat_id, P.amount * 10)
+			src.update_resource_amount(P.material.getID(), P.amount * 10, P.material)
 
 		O.set_loc(src)
 
@@ -2110,9 +2159,9 @@ TYPEINFO(/obj/machinery/manufacturer)
 		if (damage_amount > 0)
 			playsound(src.loc, src.sound_damaged, 50, 2)
 			if (src.health == 0)
-				src.visible_message("<span class='alert'><b>[src] is destroyed!</b></span>")
+				src.visible_message(SPAN_ALERT("<b>[src] is destroyed!</b>"))
 				playsound(src.loc, src.sound_destroyed, 50, 2)
-				robogibs(src.loc, null)
+				robogibs(src.loc)
 				qdel(src)
 				return
 			if (src.health <= 70 && !src.malfunction && prob(33))
@@ -2121,17 +2170,26 @@ TYPEINFO(/obj/machinery/manufacturer)
 			if (src.malfunction && prob(40))
 				src.flip_out()
 			if (src.health <= 25 && !(src.status & BROKEN))
-				src.visible_message("<span class='alert'><b>[src] breaks down and stops working!</b></span>")
+				src.visible_message(SPAN_ALERT("<b>[src] breaks down and stops working!</b>"))
 				src.status |= BROKEN
 		else
 			if (src.health >= 60 && src.status & BROKEN)
-				src.visible_message("<span class='alert'><b>[src] looks like it can function again!</b></span>")
+				src.visible_message(SPAN_ALERT("<b>[src] looks like it can function again!</b>"))
 				status &= ~BROKEN
 
 		src.build_icon()
 
-	proc/update_resource_amount(mat_id, amt)
+	proc/update_resource_amount(mat_id, amt, datum/material/mat_added=null)
 		src.resource_amounts[mat_id] = max(src.resource_amounts[mat_id] + amt, 0)
+		if (src.resource_amounts[mat_id] == 0)
+			stored_materials_by_id -= mat_id
+		else if (mat_added && !(mat_id in stored_materials_by_id))
+			stored_materials_by_id[mat_id] = mat_added
+
+	proc/get_our_material(mat_id)
+		if (mat_id in src.stored_materials_by_id)
+			return src.stored_materials_by_id[mat_id]
+		return getMaterial(mat_id)
 
 	proc/claim_free_resources()
 		if (src.deconstruct_flags & DECON_BUILT)
@@ -2143,7 +2201,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 					P.set_loc(src)
 					if (free_resource_amt > 1)
 						P.change_stack_amount(free_resource_amt - P.amount)
-					src.update_resource_amount(P.material.mat_id, free_resource_amt * 10)
+					src.update_resource_amount(P.material.getID(), free_resource_amt * 10)
 			free_resource_amt = 0
 		else
 			logTheThing(LOG_DEBUG, null, "<b>obj/manufacturer:</b> [src.name]-[src.type] empty free resources list!")
@@ -2208,16 +2266,15 @@ TYPEINFO(/obj/machinery/manufacturer)
 		/datum/manufacture/crowbar,
 		/datum/manufacture/extinguisher,
 		/datum/manufacture/welder,
-		/datum/manufacture/soldering,
 		/datum/manufacture/flashlight,
 		/datum/manufacture/weldingmask,
-		/datum/manufacture/multitool,
 		/datum/manufacture/metal,
 		/datum/manufacture/metalR,
 		/datum/manufacture/rods2,
 		/datum/manufacture/glass,
 		/datum/manufacture/glassR,
 		/datum/manufacture/atmos_can,
+		/datum/manufacture/gastank,
 		/datum/manufacture/player_module,
 		/datum/manufacture/cable,
 		/datum/manufacture/powercell,
@@ -2269,7 +2326,21 @@ TYPEINFO(/obj/machinery/manufacturer)
 		/datum/manufacture/bullet_smoke,
 		/datum/manufacture/stapler,
 		/datum/manufacture/bagpipe,
+		/datum/manufacture/fiddle,
 		/datum/manufacture/whistle)
+
+#define MALFUNCTION_WIRE_CUT 15 & ~(1<<WIRE_MALF)
+
+/obj/machinery/manufacturer/general/grody
+	name = "grody manufacturer"
+	desc = "It's covered in more gunk than a truck stop ashtray. Is this thing even safe?"
+	supplemental_desc = "This one has seen better days. There are bits and pieces of the internal mechanisms poking out the side."
+	free_resource_amt = 0
+	free_resources = list()
+	malfunction = TRUE
+	wires = MALFUNCTION_WIRE_CUT
+
+#undef MALFUNCTION_WIRE_CUT
 
 /obj/machinery/manufacturer/robotics
 	name = "robotics fabricator"
@@ -2340,6 +2411,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 		/datum/manufacture/robup_recharge,
 		/datum/manufacture/robup_repairpack,
 		/datum/manufacture/robup_speed,
+		/datum/manufacture/robup_mag,
 		/datum/manufacture/robup_meson,
 		/datum/manufacture/robup_aware,
 		/datum/manufacture/robup_physshield,
@@ -2454,7 +2526,8 @@ TYPEINFO(/obj/machinery/manufacturer)
 	free_resources = list(/obj/item/material_piece/steel,
 		/obj/item/material_piece/copper,
 		/obj/item/material_piece/glass,
-		/obj/item/material_piece/cloth/cottonfabric)
+		/obj/item/material_piece/cloth/cottonfabric,
+		/obj/item/raw_material/cobryl)
 	available = list(
 		/datum/manufacture/flashlight,
 		/datum/manufacture/gps,
@@ -2465,19 +2538,23 @@ TYPEINFO(/obj/machinery/manufacturer)
 		/datum/manufacture/atmos_can,
 		/datum/manufacture/artifactforms,
 		/datum/manufacture/fluidcanister,
+		/datum/manufacture/chembarrel,
+		/datum/manufacture/chembarrel/yellow,
+		/datum/manufacture/chembarrel/red,
+		/datum/manufacture/condenser,
+		/datum/manufacture/fractionalcondenser,
+		/datum/manufacture/beaker_lid_box,
+		/datum/manufacture/bunsen_burner,
 		/datum/manufacture/spectrogoggles,
+		/datum/manufacture/atmos_goggles,
 		/datum/manufacture/reagentscanner,
 		/datum/manufacture/dropper,
 		/datum/manufacture/mechdropper,
-		/datum/manufacture/biosuit,
-		/datum/manufacture/labcoat,
-		/datum/manufacture/jumpsuit_white,
 		/datum/manufacture/patient_gown,
 		/datum/manufacture/blindfold,
 		/datum/manufacture/muzzle,
-		/datum/manufacture/gasmask,
-		/datum/manufacture/latex_gloves,
-		/datum/manufacture/shoes_white,
+		/datum/manufacture/audiotape,
+		/datum/manufacture/audiolog,
 		/datum/manufacture/rods2,
 		/datum/manufacture/metal,
 		/datum/manufacture/glass)
@@ -2512,6 +2589,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 		/datum/manufacture/shoes,
 		/datum/manufacture/breathmask,
 		/datum/manufacture/engspacesuit,
+		/datum/manufacture/lightengspacesuit,
 #ifdef UNDERWATER_MAP
 		/datum/manufacture/engdivesuit,
 		/datum/manufacture/flippers,
@@ -2542,11 +2620,6 @@ TYPEINFO(/obj/machinery/manufacturer)
 #endif
 		)
 
-	hidden = list(/datum/manufacture/RCD,
-		/datum/manufacture/RCDammo,
-		/datum/manufacture/RCDammomedium,
-		/datum/manufacture/RCDammolarge)
-
 /obj/machinery/manufacturer/hangar
 	name = "ship component fabricator"
 	supplemental_desc = "This one produces modules for space pods or minisubs."
@@ -2558,34 +2631,28 @@ TYPEINFO(/obj/machinery/manufacturer)
 		/obj/item/material_piece/glass)
 	available = list(
 #ifdef UNDERWATER_MAP
-		/datum/manufacture/sub/engine,
-		/datum/manufacture/sub/boards,
-		/datum/manufacture/sub/control,
-		/datum/manufacture/sub/parts,
+		/datum/manufacture/sub/preassembeled_parts,
 #else
-		/datum/manufacture/putt/engine,
-		/datum/manufacture/putt/boards,
-		/datum/manufacture/putt/control,
-		/datum/manufacture/putt/parts,
+		/datum/manufacture/putt/preassembeled_parts,
+		/datum/manufacture/pod/preassembeled_parts,
 #endif
-		/datum/manufacture/pod/engine,
-		/datum/manufacture/pod/boards,
 		/datum/manufacture/pod/armor_light,
 		/datum/manufacture/pod/armor_heavy,
 		/datum/manufacture/pod/armor_industrial,
-		/datum/manufacture/pod/control,
-		/datum/manufacture/pod/parts,
 		/datum/manufacture/cargohold,
 		/datum/manufacture/orescoop,
 		/datum/manufacture/conclave,
 		/datum/manufacture/communications/mining,
+		/datum/manufacture/pod/weapon/bad_mining,
 		/datum/manufacture/pod/weapon/mining,
 		/datum/manufacture/pod/weapon/mining/drill,
 		/datum/manufacture/pod/weapon/ltlaser,
+		/datum/manufacture/engine,
 		/datum/manufacture/engine2,
 		/datum/manufacture/engine3,
 		/datum/manufacture/pod/lock,
-		/datum/manufacture/beaconkit
+		/datum/manufacture/beaconkit,
+		/datum/manufacture/podgps
 	)
 
 /obj/machinery/manufacturer/uniform // add more stuff to this as needed, but it should be for regular uniforms the HoP might hand out, not tons of gimmicks. -cogwerks
@@ -2762,8 +2829,9 @@ TYPEINFO(/obj/machinery/manufacturer)
 	supplemental_desc = "This one produces crates, carts, that sort of thing. Y'know, box stuff."
 	icon_state = "fab-crates"
 	icon_base = "crates"
-	free_resource_amt = 5
-	free_resources = list(/obj/item/material_piece/steel)
+	free_resource_amt = 1
+	free_resources = list(/obj/item/material_piece/steel,
+		/obj/item/material_piece/organic/wood)
 	accept_blueprints = FALSE
 	available = list(/datum/manufacture/crate,
 		/datum/manufacture/packingcrate,
@@ -2820,7 +2888,64 @@ TYPEINFO(/obj/machinery/manufacturer)
 		/datum/manufacture/fireaxe,
 		/datum/manufacture/shovel)
 
+/obj/machinery/manufacturer/engineering
+	name = "Engineering Specialist Manufacturer"
+	desc = "This one produces specialist engineering devices."
+	icon_state = "fab-engineering"
+	icon_base = "engineering"
+	free_resource_amt = 2
+	free_resources = list(/obj/item/material_piece/steel,
+		/obj/item/material_piece/copper,
+		/obj/item/material_piece/glass)
+	available = list(
+		/datum/manufacture/screwdriver/yellow,
+		/datum/manufacture/wirecutters/yellow,
+		/datum/manufacture/wrench/yellow,
+		/datum/manufacture/crowbar/yellow,
+		/datum/manufacture/extinguisher,
+		/datum/manufacture/welder/yellow,
+		/datum/manufacture/soldering,
+		/datum/manufacture/multitool,
+		/datum/manufacture/t_scanner,
+		/datum/manufacture/RCD,
+		/datum/manufacture/RCDammo,
+		/datum/manufacture/RCDammomedium,
+		/datum/manufacture/RCDammolarge,
+		/datum/manufacture/atmos_goggles,
+		/datum/manufacture/engivac,
+		/datum/manufacture/lampmanufacturer,
+		/datum/manufacture/breathmask,
+		/datum/manufacture/engspacesuit,
+		/datum/manufacture/lightengspacesuit,
+		/datum/manufacture/floodlight,
+		/datum/manufacture/powercell,
+		/datum/manufacture/powercellE,
+		/datum/manufacture/powercellC,
+		/datum/manufacture/powercellH,
+#ifdef UNDERWATER_MAP
+		/datum/manufacture/engdivesuit,
+		/datum/manufacture/flippers,
+#endif
+#ifdef MAP_OVERRIDE_OSHAN
+	/datum/manufacture/cable/reinforced,
+#endif
+		/datum/manufacture/mechanics/laser_mirror,
+		/datum/manufacture/mechanics/laser_splitter,
+		/datum/manufacture/interdictor_kit,
+		/datum/manufacture/interdictor_board_standard,
+		/datum/manufacture/interdictor_board_nimbus,
+		/datum/manufacture/interdictor_board_zephyr,
+		/datum/manufacture/interdictor_board_devera,
+		/datum/manufacture/interdictor_rod_lambda,
+		/datum/manufacture/interdictor_rod_sigma,
+		/datum/manufacture/interdictor_rod_epsilon,
+		/datum/manufacture/interdictor_rod_phi
+	)
 
+	New()
+		. = ..()
+		if (isturf(src.loc)) //not inside a frame or something
+			new /obj/item/paper/book/from_file/interdictor_guide(src.loc)
 
 /// Manufacturer blueprints can be read by any manufacturer unit to add the referenced object to the unit's production options.
 /obj/item/paper/manufacturer_blueprint
@@ -2914,6 +3039,16 @@ TYPEINFO(/obj/machinery/manufacturer)
 	blueprint = /datum/manufacture/mechanics/gunbot
 	override_name_desc = FALSE
 
+#ifdef ENABLE_ARTEMIS
+/obj/machinery/manufacturer/artemis
+	name = "Scout Vessel Manufacturer"
+	desc = "A manufacturing unit that can produce equipment for scouting vessels."
+	icon_state = "fab-hangar"
+	icon_base = "hangar"
+	accept_blueprints = 0
+	available = list(
+	/datum/manufacture/nav_sat)
+#endif
 /******************** Nadir Resonators *******************/
 
 /obj/item/paper/manufacturer_blueprint/resonator_type_ax
@@ -2937,7 +3072,7 @@ TYPEINFO(/obj/machinery/manufacturer)
 	throw_range = 10
 
 	attack_self(mob/user)
-		boutput(user, "<span class='alert'>The folder disintegrates in your hands, and papers scatter out. Shit!</span>")
+		boutput(user, SPAN_ALERT("The folder disintegrates in your hands, and papers scatter out. Shit!"))
 		new /obj/item/paper/manufacturer_blueprint/clonepod(get_turf(src))
 		new /obj/item/paper/manufacturer_blueprint/clonegrinder(get_turf(src))
 		new /obj/item/paper/manufacturer_blueprint/clone_scanner(get_turf(src))
@@ -2946,13 +3081,14 @@ TYPEINFO(/obj/machinery/manufacturer)
 
 /datum/action/bar/manufacturer
 	duration = 100 SECONDS
-	id = "manufacturer"
 	var/obj/machinery/manufacturer/MA
 	var/completed = FALSE
+	var/datum/computer/file/manudrive/manudrive_file
 
-	New(machine, dur)
+	New(machine, dur, datum/computer/file/manudrive/manudrive_file)
 		MA = machine
 		duration = dur
+		src.manudrive_file = manudrive_file
 		..()
 
 	onUpdate()
@@ -2971,10 +3107,22 @@ TYPEINFO(/obj/machinery/manufacturer)
 		MA.error = null
 		MA.mode = "ready"
 		MA.build_icon()
+		if(src.manudrive_file)
+			src.manudrive_file.num_working--
+			if(src.manudrive_file.num_working < 0)
+				CRASH("Manudrive num_working negative.")
 
 	onEnd()
 		..()
 		src.completed = TRUE
+		if(src.manudrive_file)
+			src.manudrive_file.num_working--
+			if(src.manudrive_file.num_working < 0)
+				CRASH("Manudrive num_working negative.")
+			if(src.manudrive_file.fablimit == 0)
+				CRASH("Manudrive fablimit 0.")
+			else if(src.manudrive_file.fablimit > 0)
+				src.manudrive_file.fablimit--
 		MA.finish_work()
 		// call dispense
 

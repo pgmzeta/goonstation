@@ -29,7 +29,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	on_hit(atom/hit, direction, var/obj/projectile/projectile)
 		if(istype(hit, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = hit
-			boutput(H, "<span class='alert'><B>You catch the kiss and save it for later.</B></span>")
+			boutput(H, SPAN_ALERT("<B>You catch the kiss and save it for later.</B>"))
 
 /datum/projectile/special/acid
 	name = "acid"
@@ -215,7 +215,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	name = "fragments"
 	sname = "fragments"
 	cost = 1
-	pellets_to_fire = 4
+	pellets_to_fire = 6
 	casing = /obj/item/casing/shotgun/pipe
 	spread_projectile_type = /datum/projectile/bullet/improvplasglass
 	shot_sound = 'sound/weapons/shotgunshot.ogg'
@@ -229,7 +229,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	name = "glass"
 	sname = "glass"
 	cost = 1
-	pellets_to_fire = 6
+	pellets_to_fire = 7
 	casing = /obj/item/casing/shotgun/pipe
 	shot_sound = 'sound/weapons/shotgunshot.ogg'
 	speed_max = 36
@@ -242,13 +242,26 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	name = "fragments"
 	sname = "fragments"
 	cost = 1
-	pellets_to_fire = 3
+	pellets_to_fire = 5
 	casing = /obj/item/casing/shotgun/pipe
 	shot_sound = 'sound/weapons/shotgunshot.ogg'
 	speed_max = 40
 	speed_min = 34
 	spread_angle_variance = 10
 	dissipation_variance = 10
+
+/datum/projectile/special/spreader/buckshot_burst/bone
+	spread_projectile_type = /datum/projectile/bullet/improvbone
+	name = "bone"
+	sname = "bone"
+	cost = 1
+	pellets_to_fire = 3
+	casing = /obj/item/casing/shotgun/pipe
+	shot_sound = 'sound/weapons/shotgunshot.ogg'
+	speed_max = 30
+	speed_min = 20
+	spread_angle_variance = 25
+	dissipation_variance = 40
 
 /datum/projectile/special/spreader/buckshot_burst/nails
 	name = "nails"
@@ -267,16 +280,6 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	spread_angle = 180
 	pellets_to_fire = 20
 
-/datum/projectile/special/spreader/uniform_burst/blaster
-	name = "blaster wave"
-	sname = "wave fire"
-	spread_angle = 33
-	cost = 200
-	pellets_to_fire = 5
-	spread_projectile_type = /datum/projectile/laser/blaster/blast
-	shot_sound = 'sound/weapons/laser_f.ogg'
-
-
 /datum/projectile/special/spreader/uniform_burst/spikes
 	name = "spike wave"
 	sname = "spike wave"
@@ -286,7 +289,29 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	spread_projectile_type = /datum/projectile/bullet/spike
 	shot_sound = 'sound/weapons/radxbow.ogg'
 
+/datum/projectile/special/spreader/uniform_burst/bird12
+	name = "birdshot"
+	sname = "birdshot"
+	spread_angle = 8
+	cost = 1
+	pellets_to_fire = 3
+	spread_projectile_type = /datum/projectile/bullet/bird12
+	casing = /obj/item/casing/shotgun/red
+	shot_sound = 'sound/weapons/birdshot.ogg'
 
+
+/datum/projectile/special/spreader/buckshot_burst/foamdarts
+	name = "foam dart"
+	sname = "foam dart"
+	spread_angle_variance = 22.5
+	damage = 0
+	speed_max = 32
+	speed_min = 20
+	cost = 6
+	casing = null
+	pellets_to_fire = 6
+	spread_projectile_type = /datum/projectile/bullet/foamdart
+	shot_sound = 'sound/effects/syringeproj.ogg'
 
 // Really crazy shit
 
@@ -325,7 +350,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 				sfloors -= Q
 
 	on_hit(var/atom/A)
-		playsound(A, 'sound/weapons/energy/LightningCannonImpact.ogg', 50, 1)
+		playsound(A, 'sound/weapons/energy/LightningCannonImpact.ogg', 50, TRUE)
 		var/list/sfloors = list()
 		for (var/turf/T in view(shock_range, A))
 			if (!T.density)
@@ -367,11 +392,11 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	var/temperature = 800
 
 	tick(var/obj/projectile/P)
-		fireflash_sm(get_turf(P), burn_range, temperature)
+		fireflash_melting(get_turf(P), burn_range, temperature)
 
 	on_hit(var/atom/A)
-		playsound(A, 'sound/effects/ExplosionFirey.ogg', 100, 1)
-		fireflash_sm(get_turf(A), blast_size, temperature)
+		playsound(A, 'sound/effects/ExplosionFirey.ogg', 100, TRUE)
+		fireflash_melting(get_turf(A), blast_size, temperature)
 
 /datum/projectile/special/howitzer
 	name = "plasma howitzer"
@@ -401,7 +426,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	tick(var/obj/projectile/P)
 		var/T1 = get_turf(P)
 		if((!istype(T1,/turf/space))) // so uh yeah this will be pretty mean
-			fireflash_sm(T1, burn_range, temperature)
+			fireflash_melting(T1, burn_range, temperature,  checkLos = TRUE)
 			new /obj/effects/explosion/dangerous(get_step(P.loc,P.dir))
 
 
@@ -413,7 +438,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 
 	on_hit(var/atom/A)
 		var/turf/T = get_turf(A)
-		playsound(A, 'sound/effects/ExplosionFirey.ogg', 60, 1)
+		playsound(A, 'sound/effects/ExplosionFirey.ogg', 60, TRUE)
 		if(!src.impacted)
 			playsound_global(world, 'sound/weapons/energy/howitzer_impact.ogg', 60)
 			src.impacted = 1
@@ -452,7 +477,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 		//prevent playing all 50 sounds at once on rapid bounce
 		if(world.time >= last_sound_time + 1 DECI SECOND)
 			last_sound_time = world.time
-			playsound(A, hit_sound, 60, 1)
+			playsound(A, hit_sound, 60, TRUE)
 
 		if (explosive_hits)
 			SPAWN(0)
@@ -550,7 +575,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	var/desired_y = 0
 
 	var/rotate_proj = 1
-	var/face_desired_dir = 0
+	var/face_desired_dir = FALSE
 
 	goes_through_walls = 1
 
@@ -668,7 +693,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 			else
 				if (dropme.loc == P)
 					dropme.set_loc(get_turf(P))
-					boutput(dropme, "<span class='alert'>Your coffin was lost or destroyed! Oh no!!!</span>")
+					boutput(dropme, SPAN_ALERT("Your coffin was lost or destroyed! Oh no!!!"))
 		..()
 
 /datum/projectile/special/homing/magicmissile
@@ -724,7 +749,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 			var/mob/living/M = A
 			M.changeStatus("weakened", src.weaken_length)
 			M.force_laydown_standup()
-			boutput(M, text("<span class='notice'>[slam_text]</span>"))
+			boutput(M, SPAN_NOTICE("[slam_text]"))
 			playsound(M.loc, 'sound/effects/mag_magmisimpact.ogg', 25, 1, -1)
 			M.lastattacker = src.master?.shooter
 			M.lastattackertime = TIME
@@ -738,7 +763,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 				else
 					playsound(T, src.hit_sound, 60, 1)
 		else
-			playsound(A, 'sound/effects/mag_magmisimpact.ogg', 25, 1, -1)
+			playsound(A, 'sound/effects/mag_magmisimpact.ogg', 25, TRUE, -1)
 
 /datum/projectile/special/homing/magicmissile/weak
 	name = "magic minimissile"
@@ -756,7 +781,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	easemult = 0.3
 
 	rotate_proj = 1
-	face_desired_dir = 1
+	face_desired_dir = TRUE
 
 	goes_through_walls = 1
 
@@ -799,7 +824,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	icon = 'icons/misc/critter.dmi'
 	icon_state = "spiritbat"
 	rotate_proj = 0
-	face_desired_dir = 1
+	face_desired_dir = TRUE
 	goes_through_walls = 1
 	is_magical = 1
 
@@ -884,6 +909,35 @@ ABSTRACT_TYPE(/datum/projectile/special)
 		FC.launch()
 		current_angle += angle_adjust_per_pellet
 
+/datum/projectile/special/spreader/pwshotgunspread
+	name = "blaster bolt"
+	sname = "shotgun spread"
+	cost = 40
+	pellets_to_fire = 5
+	spread_projectile_type = /datum/projectile/laser/blaster/pod_pilot/blue_NT/shotgun
+	split_type = 0
+	shot_sound = 'sound/weapons/laser_b.ogg'
+	var/spread_angle = 10
+	var/current_angle = 0
+	var/angle_adjust_per_pellet = 0
+	var/initial_angle_offset_mult = 0.5
+
+	on_launch(var/obj/projectile/P)
+		angle_adjust_per_pellet = ((spread_angle * 2) / pellets_to_fire)
+		current_angle = (0 - spread_angle) + (angle_adjust_per_pellet * initial_angle_offset_mult)
+		..()
+
+	new_pellet(var/obj/projectile/P, var/turf/PT, var/datum/projectile/F)
+		var/obj/projectile/FC = initialize_projectile(PT, F, P.xo, P.yo, P.shooter)
+		FC.rotateDirection(current_angle)
+		FC.launch()
+		current_angle += angle_adjust_per_pellet
+
+	NT
+		spread_projectile_type = /datum/projectile/laser/blaster/pod_pilot/blue_NT/shotgun
+
+	SY
+		spread_projectile_type = /datum/projectile/laser/blaster/pod_pilot/red_SY/shotgun
 
 /datum/projectile/special/spreader/quadwasp
 	name = "4 space wasp eggs"
@@ -895,7 +949,7 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	shot_number = 1
 	silentshot = 1 //any noise will be handled by the egg splattering anyway
 	damage = 60
-	cost = 40
+	cost = 60
 	dissipation_rate = 70
 	dissipation_delay = 0
 	window_pass = 0
@@ -930,24 +984,33 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	casing = null
 	impact_image_state = null
 	var/typetospawn = null
-	var/hasspawned = null
 	var/hit_sound = null
+	///Do we get our icon from typetospawn?
+	var/use_type_icon = FALSE
 
-	on_hit(atom/hit, direction, projectile)
+	New()
+		..()
+		if (!src.use_type_icon)
+			return
+		var/atom/thing = src.typetospawn
+		src.icon = initial(thing.icon)
+		src.icon_state = initial(thing.icon_state)
+
+	on_hit(atom/hit, direction, obj/projectile/O)
 		if(src.hit_sound)
 			playsound(hit, src.hit_sound, 50, 1)
-		if(ismob(hit) && typetospawn)
-			hasspawned = TRUE
+		if(ismob(hit) && typetospawn && !O.special_data["hasspawned"])
+			O.special_data["hasspawned"] = TRUE
 			. = new typetospawn(get_turf(hit))
+		else
+			on_end(O)
 		return
 
 
 	on_end(obj/projectile/O)
-		if(!hasspawned && typetospawn)
+		if(typetospawn && !O.special_data["hasspawned"])
+			O.special_data["hasspawned"] = TRUE
 			. = new typetospawn(get_turf(O))
-			hasspawned = TRUE
-		else
-			hasspawned = null
 		return
 
 /datum/projectile/special/spawner/gun //shoot guns
@@ -973,13 +1036,18 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	shot_number = 1
 	silentshot = 1 //any noise will be handled by the egg splattering anyway
 	hit_ground_chance = 0
-	damage_type = D_KINETIC
+	damage_type = D_SPECIAL
 	damage = 15
 	dissipation_delay = 30
 	dissipation_rate = 1
 	cost = 10
 	window_pass = 0
 	typetospawn = /obj/item/reagent_containers/food/snacks/ingredient/egg/critter/wasp/angry
+
+	on_pre_hit(atom/hit, angle, obj/projectile/O)
+		if (istype(hit, /mob/living/critter/small_animal/wasp))
+			return TRUE
+		. = ..()
 
 	on_hit(atom/hit, direction, projectile)
 		var/obj/item/reagent_containers/food/snacks/ingredient/egg/critter/wasp/angry/W = ..()
@@ -1138,3 +1206,20 @@ ABSTRACT_TYPE(/datum/projectile/special)
 		var/turf/T = get_turf(O)
 		src.emit_chems(T, O)
 		src.emit_gas(T, 1)
+
+/datum/projectile/special/spawner/handcuff
+	name = "handcuffs"
+	typetospawn = /obj/item/handcuffs/guardbot //ziptie cuffs
+	use_type_icon = TRUE
+	shot_sound = null
+
+	on_hit(atom/hit, angle, var/obj/projectile/O)
+		if (ishuman(hit))
+			var/obj/item/handcuffs/cuffs = new src.typetospawn
+			cuffs.try_cuff(hit, instant = TRUE)
+			O.special_data["hasspawned"] = TRUE
+		else
+			..()
+
+	on_pointblank(var/obj/projectile/O, var/mob/target)
+		src.on_hit(target, O = O)

@@ -1,4 +1,4 @@
-/mob/
+/mob
 	var/list/stun_resist_mods = list()
 
 
@@ -119,14 +119,13 @@
 //STAMINA UTILITY PROCS
 
 ///Responsible for executing critical hits to stamina
-/mob/proc/handle_stamina_crit(var/damage)
+/mob/proc/handle_stamina_crit()
 	. = 0
 
 //ddoub le dodbleu
-/mob/living/handle_stamina_crit(var/damage)
+/mob/living/handle_stamina_crit()
 	if(!src.use_stamina) return
-	damage = max(damage,10)
-	damage *= 4
+	var/damage = STAMINA_CRIT_DAMAGE
 	if(src.stamina >= 1 )
 		#if STAMINA_CRIT_DROP == 1
 		src.set_stamina(min(src.stamina,STAMINA_CRIT_DROP_NUM))
@@ -149,7 +148,7 @@
 		#endif
 		#if STAMINA_NEG_CRIT_KNOCKOUT == 1
 		if(!src.getStatusDuration("weakened") && isalive(src))
-			src.visible_message("<span class='alert'>[src] collapses!</span>")
+			src.visible_message(SPAN_ALERT("[src] collapses!"))
 			src.changeStatus("weakened", (STAMINA_STUN_CRIT_TIME) SECONDS)
 		#endif
 	stamina_stun() //Just in case.
@@ -168,13 +167,14 @@
 	return
 
 /mob/living/stamina_stun(stunmult = 1)
-	if(!src.use_stamina) return
+	if(!src.use_stamina || src.no_stamina_stuns)
+		return
 	if(src.stamina <= 0)
 		var/chance = STAMINA_SCALING_KNOCKOUT_BASE
 		chance += (src.stamina / STAMINA_NEG_CAP) * STAMINA_SCALING_KNOCKOUT_SCALER
 		if(prob(chance))
 			if(!src.getStatusDuration("weakened") && isalive(src))
-				src.visible_message("<span class='alert'>[src] collapses!</span>")
+				src.visible_message(SPAN_ALERT("[src] collapses!"))
 				src.changeStatus("weakened", (STAMINA_STUN_TIME * stunmult) SECONDS)
 				src.force_laydown_standup()
 
@@ -195,6 +195,8 @@
 
 /mob/proc/do_disorient(var/stamina_damage, var/weakened, var/stunned, var/paralysis, var/disorient = 60, var/remove_stamina_below_zero = 0, var/target_type = DISORIENT_BODY, stack_stuns = 1)
 	.= 1
+	if (src.no_stamina_stuns)
+		return FALSE
 	if (stunned)
 		if(stack_stuns)
 			src.changeStatus("stunned", stunned)

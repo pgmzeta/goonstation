@@ -47,6 +47,7 @@ module.exports = (env = {}, argv) => {
       filename: '[name].bundle.js',
       chunkFilename: '[name].bundle.js',
       chunkLoadTimeout: 15000,
+      hashFunction: "sha256",
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
@@ -154,6 +155,8 @@ module.exports = (env = {}, argv) => {
   if (argv.mode !== 'production') {
     config.devtool = 'cheap-module-source-map';
   }
+  // Uncomment the below if you need to locally generate source maps to debug production
+  // config.devtool = 'source-map';
 
   // Development server specific options
   if (argv.devServer) {

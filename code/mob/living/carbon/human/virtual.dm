@@ -26,7 +26,7 @@
 		if (!escape_vr)
 			var/area/A = get_area(src)
 			if ((T && !(T.z == 2)) || (A && !A.virtual))
-				boutput(src, "<span class='alert'>Is this virtual?  Is this real?? <b>YOUR MIND CANNOT TAKE THIS METAPHYSICAL CALAMITY</b></span>")
+				boutput(src, SPAN_ALERT("Is this virtual?  Is this real?? <b>YOUR MIND CANNOT TAKE THIS METAPHYSICAL CALAMITY</b>"))
 				src.gib()
 				return
 
@@ -57,7 +57,7 @@
 			src.death()
 		return
 
-	say(var/message) //Handle Virtual Spectres
+	say(var/message, var/ignore_stamina_winded = FALSE, var/unique_maptext_style, var/maptext_animation_colors)
 		if(!isghost)
 			return ..()
 
@@ -115,7 +115,7 @@
 	targeted = 0
 	target_anything = 0
 	interrupt_action_bars = 0
-	dont_lock_holder = 1
+	lock_holder = FALSE
 
 	//castcheck()
 		//if (!holder)

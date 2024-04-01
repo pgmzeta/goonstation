@@ -162,7 +162,7 @@
 						. += {"<a href='byond://?src=\ref[src];message_func=ringer'>Ringer: [src.message_silent == 1 ? "Off" : "On"]</a> |
 						<a href='byond://?src=\ref[src];message_func=on'>Send / Receive: [src.message_on == 1 ? "On" : "Off"]</a> |
 						<a href='byond://?src=\ref[src];input=tone'>Set Ring Message</a><br>
-						<a href='byond://?src=\ref[src];message_mode=1'>Messages</a> |
+						<a href='byond://?src=\ref[src];message_mode=1'>Message History</a> |
 						<a href='byond://?src=\ref[src];mode=[MODE_GROUPS]'>Groups</a> |
 						<a href='byond://?src=\ref[src];mode=[MODE_ADDRESSBOOK]'>Address Book</a><br>
 
@@ -746,7 +746,7 @@
 				null, \
 				FALSE \
 			)
-			RegisterSignal(pda, COMSIG_MOVABLE_RECEIVE_PACKET, .proc/receive_signal)
+			RegisterSignal(pda, COMSIG_MOVABLE_RECEIVE_PACKET, PROC_REF(receive_signal))
 
 		on_unset_host(obj/item/device/pda2/pda)
 			qdel(get_radio_connection_by_id(pda, "pda"))
@@ -763,7 +763,7 @@
 				return
 
 			if(signal.data["command"] == "report_pda")
-				if(!message_on || !signal.data["sender"] || signal.data["sender"] == master.net_id)
+				if(!message_on || !signal.data["sender"] || signal.data["sender"] == master.net_id || !src.master.scannable)
 					return
 
 				var/datum/signal/newsignal = get_free_signal()
@@ -772,19 +772,11 @@
 				newsignal.data["owner"] = src.master.owner
 				src.post_signal(newsignal)
 
-				if(!ON_COOLDOWN(src.master, "report_pda_refresh", 1 SECOND))
-					src.master.updateSelfDialog()
-				else if(!src.report_refresh_queued)
-					src.report_refresh_queued = TRUE
-					SPAWN(1 SECOND)
-						src.report_refresh_queued = FALSE
-						src.master.updateSelfDialog()
-
 			if(signal.encryption) return
 
 			if(signal.data["address_1"] && signal.data["address_1"] != src.master.net_id)
 				if((signal.data["address_1"] == "ping") && signal.data["sender"])
-					var/datum/signal/pingreply = new
+					var/datum/signal/pingreply = get_free_signal()
 					pingreply.source = src.master
 					pingreply.data["device"] = "NET_PDA_51XX"
 					pingreply.data["netid"] = src.master.net_id
@@ -893,8 +885,6 @@
 
 					if(length(src.hosted_files) >= 1)
 						src.CheckForPasskey(signal.data["message"], signal.data["sender"])
-
-					src.master.updateSelfDialog()
 
 				if("file_send_req")
 					if(!message_on)

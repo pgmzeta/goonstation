@@ -8,7 +8,7 @@
 import { Loader } from './common/Loader';
 import { InputButtons } from './common/InputButtons';
 import { Button, Input, Section, Stack } from '../components';
-import { KEY_A, KEY_DOWN, KEY_ESCAPE, KEY_ENTER, KEY_UP, KEY_Z, KEY_PAGEUP, KEY_PAGEDOWN, KEY_END, KEY_HOME, KEY_TAB } from 'common/keycodes';
+import { KEY_A, KEY_DOWN, KEY_END, KEY_ENTER, KEY_ESCAPE, KEY_HOME, KEY_PAGEDOWN, KEY_PAGEUP, KEY_TAB, KEY_UP, KEY_Z } from 'common/keycodes';
 import { Window } from '../layouts';
 import { useBackend, useLocalState } from '../backend';
 
@@ -26,11 +26,45 @@ const nextTick
    timeout: number;
    title: string;
    start_with_search: number;
+   capitalize: number;
+   theme: string;
  };
+
+
+
+/**
+* Uses canvas.measureText to compute and return the width of the given text of given font in pixels.
+*
+* @param {String} text The text to be rendered.
+* @param {String} font The css font descriptor that text is to be rendered with (e.g. "bold 14px verdana").
+*
+* @see https://stackoverflow.com/questions/118241/calculate-text-width-with-javascript/21015393#21015393
+*/
+const getTextWidth = (text, font) => {
+  // re-use canvas object for better performance
+  const canvas = textWidthCanvas || (textWidthCanvas = document.createElement("canvas"));
+  const context = canvas.getContext("2d");
+  context.font = font;
+  const metrics = context.measureText(text);
+  return metrics.width;
+};
+let textWidthCanvas = null;
+
+const getCssStyle = (element, prop) => {
+  return window.getComputedStyle(element, null).getPropertyValue(prop);
+};
+
+const getCanvasFont = (el = document.body) => {
+  const fontWeight = getCssStyle(el, 'font-weight') || 'normal';
+  const fontSize = getCssStyle(el, 'font-size') || '16px';
+  const fontFamily = getCssStyle(el, 'font-family') || 'Times New Roman';
+
+  return `${fontWeight} ${fontSize} ${fontFamily}`;
+};
 
 export const ListInputModal = (_, context) => {
   const { act, data } = useBackend<ListInputData>(context);
-  const { items = [], message, init_value, timeout, title, start_with_search } = data;
+  const { items = [], message, init_value, timeout, title, start_with_search, capitalize, theme } = data;
   const [selected, setSelected] = useLocalState<number>(
     context,
     'selected',
@@ -46,6 +80,12 @@ export const ListInputModal = (_, context) => {
     'searchQuery',
     ''
   );
+  const [windowWidth, setWindowWidth] = useLocalState<number>(
+    context,
+    'windowWidth',
+    null
+  );
+
   // User presses up or down on keyboard
   // Simulates clicking an item
   const onArrowKey = (key: number) => {
@@ -102,7 +142,7 @@ export const ListInputModal = (_, context) => {
     }
     let currentSelectedText = filteredItems[selected];
     let newDisplayed = items.filter(val => (
-      val.toLowerCase().search(query.toLowerCase()) !== -1
+      val.toLowerCase().includes(query.toLowerCase())
     ));
     let newSelected = newDisplayed.indexOf(currentSelectedText);
     if (newSelected === -1 && newDisplayed.length > 0) {
@@ -184,8 +224,21 @@ export const ListInputModal = (_, context) => {
     }
   };
 
+  let actualWindowWidth = windowWidth;
+  if (windowWidth === null) {
+    let maxWidth = 325;
+    const font = getCanvasFont();
+    for (const item of items) {
+      maxWidth = Math.max(maxWidth, getTextWidth(item, font));
+    }
+    // No clue why the nextTick is necessary but it seems like if you do it directly then there's about
+    // 50% chance something in Inferno will race condition and crash. Pls help.
+    nextTick(() => setWindowWidth(maxWidth));
+    actualWindowWidth = maxWidth;
+  }
+
   return (
-    <Window title={title} width={325} height={windowHeight}>
+    <Window title={title} width={actualWindowWidth} height={windowHeight} theme={theme || 'nanotrasen'}>
       {timeout && <Loader value={timeout} />}
       <Window.Content
         onkeydown={handleKey}>
@@ -214,6 +267,7 @@ export const ListInputModal = (_, context) => {
                 onFocusSearch={onFocusSearch}
                 searchBarVisible={searchBarVisible}
                 selected={selected}
+                capitalize={capitalize}
               />
             </Stack.Item>
             {searchBarVisible && (
@@ -240,7 +294,7 @@ export const ListInputModal = (_, context) => {
   */
 const ListDisplay = (props, context) => {
   const { act } = useBackend<ListInputData>(context);
-  const { filteredItems, onClick, onFocusSearch, searchBarVisible, selected }
+  const { filteredItems, onClick, onFocusSearch, searchBarVisible, selected, capitalize }
      = props;
 
   return (
@@ -274,7 +328,7 @@ const ListDisplay = (props, context) => {
               'animation': 'none',
               'transition': 'none',
             }}>
-            {item.replace(/^\w/, (c) => c.toUpperCase())}
+            {capitalize ? item.replace(/^\w/, (c) => c.toUpperCase()) : item}
           </Button>
         );
       })}

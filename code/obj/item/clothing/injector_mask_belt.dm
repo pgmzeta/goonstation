@@ -54,6 +54,8 @@ TYPEINFO(/obj/item/injector_belt)
 		return
 
 	ui_interact(mob/user, datum/tgui/ui)
+		if (src.container)
+			SEND_SIGNAL(src.container.reagents, COMSIG_REAGENTS_ANALYZED, user)
 		ui = tgui_process.try_update_ui(user, src, ui)
 		if(!ui)
 			ui = new(user, src, "AutoInjector", name)
@@ -74,7 +76,10 @@ TYPEINFO(/obj/item/injector_belt)
 	attackby(obj/item/W, mob/user)
 		if(istype(W,/obj/item/reagent_containers/glass))
 			if (container)
-				boutput(user, "<span class='alert'>There is already a container attached to the belt.</span>")
+				boutput(user, SPAN_ALERT("There is already a container attached to the belt."))
+				return
+			if (W.w_class > W_CLASS_SMALL)
+				boutput(user, SPAN_ALERT("[W] is too large to fit in the belt."))
 				return
 			if (!W.reagents.total_volume)
 				user.show_text("[W] is empty.", "red")
@@ -101,8 +106,8 @@ TYPEINFO(/obj/item/injector_belt)
 				src.can_trigger = 0
 				SPAWN(src.min_time) src.can_trigger = 1
 
-				playsound(src, 'sound/items/injectorbelt_active.ogg', 33, 0, -5)
-				boutput(src.owner, "<span class='notice'>Your Injector belt activates.</span>")
+				playsound(src, 'sound/items/injectorbelt_active.ogg', 33, FALSE, -5)
+				boutput(src.owner, SPAN_NOTICE("Your Injector belt activates."))
 
 				src.container.reagents.reaction(src.owner, INGEST)
 				SPAWN(1.5 SECONDS)
@@ -169,6 +174,8 @@ TYPEINFO(/obj/item/clothing/mask/gas/injector_mask)
 		return
 
 	ui_interact(mob/user, datum/tgui/ui)
+		if (src.container)
+			SEND_SIGNAL(src.container.reagents, COMSIG_REAGENTS_ANALYZED, user)
 		ui = tgui_process.try_update_ui(user, src, ui)
 		if(!ui)
 			ui = new(user, src, "AutoInjector", name)
@@ -189,7 +196,10 @@ TYPEINFO(/obj/item/clothing/mask/gas/injector_mask)
 	attackby(obj/item/W, mob/user)
 		if(istype(W,/obj/item/reagent_containers/glass))
 			if (container)
-				boutput(user, "<span class='alert'>There is already a container attached to the mask.</span>")
+				boutput(user, SPAN_ALERT("There is already a container attached to the mask."))
+				return
+			if (W.w_class > W_CLASS_SMALL)
+				boutput(user, SPAN_ALERT("[W] is too large to fit in the belt."))
 				return
 			if (!W.reagents.total_volume)
 				user.show_text("[W] is empty.", "red")
@@ -219,13 +229,13 @@ TYPEINFO(/obj/item/clothing/mask/gas/injector_mask)
 				SPAWN(src.min_time) src.can_trigger = 1
 				var/turf/T = get_turf(src)
 				if(T)
-					playsound(T, 'sound/items/injectorbelt_active.ogg', 33, 0, -5)
+					playsound(T, 'sound/items/injectorbelt_active.ogg', 33, FALSE, -5)
 					SPAWN(0.5 SECONDS)
-						playsound(T, 'sound/machines/hiss.ogg', 40, 1, -5)
+						playsound(T, 'sound/machines/hiss.ogg', 40, TRUE, -5)
 
-				boutput(src.owner, "<span class='notice'>Your [src] activates.</span>")
+				boutput(src.owner, SPAN_NOTICE("Your [src] activates."))
 
-				src.container.reagents.reaction(src.owner, INGEST)
+				src.container.reagents.reaction(src.owner, INGEST, paramslist = list("inhaled"))
 				SPAWN(1.5 SECONDS)
 					src.container.reagents.trans_to(src.owner, src.inj_amount)
 

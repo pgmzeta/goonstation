@@ -74,8 +74,9 @@ var/datum/signal_holder/global_signal_holder
 	parent = raw_args[1]
 	var/list/arguments = raw_args.Copy(2)
 	if(Initialize(arglist(arguments)) == COMPONENT_INCOMPATIBLE)
+		var/datum/parent_value = src.parent //qdel nulls parent!!!
 		qdel(src, TRUE, TRUE)
-		CRASH("Incompatible [type] assigned to a [parent.type]! args: [json_encode(arguments)]")
+		CRASH("Incompatible [type] assigned to a [parent_value.type]! args: [json_encode(arguments)]")
 
 	_JoinParent(parent)
 
@@ -85,6 +86,7 @@ var/datum/signal_holder/global_signal_holder
   * Do not call `qdel(src)` from this function, `return COMPONENT_INCOMPATIBLE` instead
   */
 /datum/component/proc/Initialize(...)
+	SHOULD_CALL_PARENT(TRUE)
 	return
 
 /**
@@ -150,7 +152,7 @@ var/datum/signal_holder/global_signal_holder
 		var/list/components_of_type = dc[I]
 		if(length(components_of_type))	//
 			var/list/subtracted = components_of_type - src
-			if(subtracted.len == 1)	//only 1 guy left
+			if(length(subtracted) == 1)	//only 1 guy left
 				dc[I] = subtracted[1]	//make him special
 			else
 				dc[I] = subtracted
@@ -186,7 +188,7 @@ var/datum/signal_holder/global_signal_holder
   * Register to listen for a signal from the passed in target
   *
   * This sets up a listening relationship such that when the target object emits a signal
-  * the source datum this proc is called upon, will recieve a callback to the given proctype
+  * the source datum this proc is called upon, will receive a callback to the given proctype
   * Return values from procs registered must be a bitfield
   *
   * Arguments:
@@ -200,7 +202,7 @@ var/datum/signal_holder/global_signal_holder
 /datum/proc/RegisterSignal(datum/target, signal_type, proctype, override = FALSE, ...)
 	if(QDELETED(src) || QDELETED(target))
 		return
-	if (islist(signal_type))
+	if (islist(signal_type) && !IS_COMPLEX_SIGNAL(signal_type))
 		var/static/list/known_failures = list()
 		var/list/signal_type_list = signal_type
 		var/message = "([target.type]) is registering [signal_type_list.Join(", ")] as a list, the older method. Change it to RegisterSignals."
@@ -231,7 +233,7 @@ var/datum/signal_holder/global_signal_holder
 	if(isnull(looked_up)) // Nothing has registered here yet
 		lookup[signal_type] = src
 	else if(looked_up == src) // We already registered here
-		// pass
+		; // pass
 	else if(!length(looked_up)) // One other thing registered here
 		lookup[signal_type] = list((looked_up) = TRUE, (src) = TRUE)
 	else // Many other things have registered here
@@ -254,10 +256,12 @@ var/datum/signal_holder/global_signal_holder
   * * sig_typeor_types Signal string key or list of signal keys to stop listening to specifically
   */
 /datum/proc/UnregisterSignal(datum/target, sig_type_or_types)
-	if (!target)
+	if (!target || !src || src.qdeled)
 		return
 	var/list/lookup = target.comp_lookup
-	if(!signal_procs || !signal_procs[target] || !lookup)
+	if(!signal_procs || (!islist(sig_type_or_types) && (!signal_procs[target] || !lookup)))
+		// if sig_type_or_types is a list it's either a complex signal (in which case the conditions can fail but we still want to remove the signal)
+		// or it is a list which can potentially contain another complex signal in which case ditto
 		return
 	if(!islist(sig_type_or_types) || IS_COMPLEX_SIGNAL(sig_type_or_types))
 		sig_type_or_types = list(sig_type_or_types)
@@ -269,7 +273,7 @@ var/datum/signal_holder/global_signal_holder
 				CRASH("Unregistering a complex signal [json_encode(sig)] without its component existing.")
 			comp.unregister(src, sig[2])
 			continue
-		if(!signal_procs[target][sig])
+		if(!signal_procs[target]?[sig])
 			if(!istext(sig))
 				stack_trace("We're unregistering with something that isn't a valid signal \[[sig]\], you fucked up")
 			continue
@@ -293,9 +297,10 @@ var/datum/signal_holder/global_signal_holder
 			else
 				lookup[sig] -= src
 
-	signal_procs[target] -= sig_type_or_types
-	if(!signal_procs[target].len)
-		signal_procs -= target
+	if(signal_procs?[target])
+		signal_procs[target] -= sig_type_or_types
+		if(!signal_procs[target].len)
+			signal_procs -= target
 
 /**
   * Called on a component when a component of the same type was added to the same parent
@@ -428,6 +433,18 @@ var/datum/signal_holder/global_signal_holder
 	if(!components)
 		return list()
 	return islist(components) ? components : list(components)
+
+/**
+  * Calls RemoveComponent on all components of a given type that are attached to this datum
+  *
+  * Arguments:
+  * * c_type The component type path
+  */
+
+/datum/proc/RemoveComponentsOfType(c_type)
+	var/list/datum/component/component_to_remove_list = src.GetComponents(c_type)
+	for (var/datum/component/component_to_remove as anything in component_to_remove_list)
+		component_to_remove.RemoveComponent()
 
 /**
   * Creates an instance of `new_type` in the datum and attaches to it as parent

@@ -130,7 +130,7 @@
 
 /proc/buildContextActions()
 	globalContextActions = list()
-	for(var/datum/contextAction/A as anything in childrentypesof(/datum/contextAction))
+	for(var/datum/contextAction/A as anything in concrete_typesof(/datum/contextAction))
 		globalContextActions[A] = new A()
 
 /atom/movable/screen/contextButton
@@ -166,7 +166,7 @@
 
 		if(background == null)
 			background = image('icons/ui/context16x16.dmi', src, "[action.getBackground(target, user)]0")
-			background.appearance_flags = RESET_COLOR
+			background.appearance_flags = RESET_COLOR | PIXEL_SCALE
 
 		if (A.background_color)
 			src.background.color = A.background_color

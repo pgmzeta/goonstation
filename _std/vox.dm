@@ -67,6 +67,7 @@ var/global/datum/voxdbg/VoxDebug = new
 	SET_ADMIN_CAT(ADMIN_CAT_DEBUG)
 	set name = "Debug VOX"
 	set desc = "Fuck me."
+	SHOW_VERB_DESC
 
 	VoxDebug.voxtokens = voxtokens
 	VoxDebug.voxsounds_flag_sorted = voxsounds_flag_sorted
@@ -79,10 +80,8 @@ var/global/datum/voxdbg/VoxDebug = new
 	SET_ADMIN_CAT(ADMIN_CAT_FUN)
 	set name = "Intercom Help"
 	set desc = "WOOP WOOP ASS DAY"
-
-	if(!isadmin(src))
-		boutput(src, "Only administrators may use this command.")
-		return
+	ADMIN_ONLY
+	SHOW_VERB_DESC
 
 	vox_help(usr)
 
@@ -136,9 +135,8 @@ proc/vox_help(var/mob/user)
 	SET_ADMIN_CAT(ADMIN_CAT_FUN)
 	set name = "Intercom Announcement"
 	set desc = "ABOUT THAT BEER I OWED YA, GORDON"
-	if(!isadmin(src))
-		boutput(src, "Only administrators may use this command.")
-		return
+	ADMIN_ONLY
+	SHOW_VERB_DESC
 
 	vox_reinit_check()
 
@@ -156,11 +154,8 @@ proc/vox_help(var/mob/user)
 	SET_ADMIN_CAT(ADMIN_CAT_FUN)
 	set name = "Intercom Announcement (Pitch Shifted)"
 	set desc = "ABOUT that BEER I owed YA, NODROG"
-	if(!isadmin(src))
-		boutput(src, "Only administrators may use this command.")
-		return
-
-
+	ADMIN_ONLY
+	SHOW_VERB_DESC
 
 	vox_reinit_check()
 
@@ -198,7 +193,7 @@ proc/vox_play(var/input, var/user, var/pitch = 1)
 	if(missingwords.len)
 		boutput(user, "<b>Input: </b>")
 		boutput(user, "[input]")
-		boutput(user, "<b><span class='alert'>Missing VOX words: </span></b>")
+		boutput(user, SPAN_ALERT("<b>Missing VOX words: </b>"))
 		for(var/word in missingwords)
 			boutput(user, "[word]")
 		var/play = alert("Words missing. Play anyway?","Vox Announcement","Yes","No")
@@ -1241,7 +1236,6 @@ proc/init_vox()
 "hobbits" = new/datum/VOXsound("hobbits", "sound/vox/hobbits.ogg", NOUN),
 "hodor" = new/datum/VOXsound("hodor", "sound/vox/hodor.ogg", NOUN | INTERJECTION | FX),
 "hofp" = new/datum/VOXsound("hofp", "sound/vox/hofp.ogg", INTERJECTION),
-"hogan" = new/datum/VOXsound("hogan", "sound/vox/hogan.ogg", NOUN),
 "hohohoho" = new/datum/VOXsound("hohohoho", "sound/vox/hohohoho.ogg", FX | INTERJECTION),
 "hold" = new/datum/VOXsound("hold", "sound/vox/hold.ogg", NOUN | VERB),
 "hole" = new/datum/VOXsound("hole", "sound/vox/hole.ogg", NOUN ),
@@ -2460,7 +2454,7 @@ proc/init_vox()
 "welcome" = new/datum/VOXsound("welcome", "sound/vox/welcome.ogg", NOUN|VERB|ADJECTIVE),
 "welcomes" = new/datum/VOXsound("welcomes", "sound/vox/welcomes.ogg", VERB),
 "well" = new/datum/VOXsound("well", "sound/vox/well.ogg", VERB | ADVERB | NOUN),
-"brullbar" = new/datum/VOXsound("brullbar", "sound/vox/brullbar.ogg", NOUN),
+"wendigo" = new/datum/VOXsound("wendigo", "sound/vox/wendigo.ogg", NOUN),
 "wepon" = new/datum/VOXsound("wepon", "sound/vox/wepon.ogg", NOUN),
 "werewolf" = new/datum/VOXsound("werewolf", "sound/vox/werewolf.ogg", NOUN),
 "west" = new/datum/VOXsound("west", "sound/vox/west.ogg", NOUN),

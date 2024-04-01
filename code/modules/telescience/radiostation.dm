@@ -23,7 +23,7 @@
 
 // areas
 
-/area/radiostation/
+/area/radiostation
 	name = "Radio Station"
 	icon_state = "purple"
 
@@ -128,7 +128,7 @@
 	desc = "A large and complicated audio mixing desk. Complete with fancy displays, dials, knobs and automated faders."
 	icon = 'icons/obj/radiostation.dmi'
 	icon_state = "mixtable-2"
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	flags = TGUI_INTERACTIVE
 	var/static/list/accents
@@ -239,7 +239,7 @@
 	desc = "An old school vinyl record player sat on a set of drawers. Shame you don't have any records."
 	icon = 'icons/obj/radiostation.dmi'
 	icon_state = "mixtable-3"
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	var/can_play_music = TRUE
 	var/has_record = FALSE
@@ -261,32 +261,30 @@
 /obj/submachine/record_player/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/record))
 		if (!src.can_play_music)
-			boutput(user, "<span class='alert'>You insert the record into the record player, but it won't turn on.</span>")
+			boutput(user, SPAN_ALERT("You insert the record into the record player, but it won't turn on."))
 			return
 		else if(has_record)
 			boutput(user, "The record player already has a record inside!")
 		else if(is_music_playing())
-			boutput(user, "<span class='alert'>Music is already playing, it'd be rude to interrupt!</span>")
+			boutput(user, SPAN_ALERT("Music is already playing, it'd be rude to interrupt!"))
 		else
-			boutput(user, "You insert the record into the record player.")
-			var/inserted_record = W
-			src.visible_message("<span class='notice'><b>[user] inserts the record into the record player.</b></span>")
-			user.drop_item()
-			W.set_loc(src)
-			src.record_inside = W
-			src.has_record = TRUE
-			var/R = copytext(html_encode(tgui_input_text(user, "What is the name of this record?", "Record Name", src.record_inside.record_name)), 1, MAX_MESSAGE_LEN)
+			var/obj/item/record/inserted_record = W
+			var/R = copytext(html_encode(tgui_input_text(user, "What is the name of this record?", "Record Name", inserted_record.record_name)), 1, MAX_MESSAGE_LEN)
+			if(!R)
+				boutput(user, SPAN_NOTICE("You decide not to play this record."))
+				return
 			if(!in_interact_range(src, user))
 				boutput(user, "You're out of range of the [src.name]!")
 				return
 			if(is_music_playing()) // someone queuing up several input windows
 				return
-			if(!inserted_record || (inserted_record != src.record_inside)) // record was removed/changed before input confirmation
-				return
-			if(R)
-				phrase_log.log_phrase("record", R)
-			if (!R)
-				R = record_inside.record_name ? record_inside.record_name : pick("rad tunes","hip jams","cool music","neat sounds","magnificent melodies","fantastic farts")
+			phrase_log.log_phrase("record", R)
+			boutput(user, "You insert the record into the record player.")
+			src.visible_message(SPAN_NOTICE("<b>[user] inserts the record into the record player.</b>"))
+			user.drop_item()
+			W.set_loc(src)
+			src.record_inside = W
+			src.has_record = TRUE
 			user.client.play_music_radio(record_inside.song, R)
 			/// PDA message ///
 			var/datum/signal/pdaSignal = get_free_signal()
@@ -304,7 +302,7 @@
 	if(has_record)
 		if(!is_music_playing())
 			boutput(user, "You remove the record from the record player. It looks worse for the wear.")
-			src.visible_message("<span class='notice'><b>[user] removes the record from the record player.</b></span>")
+			src.visible_message(SPAN_NOTICE("<b>[user] removes the record from the record player.</b>"))
 			user.put_in_hand_or_drop(src.record_inside)
 			src.record_inside = null
 			src.has_record = 0
@@ -333,24 +331,24 @@
 	if (record_name)
 		src.desc = "A fairly large record. There's a sticker on it that says \"[record_name]\"."
 
-/obj/item/record/attack(mob/M, mob/user) // copied plate code
+/obj/item/record/attack(mob/target, mob/user, def_zone, is_special = FALSE, params = null)
 	if (user.a_intent == INTENT_HARM)
-		if (M == user)
-			boutput(user, "<span class='alert'><B>You smash the record over your own head!</b></span>")
+		if (target == user)
+			boutput(user, SPAN_ALERT("<B>You smash the record over your own head!</b>"))
 		else
-			M.visible_message("<span class='alert'><B>[user] smashes [src] over [M]'s head!</B></span>")
-			logTheThing(LOG_COMBAT, user, "smashes [src] over [constructTarget(M,"combat")]'s head! ")
-		M.TakeDamageAccountArmor("head", force, 0, 0, DAMAGE_BLUNT)
-		M.changeStatus("weakened", 2 SECONDS)
+			target.visible_message(SPAN_ALERT("<B>[user] smashes [src] over [target]'s head!</B>"))
+			logTheThing(LOG_COMBAT, user, "smashes [src] over [constructTarget(target,"combat")]'s head! ")
+		target.TakeDamageAccountArmor("head", force, 0, 0, DAMAGE_BLUNT)
+		target.changeStatus("weakened", 2 SECONDS)
 		playsound(src, "shatter", 70, 1)
 		var/obj/O = new /obj/item/raw_material/shard/glass
-		O.set_loc(get_turf(M))
+		O.set_loc(get_turf(target))
 		if (src.material)
-			O.setMaterial(copyMaterial(src.material))
+			O.setMaterial(src.material)
 		qdel(src)
 	else
-		M.visible_message("<span class='alert'>[user] taps [M] over the head with [src].</span>")
-		logTheThing(LOG_COMBAT, user, "taps [constructTarget(M,"combat")] over the head with [src].")
+		target.visible_message(SPAN_ALERT("[user] taps [target] over the head with [src]."))
+		logTheThing(LOG_COMBAT, user, "taps [constructTarget(target,"combat")] over the head with [src].")
 
 ABSTRACT_TYPE(/obj/item/record/random)
 
@@ -648,7 +646,7 @@ ABSTRACT_TYPE(/obj/item/record/random/notaquario)
 
 /obj/item/record/poo/attackby(obj/item/P, mob/user)
 	if (istype(P, /obj/item/magnifying_glass))
-		boutput(user, "<span class='notice'>You examine the record with the magnifying glass.</span>")
+		boutput(user, SPAN_NOTICE("You examine the record with the magnifying glass."))
 		sleep(2 SECONDS)
 		boutput(user, "The scratch on the record, upon close examination, is actually tiny lettering. It says, <i>Fuck Discount Dan's. I hope more of your factories go under and you all drown in your toxic sewage.</i>")
 
@@ -783,13 +781,13 @@ ABSTRACT_TYPE(/obj/item/record/random/notaquario)
 /obj/item/storage/box/record/radio/host
 	desc = "A sleeve of exclusive radio station songs."
 
-/obj/item/storage/box/record/radio/host/New()
+/obj/item/storage/box/record/radio/host/make_my_stuff()
 	..()
 	var/list/possibilities = concrete_typesof(/obj/item/record/random, cache=FALSE)
 	possibilities = possibilities.Copy() // so we don't modify the cached version if someone else cached it I guess
-	for (var/i = 1, i < 8, i++)
+	while (!src.storage.is_full() && length(possibilities))
 		var/obj/item/record/R = pick(possibilities)
-		new R(src)
+		src.storage.add_contents(new R(src))
 		possibilities -= R
 
 // Tape deck
@@ -798,7 +796,7 @@ ABSTRACT_TYPE(/obj/item/record/random/notaquario)
 	desc = "A large standalone reel-to-reel tape deck."
 	icon = 'icons/obj/radiostation.dmi'
 	icon_state = "tapedeck"
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 	var/has_tape = FALSE
 	var/can_play_tapes = TRUE
@@ -819,16 +817,16 @@ ABSTRACT_TYPE(/obj/item/record/random/notaquario)
 /obj/submachine/tape_deck/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/radio_tape))
 		if(!src.can_play_tapes)
-			boutput(user, "<span class='alert'>You insert the tape into the tape deck, but it won't turn on.</span>")
+			boutput(user, SPAN_ALERT("You insert the tape into the tape deck, but it won't turn on."))
 			return
 		if(has_tape)
 			boutput(user, "The tape deck already has a tape inserted!")
 		else if(is_music_playing())
-			boutput(user, "<span class='alert'>Music is already playing, it'd be rude to interrupt!</span>")
+			boutput(user, SPAN_ALERT("Music is already playing, it'd be rude to interrupt!"))
 		else if(GET_COOLDOWN(src, "play"))
-			boutput(user, "<span class='alert'>The tape deck is still rewinding!</span>")
+			boutput(user, SPAN_ALERT("The tape deck is still rewinding!"))
 		else
-			src.visible_message("<span class='notice'><b>[user] inserts the compact tape into the tape deck.</b></span>",
+			src.visible_message(SPAN_NOTICE("<b>[user] inserts the compact tape into the tape deck.</b>"),
 			"You insert the compact tape into the tape deck.")
 			user.drop_item()
 			W.set_loc(src)
@@ -843,15 +841,15 @@ ABSTRACT_TYPE(/obj/item/record/random/notaquario)
 
 /obj/submachine/tape_deck/attack_hand(mob/user)
 	if(has_tape)
-		if(!is_music_playing() && !GET_COOLDOWN(src, "play"))
+		if(!GET_COOLDOWN(src, "play"))
 			if(istype(src.tape_inside,/obj/item/radio_tape/advertisement))
-				src.visible_message("<span class='alert'><b>[src.tape_inside]'s copyright preserving self destruct feature activates!</b></span>")
+				src.visible_message(SPAN_ALERT("<b>[src.tape_inside]'s copyright preserving self destruct feature activates!</b>"))
 				qdel(src.tape_inside)
 				src.tape_inside = null
 				src.has_tape = 0
 			else
 				boutput(user, "You remove the tape from the tape deck.")
-				src.visible_message("<span class='notice'><b>[user] removes the tape from the tape deck.</b></span>")
+				src.visible_message(SPAN_NOTICE("<b>[user] removes the tape from the tape deck.</b>"))
 				user.put_in_hand_or_drop(src.tape_inside)
 				src.tape_inside = null
 				src.has_tape = 0
@@ -943,16 +941,16 @@ ABSTRACT_TYPE(/obj/item/record/random/notaquario)
 	Musical Backing is "Valor" by David Fesliyan"}
 
 /obj/item/radio_tape/advertisement/chemistry
-	name = "charred compact tape - 'Unofficial Chemsitry Advertisment tape'"
+	name = "charred compact tape - 'Unofficial Chemsitry Advertisement tape'"
 	audio = 'sound/radio_station/adverts/Chemistry.ogg'
-	name_of_thing = "Unofficial Chemsitry Advertisment"
+	name_of_thing = "Unofficial Chemsitry Advertisement"
 	desc = {"A small audio tape. It looks too big to fit in an audio log.<br>
 	Voiceover by Brixx79 of Goonstation"}
 
 /obj/item/radio_tape/advertisement/robotics
-	name = "bloodied compact tape stained with oil - 'Unofficial Robotics Advertisment tape'"
+	name = "bloodied compact tape stained with oil - 'Unofficial Robotics Advertisement tape'"
 	audio = 'sound/radio_station/adverts/Robotics.ogg'
-	name_of_thing = "Unofficial Robotics Advertisment"
+	name_of_thing = "Unofficial Robotics Advertisement"
 	desc = {"A small audio tape. It looks too big to fit in an audio log.<br>
 	Voiceover by Brixx79 of Goonstation"}
 
@@ -1028,8 +1026,8 @@ ABSTRACT_TYPE(/obj/item/record/random/notaquario)
 	icon = 'icons/obj/large/64x64.dmi'
 	icon_state = "gannets_machine1"
 	bound_width = 64
-	bound_height = 64
-	anchored = 1
+	bound_height = 32
+	anchored = ANCHORED
 	density = 1
 
 /obj/decal/fakeobjects/vacuumtape
@@ -1039,31 +1037,31 @@ ABSTRACT_TYPE(/obj/item/record/random/notaquario)
 	icon_state = "gannets_machine2"
 	bound_width = 32
 	bound_height = 64
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 
 /obj/decal/fakeobjects/operatorconsole
 	name = "operator's console"
-	desc = "The computer operating console, covered in fancy toggle swtiches and register value lamps."
+	desc = "The computer operating console, covered in fancy toggle switches and register value lamps."
 	icon = 'icons/obj/large/32x64.dmi'
 	icon_state = "gannets_machine1"
 	bound_width = 32
 	bound_height = 64
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 
 /obj/decal/fakeobjects/broadcastcomputer
 	name = "broadcast server"
 	icon = 'icons/obj/decoration.dmi'
 	icon_state = "gannets_machine11"
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 
 /obj/decal/fakeobjects/tapedeck
 	name = "reel to reel tape deck"
 	icon = 'icons/obj/decoration.dmi'
 	icon_state = "gannets_machine20"
-	anchored = 1
+	anchored = ANCHORED
 	density = 1
 
 //Computer, disk and files.
@@ -1107,3 +1105,12 @@ ABSTRACT_TYPE(/obj/item/record/random/notaquario)
 /datum/computer/file/record/radioship/testlog2/New()
 	..()
 	fields = strings("radioship/radioship_records.txt","log_2")
+
+
+
+/obj/item/device/radio/intercom/radiostation
+	name = "broadcast radio"
+	desc = "A powerful radio transmitter. Enable the microphone to begin broadcasting your radio show."
+	device_color = "#E52780"
+	icon = 'icons/obj/radiostation.dmi'
+	icon_state = "mixtable-1"
