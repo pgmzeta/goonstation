@@ -91,7 +91,7 @@
 			for (var/obj/portal/portal in station_portals)
 				portal.dispose()
 			for(var/datum/allocated_region/region in regions)
-				// don't send critters to the station
+				// don't eject critters to the station
 				for (var/obj/critter/C in REGION_TILES(region))
 					for(var/type in themed_mobs)
 						if (istype(C, type))
@@ -123,31 +123,31 @@
 
 /datum/pocket_dimension_theme/martian
 	spawnable_mobs = list(
-		/obj/critter/martian,
-		/obj/critter/martian/soldier,
-		/obj/critter/martian/warrior,
+		/mob/living/critter/martian,
+		/mob/living/critter/martian/soldier,
+		/mob/living/critter/martian/warrior,
 	)
-	ground_turf = /turf/unsimulated/martian/floor
+	ground_turf = /turf/unsimulated/floor/martian
 	lighting = /obj/map/light/pink
 
 /datum/pocket_dimension_theme/desert
 	spawnable_mobs = list(
-		/obj/critter/spacescorpion,
-		/mob/living/critter/small_animal/armadillo/ai_controlled,
+		/mob/living/critter/small_animal/scorpion,
+		/mob/living/critter/small_animal/armadillo,
 	)
 	ground_turf = /turf/unsimulated/floor/auto/sand/rough
 	lighting = /obj/map/light/yellow
 
 /datum/pocket_dimension_theme/void
 	spawnable_mobs = list(
-		/obj/critter/floateye,
+		/mob/living/critter/small_animal/floateye,
 	)
 	ground_turf = /turf/unsimulated/floor/void/crunch
 	lighting = /obj/map/light/void
 
 /datum/pocket_dimension_theme/crunch
 	spawnable_mobs = list(
-		/obj/critter/crunched,
+		/mob/living/critter/crunched,
 		/obj/critter/spirit,
 	)
 	ground_turf = /turf/unsimulated/floor/void/crunch
@@ -155,7 +155,7 @@
 
 /datum/pocket_dimension_theme/swamp
 	spawnable_mobs = list(
-		/obj/critter/frog,
+		/mob/living/critter/small_animal/frog,
 		/obj/critter/turtle,
 	)
 	ground_turf = /turf/unsimulated/floor/auto/swamp/rain
@@ -163,24 +163,24 @@
 
 /datum/pocket_dimension_theme/forest
 	spawnable_mobs = list(
-		/mob/living/critter/small_animal/iguana/ai_controlled,
-		/obj/critter/bear,
+		/mob/living/critter/small_animal/iguana,
+		/mob/living/critter/bear,
 	)
 	ground_turf = /turf/unsimulated/floor/setpieces/rootfloor/random
 	lighting = /obj/map/light/green
 
 /datum/pocket_dimension_theme/asteroid
 	spawnable_mobs = list(
-		/obj/critter/fermid,
-		/obj/critter/rockworm,
+		/mob/living/critter/fermid,
+		/mob/living/critter/rockworm,
 	)
 	ground_turf = /turf/unsimulated/floor/asteroid
 	lighting = /obj/map/light/white
 
 /datum/pocket_dimension_theme/nerd
 	spawnable_mobs = list(
-		/obj/critter/mimic,
-		/obj/critter/townguard,
+		/mob/living/critter/mimic,
+		/mob/living/critter/townguard,
 	)
 	ground_turf = /turf/unsimulated/floor/wood/two
 	lighting = /obj/map/light/dimreddish
@@ -196,7 +196,7 @@
 
 /datum/pocket_dimension_theme/wrassle
 	spawnable_mobs = list(
-		/obj/critter/zombie/hogan,
+		/mob/living/critter/zombie/wrestler,
 		/obj/critter/microman,
 	)
 	ground_turf = /turf/unsimulated/floor/specialroom/gym
@@ -204,7 +204,6 @@
 
 /datum/pocket_dimension_theme/graveyard
 	spawnable_mobs = list(
-		/obj/critter/magiczombie,
 		/mob/living/critter/small_animal/bird/crow,
 		/mob/living/critter/small_animal/bat/angry,
 	)
@@ -213,16 +212,16 @@
 
 /datum/pocket_dimension_theme/grassland
 	spawnable_mobs = list(
-		/obj/critter/wasp/angry,
-		/obj/critter/spacerattlesnake,
+		/mob/living/critter/small_animal/wasp/angry,
+		/mob/living/critter/small_animal/rattlesnake,
 	)
 	ground_turf = /turf/unsimulated/floor/grass/random
 	lighting = /obj/map/light/green
 
 /datum/pocket_dimension_theme/ocean
 	spawnable_mobs = list(
-		/obj/critter/crab,
-		/mob/living/critter/small_animal/hallucigenia/ai_controlled,
+		/mob/living/critter/small_animal/crab,
+		/mob/living/critter/small_animal/hallucigenia,
 		// these (reasonably) use an overlay for their bury action, but allocated regions don't clean overlays
 		// /mob/living/critter/small_animal/trilobite/ai_controlled,
 		// /mob/living/critter/small_animal/pikaia/ai_controlled,
@@ -241,8 +240,8 @@
 
 /datum/pocket_dimension_theme/blood
 	spawnable_mobs = list(
-		/obj/critter/zombie,
-		/obj/critter/blobman
+		/mob/living/critter/zombie/meatmonaut,
+		/mob/living/critter/blobman
 	)
 	ground_turf = /turf/unsimulated/floor/setpieces/bloodfloor
 	lighting = /obj/map/light/meatland
