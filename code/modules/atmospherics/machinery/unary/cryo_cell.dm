@@ -243,7 +243,7 @@
 		if (try_push_in(G.affecting, user))
 			qdel(G)
 	else if (istype(I, /obj/item/reagent_containers/syringe))
-		//this is in syringe.dm
+		//this is in syringes.dm
 		logTheThing(LOG_CHEMISTRY, user, "injects [log_reagents(I)] to [src] at [log_loc(src)].")
 		if (!src.beaker)
 			boutput(user, SPAN_ALERT("There is no beaker in [src] for you to inject reagents."))
@@ -251,8 +251,9 @@
 		if (src.beaker.reagents.total_volume == src.beaker.reagents.maximum_volume)
 			boutput(user, SPAN_ALERT("The beaker in [src] is full."))
 			return
-		var/transferred = I.reagents.trans_to(src.beaker, 5)
-		src.visible_message(SPAN_ALERT("<B>[user] injects [transferred] into [src].</B>"))
+		var/obj/item/reagent_containers/syringe/injecting = I
+		var/transferred = I.reagents.trans_to(src.beaker, injecting.amount_per_transfer_from_this)
+		src.visible_message(SPAN_ALERT("<B>[user] injects [src] with [injecting].</B>"))
 		src.beaker.on_reagent_change()
 		return
 	else if (istype(I, /obj/item/device/analyzer/healthanalyzer_upgrade))
