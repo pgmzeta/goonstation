@@ -252,7 +252,7 @@
 			boutput(user, SPAN_ALERT("The beaker in [src] is full."))
 			return
 		var/obj/item/reagent_containers/syringe/injecting = I
-		var/transferred = I.reagents.trans_to(src.beaker, injecting.amount_per_transfer_from_this)
+		injecting.reagents.trans_to(src.beaker, injecting.amount_per_transfer_from_this)
 		src.visible_message(SPAN_ALERT("<B>[user] injects [src] with [injecting].</B>"))
 		src.beaker.on_reagent_change()
 		return
