@@ -314,7 +314,7 @@
 	},
 /area/russian/radiation)
 "aqh" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -1875,7 +1875,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/manufacturer/hangar,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -5223,7 +5223,7 @@
 	},
 /area/station/mining/magnet)
 "bgW" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/grass,
@@ -8379,7 +8379,7 @@
 /obj/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -8763,7 +8763,7 @@
 	},
 /area/russian/radiation)
 "bsH" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -9749,7 +9749,7 @@
 /obj/machinery/computer/pathology{
 	dir = 8
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	layer = 4;
 	pixel_x = 20
@@ -11983,7 +11983,7 @@
 	},
 /area/russian/radiation)
 "bHn" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/wood/two{
@@ -11994,7 +11994,7 @@
 	},
 /area/russian/radiation)
 "bHp" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/purpleblack{
@@ -13850,7 +13850,7 @@
 	},
 /area/russian/radiation)
 "bUK" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/disposalpipe/segment/transport{
@@ -14655,7 +14655,7 @@
 	dir = 1
 	},
 /obj/machinery/manufacturer/medical,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/disposalpipe/segment/morgue{
@@ -14787,7 +14787,7 @@
 /obj/machinery/atmospherics/unary/cold_sink/freezer/cryo{
 	dir = 8
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/disposalpipe/segment/morgue{
@@ -14995,7 +14995,7 @@
 	},
 /area/russian/radiation)
 "bYU" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/decal/tile_edge/stripe{
@@ -15144,7 +15144,7 @@
 	},
 /area/russian/radiation)
 "bZl" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/storage/closet/fire,
@@ -15184,7 +15184,7 @@
 	},
 /area/russian/radiation)
 "bZp" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/machinery/portable_atmospherics/scrubber,
@@ -16967,7 +16967,7 @@
 	},
 /obj/storage/secure/closet/command/captain,
 /obj/item/storage/box/costume/clown,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/carpet/blue/fancy/innercorner/north{
@@ -20544,7 +20544,7 @@
 	},
 /area/station/science/testchamber)
 "cwu" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/disposalpipe/segment{
@@ -21326,7 +21326,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/optable,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/item/paper/book/from_file/medical_surgery_guide,
@@ -28976,7 +28976,7 @@
 /area/russian/radiation)
 "cUO" = (
 /obj/storage/closet/emergency,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -30565,7 +30565,7 @@
 /obj/item/clothing/head/helmet/space,
 /obj/item/tank/air,
 /obj/item/clothing/mask/breath,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -42481,7 +42481,7 @@
 "gZZ" = (
 /obj/storage/closet/biohazard,
 /obj/item/clothing/head/emerg,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/decal/cleanable/dirt,
@@ -42614,7 +42614,7 @@
 	name = "ejection outlet";
 	pixel_x = 10
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	layer = 4;
 	pixel_x = 20
@@ -42740,7 +42740,7 @@
 /area/russian/radiation)
 "hjp" = (
 /obj/stool/bench/red/auto,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -43634,7 +43634,7 @@
 /obj/machinery/atmospherics/binary/valve{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/engine{
@@ -44203,7 +44203,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 6
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/specialroom/freezer/blue{
@@ -47201,7 +47201,7 @@
 /obj/submachine/seed_manipulator{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -51443,7 +51443,7 @@
 	dir = 2;
 	name = "Air Cooler"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/yellowblack{
@@ -51726,7 +51726,7 @@
 /obj/machinery/power/furnace/thermo{
 	fuel = 100
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/yellow/side{
@@ -56794,7 +56794,7 @@
 /obj/machinery/chem_master{
 	dir = 8
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -62990,7 +62990,7 @@
 /obj/machinery/computer3/generic/communications{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -63655,7 +63655,7 @@
 "rky" = (
 /obj/table/reinforced/auto,
 /obj/item/weldingtool,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/blueblack{
@@ -67850,7 +67850,7 @@
 /obj/machinery/atmospherics/pipe/manifold{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/carpet/red/standard/edge/nw{

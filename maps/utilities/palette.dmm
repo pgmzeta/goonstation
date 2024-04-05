@@ -945,7 +945,7 @@
 	},
 /area/space)
 "dU" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -1355,7 +1355,7 @@
 /turf/simulated/floor/yellow,
 /area/space)
 "fK" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -6066,7 +6066,7 @@
 	},
 /area/space)
 "yd" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor,

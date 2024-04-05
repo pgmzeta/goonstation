@@ -6006,7 +6006,7 @@
 /area/station/bridge)
 "aBA" = (
 /obj/machinery/sleeper/compact,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/machinery/power/data_terminal,
@@ -17000,7 +17000,7 @@
 	icon_state = "line2"
 	},
 /obj/machinery/atmospherics/unary/cryo_cell,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -22568,7 +22568,7 @@
 /obj/item/storage/wall/emergency{
 	pixel_y = 32
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -25450,7 +25450,7 @@
 	name = "autoname  - SS13";
 	pixel_y = 21
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/orangeblack/side/white{
@@ -29612,7 +29612,7 @@
 /obj/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/black,
@@ -32674,7 +32674,7 @@
 	},
 /area/station/crew_quarters/lounge)
 "jTj" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
@@ -36102,7 +36102,7 @@
 /area/station/medical/medbay/treatment)
 "lKv" = (
 /obj/machinery/nanofab/refining,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/machinery/firealarm{
@@ -36206,7 +36206,7 @@
 "lMK" = (
 /obj/stool/bed/moveable,
 /obj/item/clothing/suit/bedsheet,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -36753,7 +36753,7 @@
 "mbA" = (
 /obj/machinery/chem_dispenser/chemical,
 /obj/item/reagent_containers/glass/beaker/large,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -38024,7 +38024,7 @@
 /obj/machinery/shipalert{
 	pixel_y = 28
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -39886,7 +39886,7 @@
 	},
 /area/station/medical/cdc)
 "nCZ" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -40344,7 +40344,7 @@
 /obj/decal/tile_edge/line/red{
 	icon_state = "line3"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/white,
@@ -41500,7 +41500,7 @@
 	},
 /area/station/crew_quarters/quartersA)
 "oxv" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -41920,7 +41920,7 @@
 /turf/simulated/floor/specialroom/bar,
 /area/station/crew_quarters/bar)
 "oMc" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/unary/tank{
@@ -44532,7 +44532,7 @@
 /obj/machinery/bot/guardbot/old/tourguide/destiny,
 /obj/machinery/navbeacon/tour/destiny/tour20,
 /obj/machinery/power/data_terminal,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -48010,7 +48010,7 @@
 	icon_state = "line3"
 	},
 /obj/machinery/power/data_terminal,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/cable{
@@ -49935,7 +49935,7 @@
 /obj/item/clothing/suit/bedsheet,
 /obj/landmark/start/job/medical_doctor,
 /obj/machinery/light,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -59853,7 +59853,7 @@
 /turf/simulated/floor,
 /area/station/security/equipment)
 "xNk" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/fitness/weightlifter,

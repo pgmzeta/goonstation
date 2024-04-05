@@ -3745,7 +3745,7 @@
 /turf/simulated/floor/wood/two,
 /area/station/crew_quarters/jazz)
 "aYX" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/disposalpipe/segment/morgue{
@@ -5127,7 +5127,7 @@
 	bcolor = "blue";
 	icon_state = "bedsheet-blue"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/machinery/light/small{
@@ -5204,7 +5204,7 @@
 /obj/stool/chair/blue{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -6216,7 +6216,7 @@
 	})
 "bKB" = (
 /obj/storage/secure/closet/personal,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -8118,7 +8118,7 @@
 /turf/simulated/floor/plating,
 /area/station/hallway/secondary/west)
 "cjP" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -9513,7 +9513,7 @@
 	dir = 4;
 	pixel_x = 12
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/black,
@@ -12454,7 +12454,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/data_terminal,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -13699,7 +13699,7 @@
 "dJy" = (
 /obj/stool/bed,
 /obj/item/clothing/suit/bedsheet,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/machinery/light/small{
@@ -16671,7 +16671,7 @@
 /area/station/engine/core)
 "evE" = (
 /obj/machinery/floorflusher/minibrig3,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/disposalpipe/trunk/west,
@@ -18660,7 +18660,7 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/specialroom/arcade,
@@ -19164,7 +19164,7 @@
 /area/station/security/main)
 "fdg" = (
 /obj/table/reinforced/auto,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -20559,7 +20559,7 @@
 	dir = 8;
 	pixel_x = -12
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/wood/seven,
@@ -27219,7 +27219,7 @@
 /turf/simulated/floor,
 /area/station/security/brig)
 "hgv" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/carpet/red/fancy/edge/nw,
@@ -30649,7 +30649,7 @@
 	name = "Hydroponics Staff Section"
 	})
 "iav" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/carpet/red/fancy/edge/ne,
@@ -31016,7 +31016,7 @@
 /area/station/security/processing)
 "ihl" = (
 /obj/stool/chair,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -41655,7 +41655,7 @@
 /obj/machinery/atmospherics/pipe/simple/insulated{
 	dir = 6
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -42152,7 +42152,7 @@
 /obj/machinery/atmospherics/pipe/simple/insulated/cold{
 	dir = 10
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -42414,7 +42414,7 @@
 /obj/machinery/rkit,
 /obj/item/storage/belt/utility,
 /obj/item/device/multitool,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -45687,7 +45687,7 @@
 /obj/machinery/atmospherics/unary/cold_sink/freezer/cryo{
 	dir = 8
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/bluewhite{
@@ -46689,7 +46689,7 @@
 /turf/simulated/floor/caution/westeast,
 /area/station/routing/engine)
 "mjQ" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -52272,7 +52272,7 @@
 /obj/stool/chair{
 	dir = 8
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -52559,7 +52559,7 @@
 /area/station/medical/medbay)
 "nPd" = (
 /obj/shrub,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -53236,7 +53236,7 @@
 	})
 "nYu" = (
 /obj/storage/secure/closet/security/equipment,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/item/storage/secure/ssafe{
@@ -57039,7 +57039,7 @@
 /turf/simulated/floor/yellowblack,
 /area/station/engine/gas)
 "oWp" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -59234,7 +59234,7 @@
 	icon_state = "4-8"
 	},
 /obj/disposalpipe/segment/horizontal,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor,
@@ -59979,7 +59979,7 @@
 /area/station/medical/medbay/treatment1)
 "pJD" = (
 /obj/stool/chair,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -62916,7 +62916,7 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/data_terminal,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -63585,7 +63585,7 @@
 	dir = 4;
 	pixel_x = 12
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/specialroom/arcade,
@@ -66980,7 +66980,7 @@
 /turf/simulated/floor/yellow/side,
 /area/station/engine/power)
 "rAi" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/grass,
@@ -68502,7 +68502,7 @@
 "rSh" = (
 /obj/machinery/disposal,
 /obj/disposalpipe/trunk/west,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -69680,7 +69680,7 @@
 "shP" = (
 /obj/table/reinforced/chemistry/auto,
 /obj/random_item_spawner/desk_stuff/g_clip_bin_pen,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -70230,7 +70230,7 @@
 /turf/simulated/floor/wood/two,
 /area/station/medical/medbay/lobby)
 "soL" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -70655,7 +70655,7 @@
 /obj/item/storage/secure/ssafe{
 	pixel_x = -28
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/carpet/red/fancy/edge/nw,
@@ -70977,7 +70977,7 @@
 /obj/item/device/radio/intercom/medical{
 	dir = 8
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -71359,7 +71359,7 @@
 /obj/machinery/atmospherics/unary/portables_connector{
 	dir = 2
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -72674,7 +72674,7 @@
 /obj/item/storage/belt/utility{
 	pixel_y = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -72888,7 +72888,7 @@
 "sTE" = (
 /obj/stool/bed,
 /obj/item/clothing/suit/bedsheet,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /obj/machinery/light/small{
@@ -73958,7 +73958,7 @@
 /area/station/storage/tools)
 "tgQ" = (
 /obj/submachine/seed_manipulator,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/grass,
@@ -75514,7 +75514,7 @@
 /obj/cable{
 	icon_state = "0-4"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -76058,7 +76058,7 @@
 	icon_state = "bedsheet-green"
 	},
 /obj/landmark/start/job/chef,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -79774,7 +79774,7 @@
 "uEy" = (
 /obj/table/reinforced/auto,
 /obj/bedsheetbin,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -81600,7 +81600,7 @@
 	layer = 9.1;
 	pixel_x = -10
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/black,
@@ -82119,7 +82119,7 @@
 /area/station/medical/medbay/lobby)
 "vfW" = (
 /obj/disposalpipe/segment/vertical,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -83953,7 +83953,7 @@
 /obj/item/device/reagentscanner,
 /obj/item/reagent_containers/dropper/mechanical,
 /obj/item/clothing/glasses/spectro,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -84666,7 +84666,7 @@
 "vJl" = (
 /obj/machinery/manufacturer/general/grody{
 	free_resource_amt = 2;
-
+	
 	},
 /turf/simulated/floor/industrial,
 /area/station/hallway/secondary/construction{
@@ -88107,7 +88107,7 @@
 	},
 /area/station/hallway/secondary/exit)
 "wAM" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -89087,7 +89087,7 @@
 /obj/stool/chair/office/yellow{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/wood/seven,
@@ -90994,7 +90994,7 @@
 	icon_state = "bedsheet-yellow"
 	},
 /obj/landmark/start/job/engineer,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 24
 	},
 /turf/simulated/floor/carpet/grime,

@@ -309,7 +309,7 @@
 	icon_state = "2-4";
 	
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -853,7 +853,7 @@
 	name = "N APC";
 	pixel_y = 24
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -2361,7 +2361,7 @@
 	desc = "Caution! Construction Zone!";
 	name = "caution sign"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -3357,7 +3357,7 @@
 /turf/simulated/floor,
 /area/station/janitor/office)
 "agM" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -5365,7 +5365,7 @@
 	},
 /area/station/chapel/sanctuary)
 "akN" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -6644,7 +6644,7 @@
 "anc" = (
 /obj/table/wood,
 /obj/item/reagent_containers/glass/bottle/holywater,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 1;
 	name = "Local Air Monitor";
 	pixel_y = -29
@@ -6995,7 +6995,7 @@
 /turf/simulated/floor/plating,
 /area/station/storage/tech)
 "anQ" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -7591,7 +7591,7 @@
 /turf/simulated/floor/plating/scorched,
 /area/station/chapel/sanctuary)
 "apk" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -8855,7 +8855,7 @@
 	},
 /area/space)
 "asb" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -10481,7 +10481,7 @@
 /turf/simulated/floor/plating,
 /area/station/maintenance/east)
 "avM" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -12043,7 +12043,7 @@
 	},
 /area/station/medical/robotics)
 "aze" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -12767,7 +12767,7 @@
 /turf/simulated/floor/plating,
 /area/station/maintenance/east)
 "aAF" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -14803,7 +14803,7 @@
 /turf/simulated/floor/plating,
 /area/station/maintenance/east)
 "aEu" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -14884,7 +14884,7 @@
 	dir = 2
 	},
 /obj/item/storage/box/syringes,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -15638,7 +15638,7 @@
 /obj/item/storage/firstaid/oxygen,
 /obj/item/storage/firstaid/oxygen,
 /obj/item/storage/firstaid/oxygen,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -16246,7 +16246,7 @@
 	},
 /area/station/hallway/primary/south)
 "aHq" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -17755,7 +17755,7 @@
 /turf/simulated/floor/white,
 /area/station/medical/medbay)
 "aJX" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -18887,7 +18887,7 @@
 	pixel_x = -4;
 	pixel_y = 15
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -19420,7 +19420,7 @@
 /obj/stool/chair{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -19817,7 +19817,7 @@
 /obj/item/clothing/suit/bedsheet,
 /obj/landmark/start/job/assistant,
 /obj/landmark/start/job/assistant,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -20024,7 +20024,7 @@
 /turf/simulated/floor/white,
 /area/station/science/artifact)
 "aOq" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 1;
 	name = "Local Air Monitor";
 	pixel_y = -29
@@ -20331,7 +20331,7 @@
 /turf/simulated/floor/plating,
 /area/station/maintenance/southeast)
 "aOV" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -21834,7 +21834,7 @@
 /turf/simulated/floor/circuit,
 /area/space)
 "aRJ" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -23090,7 +23090,7 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -23351,7 +23351,7 @@
 	},
 /obj/disposalpipe/segment,
 /obj/storage/secure/closet/personal,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -24067,7 +24067,7 @@
 	name = "Mixing Room"
 	})
 "aVQ" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 1;
 	name = "Local Air Monitor";
 	pixel_y = -29
@@ -24998,7 +24998,7 @@
 /obj/cable{
 	icon_state = "1-4"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -25113,7 +25113,7 @@
 /turf/simulated/floor/plating,
 /area/station/science/storage)
 "aYn" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 1;
 	name = "Local Air Monitor";
 	pixel_y = -29
@@ -26138,7 +26138,7 @@
 	},
 /area/station/crew_quarters/arcade)
 "bav" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -26224,7 +26224,7 @@
 	icon_state = "pipe-s";
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -26420,7 +26420,7 @@
 	},
 /obj/item/storage/toolbox/electrical,
 /obj/item/weldingtool,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -27829,7 +27829,7 @@
 	icon_state = "4-8";
 	
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -29230,7 +29230,7 @@
 /turf/simulated/floor,
 /area/station/crew_quarters/courtroom)
 "bfU" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 1;
 	name = "Local Air Monitor";
 	pixel_y = -29
@@ -29791,7 +29791,7 @@
 /turf/simulated/floor/black,
 /area/station/security/hos)
 "bgZ" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	name = "Local Air Monitor";
 	pixel_y = 29
 	},
@@ -30434,7 +30434,7 @@
 /turf/simulated/floor/black,
 /area/station/crew_quarters/captain)
 "bif" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -30680,7 +30680,7 @@
 	},
 /area/station/bridge)
 "biH" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -30701,7 +30701,7 @@
 /turf/simulated/floor/black,
 /area/station/crew_quarters/captain)
 "biK" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -31333,7 +31333,7 @@
 /turf/simulated/floor/white,
 /area/space)
 "bjV" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -31566,7 +31566,7 @@
 /area/space)
 "bku" = (
 /obj/machinery/chem_master,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -31740,7 +31740,7 @@
 	icon_state = "1-2";
 	
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -31776,7 +31776,7 @@
 /turf/simulated/wall/r_wall,
 /area/space)
 "bkM" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -31999,7 +31999,7 @@
 /turf/simulated/floor/plating,
 /area/space)
 "blk" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 1;
 	name = "Local Air Monitor";
 	pixel_y = -29
@@ -32328,7 +32328,7 @@
 /obj/machinery/networked/storage/bomb_tester{
 	bank_id = "Mixer"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29
@@ -33289,7 +33289,7 @@
 /area/space)
 "bnI" = (
 /obj/submachine/chef_sink/chem_sink,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	name = "Local Air Monitor";
 	pixel_x = 29
@@ -33379,7 +33379,7 @@
 /obj/cable{
 	icon_state = "1-4"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 1;
 	name = "Local Air Monitor";
 	pixel_y = -29
@@ -33513,7 +33513,7 @@
 	o2tanks = 5;
 	pltanks = 15
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 1;
 	name = "Local Air Monitor";
 	pixel_y = -29
@@ -34073,7 +34073,7 @@
 	},
 /area/space)
 "bpf" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	name = "Local Air Monitor";
 	pixel_x = -29

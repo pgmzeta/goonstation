@@ -6,7 +6,7 @@
 #define ALARM_MINOR 1
 #define ALARM_GOOD 2
 
-/obj/machinery/alarm
+/obj/machinery/alarm/air
 	name = "air monitor"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm_unpowered"
@@ -39,7 +39,7 @@
 	var/const/temp_good_min = T0C
 	var/const/temp_good_max = T20C+20
 
-/obj/machinery/alarm/New()
+/obj/machinery/alarm/air/New()
 	..()
 	MAKE_SENDER_RADIO_PACKET_COMPONENT("alarm", alarm_frequency)
 	MAKE_SENDER_RADIO_PACKET_COMPONENT("control", control_frequency) // seems to be unused?
@@ -51,7 +51,7 @@
 		else
 			alarm_zone = "Unregistered"
 
-/obj/machinery/alarm/get_desc(dist, mob/user)
+/obj/machinery/alarm/air/get_desc(dist, mob/user)
 	. = ..()
 	if(status & (NOPOWER | BROKEN))
 		. += "It doesn't seem to be working."
@@ -65,16 +65,16 @@
 		if(ALARM_GOOD)
 			. += "It is showing optimal status. Take a deep breath of fresh-ish air!"
 
-/obj/machinery/alarm/ui_interact(mob/user, datum/tgui/ui)
+/obj/machinery/alarm/air/ui_interact(mob/user, datum/tgui/ui)
 	ui = tgui_process.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "AirAlarm", src.name)
 		ui.open()
 
-/obj/machinery/alarm/ui_static_data(mob/user)
+/obj/machinery/alarm/air/ui_static_data(mob/user)
 		return list("boundaries" = gas_safety_levels)
 
-/obj/machinery/alarm/ui_data(mob/user)
+/obj/machinery/alarm/air/ui_data(mob/user)
 	. = list("gasses" = list())
 	var/env_moles = environment ? TOTAL_MOLES(environment) : 0
 	if(env_moles == 0)
@@ -89,7 +89,7 @@
 	.["safe"] = last_safe
 
 
-/obj/machinery/alarm/process()
+/obj/machinery/alarm/air/process()
 	.=..()
 
 	var/safe = ALARM_GOOD
@@ -147,7 +147,7 @@
 		last_safe = safe
 
 
-/obj/machinery/alarm/proc/post_alert(alert_level)
+/obj/machinery/alarm/air/proc/post_alert(alert_level)
 	var/datum/signal/alert_signal = get_free_signal()
 	alert_signal.source = src
 	alert_signal.transmission_method = 1
@@ -164,7 +164,7 @@
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, alert_signal, null, "alarm")
 
-/obj/machinery/alarm/attackby(var/obj/item/W, user)
+/obj/machinery/alarm/air/attackby(var/obj/item/W, user)
 	if (issnippingtool(W))
 		status ^= BROKEN
 		src.add_fingerprint(user)
@@ -173,58 +173,11 @@
 		return
 	return ..()
 
-/obj/machinery/alarm/power_change()
+/obj/machinery/alarm/air/power_change()
 	if(powered(ENVIRON))
 		status &= ~NOPOWER
 	else
 		status |= NOPOWER
-
-/*
-/obj/machinery/alarm/proc/panic(var/time)
-	var/datum/radio_frequency/frequency = radio_controller.return_frequency(control_frequency)
-
-	if(!frequency) return
-
-	panic_mode = time
-
-	var/datum/signal/signal = get_free_signal()
-	signal.source = src
-	signal.transmission_method = 1
-	signal.data["tag"] = id
-	signal.data["command"] = "set_siphon"
-
-	frequency.post_signal(src, signal)
-
-	signal = get_free_signal()
-	signal.source = src
-	signal.transmission_method = 1
-	signal.data["tag"] = id
-	signal.data["command"] = "purge"
-
-	frequency.post_signal(src, signal)
-
-/obj/machinery/alarm/proc/unpanic()
-	var/datum/radio_frequency/frequency = radio_controller.return_frequency(control_frequency)
-
-	if(!frequency) return
-
-	panic_mode = 0
-
-	var/datum/signal/signal = get_free_signal()
-	signal.source = src
-	signal.transmission_method = 1
-	signal.data["tag"] = id
-	signal.data["command"] = "set_scrubbing"
-
-	frequency.post_signal(src, signal)
-
-	signal = get_free_signal()
-	signal.source = src
-	signal.transmission_method = 1
-	signal.data["tag"] = id
-	signal.data["command"] = "end_purge"
-
-	frequency.post_signal(src, signal) */
 
 #undef ALARM_GOOD
 #undef ALARM_MINOR

@@ -508,7 +508,7 @@
 	/obj/item/storage/toilet, \
 	/obj/machinery/firealarm, \
 	/obj/machinery/power/apc, \
-	/obj/machinery/alarm, \
+	/obj/machinery/alarm/air, \
 	/obj/machinery/disposal, \
 	/obj/machinery/gibber, \
 	/obj/machinery/floorflusher, \

@@ -6217,7 +6217,7 @@
 /turf/space,
 /area/station/solar/north)
 "asR" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/purpleblack{
@@ -6671,7 +6671,7 @@
 /turf/simulated/floor/carpet/grime,
 /area/station/crew_quarters/quartersB)
 "aus" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -6841,7 +6841,7 @@
 /obj/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -7099,7 +7099,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/manufacturer/hangar,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -7268,7 +7268,7 @@
 	},
 /area/station/medical/medbay/treatment1)
 "awr" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -8079,7 +8079,7 @@
 /obj/machinery/computer/pathology{
 	dir = 8
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	layer = 4;
 	pixel_x = 20
@@ -9246,7 +9246,7 @@
 /turf/simulated/floor/wood/two,
 /area/station/hallway/secondary/east)
 "aCm" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/wood/two,
@@ -11677,7 +11677,7 @@
 	layer = 9.1;
 	pixel_y = 21
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/disposalpipe/segment/transport{
@@ -12315,7 +12315,7 @@
 /obj/machinery/atmospherics/unary/cold_sink/freezer/cryo{
 	dir = 8
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/disposalpipe/segment/morgue{
@@ -12429,7 +12429,7 @@
 	},
 /area/station/medical/medbay)
 "aKX" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/decal/tile_edge/stripe{
@@ -13710,7 +13710,7 @@
 	},
 /obj/storage/secure/closet/command/captain,
 /obj/item/storage/box/costume/clown,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/carpet/blue/fancy/innercorner/north,
@@ -14727,7 +14727,7 @@
 /obj/machinery/computer3/generic/communications{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -14894,7 +14894,7 @@
 	dir = 1
 	},
 /obj/machinery/manufacturer/medical,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/disposalpipe/segment/morgue{
@@ -17217,7 +17217,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/optable,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/item/paper/book/from_file/medical_surgery_guide,
@@ -17953,7 +17953,7 @@
 /area/station/storage/eva)
 "aZO" = (
 /obj/storage/closet/emergency,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -18284,7 +18284,7 @@
 /obj/item/clothing/head/helmet/space,
 /obj/item/tank/air,
 /obj/item/clothing/mask/breath,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -22922,7 +22922,7 @@
 /area/station/garden/owlery)
 "bmX" = (
 /obj/stool/bench/red/auto,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -25376,7 +25376,7 @@
 /area/station/garden/owlery)
 "buW" = (
 /obj/landmark/start/job/assistant,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/grass,
@@ -28247,7 +28247,7 @@
 "bDw" = (
 /obj/storage/closet/biohazard,
 /obj/item/clothing/head/emerg,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/decal/cleanable/dirt,
@@ -28643,7 +28643,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 6
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/specialroom/freezer/blue,
@@ -31358,7 +31358,7 @@
 	name = "ejection outlet";
 	pixel_x = 10
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	layer = 4;
 	pixel_x = 20
@@ -32871,7 +32871,7 @@
 	dir = 2;
 	name = "Air Cooler"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/yellowblack{
@@ -33060,7 +33060,7 @@
 /obj/machinery/power/furnace/thermo{
 	fuel = 100
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/yellow/side{
@@ -34334,7 +34334,7 @@
 /obj/submachine/seed_manipulator{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -34372,7 +34372,7 @@
 /turf/simulated/floor/black,
 /area/station/science/testchamber)
 "bVf" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/disposalpipe/segment{
@@ -36288,7 +36288,7 @@
 /obj/machinery/chem_master{
 	dir = 8
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -39507,7 +39507,7 @@
 "ciL" = (
 /obj/table/reinforced/auto,
 /obj/item/weldingtool,
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/blueblack,
@@ -39935,7 +39935,7 @@
 /turf/simulated/floor/plating/random,
 /area/station/crew_quarters/hor)
 "cjU" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/storage/closet/fire,
@@ -42385,7 +42385,7 @@
 /turf/space,
 /area/space)
 "crC" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /obj/machinery/portable_atmospherics/scrubber,
@@ -43378,7 +43378,7 @@
 /turf/simulated/floor/grey/blackgrime,
 /area/listeningpost)
 "cuW" = (
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 4;
 	pixel_x = -20
 	},
@@ -43625,7 +43625,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	dir = 8;
 	layer = 4;
 	pixel_x = 20
@@ -55116,7 +55116,7 @@
 /obj/machinery/atmospherics/pipe/manifold{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/carpet/red/standard/edge/nw,
@@ -57111,7 +57111,7 @@
 /obj/machinery/atmospherics/binary/valve{
 	dir = 4
 	},
-/obj/machinery/alarm{
+/obj/machinery/alarm/air{
 	pixel_y = 20
 	},
 /turf/simulated/floor/engine,
