@@ -2797,7 +2797,7 @@
 /area/station/maintenance/west)
 "aji" = (
 /obj/machinery/light,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	pixel_y = -24
 	},
@@ -2811,7 +2811,7 @@
 /turf/simulated/floor/green,
 /area/station/hydroponics/bay)
 "ajm" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -24
 	},
@@ -3969,7 +3969,7 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	pixel_y = -24
 	},
@@ -9023,7 +9023,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	pixel_y = -24
 	},
@@ -9353,7 +9353,7 @@
 /turf/simulated/floor,
 /area/station/crew_quarters/locker)
 "aGx" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24
 	},
 /turf/simulated/floor,
@@ -10611,7 +10611,7 @@
 /turf/simulated/floor,
 /area/station/crew_quarters/locker)
 "aLt" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -24
 	},
@@ -11074,7 +11074,7 @@
 	c_tag = "Medical East";
 	dir = 8
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 24
 	},
@@ -15621,7 +15621,7 @@
 /turf/simulated/floor/carpet/grime,
 /area/station/security/detectives_office)
 "bdH" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24
 	},
 /obj/machinery/light/small{
@@ -18695,7 +18695,7 @@
 /turf/simulated/floor/arrival,
 /area/station/hallway/secondary/entry)
 "bnr" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	pixel_y = -24
 	},
@@ -19572,7 +19572,7 @@
 /turf/simulated/floor/white,
 /area/station/crew_quarters/cafeteria)
 "bpM" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24
 	},
 /obj/landmark/kudzu,
@@ -21204,7 +21204,7 @@
 /obj/cable{
 	icon_state = "2-4"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24
 	},
 /obj/decal/stripe_delivery,
@@ -22031,7 +22031,7 @@
 	},
 /area/station/hallway/primary/east)
 "bvY" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 24
 	},
@@ -22139,7 +22139,7 @@
 /turf/simulated/floor/grime,
 /area/station/science/gen_storage)
 "bwl" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	pixel_y = -24
 	},
@@ -22320,7 +22320,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24
 	},
 /obj/decal/tile_edge/stripe/extra_big{
@@ -24209,7 +24209,7 @@
 /turf/simulated/floor/purple/side,
 /area/station/hallway/primary/central)
 "bDG" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	pixel_y = -24
 	},
@@ -24257,7 +24257,7 @@
 /turf/simulated/floor/darkpurple/side,
 /area/station/hallway/primary/east)
 "bDO" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	pixel_y = -24
 	},
@@ -24959,7 +24959,7 @@
 /turf/simulated/floor/black,
 /area/station/science/lab)
 "bFv" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 24
 	},
@@ -25478,7 +25478,7 @@
 /turf/simulated/floor/plating,
 /area/space)
 "djR" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 24
 	},
@@ -26210,7 +26210,7 @@
 /turf/simulated/floor/plating,
 /area/station/engine/engineering)
 "fxa" = (
-/obj/machinery/firealarm,
+/obj/machinery/alarm/fire,
 /turf/simulated/wall/r_wall,
 /area/station/science/chemistry)
 "fyk" = (
@@ -28172,7 +28172,7 @@
 /turf/simulated/floor,
 /area/station/security/prison)
 "liM" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -24
 	},

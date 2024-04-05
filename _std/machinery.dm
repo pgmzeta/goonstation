@@ -66,7 +66,7 @@
 #define MACHINES_STATUSDISPLAYS		7 // /obj/machinery/ai_status_display
 #define MACHINES_CLONINGCONSOLES 	8 // /obj/machinery/computer/cloning
 #define	MACHINES_FISSION					9 // Contains both the computers and the reactors
-#define MACHINES_FIREALARMS				10 // /obj/machinery/firealarm
+#define MACHINES_FIREALARMS				10 // /obj/machinery/alarm/fire
 #define MACHINES_PRINTERS					11 // /obj/machinery/networked/printer
 #define MACHINES_SHIELDGENERATORS	12 // /obj/machinery/shield_generator
 #define MACHINES_ANNOUNCEMENTS		13 // /obj/machinery/computer/announcement

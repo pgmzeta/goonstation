@@ -506,7 +506,7 @@
 	/obj/machinery/camera, \
 	/obj/item/device/radio/intercom, \
 	/obj/item/storage/toilet, \
-	/obj/machinery/firealarm, \
+	/obj/machinery/alarm/fire, \
 	/obj/machinery/power/apc, \
 	/obj/machinery/alarm/air, \
 	/obj/machinery/disposal, \

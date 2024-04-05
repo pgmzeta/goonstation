@@ -170,7 +170,7 @@
 	},
 /area/spacehabitat/beach)
 "D" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1

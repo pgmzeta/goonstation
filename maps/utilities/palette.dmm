@@ -1540,7 +1540,7 @@
 /obj/disposalpipe/broken{
 	dir = 1
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 24
 	},
@@ -7360,7 +7360,7 @@
 /obj/disposalpipe/broken{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	pixel_y = -24
 	},
@@ -10271,7 +10271,7 @@
 /obj/disposalpipe/broken{
 	dir = 8
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24
 	},
 /obj/machinery/camera{
@@ -11052,7 +11052,7 @@
 /area/space)
 "RK" = (
 /obj/disposalpipe/broken,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -24
 	},

@@ -5893,7 +5893,7 @@
 /obj/machinery/centrifuge,
 /obj/decal/cleanable/dirt/dirt2,
 /obj/decal/cleanable/dirt/dirt4,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -7619,7 +7619,7 @@
 	dir = 1
 	},
 /obj/disposalpipe/segment/morgue,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	layer = 4;
 	pixel_x = 24
@@ -8030,7 +8030,7 @@
 /obj/disposalpipe/segment/morgue{
 	dir = 8
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -9905,7 +9905,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -10673,7 +10673,7 @@
 /turf/simulated/floor/blue/checker,
 /area/station/maintenance/northeast)
 "aFZ" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -11552,7 +11552,7 @@
 /turf/simulated/floor/specialroom/freezer/blue,
 /area/station/medical/crematorium)
 "aIE" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -12065,7 +12065,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -14510,7 +14510,7 @@
 /obj/machinery/networked/mainframe/zeta{
 	tag = "ZETA_MAINFRAME"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -14997,7 +14997,7 @@
 /obj/decal/tile_edge/line/blue{
 	icon_state = "line1"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -16098,7 +16098,7 @@
 /turf/simulated/floor/bluewhite/corner,
 /area/station/medical/medbay)
 "aUH" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -16988,7 +16988,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -17260,7 +17260,7 @@
 /turf/simulated/floor/neutral,
 /area/station/crew_quarters/courtroom)
 "aXS" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -17434,7 +17434,7 @@
 /turf/simulated/wall/auto/supernorn,
 /area/station/crew_quarters/pool)
 "aYn" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -17891,7 +17891,7 @@
 	},
 /area/station/janitor/office)
 "aZD" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -17924,7 +17924,7 @@
 /turf/simulated/floor,
 /area/station/security/checkpoint/arrivals)
 "aZJ" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -18627,7 +18627,7 @@
 /obj/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -19199,7 +19199,7 @@
 /obj/cable{
 	icon_state = "2-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -19294,7 +19294,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -19346,7 +19346,7 @@
 /obj/machinery/power/data_terminal,
 /obj/machinery/guardbot_dock,
 /obj/machinery/bot/guardbot/ranger,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -19370,7 +19370,7 @@
 /turf/simulated/floor/black,
 /area/station/security/main)
 "bdj" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -19707,7 +19707,7 @@
 	dir = 4;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -20054,7 +20054,7 @@
 	pixel_x = 10;
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -20096,7 +20096,7 @@
 /turf/simulated/floor/red/checker,
 /area/station/security/checkpoint/arrivals)
 "bfw" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -20166,7 +20166,7 @@
 	name = "Net Cafe"
 	})
 "bfK" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -20296,7 +20296,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -20689,7 +20689,7 @@
 /turf/simulated/floor/blue/checker,
 /area/station/medical/medbay/surgery)
 "bhf" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -21073,7 +21073,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/cyan_pipe{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -21248,7 +21248,7 @@
 /area/station/storage/eva)
 "biB" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -21537,7 +21537,7 @@
 /obj/table/reinforced/auto,
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -21786,7 +21786,7 @@
 /obj/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -21803,7 +21803,7 @@
 /obj/table/reinforced/auto,
 /obj/item/scalpel,
 /obj/item/implantcase/health,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -21913,7 +21913,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -22214,7 +22214,7 @@
 /obj/cable{
 	icon_state = "2-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	layer = 4;
 	pixel_x = 24
@@ -22280,7 +22280,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -22519,7 +22519,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -23012,7 +23012,7 @@
 /turf/simulated/floor/yellow/corner,
 /area/station/mining/staff_room)
 "bni" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -23206,7 +23206,7 @@
 /turf/simulated/floor/carpet/purple/fancy/edge,
 /area/station/hallway/primary/west)
 "bob" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	layer = 4;
 	pixel_x = 24
@@ -23266,7 +23266,7 @@
 /obj/disposalpipe/segment/produce{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -23581,7 +23581,7 @@
 /obj/machinery/atmospherics/pipe/simple/insulated/cold{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -24447,7 +24447,7 @@
 	},
 /area/station/hallway/primary/central)
 "brz" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -25008,7 +25008,7 @@
 /obj/disposalpipe/segment/food{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -25522,7 +25522,7 @@
 /obj/disposalpipe/segment/transport{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -25599,7 +25599,7 @@
 /obj/disposalpipe/segment/transport{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -25682,7 +25682,7 @@
 	},
 /area/station/hallway/primary/west)
 "bvO" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -26615,7 +26615,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -26686,7 +26686,7 @@
 	icon_state = "4-8"
 	},
 /obj/disposalpipe/segment/bent/south,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -27004,7 +27004,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -27320,7 +27320,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/cyan_pipe{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -27874,7 +27874,7 @@
 	icon_state = "bot2";
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -28090,7 +28090,7 @@
 /turf/simulated/floor/carpet/red/standard/edge/north,
 /area/station/security/detectives_office)
 "bCY" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -28196,7 +28196,7 @@
 /turf/simulated/floor/sanitary/white,
 /area/station/crew_quarters/showers)
 "bDr" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -28215,7 +28215,7 @@
 /turf/simulated/floor/sanitary/white,
 /area/station/crew_quarters/showers)
 "bDt" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -28272,7 +28272,7 @@
 /obj/rack,
 /obj/item/device/light/flashlight,
 /obj/item/device/light/flashlight,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -28389,7 +28389,7 @@
 /obj/table/reinforced/auto,
 /obj/machinery/power/data_terminal,
 /obj/machinery/computer3/generic/personal,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -28671,7 +28671,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -29279,7 +29279,7 @@
 	name = "autoname - SS13";
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -29763,7 +29763,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/cyan_pipe{
 	dir = 1
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -30055,7 +30055,7 @@
 /obj/table/wood/auto,
 /obj/machinery/light/lamp/green,
 /obj/item/clothing/head/fedora,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -30397,7 +30397,7 @@
 /turf/simulated/floor/carpet/grime,
 /area/station/crew_quarters/quarters_south)
 "bJG" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -30468,7 +30468,7 @@
 /turf/simulated/floor/sanitary,
 /area/station/crew_quarters/quarters_south)
 "bJR" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -30685,7 +30685,7 @@
 	icon_state = "delivery2";
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	layer = 4;
 	pixel_x = 24
@@ -31090,7 +31090,7 @@
 /obj/item/cell/supercell/charged,
 /obj/item/cell/supercell/charged,
 /obj/storage/crate/robotparts,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	layer = 4;
 	pixel_x = 24
@@ -31498,7 +31498,7 @@
 /area/station/crew_quarters/pool)
 "bMW" = (
 /obj/machinery/vending/cola/red,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -31832,7 +31832,7 @@
 /area/station/security/main)
 "bNV" = (
 /obj/machinery/vending/security,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -32185,7 +32185,7 @@
 /area/station/maintenance/southwest)
 "bPk" = (
 /obj/machinery/floorflusher/minibrig,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -32699,7 +32699,7 @@
 /obj/cable{
 	icon_state = "1-4"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -33526,7 +33526,7 @@
 	},
 /area/station/crew_quarters/pool)
 "bSI" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -33706,7 +33706,7 @@
 	pixel_x = -10;
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -34451,7 +34451,7 @@
 /turf/simulated/floor/carpet/grime,
 /area/station/crew_quarters/quarters_south)
 "bVs" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -35304,7 +35304,7 @@
 	},
 /area/station/crew_quarters/kitchen)
 "bXR" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -36201,7 +36201,7 @@
 /turf/simulated/floor/wood/two,
 /area/station/crew_quarters/bar)
 "bZW" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -36907,7 +36907,7 @@
 "cbJ" = (
 /obj/machinery/chem_dispenser/alcohol,
 /obj/item/reagent_containers/food/drinks/drinkingglass/pitcher,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -37240,7 +37240,7 @@
 	})
 "ccI" = (
 /obj/landmark/start/job/engineer,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -37291,7 +37291,7 @@
 	},
 /area/station/engine/core)
 "ccN" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -37707,7 +37707,7 @@
 "cdU" = (
 /obj/machinery/light,
 /obj/machinery/portable_atmospherics/canister/empty,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -38612,7 +38612,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/cyan_pipe{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -38742,7 +38742,7 @@
 /obj/machinery/atmospherics/pipe/manifold/overfloor{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -42406,7 +42406,7 @@
 	icon_state = "bot2";
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -45269,7 +45269,7 @@
 /obj/decal/tile_edge/stripe/extra_big{
 	dir = 9
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -45434,7 +45434,7 @@
 	dir = 9;
 	icon_state = "xtra_bigstripe2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -46206,7 +46206,7 @@
 	})
 "cDu" = (
 /obj/table/reinforced/auto,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -46238,7 +46238,7 @@
 	name = "Experimental Table"
 	},
 /obj/item/clothing/glasses/spectro,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -46271,7 +46271,7 @@
 /obj/cable{
 	icon_state = "1-4"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -46308,7 +46308,7 @@
 /area/station/science/lobby)
 "cDF" = (
 /obj/storage/closet/biohazard,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -46735,7 +46735,7 @@
 /turf/simulated/floor/darkblue,
 /area/station/engine/substation/north)
 "deC" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -47187,7 +47187,7 @@
 /obj/decal/tile_edge/line/green{
 	icon_state = "line1"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -47750,7 +47750,7 @@
 /obj/disposalpipe/segment/produce{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -47996,7 +47996,7 @@
 /turf/simulated/floor/plating,
 /area/station/maintenance/east)
 "fcI" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -48135,7 +48135,7 @@
 	dir = 1;
 	pixel_y = 21
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	layer = 4;
 	pixel_x = 24
@@ -48247,7 +48247,7 @@
 /obj/disposalpipe/segment/produce{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -48333,7 +48333,7 @@
 /obj/disposalpipe/segment/morgue{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -48515,7 +48515,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -48586,7 +48586,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -49105,7 +49105,7 @@
 /obj/disposalpipe/segment/transport{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -49460,7 +49460,7 @@
 /obj/disposalpipe/segment/produce{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -50197,7 +50197,7 @@
 	requires_power = 0
 	})
 "iNN" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -50224,7 +50224,7 @@
 /obj/disposalpipe/segment/ejection{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -50375,7 +50375,7 @@
 /obj/item/pen,
 /obj/item/clothing/head/helmet/space/captain,
 /obj/item/clothing/mask/breath,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -50722,7 +50722,7 @@
 /obj/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -51504,7 +51504,7 @@
 /obj/disposalpipe/segment/ejection{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -51621,7 +51621,7 @@
 /turf/simulated/floor/plating/random,
 /area/station/maintenance/northeast)
 "ljE" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -52115,7 +52115,7 @@
 	can_rupture = 0;
 	dir = 5
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -52834,7 +52834,7 @@
 /obj/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -53311,7 +53311,7 @@
 	icon_state = "1-2"
 	},
 /obj/disposalpipe/segment/bent/west,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	layer = 4;
 	pixel_x = 24
@@ -53888,7 +53888,7 @@
 /obj/disposalpipe/segment/ejection{
 	icon_state = "pipe-c"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -54671,7 +54671,7 @@
 /obj/disposalpipe/segment/morgue{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -55544,7 +55544,7 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -55684,7 +55684,7 @@
 /obj/item/storage/firstaid/brain,
 /obj/item/clothing/glasses/eyepatch,
 /obj/item/cloneModule/genepowermodule,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -56777,7 +56777,7 @@
 /obj/disposalpipe/segment{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -57089,7 +57089,7 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -57267,7 +57267,7 @@
 	name = "old wooden chair"
 	},
 /obj/landmark/start/job/assistant,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -57547,7 +57547,7 @@
 /area/space)
 "uNj" = (
 /obj/disposalpipe/segment/transport,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -57996,7 +57996,7 @@
 /turf/simulated/floor/grass,
 /area/station/medical/dome)
 "vEA" = (
-/obj/machinery/firealarm,
+/obj/machinery/alarm/fire,
 /turf/unsimulated/wall/auto/adventure/shuttle/dark,
 /area/station/storage/emergency{
 	name = "Hilarious Storage A"
@@ -58135,7 +58135,7 @@
 /obj/disposalpipe/segment/brig{
 	dir = 8
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -58423,7 +58423,7 @@
 /obj/machinery/atmospherics/binary/valve{
 	name = "mixing valve"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1

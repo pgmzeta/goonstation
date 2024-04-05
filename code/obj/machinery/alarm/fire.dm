@@ -1,8 +1,8 @@
 //
 // Firealarm
 //
-ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
-/obj/machinery/firealarm
+ADMIN_INTERACT_PROCS(/obj/machinery/alarm/fire, proc/alarm, proc/reset)
+/obj/machinery/alarm/fire
 	name = "Fire Alarm"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "firep"
@@ -30,7 +30,7 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 
 	desc = "A fire sensor and alarm system. When it detects fire or is manually activated, it closes all firelocks in the area to minimize the spread of fire."
 
-/obj/machinery/firealarm/New()
+/obj/machinery/alarm/fire/New()
 	..()
 	START_TRACKING
 	if(!alarm_zone)
@@ -52,11 +52,11 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 	SEND_SIGNAL(src,COMSIG_MECHCOMP_ADD_INPUT,"toggle", PROC_REF(toggleinput))
 	MAKE_DEFAULT_RADIO_PACKET_COMPONENT(null, alarm_frequency)
 
-/obj/machinery/firealarm/disposing()
+/obj/machinery/alarm/fire/disposing()
 	STOP_TRACKING
 	..()
 
-/obj/machinery/firealarm/update_icon()
+/obj/machinery/alarm/fire/update_icon()
 	if (status & NOPOWER)
 		icon_state = "firep"
 		ClearSpecificOverlays("alarm_base_overlay")
@@ -71,39 +71,39 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 		UpdateOverlays(alarm_base_overlay, "alarm_base_overlay")
 		UpdateOverlays(alarm_overlay, "alarm_overlay")
 
-/obj/machinery/firealarm/set_loc(var/newloc)
+/obj/machinery/alarm/fire/set_loc(var/newloc)
 	..()
 	var/area/A = get_area(loc)
 	if (A)
 		alarm_zone = A.name
 		net_id = generate_net_id(src)
 
-/obj/machinery/firealarm/proc/toggleinput(var/datum/mechanicsMessage/inp)
+/obj/machinery/alarm/fire/proc/toggleinput(var/datum/mechanicsMessage/inp)
 	if(!alarm_active)
 		alarm()
 	else
 		reset()
 	return
 
-/obj/machinery/firealarm/temperature_expose(datum/gas_mixture/air, temperature, volume)
+/obj/machinery/alarm/fire/temperature_expose(datum/gas_mixture/air, temperature, volume)
 	if(src.detecting)
 		if(temperature > T0C+200)
 			src.alarm(triggered_automatically=TRUE)			// added check of detector status here
 	return
 
-/obj/machinery/firealarm/attack_ai(mob/user as mob)
+/obj/machinery/alarm/fire/attack_ai(mob/user as mob)
 	return src.Attackhand(user)
 
-/obj/machinery/firealarm/bullet_act(BLAH)
+/obj/machinery/alarm/fire/bullet_act(BLAH)
 	return src.alarm()
 
-/obj/machinery/firealarm/emp_act()
+/obj/machinery/alarm/fire/emp_act()
 	..()
 	if(prob(50))
 		src.alarm()
 	return
 
-/obj/machinery/firealarm/attackby(obj/item/W, mob/user)
+/obj/machinery/alarm/fire/attackby(obj/item/W, mob/user)
 	if (issnippingtool(W))
 		src.detecting = !( src.detecting )
 		if (src.detecting)
@@ -123,14 +123,14 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 	src.add_fingerprint(user)
 	return
 
-/obj/machinery/firealarm/process()
+/obj/machinery/alarm/fire/process()
 	if(status & (NOPOWER|BROKEN))
 		return
 	if(idle_count > 0)
 		idle_count--
 	..()
 
-/obj/machinery/firealarm/power_change()
+/obj/machinery/alarm/fire/power_change()
 	if(powered(ENVIRON))
 		if (status & NOPOWER)
 			var/area/A = get_area(src)
@@ -142,7 +142,7 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 			status |= NOPOWER
 			UpdateIcon()
 
-/obj/machinery/firealarm/attack_hand(mob/user)
+/obj/machinery/alarm/fire/attack_hand(mob/user)
 	if(user.stat || status & (NOPOWER|BROKEN) || ON_COOLDOWN(src, "toggle", 1 SECOND))
 		return
 
@@ -154,7 +154,7 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 		idle_count = manual_off_reactivate_idle
 		src.reset()
 
-/obj/machinery/firealarm/proc/reset()
+/obj/machinery/alarm/fire/proc/reset()
 	if(!working)
 		return
 
@@ -171,7 +171,7 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 	post_alert(0)
 	return
 
-/obj/machinery/firealarm/proc/alarm(triggered_automatically=FALSE)
+/obj/machinery/alarm/fire/proc/alarm(triggered_automatically=FALSE)
 	if(triggered_automatically && idle_count > 0)
 		return
 
@@ -206,7 +206,7 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 	return
 
 
-/obj/machinery/firealarm/proc/post_alert(var/alarm, var/specific_target)
+/obj/machinery/alarm/fire/proc/post_alert(var/alarm, var/specific_target)
 	var/datum/signal/alert_signal = get_free_signal()
 	alert_signal.source = src
 	alert_signal.data["address_tag"] = alarm_zone
@@ -223,7 +223,7 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, alert_signal)
 
-/obj/machinery/firealarm/receive_signal(datum/signal/signal)
+/obj/machinery/alarm/fire/receive_signal(datum/signal/signal)
 	if(status & NOPOWER)
 		return
 
@@ -254,17 +254,17 @@ ADMIN_INTERACT_PROCS(/obj/machinery/firealarm, proc/alarm, proc/reset)
 			SEND_SIGNAL(src, COMSIG_MOVABLE_POST_RADIO_PACKET, reply)
 
 // these seem kind of inverted but it's because an alarm on a wall to the north faces south and etc
-/obj/machinery/firealarm/north
+/obj/machinery/alarm/fire/north
 	pixel_y = 30
 
-/obj/machinery/firealarm/south
+/obj/machinery/alarm/fire/south
 	dir = NORTH
 	pixel_y = -22
 
-/obj/machinery/firealarm/east
+/obj/machinery/alarm/fire/east
 	dir = WEST
 	pixel_x = 24
 
-/obj/machinery/firealarm/west
+/obj/machinery/alarm/fire/west
 	dir = EAST
 	pixel_x = -24

@@ -3540,7 +3540,7 @@
 	},
 /area/russian/radiation)
 "bal" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -4205,7 +4205,7 @@
 /obj/item/extinguisher,
 /obj/item/cargotele,
 /obj/item/storage/toolbox/mechanical,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	layer = 4;
 	pixel_x = 24
@@ -4310,7 +4310,7 @@
 	},
 /area/russian/radiation)
 "bej" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -6037,7 +6037,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/cyan_pipe{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -6243,7 +6243,7 @@
 	},
 /area/russian/radiation)
 "bjn" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -6821,7 +6821,7 @@
 /obj/table/wood/auto,
 /obj/machinery/light/lamp/green,
 /obj/item/clothing/head/fedora,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -13658,7 +13658,7 @@
 	},
 /area/russian/radiation)
 "bRV" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -14330,7 +14330,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -15158,7 +15158,7 @@
 /area/russian/radiation)
 "bZm" = (
 /obj/table/reinforced/auto,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -15247,7 +15247,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -15269,7 +15269,7 @@
 	name = "Experimental Table"
 	},
 /obj/item/clothing/glasses/spectro,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -15931,7 +15931,7 @@
 	can_rupture = 0;
 	dir = 5
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -16560,7 +16560,7 @@
 /obj/cable{
 	icon_state = "1-4"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -16933,7 +16933,7 @@
 /obj/item/pen,
 /obj/item/clothing/head/helmet/space/captain,
 /obj/item/clothing/mask/breath,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -18729,7 +18729,7 @@
 /obj/decal/tile_edge/line/blue{
 	icon_state = "line1"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -21031,7 +21031,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -21713,7 +21713,7 @@
 /area/station/science/testchamber)
 "cAi" = (
 /obj/storage/closet/biohazard,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -22726,7 +22726,7 @@
 /obj/decal/tile_edge/stripe/extra_big{
 	dir = 9
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -23193,7 +23193,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -23283,7 +23283,7 @@
 /obj/machinery/power/data_terminal,
 /obj/machinery/guardbot_dock,
 /obj/machinery/bot/guardbot/ranger,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -23293,7 +23293,7 @@
 	},
 /area/russian/radiation)
 "cFE" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -24610,7 +24610,7 @@
 /obj/machinery/networked/mainframe/zeta{
 	tag = "ZETA_MAINFRAME"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -25388,7 +25388,7 @@
 	},
 /area/russian/radiation)
 "cLc" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -26529,7 +26529,7 @@
 /obj/table/reinforced/auto,
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -26903,7 +26903,7 @@
 /obj/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -26923,7 +26923,7 @@
 /obj/table/reinforced/auto,
 /obj/item/scalpel,
 /obj/item/implantcase/health,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -27100,7 +27100,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -27953,7 +27953,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -28859,7 +28859,7 @@
 	},
 /area/russian/radiation)
 "cUC" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -28915,7 +28915,7 @@
 	},
 /area/russian/radiation)
 "cUI" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -29599,7 +29599,7 @@
 	},
 /area/russian/radiation)
 "cWB" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -30147,7 +30147,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -30690,7 +30690,7 @@
 /obj/cable{
 	icon_state = "2-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -31712,7 +31712,7 @@
 	pixel_x = 10;
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -31789,7 +31789,7 @@
 	},
 /area/russian/radiation)
 "dfi" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -32004,7 +32004,7 @@
 	},
 /area/russian/radiation)
 "dfB" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -32111,7 +32111,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -32227,7 +32227,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/cyan_pipe{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -32580,7 +32580,7 @@
 /area/russian/radiation)
 "dhc" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -32935,7 +32935,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -37104,7 +37104,7 @@
 	},
 /area/russian/radiation)
 "eKO" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -37132,7 +37132,7 @@
 	},
 /area/russian/radiation)
 "eLw" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -37451,7 +37451,7 @@
 /obj/table/reinforced/auto,
 /obj/machinery/power/data_terminal,
 /obj/machinery/computer3/generic/personal,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -39126,7 +39126,7 @@
 	name = "autoname - SS13";
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -41004,7 +41004,7 @@
 /turf/space,
 /area/russian/radiation)
 "gxe" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -41318,7 +41318,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -42106,7 +42106,7 @@
 	dir = 8;
 	name = "old wooden chair"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -42506,7 +42506,7 @@
 /obj/rack,
 /obj/item/device/light/flashlight,
 /obj/item/device/light/flashlight,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -42553,7 +42553,7 @@
 	},
 /area/russian/radiation)
 "haT" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -42821,7 +42821,7 @@
 /area/russian/radiation)
 "hlf" = (
 /obj/machinery/vending/cola/red,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -43385,7 +43385,7 @@
 	icon_state = "bot2";
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -43428,7 +43428,7 @@
 /obj/machinery/atmospherics/binary/valve{
 	name = "mixing valve"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -43726,7 +43726,7 @@
 /area/russian/radiation)
 "hOL" = (
 /obj/machinery/floorflusher/minibrig,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -44234,7 +44234,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -45636,7 +45636,7 @@
 	},
 /area/russian/radiation)
 "iMp" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -46609,7 +46609,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/cyan_pipe{
 	dir = 1
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -46877,7 +46877,7 @@
 /obj/machinery/atmospherics/pipe/simple/insulated/cold{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -47564,7 +47564,7 @@
 	},
 /area/russian/radiation)
 "jzZ" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -48821,7 +48821,7 @@
 /obj/decal/tile_edge/line/green{
 	icon_state = "line1"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -52206,7 +52206,7 @@
 	pixel_x = -10;
 	tag = ""
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -53473,7 +53473,7 @@
 	},
 /area/russian/radiation)
 "mxZ" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 26;
 	pixel_y = 1
@@ -55136,7 +55136,7 @@
 	},
 /area/russian/radiation)
 "nld" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -56022,7 +56022,7 @@
 	},
 /area/russian/radiation)
 "nDL" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -58161,7 +58161,7 @@
 "oAq" = (
 /obj/machinery/chem_dispenser/alcohol,
 /obj/item/reagent_containers/food/drinks/drinkingglass/pitcher,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -58930,7 +58930,7 @@
 	},
 /area/russian/radiation)
 "oSw" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -59032,7 +59032,7 @@
 	},
 /area/russian/radiation)
 "oUm" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -59772,7 +59772,7 @@
 /area/russian/radiation)
 "ptw" = (
 /obj/machinery/portable_atmospherics/canister/empty,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -26;
 	pixel_y = -1
@@ -61585,7 +61585,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/cyan_pipe{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -61781,7 +61781,7 @@
 /obj/machinery/atmospherics/pipe/manifold/overfloor{
 	dir = 4
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
@@ -76102,7 +76102,7 @@
 	},
 /area/russian/radiation)
 "ycZ" = (
-/obj/machinery/firealarm,
+/obj/machinery/alarm/fire,
 /turf/unsimulated/wall/auto/adventure/shuttle/dark{
 	icon_state = "dshuttle-4"
 	},

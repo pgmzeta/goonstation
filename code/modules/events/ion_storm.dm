@@ -277,11 +277,11 @@ ABSTRACT_TYPE(/datum/ion_category)
 	amount_max = 6
 
 	build_targets()
-		for(var/obj/machinery/firealarm/alarm as anything in machine_registry[MACHINES_FIREALARMS])
+		for(var/obj/machinery/alarm/fire/alarm as anything in machine_registry[MACHINES_FIREALARMS])
 			if (valid_instance(alarm))
 				targets += alarm
 
-	action(var/obj/machinery/firealarm/alarm)
+	action(var/obj/machinery/alarm/fire/alarm)
 		alarm.alarm()
 
 /datum/ion_category/pda_alerts

@@ -2426,7 +2426,7 @@
 	dir = 5;
 	icon_state = "tabledir"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	pixel_y = -24
 	},
@@ -4207,7 +4207,7 @@
 /area/toxins/storage)
 "kK" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 24
 	},
@@ -4985,7 +4985,7 @@
 /turf/simulated/floor/white,
 /area/toxins/lab)
 "mD" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24
 	},
 /obj/cable{
@@ -5621,7 +5621,7 @@
 /turf/simulated/wall,
 /area/hallway/primary/east)
 "oj" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -24
 	},
@@ -6272,7 +6272,7 @@
 /turf/simulated/floor,
 /area/security/main)
 "pN" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24
 	},
 /obj/landmark/start{
@@ -6329,7 +6329,7 @@
 /turf/simulated/floor,
 /area/security/main)
 "pT" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 4;
 	pixel_x = 24
 	},
@@ -14950,7 +14950,7 @@
 /turf/simulated/floor/plating,
 /area/zeta/bot_storage)
 "Ka" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -24
 	},

@@ -6474,7 +6474,7 @@
 /turf/simulated/floor/airless/plating/damaged3,
 /area/abandonedship)
 "aIu" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -8608,7 +8608,7 @@
 	},
 /area/derelict_ai_sat/solar)
 "aPi" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -24
 	},
@@ -8809,7 +8809,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 1;
 	layer = 3.5;
 	pixel_y = -24
@@ -12063,7 +12063,7 @@
 /turf/simulated/floor,
 /area/h7/lab)
 "bae" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	dir = 8;
 	pixel_x = -24
 	},

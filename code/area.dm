@@ -4203,7 +4203,7 @@ ABSTRACT_TYPE(/area/mining)
 		src.UpdateIcon()
 		src.mouse_opacity = 0
 		var/list/cameras = list()
-		for_by_tcl(F, /obj/machinery/firealarm)
+		for_by_tcl(F, /obj/machinery/alarm/fire)
 			if(get_area(F) == src)
 				F.alarm_active = TRUE
 				F.UpdateIcon()
@@ -4227,7 +4227,7 @@ ABSTRACT_TYPE(/area/mining)
 		src.mouse_opacity = 0
 		src.UpdateIcon()
 
-		for_by_tcl(F, /obj/machinery/firealarm)
+		for_by_tcl(F, /obj/machinery/alarm/fire)
 			if(get_area(F) == src)
 				F.alarm_active = FALSE
 				F.UpdateIcon()

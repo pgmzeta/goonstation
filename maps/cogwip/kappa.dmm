@@ -941,7 +941,7 @@
 /turf/simulated/floor,
 /area/space)
 "da" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_x = 1;
 	pixel_y = 26;
 	text = "NF"
@@ -1255,7 +1255,7 @@
 /turf/simulated/floor/stairs/quilty,
 /area/space)
 "ed" = (
-/obj/machinery/firealarm{
+/obj/machinery/alarm/fire{
 	pixel_y = 24;
 	text = "NF"
 	},
