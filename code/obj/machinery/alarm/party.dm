@@ -2,10 +2,10 @@
 // Party alarm
 //
 
-TYPEINFO(/obj/machinery/partyalarm)
+TYPEINFO(/obj/machinery/alarm/party)
 	mats = 0
 
-/obj/machinery/partyalarm
+/obj/machinery/alarm/party
 	name = "Party Button"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "party"
@@ -18,11 +18,11 @@ TYPEINFO(/obj/machinery/partyalarm)
 	var/list/lights = list()
 	anchored = ANCHORED
 
-/obj/machinery/partyalarm/process()
+/obj/machinery/alarm/party/process()
 	if (timing > 0)
 		timing--
 
-/obj/machinery/partyalarm/attack_hand(mob/user)
+/obj/machinery/alarm/party/attack_hand(mob/user)
 	if(user.stat || status & (NOPOWER|BROKEN))
 		return
 
@@ -48,7 +48,7 @@ TYPEINFO(/obj/machinery/partyalarm)
 		src.party()
 	return
 
-/obj/machinery/partyalarm/proc/party()
+/obj/machinery/alarm/party/proc/party()
 	var/r = rand(100) / 100
 	var/g = rand(100) / 100
 	var/b = rand(100) / 100

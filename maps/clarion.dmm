@@ -7888,7 +7888,7 @@
 "aGt" = (
 /obj/table/reinforced/bar/auto,
 /obj/random_item_spawner/tableware,
-/obj/machinery/partyalarm,
+/obj/machinery/alarm/party,
 /turf/simulated/floor/wood,
 /area/station/crew_quarters/bar)
 "aGu" = (

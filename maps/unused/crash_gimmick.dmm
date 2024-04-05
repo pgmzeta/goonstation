@@ -52302,7 +52302,7 @@
 /area/russian/radiation)
 "lOR" = (
 /obj/machinery/light_switch/north,
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	pixel_x = 10;
 	pixel_y = 24
 	},

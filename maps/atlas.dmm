@@ -3228,7 +3228,7 @@
 "akv" = (
 /obj/machinery/chem_dispenser/chemical,
 /obj/item/reagent_containers/glass/beaker/large,
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	pixel_y = 28
 	},
 /turf/simulated/floor/carpet{

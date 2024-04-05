@@ -47800,7 +47800,7 @@
 /turf/simulated/floor/plating,
 /area/station/maintenance/inner/central)
 "jZQ" = (
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	dir = 8;
 	pixel_y = -26
 	},

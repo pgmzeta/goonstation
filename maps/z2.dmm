@@ -53354,7 +53354,7 @@
 /turf/unsimulated/floor,
 /area/centcom/lounge)
 "dKc" = (
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	pixel_y = -32
 	},
 /obj/decal/tile_edge/line/black{

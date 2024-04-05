@@ -496,7 +496,7 @@
 
 	big_station_bounties[/obj/machinery/bot/guardbot] = 1
 	big_station_bounties[/obj/machinery/plantpot] = 1
-	big_station_bounties[/obj/machinery/partyalarm] = 1
+	big_station_bounties[/obj/machinery/alarm/party] = 1
 	big_station_bounties[/obj/pool_springboard] = 1
 	big_station_bounties[/obj/machinery/hydro_growlamp] = 1
 

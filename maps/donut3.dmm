@@ -65522,7 +65522,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	pixel_x = 9;
 	pixel_y = 28
 	},

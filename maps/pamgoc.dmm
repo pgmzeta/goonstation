@@ -16941,7 +16941,7 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	dir = 4;
 	pixel_y = -26
 	},

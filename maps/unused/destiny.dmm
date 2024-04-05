@@ -33077,7 +33077,7 @@
 /turf/simulated/floor/specialroom/gym/alt,
 /area/station/crew_quarters/fitness)
 "khb" = (
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	pixel_x = -26
 	},
 /obj/cable{

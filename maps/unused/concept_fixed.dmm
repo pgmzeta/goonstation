@@ -24607,7 +24607,7 @@
 /turf/simulated/floor/carpet,
 /area/station/crew_quarters/bar)
 "aXe" = (
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	pixel_x = 30
 	},
 /turf/simulated/floor{
@@ -24870,7 +24870,7 @@
 /area/station/crew_quarters/bar)
 "aXJ" = (
 /obj/disposalpipe/segment,
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	pixel_y = -24
 	},
 /obj/machinery/door_control{

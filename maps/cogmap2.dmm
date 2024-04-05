@@ -9027,7 +9027,7 @@
 	pixel_y = 21
 	},
 /obj/item/reagent_containers/food/drinks/drinkingglass/pitcher,
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	pixel_y = 28
 	},
 /turf/simulated/floor/carpet{

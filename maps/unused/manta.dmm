@@ -39755,7 +39755,7 @@
 	dir = 4;
 	icon_state = "line1"
 	},
-/obj/machinery/partyalarm{
+/obj/machinery/alarm/party{
 	pixel_x = 26
 	},
 /obj/item/device/reagentscanner,
