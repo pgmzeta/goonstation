@@ -4,14 +4,12 @@
 ADMIN_INTERACT_PROCS(/obj/machinery/alarm/fire, proc/alarm, proc/reset)
 /obj/machinery/alarm/fire
 	name = "Fire Alarm"
-	icon = 'icons/obj/monitors.dmi'
 	icon_state = "firep"
 	plane = PLANE_NOSHADOW_ABOVE
 	deconstruct_flags = DECON_WIRECUTTERS | DECON_MULTITOOL
 	machine_registry_idx = MACHINES_FIREALARMS
 	power_usage = 10
 	power_channel = ENVIRON
-	var/alarm_frequency = FREQ_ALARM
 	var/detecting = 1
 	var/working = 1
 	var/lockdownbyai = 0

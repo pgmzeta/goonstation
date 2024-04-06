@@ -1,21 +1,15 @@
 //
-// Alarm
+// Air Alarm
 //
-
-#define ALARM_SEVERE 0
-#define ALARM_MINOR 1
-#define ALARM_GOOD 2
 
 /obj/machinery/alarm/air
 	name = "air monitor"
-	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm_unpowered"
 	power_usage = 5
 	power_channel = ENVIRON
 	anchored = ANCHORED
 	/// save some CPU by only checking every tick when something is amiss
 	var/skipprocess = 0
-	var/alarm_frequency = FREQ_ALARM
 	var/alarm_zone = null
 	var/control_frequency = FREQ_AIR_ALARM_CONTROL
 	/// keeps track of last alarm status
@@ -178,7 +172,3 @@
 		status &= ~NOPOWER
 	else
 		status |= NOPOWER
-
-#undef ALARM_GOOD
-#undef ALARM_MINOR
-#undef ALARM_SEVERE
