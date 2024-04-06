@@ -60045,7 +60045,7 @@
 /obj/cable{
 	icon_state = "2-8"
 	},
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_x = 30
 	},
 /turf/simulated/floor/black/side{

@@ -27793,7 +27793,7 @@
 	},
 /area/station/bridge)
 "bDM" = (
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_x = 3;
 	pixel_y = 26
 	},

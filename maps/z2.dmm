@@ -50058,7 +50058,7 @@
 	pixel_y = 4;
 	switchon = 1
 	},
-/obj/machinery/shipalert/bill{
+/obj/machinery/alert/ship/bill{
 	pixel_y = 3
 	},
 /obj/item/reagent_containers/food/snacks/cookie/chocolate_chip{

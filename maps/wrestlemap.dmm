@@ -50430,7 +50430,7 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/simple,
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_x = 27
 	},
 /turf/simulated/floor/black,

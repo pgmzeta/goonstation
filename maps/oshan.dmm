@@ -20591,7 +20591,7 @@
 /turf/simulated/floor/carpet/purple/standard/narrow/ne,
 /area/station/crew_quarters/captain)
 "bwj" = (
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_x = -26
 	},
 /turf/simulated/floor/carpet{

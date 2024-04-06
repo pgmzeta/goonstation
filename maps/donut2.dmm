@@ -33721,7 +33721,7 @@
 /turf/simulated/floor/circuit,
 /area/station/turret_protected/ai)
 "mXH" = (
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_y = 24
 	},
 /turf/simulated/floor/black,

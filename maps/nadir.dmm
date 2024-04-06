@@ -21525,7 +21525,7 @@
 "jdA" = (
 /obj/table/reinforced/industrial/auto,
 /obj/machinery/phone,
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_y = 26
 	},
 /obj/decal/tile_edge/line/blue{

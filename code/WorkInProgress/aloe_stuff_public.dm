@@ -95,7 +95,7 @@
 	ckey = "asche"
 
 /// Button 4 bill office
-/obj/machinery/shipalert/bill
+/obj/machinery/alert/ship/bill
 	name = "\improper Emergency Plot Generation Button"
 	desc = "<b class='alert'>IN CASE OF BOREDOM<br>BREAK GLASS</b>"
 	var/list/eventbank

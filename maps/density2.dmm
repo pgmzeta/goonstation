@@ -3487,7 +3487,7 @@
 	},
 /area/station/bridge)
 "wp" = (
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_y = -9
 	},
 /turf/unsimulated/wall/setpieces/leadwindow{

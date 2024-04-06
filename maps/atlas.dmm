@@ -19684,7 +19684,7 @@
 /obj/cable{
 	icon_state = "0-8"
 	},
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_y = 28
 	},
 /turf/simulated/floor/carpet{

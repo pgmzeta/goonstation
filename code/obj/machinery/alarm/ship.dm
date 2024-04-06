@@ -7,13 +7,13 @@
 var/global/shipAlertState = SHIP_ALERT_GOOD
 var/global/soundGeneralQuarters = sound('sound/machines/siren_generalquarters_quiet.ogg')
 
-TYPEINFO(/obj/machinery/shipalert)
+TYPEINFO(/obj/machinery/alert/ship)
 	mats = 0
 
 #define COMPLETE 0
 #define HAMMER_TAKEN 1
 #define SMASHED 2
-/obj/machinery/shipalert
+/obj/machinery/alert/ship
 	name = "Ship Alert Button"
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "shipalert0"
@@ -30,7 +30,7 @@ TYPEINFO(/obj/machinery/shipalert)
 		src.name = "[capitalize(station_or_ship())] Alert Button"
 		UnsubscribeProcess()
 
-/obj/machinery/shipalert/attack_hand(mob/user)
+/obj/machinery/alert/ship/attack_hand(mob/user)
 	if (user.stat || isghostdrone(user) || !isliving(user) || isintangible(user))
 		return
 
@@ -55,7 +55,7 @@ TYPEINFO(/obj/machinery/shipalert)
 			if (src.toggleActivate(user))
 				playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 
-/obj/machinery/shipalert/attackby(obj/item/W, mob/user)
+/obj/machinery/alert/ship/attackby(obj/item/W, mob/user)
 	if (user.stat)
 		return
 	switch (src.usageState)
@@ -76,14 +76,14 @@ TYPEINFO(/obj/machinery/shipalert)
 			if (istype(W, /obj/item/sheet) && (W.material.getMaterialFlags() & MATERIAL_CRYSTAL) && W.amount >= 2)
 				SETUP_GENERIC_ACTIONBAR(user, src, 3 SECONDS, PROC_REF(repair_callback), list(user, W), W.icon, W.icon_state, "[user] repairs [src]'s safety glass.", INTERRUPT_ATTACKED | INTERRUPT_STUNNED | INTERRUPT_ACTION)
 
-/obj/machinery/shipalert/proc/repair_callback(mob/user, obj/item/sheet/glass)
+/obj/machinery/alert/ship/proc/repair_callback(mob/user, obj/item/sheet/glass)
 	if (src.usageState != SMASHED)
 		return
 	src.usageState = HAMMER_TAKEN
 	glass.change_stack_amount(-2)
 	src.icon_state = "shipalert1"
 
-/obj/machinery/shipalert/proc/toggleActivate(mob/user)
+/obj/machinery/alert/ship/proc/toggleActivate(mob/user)
 	if (!user)
 		return FALSE
 
@@ -139,12 +139,12 @@ TYPEINFO(/obj/machinery/shipalert)
 	message_admins("[user] toggled the ship alert to \"[alertWord]\"")
 	src.working = FALSE
 
-/obj/machinery/shipalert/proc/update_lights()
+/obj/machinery/alert/ship/proc/update_lights()
 	for(var/obj/machinery/light/emergency/light in by_cat[TR_CAT_STATION_EMERGENCY_LIGHTS])
 		light.power_change()
 		LAGCHECK(LAG_LOW)
 
-/obj/machinery/shipalert/proc/do_lockdown(mob/user)
+/obj/machinery/alert/ship/proc/do_lockdown(mob/user)
 	for_by_tcl(shutter, /obj/machinery/door/poddoor/pyro/shutters)
 		if (shutter.density)
 			continue

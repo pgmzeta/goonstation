@@ -12085,7 +12085,7 @@
 	pixel_x = 7;
 	pixel_y = 4
 	},
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_y = 28
 	},
 /turf/simulated/floor/black,

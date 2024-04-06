@@ -43903,7 +43903,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/shipalert,
+/obj/machinery/alert/ship,
 /turf/simulated/floor/black,
 /area/station/bridge)
 "nlT" = (

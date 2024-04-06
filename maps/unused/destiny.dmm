@@ -8376,7 +8376,7 @@
 	},
 /obj/machinery/power/apc/autoname_north,
 /obj/table/wood/auto,
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_x = 30;
 	pixel_y = -2
 	},
@@ -38021,7 +38021,7 @@
 /turf/simulated/floor/plating/airless,
 /area/station/maintenance/south)
 "mGL" = (
-/obj/machinery/shipalert{
+/obj/machinery/alert/ship{
 	pixel_y = 28
 	},
 /obj/machinery/alarm/air{

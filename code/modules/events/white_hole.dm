@@ -552,7 +552,7 @@ ADMIN_INTERACT_PROCS(/obj/whitehole, proc/admin_activate)
 			/obj/item/storage/box/clothing/captain = 1,
 			/obj/item/item_box/gold_star = 1,
 			/obj/item/hand_tele = 2,
-			/obj/machinery/shipalert = 1,
+			/obj/machinery/alert/ship = 1,
 			/obj/item/storage/box/PDAbox = 1,
 			/obj/item/storage/box/trackimp_kit = 1,
 			/obj/item/cigarbox/gold = 2,

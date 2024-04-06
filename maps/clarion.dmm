@@ -7076,7 +7076,7 @@
 /obj/table/reinforced/bar/auto{
 	name = "table"
 	},
-/obj/machinery/shipalert,
+/obj/machinery/alert/ship,
 /obj/item/decoration/flower_vase{
 	pixel_y = 24
 	},

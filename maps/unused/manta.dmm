@@ -14267,7 +14267,7 @@
 /obj/table/reinforced/bar/auto{
 	name = "table"
 	},
-/obj/machinery/shipalert,
+/obj/machinery/alert/ship,
 /turf/simulated/floor/darkblue,
 /area/station/bridge)
 "aPj" = (
