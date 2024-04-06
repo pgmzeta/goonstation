@@ -2220,6 +2220,7 @@ var/datum/preMapLoad/preMapLoad = new
 #include "code\obj\machinery\alarm\air.dm"
 #include "code\obj\machinery\alarm\alarm.dm"
 #include "code\obj\machinery\alarm\fire.dm"
+#include "code\obj\machinery\alarm\general_alert.dm"
 #include "code\obj\machinery\alarm\party.dm"
 #include "code\obj\machinery\alarm\ship.dm"
 #include "code\obj\machinery\computer\announcement.dm"
