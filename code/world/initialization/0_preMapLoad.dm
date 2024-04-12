@@ -70,8 +70,8 @@
 			screenOverlayLibrary.Add(over)
 			screenOverlayLibrary[over] = E
 
-		url_regex = new("(https?|byond|www)(\\.|:\\/\\/)", "i")
-		full_url_regex = new(@"(https?:\/\/)?((www\.)?([-\w]+\.)+[\l]+(\/\S+)*\/?)","ig")
+		url_regex = new("(https?|\\bbyond|\\bwww)(\\.|:\\/\\/)", "ig")
+		full_url_regex = new(@"(https?:\/\/)?((\\bwww\.)?([-\w]+\.)+[\l]+(\/\S+)*\/?)","ig")
 
 		Z_LOG_DEBUG("Preload", "initLimiter() (whatever the fuck that does)")
 		initLimiter()
@@ -196,9 +196,6 @@
 			E.dnaBlocks.GenerateBlocks()     //Generate global sequence for this effect.
 			if (E.acceptable_in_mutini) // for the drink reagent  :T
 				mutini_effects[E.id] = E
-
-		Z_LOG_DEBUG("Preload", "  zoldorf")
-		zoldorfsetup()
 
 		Z_LOG_DEBUG("Preload", "  fluid turf misc setup")
 		fluid_turf_setup(first_time=TRUE)
