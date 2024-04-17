@@ -107,6 +107,12 @@ TYPEINFO(/obj/item/magtractor)
 			if (istype(target, /obj/item/magtractor))
 				return 0
 
+			if (istype(target, /obj/item/organ/brain))
+				var/obj/item/organ/brain/thinker = target
+				if (thinker.owner) // stop owned brains from being picked
+					boutput(user, SPAN_ALERT("\The [src] beeps curtly and refuses to handle a previuosly owned [target]!"))
+					return 0
+
 			//pick up item
 			actions.start(new/datum/action/bar/private/icon/magPicker(target, src), user)
 
