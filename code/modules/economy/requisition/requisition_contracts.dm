@@ -328,8 +328,12 @@ ABSTRACT_TYPE(/datum/req_contract)
 	var/flavor_desc
 	///Mandatory descriptive text that lists contract requirements; automatically populated from the list of rc_entries
 	var/requis_desc = ""
-	///Tracks whether contract is pinned; one contract at a time may be pinned, reserving it for QM and preventing it from leaving with market shift
+	///Tracks whether contract is pinned, preventing it from leaving with market shift
 	var/pinned = FALSE
+	///How many market cycles has this contract been available
+	var/market_cycles = 0
+	///Related stock market industry
+	var/datum/stock/industry/industry = null
 
 	New() //in individual definitions, create entries and THEN call this, it'll get things set up for you
 		..()

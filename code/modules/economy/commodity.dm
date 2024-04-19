@@ -20,6 +20,7 @@
 	///are there any commodities linked to this one? used to balance pricing for related commodities e.g. sheets/ore/materials
 	///The key/value pair is commodity_type / ratio of relationship B/A where A is the current commodity's value related to linked commodity B
 	var/list/linked_commodities = null
+	var/datum/stock/industry/industry = null
 
 	New(atom/source, var/amount_sell_or_buy = -1)
 		. = ..()
@@ -30,24 +31,6 @@
 			lowerfluc = -baseprice/2
 		if(amount_sell_or_buy > 0)
 			src.amount = amount_sell_or_buy
-
-/*
-/datum/commodity/clothing
-	comname = "Jumpsuits"
-	comtype = /obj/item/clothing/under
-	price = 30
-	baseprice = 30
-	upperfluc = 20
-	lowerfluc = 10
-
-/datum/commodity/shoes
-	comname = "Shoes"
-	comtype = /obj/item/clothing/shoes
-	price = 20
-	baseprice = 20
-	upperfluc = 10
-	lowerfluc = 10 */
-
 
 /datum/commodity/robotics
 	comname = "Robot Parts"
@@ -62,24 +45,28 @@
 	comtype = /obj/item/reagent_containers/food/snacks/plant
 	onmarket = 1
 	price = PAY_TRADESMAN/5
+	industry = /datum/stock/industry/agriculture
 
 /datum/commodity/meat
 	comname = "Meat"
 	comtype = /obj/item/reagent_containers/food/snacks/ingredient/meat
 	onmarket = 1
 	price = PAY_TRADESMAN/5
+	industry = /datum/stock/industry/agriculture
 
 /datum/commodity/fish
 	comname = "Fish"
 	comtype = /obj/item/reagent_containers/food/fish
 	onmarket = 1
 	price = PAY_TRADESMAN/5
+	industry = /datum/stock/industry/agriculture
 
 /datum/commodity/herbs
 	comname = "Medical Herbs"
 	comtype = /obj/item/plant/herb
 	onmarket = 1
 	price = PAY_TRADESMAN/4
+	industry = /datum/stock/industry/agriculture
 
 /datum/commodity/honey
 	comname = "Space Honey"
@@ -87,6 +74,7 @@
 	desc_buy = "Meagre nectar yields this year have made honey imports desirable to space-bee hives."
 	onmarket = 1
 	price = PAY_TRADESMAN
+	industry = /datum/stock/industry/agriculture
 
 /datum/commodity/sheet
 	comname = "Material Sheets"
@@ -97,7 +85,7 @@
 	linked_commodities = list(
 		/datum/commodity/mat_bar = 10,
 	)
-/// pathology
+	industry = /datum/stock/industry/consumer
 
 /datum/commodity/mat_bar
 	comname = "Material Bar"
@@ -110,6 +98,7 @@
 	linked_commodities = list(
 		/datum/commodity/sheet = 0.1,
 	)
+	industry = /datum/stock/industry/consumer
 
 /datum/commodity/ore
 	comname = "Rock"
@@ -119,6 +108,7 @@
 	desc_buy_demand = "The colony on Regus X has had their main power reactor break down and need this item for repairs"
 	onmarket = 0
 	price = PAY_UNTRAINED
+	industry = /datum/stock/industry/consumer
 	var/value = 1
 
 	New()
@@ -2026,3 +2016,4 @@
 	comtype = /obj/item/playing_card/expensive
 	onmarket = 1
 	price = PAY_EMBEZZLED
+	industry = /datum/stock/industry/consumer

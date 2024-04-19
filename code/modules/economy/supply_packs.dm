@@ -44,12 +44,14 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	var/category = "Miscellaneous"
 	var/access = null
 	var/hidden = 0	//So as it turns out this is used in construction mode hardyhar
-	var/syndicate = 0 //If this is one the crate will only show up when the console is emagged
-	var/id = 0 //What jobs can order it
-	var/whos_id = null //linked ID
-	var/basecost // the original cost
+	var/syndicate = 0 //!If this is TRUE the crate will only show up when the console is emagged
+	var/id = 0 //!What jobs can order it
+	var/whos_id = null //!linked ID
+	var/basecost //!the original cost
 	///This value will be used to increase the price of the supply pack if it's bought too many times.
 	var/exhaustion = 0
+	///Related stock market industry
+	var/datum/stock/industry/industry = null
 
 	New()
 		. = ..()
@@ -144,6 +146,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*3
 	containertype = /obj/storage/crate
 	containername = "Metal Sheets Crate - 200 pack"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/metal50
 	name = "50 Metal Sheets"
@@ -154,6 +157,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN
 	containertype = /obj/storage/crate
 	containername = "Metal Sheets Crate - 50 pack"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/glass200
 	name = "200 Glass Sheets"
@@ -164,6 +168,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*3
 	containertype = /obj/storage/crate
 	containername = "Glass Sheets Crate - 200 pack"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/glass50
 	name = "50 Glass Sheets"
@@ -174,6 +179,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN
 	containertype = /obj/storage/crate
 	containername = "Glass Sheets Crate - 50 pack"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/wood10
 	name = "10 Wooden Sheets"
@@ -184,6 +190,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN
 	containertype = /obj/storage/crate/wooden
 	containername = "Wooden Sheets Crate - 10 pack"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/wood50
 	name = "50 Wooden Sheets"
@@ -194,6 +201,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*3
 	containertype = /obj/storage/crate/wooden
 	containername = "Wooden Sheets Crate - 50 pack"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/dryfoods
 	name = "Catering: Dry Goods Crate"
@@ -209,6 +217,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*5
 	containertype = /obj/storage/crate/freezer
 	containername = "Catering: Dry Goods Crate"
+	industry = /datum/stock/industry/agriculture
 
 /datum/supply_packs/meateggdairy
 	name = "Catering: Meat, Eggs and Dairy Crate"
@@ -226,6 +235,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*5
 	containertype = /obj/storage/crate/freezer
 	containername = "Catering: Meat, Eggs and Dairy Crate"
+	industry = /datum/stock/industry/agriculture
 
 /datum/supply_packs/produce
 	name = "Catering: Fresh Produce Crate"
@@ -246,6 +256,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*2
 	containertype = /obj/storage/crate/freezer
 	containername = "Catering: Fresh Produce Crate"
+	industry = /datum/stock/industry/agriculture
 
 /datum/supply_packs/condiment
 	name = "Catering: Condiment Crate"
@@ -263,6 +274,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*2
 	containertype = /obj/storage/crate/freezer
 	containername = "Catering: Condiment Crate"
+	industry = /datum/stock/industry/agriculture
 
 /datum/supply_packs/electrical
 	name = "Electrical Supplies Crate (red) - 2 pack"
@@ -294,6 +306,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_DOCTORATE*2
 	containertype = /obj/storage/crate
 	containername = "Electrical Maintenance Crate"
+	industry = /datum/stock/industry/it
 
 /datum/supply_packs/powercell
 	name = "Power Cell Crate"
@@ -375,6 +388,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_DOCTORATE*3
 	containertype = /obj/storage/crate/medical
 	containername = "Medical: First Aid Crate"
+	industry = /datum/stock/industry/health
 
 /datum/supply_packs/medicalchems
 	name = "Medical: Medical Reservoir Crate"
@@ -393,6 +407,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_DOCTORATE*3
 	containertype = /obj/storage/crate/medical
 	containername = "Medical Crate"
+	industry = /datum/stock/industry/health
 
 /datum/supply_packs/complex/glass_recycler
 	name = "Glass Recycler"
@@ -417,6 +432,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*2
 	containertype = /obj/storage/crate
 	containername = "Janitorial Supplies"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/hydronutrient
 	name = "Hydroponics: Nutrient Crate"
@@ -430,6 +446,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*2
 	containertype = /obj/storage/crate
 	containername = "Hydroponics: Nutrient Crate"
+	industry = /datum/stock/industry/agriculture
 
 /datum/supply_packs/mining
 	name = "Mining Equipment"
@@ -480,6 +497,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 		for(var/obj/item/bee_egg_carton/carton in beez)
 			carton.ourEgg.blog = "ordered by [key_name(creator)]|"
 		return beez
+	industry = /datum/stock/industry/agriculture
 
 /datum/supply_packs/sheep
 	name = "Wool Production Kit"
@@ -489,6 +507,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*10
 	containertype = /obj/storage/crate
 	containername = "Wool Production Kit"
+	industry = /datum/stock/industry/agriculture
 
 /datum/supply_packs/fishing
 	name = "Angling Starter Kit"
@@ -502,6 +521,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*2
 	containertype = /obj/storage/crate
 	containername = "Angling Starter Kit"
+	industry = /datum/stock/industry/agriculture
 
 /datum/supply_packs/chemical
 	name = "Chemistry Resupply Crate"
@@ -620,6 +640,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*2
 	containertype = /obj/storage/crate
 	containername = "Alcohol Crate"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/cocktailparty
 	name = "Cocktail Party Supplies"
@@ -633,6 +654,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*2
 	containertype = /obj/storage/crate
 	containername = "Cocktail Party Supplies"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/robot
 	name = "Robotics Crate"
@@ -663,6 +685,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*5
 	containertype = /obj/storage/crate/packing
 	containername = "Novelty Clothing Crate"
+	industry = /datum/stock/industry/consumer
 
 #ifdef HALLOWEEN
 /datum/supply_packs/halloween
@@ -704,6 +727,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_TRADESMAN*2
 	containertype = /obj/storage/crate
 	containername = "Party Supplies"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/wedding
 	name = "Wedding Supplies"
@@ -717,6 +741,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_EXECUTIVE*2
 	containertype = /obj/storage/crate
 	containername = "Wedding Supplies"
+	industry = /datum/stock/industry/consumer
 
 /datum/supply_packs/glowsticks
 	name = "Emergency Glowsticks Crate - 4 pack"
@@ -797,6 +822,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 		/obj/item/stamp = 2)
 	cost = PAY_UNTRAINED*2
 	containername = "Office Supply Crate"
+	industry = /datum/stock/industry/consumer
 
 // vvv Adding some suggestions from the QM Order Thread (Gannets) vvv
 
@@ -893,6 +919,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	cost = PAY_DOCTORATE*2
 	containertype = /obj/storage/crate
 	containername = "Prosthetic Augmentation Kit"
+	industry = /datum/stock/industry/health
 
 /datum/supply_packs/restricted_medicine
 	name = "Restricted Medicine Shipment"
@@ -907,6 +934,7 @@ ABSTRACT_TYPE(/datum/supply_packs)
 	containertype = /obj/storage/secure/crate
 	containername = "Restricted Medicine Shipment (Cardlocked \[Medical])"
 	access = access_medical_director
+	industry = /datum/stock/industry/health
 
 /datum/supply_packs/cyborg
 	name = "Cyborg Component Crate"
@@ -1855,6 +1883,7 @@ ABSTRACT_TYPE(/datum/supply_packs/complex)
 	cost = PAY_TRADESMAN*2
 	containertype = /obj/storage/crate
 	containername = "Hydroponics: Starter Crate"
+	industry = /datum/stock/industry/agriculture
 
 /datum/supply_packs/complex/robotics_kit
 	name = "Robotics kit"
@@ -1870,6 +1899,7 @@ ABSTRACT_TYPE(/datum/supply_packs/complex)
 	cost = PAY_DOCTORATE*10
 	containertype = /obj/storage/crate
 	containername = "Robotics kit"
+	industry = /datum/stock/industry/health
 
 /datum/supply_packs/complex/genetics_kit
 	name = "Genetics kit"
@@ -1880,6 +1910,7 @@ ABSTRACT_TYPE(/datum/supply_packs/complex)
 	cost = PAY_DOCTORATE*10
 	containertype = /obj/storage/crate
 	containername = "Genetics kit"
+	industry = /datum/stock/industry/health
 
 /datum/supply_packs/complex/cloner_kit
 	name = "Cloning kit"
@@ -1892,6 +1923,7 @@ ABSTRACT_TYPE(/datum/supply_packs/complex)
 	cost = PAY_DOCTORATE*20
 	containertype = /obj/storage/crate
 	containername = "Cloning kit"
+	industry = /datum/stock/industry/health
 
 /datum/supply_packs/bureaucrat
 	name = "Bureaucracy Supply Crate"

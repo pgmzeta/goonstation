@@ -290,6 +290,8 @@
 						src.aid_contracts_active--
 						src.req_contracts -= RC
 						qdel(RC)
+			if (RC)
+				RC.market_cycles += 1
 
 		//... and repopulate afterwards.
 		while(length(src.req_contracts) < src.max_req_contracts)
@@ -502,6 +504,11 @@
 						break
 					else if (O.artifact && sell)
 						src.sell_artifact(O, O.artifact)
+					if (CM.industry)
+						for(var/datum/stock/ticker/stock as anything in stockExchange.stocks)
+							if(CM.industry == stock.industry)
+								stock.affectPublicOpinion(1)
+
 		else // Please excuse this duplicate code, I'm gonna change trader commodity lists into associative ones later I swear
 			for(var/obj/O in items)
 				for (var/datum/commodity/C in commodities_list)
@@ -600,6 +607,10 @@
 						if(AID_CONTRACT) src.aid_contracts_active--
 						if(SCI_CONTRACT) src.sci_contracts_active--
 					duckets += contract.payout
+					if(contract.industry)
+						for(var/datum/stock/ticker/stock as anything in stockExchange.stocks)
+							if(contract.industry == stock.industry)
+								stock.affectPublicOpinion(5 / contract.market_cycles)
 					if(length(contract.item_rewarders))
 						for(var/datum/rc_itemreward/giftback in contract.item_rewarders)
 							var/reward = giftback.build_reward()

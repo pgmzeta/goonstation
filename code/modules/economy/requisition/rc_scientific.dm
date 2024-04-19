@@ -11,6 +11,7 @@ ABSTRACT_TYPE(/datum/req_contract/scientific)
 	//name = "Don't Ask Too Many Questions"
 	payout = PAY_DOCTORATE*10*2
 	weight = 80
+	industry = /datum/stock/industry/health
 	var/list/namevary = list("Organ Analysis","Organ Research","Biolab Supply","Biolab Partnership","CANNOT VERIFY ORIGIN","Organ Study")
 	var/list/desc_begins = list("conducting","performing","beginning","initiating","seeking supplies for","organizing")
 	var/list/desc_whatstudy = list("long-term study","intensive trialing","in-depth analysis","study","regulatory assessment")
@@ -53,6 +54,7 @@ ABSTRACT_TYPE(/datum/rc_entry/item/organ)
 /datum/req_contract/scientific/clonejuice
 	payout = PAY_DOCTORATE*5
 	weight = 80
+	industry = /datum/stock/industry/health
 	var/list/namevary = list("Biotechnical Project","Gruesome Undertaking","Any Means Necessary","Protein Purchase","Special Slurry")
 	var/list/desc_wherestudy = list(
 		"(REDACTED)",
@@ -108,6 +110,7 @@ ABSTRACT_TYPE(/datum/rc_entry/item/organ)
 /datum/req_contract/scientific/spectrometry
 	//name = "Totally Will Not Result In A Resonance Cascade"
 	payout = PAY_DOCTORATE*10*2
+	industry = /datum/stock/industry/consumer
 	var/list/namevary = list("Beamline Calibration","Spectral Analysis","Chromatic Analysis","Refraction Survey","Component Restock","Photonics Project")
 	var/list/desc_wherestudy = list(
 		"Optics calibration laboratory",
@@ -183,6 +186,7 @@ ABSTRACT_TYPE(/datum/rc_entry/item/organ)
 
 /datum/req_contract/scientific/chemlab
 	payout = PAY_DOCTORATE*10
+	industry = /datum/stock/industry/consumer
 	var/list/desc_friendliness = list(
 		"Associated",
 		"Nanotrasen",
@@ -341,6 +345,7 @@ ABSTRACT_TYPE(/datum/rc_entry/item/organ)
 /datum/req_contract/scientific/botanical
 	//name = "Feed Me, Seymour (Butz)"
 	payout = PAY_TRADESMAN*10*2
+	industry = /datum/stock/industry/agriculture
 	var/list/namevary = list("Botanical Prototyping","Hydroponic Acclimation","Cultivar Propagation","Plant Genotype Study","Botanical Advancement")
 	var/list/desc_wherestudy = list(
 		"An affiliated hydroponics lab",
@@ -464,7 +469,7 @@ ABSTRACT_TYPE(/datum/rc_entry/item/organ)
 /datum/req_contract/scientific/prototypist
 	payout = PAY_DOCTORATE
 	weight = 120
-
+	industry = /datum/stock/industry/consumer
 	var/list/namevary = list("Prototyping Assistance","Cutting-Edge Endeavor","Investment Opportunity","Limited Run","Overhaul Project")
 	var/list/desc_bonusflavor = list(
 		"Funds are scarce due to budgetary restrictions; a cut of the product will be offered in return.",

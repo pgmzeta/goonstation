@@ -11,6 +11,7 @@ ABSTRACT_TYPE(/datum/req_contract/civilian)
 	name = "Event Catering"
 	payout = PAY_IMPORTANT*10
 	weight = 60
+	industry = /datum/stock/industry/agriculture
 	var/list/desc_event = list("reception","formal event","welcoming party","going-away party","commemorative dinner","dinner")
 	var/list/desc_honorific = list("an esteemed","an infamous","a famous","a renowned")
 	var/list/desc_origin = list(" Nanotrasen"," Martian"," freelancing"," frontier"," - if only barely -"," retired")
@@ -94,6 +95,7 @@ ABSTRACT_TYPE(/datum/rc_entry/reagent/caterdrink)
 /datum/req_contract/civilian/furnishing
 	//name = "Interior Outfitting"
 	payout = PAY_EMBEZZLED
+	industry = /datum/stock/industry/consumer
 	var/list/namevary = list("Interior Outfitting","Furnishing Assistance","Interior Decorating","Occupancy Preparations","Last-Minute Furnishing")
 	var/list/desc_whatitdoes = list("A new gaming","An extraction","A medical","A research","A cartographic","A transit")
 	var/list/desc_whatitis = list("vessel","station","platform","outpost")
@@ -167,6 +169,7 @@ ABSTRACT_TYPE(/datum/rc_entry/reagent/caterdrink)
 /datum/req_contract/civilian/greytide
 	//name = "Crew Embarcation"
 	payout = PAY_UNTRAINED*10*2
+	industry = /datum/stock/industry/consumer
 	var/list/namevary = list("Crew Embarcation","Crew Onboarding","New Hands on Deck","Expedited Outfitting","Personnel Rotation")
 	var/list/desc_task = list("mining","hydroponics","cargo handling","engineering","medical","research","cartographic")
 	var/list/desc_place = list("vessel","station","platform","outpost")
@@ -445,6 +448,7 @@ ABSTRACT_TYPE(/datum/rc_entry/reagent/caterdrink)
 /datum/req_contract/civilian/architecture
 	//name = "Architecture Deluxe"
 	payout = PAY_EMBEZZLED
+	industry = /datum/stock/industry/consumer
 	var/list/namevary = list("Structural Setup","Brick by Brick","New Construction","Building Supply","Structure Fabrication","Asset Development")
 	var/list/desc_thingbuilt = list("A planetary habitation site","A new deluxe retreat","A new station wing","An affiliated construction project")
 	var/list/desc_progress = list("currently underway","delayed by supply difficulties","planned for near-term assembly","commissioned by a third party")
@@ -552,6 +556,7 @@ ABSTRACT_TYPE(/datum/rc_entry/reagent/caterdrink)
 /datum/req_contract/civilian/robotics
 	//name = "Borg Buds"
 	payout = PAY_TRADESMAN*10
+	industry = /datum/stock/industry/communications
 	var/list/namevary = list("Robot Overhaul","Loose Sprockets","Parts Wanted","Servo Service")
 	var/list/desc_whatbork = list("mining operation","security post","automated refueling station","cultivation platform","hazardous material processor")
 	var/list/desc_whatget = list(
@@ -670,6 +675,7 @@ ABSTRACT_TYPE(/datum/rc_entry/reagent/caterdrink)
 
 /datum/req_contract/civilian/pod
 	//name = "Space Hogg"
+	industry = /datum/stock/industry/consumer
 	payout = PAY_TRADESMAN*10
 	var/list/namevary = list("Back in the Shop","Vehicular Teardown","Rebuild Assistance","Nuts and Bolts")
 	var/list/flavor_descs = list(
