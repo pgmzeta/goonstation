@@ -15938,6 +15938,9 @@
 	dir = 4
 	},
 /obj/machinery/manufacturer/personnel,
+/obj/decal/poster/wallsign/framed_award/firstbill{
+	pixel_y = 24
+	},
 /turf/simulated/floor/black,
 /area/station/crew_quarters/heads)
 "bbX" = (
@@ -24613,6 +24616,9 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/decal/poster/wallsign/framed_award/rddiploma{
+	pixel_y = 23
+	},
 /turf/simulated/floor/black,
 /area/station/crew_quarters/hor)
 "bLr" = (
@@ -31758,6 +31764,9 @@
 	},
 /obj/item/matchbook,
 /obj/item/cigpacket/propuffs,
+/obj/decal/poster/wallsign/framed_award/mdlicense{
+	pixel_x = 25
+	},
 /turf/simulated/floor/specialroom/medbay,
 /area/station/medical/head)
 "cjy" = (

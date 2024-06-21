@@ -1081,6 +1081,9 @@
 	pixel_y = 3
 	},
 /obj/table/auto,
+/obj/decal/poster/wallsign/framed_award/rddiploma{
+	pixel_x = 26
+	},
 /turf/simulated/floor/carpet/purple/fancy/edge/ne,
 /area/station/crew_quarters/hor)
 "afR" = (
@@ -30594,6 +30597,9 @@
 "lcp" = (
 /obj/machinery/light/incandescent,
 /mob/living/critter/small_animal/dog/george/orwell,
+/obj/decal/poster/wallsign/framed_award/firstbill{
+	pixel_x = -26
+	},
 /turf/simulated/floor/carpet{
 	dir = 8;
 	icon_state = "fgreen2"

@@ -4749,6 +4749,9 @@
 	icon_state = "skeleton_stand";
 	name = "Jim"
 	},
+/obj/decal/poster/wallsign/framed_award/mdlicense{
+	pixel_y = 23
+	},
 /turf/simulated/floor/carpet{
 	dir = 1;
 	icon_state = "fblue2"
@@ -5968,6 +5971,9 @@
 /obj/stool/bee_bed/heisenbee,
 /obj/critter/domestic_bee/heisenbee,
 /obj/machinery/light/incandescent/warm,
+/obj/decal/poster/wallsign/framed_award/rddiploma{
+	pixel_x = -26
+	},
 /turf/simulated/floor/wood,
 /area/station/science/research_director)
 "aua" = (
@@ -32788,12 +32794,15 @@
 /obj/item/reagent_containers/food/drinks/rum_spaced{
 	pixel_y = 8
 	},
-/obj/item/currency/spacecash,
 /obj/item/coin{
 	pixel_x = 4;
 	pixel_y = 11
 	},
 /obj/machinery/light_switch/auto,
+/obj/decal/poster/wallsign/framed_award/firstbill{
+	pixel_y = -5;
+	pixel_x = 27
+	},
 /turf/simulated/floor/carpet{
 	dir = 4;
 	icon_state = "fgreen3"

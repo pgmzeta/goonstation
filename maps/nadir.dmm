@@ -8191,6 +8191,10 @@
 /obj/item/storage/secure/ssafe{
 	pixel_y = 26
 	},
+/obj/decal/poster/wallsign/framed_award/rddiploma{
+	pixel_y = -2;
+	pixel_x = 26
+	},
 /turf/simulated/floor/black,
 /area/station/science/research_director)
 "dHI" = (
@@ -46091,6 +46095,10 @@
 	},
 /obj/item/stamp/md{
 	pixel_x = 14
+	},
+/obj/decal/poster/wallsign/framed_award/mdlicense{
+	pixel_x = -6;
+	pixel_y = 28
 	},
 /turf/simulated/floor/black,
 /area/station/medical/head)

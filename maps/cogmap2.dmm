@@ -23696,6 +23696,9 @@
 	layer = 9.1;
 	pixel_x = -10
 	},
+/obj/decal/poster/wallsign/framed_award/firstbill{
+	pixel_y = 22
+	},
 /turf/simulated/floor/black,
 /area/station/crew_quarters/heads)
 "bsT" = (
@@ -39377,6 +39380,9 @@
 "ckO" = (
 /obj/storage/closet/biohazard,
 /obj/item/reagent_containers/emergency_injector/spaceacillin,
+/obj/decal/poster/wallsign/framed_award/rddiploma{
+	pixel_x = 26
+	},
 /turf/simulated/floor/black,
 /area/station/crew_quarters/hor)
 "ckP" = (
@@ -64055,6 +64061,9 @@
 /area/station/engine/core)
 "liV" = (
 /obj/storage/secure/closet/medical/chemical,
+/obj/decal/poster/wallsign/framed_award/mdlicense{
+	pixel_x = -26
+	},
 /turf/simulated/floor/carpet/blue/fancy/edge/sw,
 /area/station/medical/head)
 "lje" = (

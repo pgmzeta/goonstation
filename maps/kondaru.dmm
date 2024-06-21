@@ -43344,7 +43344,6 @@
 	layer = 9.1;
 	pixel_y = 21
 	},
-/obj/machinery/light_switch/north,
 /obj/machinery/phone,
 /obj/item/stamp/md{
 	pixel_x = -14;
@@ -43356,6 +43355,9 @@
 /obj/item/clothing/glasses/healthgoggles,
 /obj/item/remote/porter/port_a_nanomed,
 /obj/item/reagent_containers/hypospray,
+/obj/decal/poster/wallsign/framed_award/mdlicense{
+	pixel_y = 24
+	},
 /turf/simulated/floor/carpet/blue/fancy/edge/north,
 /area/station/crew_quarters/md)
 "lJO" = (
@@ -43900,6 +43902,9 @@
 	},
 /obj/cable{
 	icon_state = "0-2"
+	},
+/obj/decal/poster/wallsign/framed_award/rddiploma{
+	pixel_x = 25
 	},
 /turf/simulated/floor/carpet/purple/fancy/edge/ne,
 /area/station/science/research_director)
@@ -45217,6 +45222,10 @@
 	pixel_x = 5
 	},
 /obj/item/device/radio/intercom/bridge,
+/obj/decal/poster/wallsign/framed_award/firstbill{
+	pixel_y = -3;
+	pixel_x = -25
+	},
 /turf/simulated/floor/carpet/green/fancy/edge/nw,
 /area/station/bridge/hos)
 "njG" = (
@@ -59581,10 +59590,15 @@
 /obj/item/storage/toilet{
 	dir = 4
 	},
-/obj/blind_switch/area/south,
+/obj/blind_switch/area/south{
+	pixel_x = -6
+	},
 /obj/decal/tile_edge/line/black{
 	dir = 1;
 	icon_state = "line1"
+	},
+/obj/machinery/light_switch/south{
+	pixel_x = 7
 	},
 /turf/simulated/floor/sanitary,
 /area/station/crew_quarters/md)
