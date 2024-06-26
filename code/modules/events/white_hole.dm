@@ -158,6 +158,7 @@ ADMIN_INTERACT_PROCS(/obj/whitehole, proc/admin_activate)
 			/obj/machinery/portable_atmospherics/canister/oxygen = 2,
 			/obj/machinery/portable_atmospherics/canister/nitrogen = 2,
 			/obj/machinery/portable_atmospherics/canister/carbon_dioxide = 2,
+			/obj/machinery/portable_atmospherics/canister/methane = 1,
 			/obj/item/paper/engine = 5,
 			/obj/item/chem_grenade/firefighting = 5,
 			/obj/item/clothing/mask/gas = 2,
