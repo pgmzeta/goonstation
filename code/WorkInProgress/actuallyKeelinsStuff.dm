@@ -2811,12 +2811,18 @@ Returns:
 		return
 
 /obj/laser_sink/perm_portal //this path is FINE, shut UP
-	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "portal"
+	// icon = 'icons/obj/stationobjs.dmi'
+	// icon_state = "portal"
+	// name = ""
+	// mouse_opacity = 0
+	// desc = ""
 	anchored = ANCHORED
 	density = 1
 	opacity = 0
 	var/atom/target = null
+	var/targetX = 2
+	var/targetY = 2
+	var/targetZ = 2
 	var/target_tag = null
 	var/datum/light/light
 
@@ -2832,6 +2838,12 @@ Returns:
 		SPAWN(0.6 SECONDS)
 			if (target_tag)
 				target = locate(target_tag)
+				if(target)
+					targetX = target.x
+					targetY = target.y
+					targetZ = target.z
+					updateVis()
+		updateVis()
 
 	incident(obj/linked_laser/laser)
 		if (src.in_laser) //no infinite loops allowed
@@ -2875,6 +2887,21 @@ Returns:
 			usr.set_loc(src.target)
 			return
 		..()
+
+	proc/updateVis()
+		src.overlays.Cut()
+		vis_contents = list()
+		if(target)
+			vis_contents += locate(target.x, target.y, target.z)
+
+		var/icon/mask = null
+		mask = icon('icons/effects/effects.dmi',"portal_trans_cutout")
+		mask.Blend(getFlatIcon(src.loc), ICON_MULTIPLY)
+		var/image/finished = image(mask,"",layer = 13)
+		// src.overlays += image('icons/effects/effects.dmi',"portalshade",layer = 12)
+		src.overlays += image('icons/obj/stationobjs.dmi',"portal_trans",layer = 12)
+		src.overlays += finished
+		return
 
 ////////////////////////////////////////////////////////////////////////////////////////
 /* var/list/raisinlist = new/list()
