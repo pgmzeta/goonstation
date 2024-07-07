@@ -43,6 +43,18 @@
 	icon_closed = "forensiccart"
 	icon_opened = "forensiccartopen"
 
+/obj/storage/cart/forensic/detective
+	spawn_contents = list(
+		/obj/item/storage/box/evidence = 4,
+		/obj/item/hand_labeler = 1,
+		/obj/item/clothing/gloves/latex/random = 1,
+		/obj/item/clothing/mask/surgical = 1,
+		/obj/item/device/audio_log = 1,
+		/obj/item/device/detective_scanner = 1,
+		/obj/item/body_bag = 3,
+		/obj/item/spraybottle/detective = 1,
+	)
+
 /obj/storage/cart/trash
 	name = "trash cart"
 	desc = "Well at least you're in space, right?"
