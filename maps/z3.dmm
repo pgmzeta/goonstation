@@ -4216,13 +4216,6 @@
 	},
 /turf/simulated/floor/orangeblack,
 /area/buddyfactory)
-"asK" = (
-/obj/machinery/buddyfactory{
-	dir = 1;
-	input_stage = 3
-	},
-/turf/simulated/floor/orangeblack,
-/area/buddyfactory)
 "asL" = (
 /obj/rack,
 /obj/item/parts/robot_parts/arm/left/light{
@@ -4238,16 +4231,6 @@
 	name = "Robuddy Arm"
 	},
 /turf/simulated/floor,
-/area/buddyfactory)
-"asM" = (
-/obj/overlay{
-	density = 1;
-	desc = "This is probably meant to keep the part hoppers loaded.";
-	icon = 'icons/mob/hivebot.dmi';
-	icon_state = "fab_robot";
-	name = "janky machine"
-	},
-/turf/simulated/floor/orangeblack,
 /area/buddyfactory)
 "asN" = (
 /obj/decal{
@@ -17659,6 +17642,16 @@
 	},
 /turf/simulated/floor/carpet/arcade,
 /area/diner/arcade)
+"hRr" = (
+/obj/overlay{
+	density = 1;
+	desc = "This is probably meant to keep the part hoppers loaded.";
+	icon = 'icons/mob/hivebot.dmi';
+	icon_state = "fab_robot";
+	name = "janky machine"
+	},
+/turf/simulated/floor,
+/area/buddyfactory)
 "hSH" = (
 /turf/simulated/floor/green/checker,
 /area/diner/arcade)
@@ -20541,6 +20534,13 @@
 	icon_state = "catwalk_cross"
 	},
 /area/space)
+"pHM" = (
+/obj/machinery/buddyfactory{
+	dir = 1;
+	input_stage = 3
+	},
+/turf/simulated/floor,
+/area/buddyfactory)
 "pIQ" = (
 /obj/decal/cleanable/dirt,
 /obj/stool/chair/couch{
@@ -28905,7 +28905,7 @@ aqC
 ppF
 aqC
 aqC
-sBz
+dwW
 aqV
 aqC
 ajC
@@ -29202,7 +29202,7 @@ ajC
 aqV
 aqC
 sBz
-asK
+ath
 atf
 ppF
 atU
@@ -29504,7 +29504,7 @@ ajC
 aqV
 aqC
 sBz
-atg
+aqC
 asI
 ppF
 atd
@@ -29806,7 +29806,7 @@ ajC
 ary
 aqC
 sBz
-asM
+ath
 ath
 ppF
 ath
@@ -30108,7 +30108,7 @@ ajC
 aqC
 aqC
 sBz
-aqC
+pHM
 aqC
 ppF
 aqC
@@ -30410,7 +30410,7 @@ ajC
 arz
 aqC
 sBz
-aqC
+atg
 aqC
 ppF
 ath
@@ -30711,7 +30711,7 @@ aqY
 ajC
 arA
 aqC
-mSW
+sBz
 aqC
 aqC
 ppF
@@ -31013,8 +31013,8 @@ aqY
 ajC
 aqC
 aqC
-aqC
-aqC
+sBz
+hRr
 aqC
 ppF
 aqC
@@ -31315,7 +31315,7 @@ aqY
 ajC
 arB
 aqC
-aqC
+mSW
 aqC
 aqC
 rDK
