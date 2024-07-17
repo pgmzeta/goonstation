@@ -6,7 +6,7 @@
 	desc = "Some sort of stationary factory robot."
 	icon = 'icons/misc/exploration.dmi'
 	icon_state = "factory_arm_sleep"
-	var/input_stage = 1 //What stage of buddy frame we operate on.
+	var/input_stage = ROBUDDY_STAGE_BATTERY //What stage of buddy frame we operate on.
 	var/input_model = 4 //Model of buddy we can build.
 
 	proc/drop_item()
@@ -22,35 +22,36 @@
 				return
 
 			switch (input_stage)
-				if (1)
+				if (ROBUDDY_STAGE_BATTERY)
 					var/obj/item/cell/cell_to_add = locate() in range(src, 1)
 					if (istype(cell_to_add))
 						frame.Attackby(cell_to_add, src)
-						if (frame.stage > 1)
+						if (frame.stage > ROBUDDY_STAGE_BATTERY)
 							src.visible_message("[src] inserts [cell_to_add] into [frame].")
 							flick("factory_arm_active",src)
 
-				if (2)
+				if (ROBUDDY_STAGE_MAINBOARD)
+					var/obj/item/guardbot_core/robuddy_mainboard = locate() in range(src, 1)
+					if (istype(robuddy_mainboard))
+						frame.Attackby(robuddy_mainboard, src)
+						if (frame.stage > ROBUDDY_STAGE_MAINBOARD)
+							src.visible_message("[src] installs [robuddy_mainboard] into [frame].")
+							flick("factory_arm_active",src)
+
+				if (ROBUDDY_STAGE_ARM)
+					var/obj/item/parts/robot_parts/arm/arm = locate() in range(src,1)
+					if (istype(arm))
+						frame.Attackby(arm,src)
+						flick("factory_arm_active",src)
+
+				if (ROBUDDY_STAGE_TOOL) // TODO: So tools are installed on functioning robuddies, not parts anymore. Whelp.
 					var/obj/item/device/guardbot_tool/tool_to_add = locate() in range(src, 1)
 					if (!frame.created_module && istype(tool_to_add))
 						frame.Attackby(tool_to_add, src)
 						if (frame.created_module)
 							src.visible_message("[src] attaches [tool_to_add] into [frame].")
 							flick("factory_arm_active",src)
-					else
-						var/obj/item/guardbot_core/core = locate() in range(src, 1)
-						if (istype(core))
-							frame.Attackby(core, src)
-							if (frame.stage == 3)
-								src.visible_message("[src] attaches [core] into [frame].")
-								flick("factory_arm_active",src)
 
-				if (3)
-					var/obj/item/parts/robot_parts/arm/arm = locate() in range(src,1)
-					if (istype(arm))
-						frame.Attackby(arm,src)
-						flick("factory_arm_active",src)
-			//todo
 			return
 
 	power_change()
@@ -63,6 +64,10 @@
 				src.name = "inactive [initial(src.name)]"
 				icon_state = "factory_arm_sleep"
 				status |= NOPOWER
+
+
+/obj/machinery/conveyor_switch/robuddy
+	slowdown = 16
 
 /obj/machinery/networked/mainframe/robot_factory
 	setup_drive_type = /obj/item/disk/data/memcard/robot_factory

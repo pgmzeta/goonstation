@@ -4162,7 +4162,7 @@ TYPEINFO(/obj/item/guardbot_frame)
 	desc = "The external casing of a PR-6S Guardbuddy."
 	icon = 'icons/obj/bots/robuddy/pr-6.dmi'
 	icon_state = "frame-1"
-	var/stage = 1
+	var/stage = ROBUDDY_STAGE_BATTERY
 	var/created_name = "Guardbuddy" //Still the name of resulting guardbot
 	var/created_default_task = null //Default task path of result
 	var/datum/computer/file/guardbot_task/created_model_task = null //Initial model task of result.
@@ -4175,7 +4175,7 @@ TYPEINFO(/obj/item/guardbot_frame)
 		..()
 		SPAWN(0.6 SECONDS)
 			src.icon_state = "frame-[stage]"
-			if(src.stage >= 2)
+			if(src.stage >= ROBUDDY_STAGE_MAINBOARD)
 				src.created_cell = new
 				src.created_cell.charge = 0.9 * src.created_cell.maxcharge
 		return
@@ -4183,14 +4183,19 @@ TYPEINFO(/obj/item/guardbot_frame)
 
 	//Frame -> Add cell -> Add core -> Add arm -> Done. Then add tool. Or gun.
 	attackby(obj/item/W, mob/user)
+		// switch(src.stage)
+		// 	if (ROBUDDY_STAGE_BATTERY)
+		// 	if (ROBUDDY_STAGE_MAINBOARD)
+		// 	if (ROBUDDY_STAGE_ARM)
+
 		if ((istype(W, /obj/item/guardbot_core)))
 			if(W:buddy_model != src.buddy_model)
 				boutput(user, SPAN_ALERT("That core board is for a different model of robot!"))
 				return
-			if(!created_cell || stage != 2)
+			if(!created_cell || stage != ROBUDDY_STAGE_MAINBOARD)
 				boutput(user, SPAN_ALERT("You need to add a power cell first!"))
 				return
-			src.stage = 3
+			src.stage = ROBUDDY_STAGE_ARM
 			src.icon_state = "frame-3"
 			if(W:created_name)
 				src.created_name = W:created_name
@@ -4198,22 +4203,22 @@ TYPEINFO(/obj/item/guardbot_frame)
 				src.created_default_task = W:created_default_task
 			if(W:created_model_task)
 				src.created_model_task = W:created_model_task
-			boutput(user, "You add the core board to  [src]!")
+			src.visible_message("[W] slots into [src]")
 			qdel(W)
 
-		else if((istype(W, /obj/item/cell)) && stage == 1 && !created_cell)
+		else if((istype(W, /obj/item/cell)) && stage == ROBUDDY_STAGE_BATTERY && !created_cell)
 			user.drop_item()
 
 			W.set_loc(src)
 			src.created_cell = W
-			src.stage = 2
+			src.stage = ROBUDDY_STAGE_MAINBOARD
 			src.icon_state = "frame-2"
-			boutput(user, "You add the power cell to [src]!")
+			src.visible_message("[W] slots into [src]")
 
 
-		else if (istype(W, /obj/item/parts/robot_parts/arm/) && src.stage == 3)
-			src.stage++
-			boutput(user, "You add the robot arm to [src]!")
+		else if (istype(W, /obj/item/parts/robot_parts/arm/) && src.stage == ROBUDDY_STAGE_ARM)
+			src.stage = ROBUDDY_STAGE_TOOL
+			src.visible_message("[W] slots into [src]")
 			qdel(W)
 
 			var/obj/machinery/bot/guardbot/newbot = new src.spawned_bot_type (get_turf(src))

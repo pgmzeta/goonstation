@@ -95,6 +95,7 @@
 #include "defines\speech_pro.dm"
 #include "defines\reagents.dm"
 #include "defines\robot.dm"
+#include "defines\robuddy.dm"
 #include "defines\roles.dm"
 #include "defines\security.dm"
 #include "defines\shuttle.dm"
