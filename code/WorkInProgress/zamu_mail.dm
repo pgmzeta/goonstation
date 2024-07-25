@@ -333,6 +333,7 @@ var/global/mail_types_by_job = list(
 		/obj/item/pinpointer/category/pets = 1,
 		/obj/item/reagent_containers/food/drinks/rum_spaced = 2,
 		/obj/item/device/flash = 2,
+		/obj/item/clothing/glasses/regular/bluelight = 1,
 		),
 
 	/datum/job/command/head_of_security = list(
@@ -480,6 +481,7 @@ var/global/mail_types_by_job = list(
 		// so you can keep looking at your screen,
 		// even in the brightness of nuclear hellfire o7
 		/obj/item/clothing/glasses/sunglasses/tanning = 10,
+		/obj/item/clothing/glasses/regular/bluelight = 10,
 		),
 
 
@@ -504,6 +506,7 @@ var/global/mail_types_by_job = list(
 		/obj/item/stamp/qm = 5,
 		/obj/item/cargotele = 3,
 		/obj/item/device/appraisal = 4,
+		/obj/item/clothing/glasses/regular/bluelight = 2,
 		),
 
 	/datum/job/engineering/miner = list(

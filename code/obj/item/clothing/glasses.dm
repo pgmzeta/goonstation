@@ -130,6 +130,21 @@ TYPEINFO(/obj/item/clothing/glasses/toggleable/meson)
 	desc = "Corrective lenses, perfect for the near-sighted."
 	correct_bad_vision = 1
 
+/obj/item/clothing/glasses/regular/bluelight
+	name = "blue-light blocking glasses"
+	icon_state = "oglasses"
+	desc = "Glasses designed to block out blue-light, perfect for long computer sessions."
+	correct_bad_vision = FALSE
+
+/obj/item/clothing/glasses/regular/bluelight/equipped(mob/user, slot)
+	. = ..()
+	user.apply_color_matrix(COLOR_MATRIX_DEUTERANOPIA, "bluelight_glasses")
+
+/obj/item/clothing/glasses/regular/bluelight/unequipped(mob/user)
+	. = ..()
+	user.remove_color_matrix("bluelight_glasses")
+
+
 /obj/item/clothing/glasses/regular/ecto
 	name = "peculiar spectacles"
 	desc = "Admittedly, they are rather strange."
