@@ -2010,3 +2010,44 @@
 		. = ..()
 		src.user.UpdateOverlays(null, "showoff_overlay")
 		src.user.UpdateOverlays(null, "showoff_hand_overlay")
+
+/datum/action/bar/icon/badge_door_open
+	duration = 15 SECONDS
+	interrupt_flags = INTERRUPT_MOVE | INTERRUPT_ACT | INTERRUPT_STUNNED | INTERRUPT_ACTION
+	icon = 'icons/obj/clothing/overcoats/item_suit_gimmick.dmi'
+	icon_state = "security_badge"
+	var/mob/user = null
+	var/obj/machinery/door/airlock/door = null
+	var/obj/item/clothing/suit/security_badge/badge = null
+
+	New(mob/user, obj/machinery/door/airlock/to_open, obj/item/clothing/suit/security_badge/authority)
+		. = ..()
+		src.user = user
+		src.door = to_open
+		src.badge = authority
+		src.place_to_put_bar = to_open
+
+	onStart()
+		if (!src.user)
+			interrupt(INTERRUPT_ALWAYS)
+		if (src.door && !IN_RANGE(src.owner, src.door, 1))
+			interrupt(INTERRUPT_ALWAYS)
+		src.door.visible_message("[src.user] begins issuing a badge override on the door")
+		playsound(src.door, 'sound/machines/whistlealert.ogg', 75)
+		..()
+
+	onUpdate()
+		. = ..()
+		if (!src.user)
+			interrupt(INTERRUPT_ALWAYS)
+		if (src.door && !IN_RANGE(src.owner, src.door, 1)) // stay close
+			interrupt(INTERRUPT_ALWAYS)
+		if (!(src.user.equipped() == src.badge)) // hold onto badge
+			interrupt(INTERRUPT_ALWAYS)
+		if (src.door.operating != 0) // it opened (or was permanently closed)
+			interrupt(INTERRUPT_ALWAYS)
+
+	onEnd()
+		. = ..()
+		src.door.open()
+		playsound(src.door, 'sound/machines/whistlebeep.ogg', 75)

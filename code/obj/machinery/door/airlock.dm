@@ -727,6 +727,16 @@ var/global/list/cycling_airlocks = list()
 				boutput(user, SPAN_NOTICE("[bicon(C)] Regular electrical response received from access panel."))
 		return
 
+	if ((shipAlertState == SHIP_ALERT_BAD) && istype(C, /obj/item/clothing/suit/security_badge))
+		if (HAS_ANY_FLAGS(src.status, BROKEN|NOPOWER|POWEROFF|MAINT))
+			return
+		if (src.operating || src.welded || src.locked || src.hardened || !src.arePowerSystemsOn())
+			return
+		var/obj/item/clothing/suit/security_badge/badge = C
+		if (!badge.check_badge_access(src))
+			return
+		actions.start(new /datum/action/bar/icon/badge_door_open(user, src, C), user)
+
 	if (!issilicon(user) && (BOUNDS_DIST(src, user) == 0))
 		if (src.isElectrified())
 			if(src.shock(user, 75))

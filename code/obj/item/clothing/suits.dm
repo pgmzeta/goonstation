@@ -1978,8 +1978,6 @@ TYPEINFO(/obj/item/clothing/suit/space/industrial/salvager)
 		..()
 		setProperty("chemprot", 70)
 
-#define BADGE_SHOWOFF_COOLDOWN 2 SECONDS
-
 /obj/item/clothing/suit/security_badge
 	name = "Security Badge"
 	desc = "An official badge for a Nanotrasen Security Worker."
@@ -1991,6 +1989,13 @@ TYPEINFO(/obj/item/clothing/suit/space/industrial/salvager)
 	item_state = "security_badge"
 	var/badge_owner_name = null
 	var/badge_owner_job = null
+	var/list/badge_access = list(access_security, access_brig, access_forensics_lockers, access_medical, access_medlab, access_morgue,
+		access_securitylockers, access_tox, access_tox_storage, access_chemistry, access_carrypermit, access_contrabandpermit, access_chapel_office,
+		access_kitchen, access_bar, access_janitor, access_robotics, access_cargo, access_hydro, access_mail, access_engineering,
+		access_maint_tunnels, access_tech_storage, access_engineering_storage, access_engineering_eva, access_engineering_engine,
+		access_engineering_control, access_engineering_mechanic, access_mining, access_mining_outpost, access_research, access_engineering_atmos,
+		access_ranch, access_pathology, access_artlab, access_telesci, access_researchfoyer, access_robotdepot)
+	HELP_MESSAGE_OVERRIDE("During a red-alert, use on a door with non-command access to issue an override and open the door.")
 
 	setupProperties()
 		..()
@@ -2012,6 +2017,18 @@ TYPEINFO(/obj/item/clothing/suit/space/industrial/salvager)
 			return
 		user.visible_message("[user] flashes the badge at [target.name]: <br>[SPAN_BOLD("[bicon(src)] Nanotrasen's Finest [badge_owner_job]: [badge_owner_name].")]", "You show off the badge to [target.name]: <br>[SPAN_BOLD("[bicon(src)] Nanotrasen's Finest [badge_owner_job] [badge_owner_name].")]")
 		actions.start(new /datum/action/show_item(user, src, "badge"), user)
+
+	/// checks if the badge is allowed to open this door
+	proc/check_badge_access(obj/machinery/door/airlock/airlock)
+		if(!istype(airlock.req_access, /list)) //something's very wrong
+			return TRUE
+		var/list/access_list = airlock.req_access
+		if (!access_list.len) // no access restriction
+			return TRUE
+		for (var/access in access_list)
+			if (access in src.badge_access)
+				return TRUE
+		return FALSE
 
 /obj/item/clothing/suit/security_badge/shielded
 	name = "NTSO Tactical Badge"
