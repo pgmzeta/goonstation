@@ -202,6 +202,7 @@
 						O.address = account["pda_net_id"]
 					O.orderedby = usr.name
 					O.console_location = src.console_location
+					O.comment = usr.name
 					var/obj/storage/S = O.create(usr)
 					shippingmarket.receive_crate(S)
 					logTheThing(LOG_STATION, usr, "ordered a [P.name] at [log_loc(src)].")
