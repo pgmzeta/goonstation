@@ -71,6 +71,7 @@
 	var/d_mouse_opacity = 0 //In case you want it to block clicks. For blindness and such.
 	var/do_wide_fill = 1 //If true, use underlays to 'fill out' the area that extends to the sides in widescreen
 	var/d_screen_loc = "CENTER-7,CENTER-7"
+	var/appearance_flags = null
 
 //list of overlay composition stored on mob
 //list is applied in life proc?! and login
@@ -94,6 +95,8 @@
 			S.plane = D.d_plane
 			S.mouse_opacity = D.d_mouse_opacity
 			S.screen_loc = D.d_screen_loc
+			if (!isnull(D.appearance_flags))
+				S.appearance_flags = D.appearance_flags
 
 			instances.Add(S)
 
@@ -387,6 +390,41 @@
 
 		return ..()
 
+
+/datum/overlayComposition/gasmask
+	New()
+		var/datum/overlayDefinition/dither = new()
+		dither.d_icon = 'icons/effects/overlays/gasmask.dmi'
+		dither.d_icon_state = "gasmask"
+		dither.d_blend_mode = BLEND_ADD
+		dither.d_mouse_opacity = 0
+		dither.do_wide_fill = FALSE
+		dither.d_screen_loc = "CENTER-7,CENTER-7"
+		definitions.Add(dither)
+
+		// we have to do our own custom solid fill since we can't tile ours :V
+		var/datum/overlayDefinition/wide_l = new()
+		wide_l.d_icon = 'icons/effects/overlays/gasmask.dmi'
+		wide_l.d_icon_state = "solid"
+		wide_l.d_screen_loc = "LEFT-12,CENTER-7"
+		wide_l.d_blend_mode = BLEND_ADD
+		wide_l.do_wide_fill = FALSE
+		wide_l.d_mouse_opacity = 0
+		wide_l.appearance_flags = TILE_BOUND | PIXEL_SCALE
+		definitions.Add(wide_l)
+
+		var/datum/overlayDefinition/wide_r = new()
+		wide_r.d_icon = 'icons/effects/overlays/gasmask.dmi'
+		wide_r.d_icon_state = "solid"
+		wide_l.d_blend_mode = BLEND_ADD
+		wide_r.d_screen_loc = "RIGHT+12,CENTER-7"
+		wide_r.do_wide_fill = FALSE
+		wide_r.d_mouse_opacity = 0
+		wide_r.appearance_flags = TILE_BOUND | PIXEL_SCALE
+		definitions.Add(wide_r)
+
+
+		return ..()
 
 // temporary blindness overlay until the other one is fixed
 /datum/overlayComposition/limited_sight

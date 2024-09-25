@@ -108,6 +108,20 @@
 	color_r = 0.8 // green tint
 	color_g = 1
 	color_b = 0.8
+	var/obscures_view = TRUE
+
+	equipped(mob/user, slot)
+		. = ..()
+		if(src.obscures_view)
+			user.addOverlayComposition(/datum/overlayComposition/gasmask)
+			user.updateOverlaysClient(user.client)
+
+	unequipped(mob/user)
+		. = ..()
+		if(src.obscures_view)
+			user.removeOverlayComposition(/datum/overlayComposition/gasmask)
+			user.updateOverlaysClient(user.client)
+
 
 	setupProperties()
 		..()
@@ -184,6 +198,8 @@ TYPEINFO(/obj/item/clothing/mask/moustache)
 		item_state = "slasher_mask"
 		item_function_flags = IMMUNE_TO_ACID
 		see_face = TRUE
+		obscures_view = FALSE
+
 		setupProperties()
 			..()
 			setProperty("meleeprot_head", 6)
@@ -217,6 +233,7 @@ TYPEINFO(/obj/item/clothing/mask/moustache)
 	color_r = 1
 	color_g = 0.8
 	color_b = 0.8
+	obscures_view = FALSE
 
 	New()
 		. = ..()
