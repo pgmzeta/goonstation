@@ -752,6 +752,10 @@ or don't if it uses a custom topopen overlay
 				user.visible_message(SPAN_ALERT("<b>[user.name]</b> grabs and shakes [src.name]."))
 				playsound(src.loc, 'sound/impact_sounds/Generic_Shove_1.ogg', 50, 1)
 			if(INTENT_HARM)
+				if(istype(user, /mob/living/critter))
+					var/mob/living/critter/critter = user
+					critter.melee_attack(src)
+					return
 				user.visible_message(SPAN_ALERT("<b>[user.name]</b> kicks [src.name]."))
 				logTheThing(LOG_COMBAT, user, "kicks [constructTarget(src,"combat")]")
 				playsound(src.loc, 'sound/impact_sounds/Metal_Hit_Light_1.ogg', 50, 1)

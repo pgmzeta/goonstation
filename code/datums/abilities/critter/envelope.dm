@@ -55,6 +55,10 @@
 							W.set_loc(target.loc)
 							W.dropped(target)
 							W.layer = initial(W.layer)
+			else if (istype(target, /mob/living/silicon/ai))
+				var/mob/living/silicon/ai/AI = target
+				AI.brain.set_loc(target.loc)
+
 			ability?.actionFinishCooldown()
 			qdel(target)
 
