@@ -98,73 +98,7 @@
 	temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume, cannot_be_cooled)
 		. = ..()
 		if ((!isrestrictedz(src.z) || isgenplanet(src)) && (exposed_temperature > TREE_IGNITION_TEMPERATURE))
-			src.combust_start()
-
-	disposing()
-		. = ..()
-		if (src.burning)
-			STOP_TRACKING_CAT(TR_CAT_BURNING_ITEMS)
-
-	proc/combust_start()
-		if(src.burning || (src in by_cat[TR_CAT_BURNING_ITEMS]))
-			return
-		START_TRACKING_CAT(TR_CAT_BURNING_ITEMS)
-		src.burning = TRUE
-
-		var/image/I1 = image('icons/effects/fire.dmi', null, "item_fire", pixel_y = rand(24, 48), pixel_x = rand(8, 24)) // left
-		I1.alpha = 180
-		I1.transform = matrix(I1.transform, randfloat(1.1, 1.2), randfloat(1.2, 1.5), MATRIX_SCALE)
-		src.UpdateOverlays(I1, "main_ignition1")
-		var/image/I2 = image('icons/effects/fire.dmi', null, "item_fire", pixel_y = rand(32, 70), pixel_x = rand(24, 48)) // center
-		I2.alpha = 180
-		I2.transform = matrix(I2.transform, randfloat(1.1, 1.2), randfloat(1.2, 1.5), MATRIX_SCALE)
-		src.UpdateOverlays(I2, "main_ignition2")
-		var/image/I3 = image('icons/effects/fire.dmi', null, "item_fire", pixel_y = rand(16, 50), pixel_x = rand(48, 56)) // right
-		I3.alpha = 180
-		I3.transform = matrix(I3.transform, randfloat(1.1, 1.2), randfloat(1.2, 1.5), MATRIX_SCALE)
-		src.UpdateOverlays(I3, "main_ignition3")
-
-		src.add_simple_light("tree_ignition", list(255, 110, 135, 110))
-		src.simple_light.pixel_x = 32
-		src.simple_light.pixel_y = 48
-
-	proc/combust_ended()
-		STOP_TRACKING_CAT(TR_CAT_BURNING_ITEMS)
-		src.burning = FALSE
-		ClearSpecificOverlays("main_ignition1")
-		ClearSpecificOverlays("main_ignition2")
-		ClearSpecificOverlays("main_ignition3")
-		src.remove_simple_light("tree_ignition")
-
-	proc/process_burning()
-		SHOULD_NOT_SLEEP(TRUE)
-		if (src.burning)
-			if (prob(7))
-				var/datum/effects/system/bad_smoke_spread/smoke = new /datum/effects/system/bad_smoke_spread()
-				smoke.set_up(1, 0, src.loc)
-				smoke.attach(src)
-				smoke.start()
-
-			if (prob(10)) // burning branches
-				var/turf/T = get_step(src, pick(alldirs))
-				fireflash(T, 0, chemfire = CHEM_FIRE_RED)
-
-			if (prob(40))
-				if (src._health > 4)
-					src._health /= 2
-				else
-					src._health -= 2
-
-			if (src._health <= 0)
-				make_cleanable( /obj/decal/cleanable/ash, get_turf(src))
-				src.combust_ended()
-				qdel(src)
-				return
-		else
-			if (src.burning_last_process != src.burning)
-				src.combust_ended()
-			STOP_TRACKING_CAT(TR_CAT_BURNING_ITEMS)
-		src.burning_last_process = src.burning
+			AddComponent(/datum/component/burning, BURN_REMAINS_ASH, 0, 0)
 
 	proc/animate_fall()
 		var/ratio = 0.3
@@ -433,58 +367,12 @@
 	temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume, cannot_be_cooled)
 		. = ..()
 		if ((!isrestrictedz(src.z) || isgenplanet(src)) && (exposed_temperature > TREE_IGNITION_TEMPERATURE))
-			src.combust_start()
+			AddComponent(/datum/component/burning, BURN_REMAINS_ASH, 0, 0)
 
 	disposing()
 		. = ..()
 		if (src.burning)
 			STOP_TRACKING_CAT(TR_CAT_BURNING_ITEMS)
-
-	proc/combust_start()
-		if(src.burning || (src in by_cat[TR_CAT_BURNING_ITEMS]))
-			return
-		START_TRACKING_CAT(TR_CAT_BURNING_ITEMS)
-		src.burning = TRUE
-
-		var/image/I = image('icons/effects/fire.dmi', null, "item_fire")
-		I.alpha = 180
-		src.UpdateOverlays(I, "main_ignition")
-		src.add_simple_light("shrub_ignition", list(255, 110, 135, 110))
-
-	proc/combust_ended()
-		STOP_TRACKING_CAT(TR_CAT_BURNING_ITEMS)
-		src.burning = FALSE
-		ClearSpecificOverlays("main_ignition")
-		src.remove_simple_light("shrub_ignition")
-
-	proc/process_burning()
-		SHOULD_NOT_SLEEP(TRUE)
-		if (src.burning)
-			if (prob(7))
-				var/datum/effects/system/bad_smoke_spread/smoke = new /datum/effects/system/bad_smoke_spread()
-				smoke.set_up(1, 0, src.loc)
-				smoke.attach(src)
-				smoke.start()
-
-			if (prob(40))
-				if (src._health > 4)
-					src._health /= 2
-				else
-					src._health -= 2
-
-			if (src._health <= 0)
-				if (src.is_plastic)
-					make_cleanable(/obj/decal/cleanable/molten_item, get_turf(src))
-				else
-					make_cleanable(/obj/decal/cleanable/ash, get_turf(src))
-				src.combust_ended()
-				qdel(src)
-				return
-		else
-			if (src.burning_last_process != src.burning)
-				src.combust_ended()
-			STOP_TRACKING_CAT(TR_CAT_BURNING_ITEMS)
-		src.burning_last_process = src.burning
 
 	random
 		New()

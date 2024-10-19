@@ -963,12 +963,8 @@ ADMIN_INTERACT_PROCS(/obj/item, proc/admin_set_stack_amount)
 
 		if (src.health <= 0)
 			STOP_TRACKING_CAT(TR_CAT_BURNING_ITEMS)
-			switch(src.burn_remains)
-				if(BURN_REMAINS_ASH)
-					make_cleanable(/obj/decal/cleanable/ash, get_turf(src))
-				if(BURN_REMAINS_MELT)
-					make_cleanable(/obj/decal/cleanable/molten_item, get_turf(src))
-
+			if (src.burn_remains)
+				make_cleanable(src.burn_remains, get_turf(src))
 
 			if (istype(src,/obj/item/parts/human_parts))
 				src:holder = null
