@@ -552,6 +552,16 @@ TYPEINFO(/obj/item/reagent_containers/food/snacks/ingredient/honey)
 			user.u_equip(src)
 			user.put_in_hand_or_drop(P)
 			qdel(src)
+		else if (iscuttingtool(W) || issawingtool(W))
+			boutput(user, SPAN_NOTICE("You cut the dough into two strips."))
+			if (prob(25))
+				JOB_XP(user, "Chef", 1)
+			if(prob(1))
+				playsound(src.loc, 'sound/voice/screams/male_scream.ogg', 100, 1, channel=VOLUME_CHANNEL_EMOTE)
+				src.visible_message(SPAN_ALERT("<B>The [src] screams!</B>"))
+			for(var/i = 1, i <= 2, i++)
+				new /obj/item/reagent_containers/food/snacks/ingredient/dough_strip/semolina(get_turf(src))
+			qdel(src)
 		else ..()
 
 /obj/item/reagent_containers/food/snacks/ingredient/dough_strip
@@ -563,7 +573,10 @@ TYPEINFO(/obj/item/reagent_containers/food/snacks/ingredient/honey)
 	fill_amt = 0.5
 
 	attackby(obj/item/W, mob/user)
-		if (istype(W, /obj/item/reagent_containers/food/snacks/ingredient/dough_strip))
+		if (istype(W, /obj/item/reagent_containers/food/snacks/ingredient/dough_strip/semolina))
+			boutput(user, SPAN_NOTICE("You can't mix regular dough and semolina dough, you donkey!"))
+			return
+		else if (istype(W, /obj/item/reagent_containers/food/snacks/ingredient/dough_strip))
 			boutput(user, SPAN_NOTICE("You attach the [src]s back together to make a piece of dough."))
 			if (prob(25))
 				JOB_XP(user, "Chef", 1)
@@ -590,6 +603,26 @@ TYPEINFO(/obj/item/reagent_containers/food/snacks/ingredient/honey)
 			src.visible_message(SPAN_ALERT("<B>The [src] screams!</B>"))
 		new /obj/item/reagent_containers/food/snacks/ingredient/dough_circle(get_turf(src))
 		qdel (src)
+
+
+/obj/item/reagent_containers/food/snacks/ingredient/dough_strip/semolina
+	name = "semolina dough strip"
+	food_color = "#eedb5c"
+
+	attackby(obj/item/W, mob/user)
+		if(istype(W, /obj/item/reagent_containers/food/snacks/ingredient/dough_strip/semolina))
+			boutput(user, SPAN_NOTICE("You attach the [src]s back together to make a piece of semolina dough."))
+			if (prob(25))
+				JOB_XP(user, "Chef", 1)
+			var/obj/item/reagent_containers/food/snacks/ingredient/dough/semolina/D = new /obj/item/reagent_containers/food/snacks/ingredient/dough/semolina(W.loc)
+			user.u_equip(W)
+			user.put_in_hand_or_drop(D)
+			qdel(W)
+			qdel(src)
+		else if(istype(W, /obj/item/reagent_containers/food/snacks/ingredient/dough_strip))
+			boutput(user, SPAN_NOTICE("You can't mix regular dough and semolina dough, you donkey!"))
+			return
+		else ..()
 
 /obj/item/reagent_containers/food/snacks/ingredient/dough_circle
 	name = "dough circle"
