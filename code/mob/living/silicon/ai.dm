@@ -1789,27 +1789,8 @@ or don't if it uses a custom topopen overlay
 	set category = "AI Commands"
 	set name = "Cancel Camera View"
 
-	//src.set_eye(null)
-	//src:cameraFollow = null
 	src.tracker.cease_track()
 	src.current = null
-
-/mob/living/silicon/ai/verb/change_network()
-	set category = "AI Commands"
-	set name = "Change Camera Network"
-	src.set_eye(null)
-	src.remove_dialogs()
-	//src:cameraFollow = null
-	tracker.cease_track()
-	if (src.network == "SS13")
-		src.network = "Robots"
-	else if (src.network == "Robots")
-		src.network = "Mining"
-	else
-		src.network = "SS13"
-	boutput(src, SPAN_NOTICE("Switched to [src.network] camera network."))
-	if (camnets.len && camnets[network])
-		switchCamera(pick(camnets[network]))
 
 /mob/living/silicon/ai/verb/deploy_to()
 	set category = "AI Commands"
