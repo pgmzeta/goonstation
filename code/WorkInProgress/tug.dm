@@ -153,6 +153,8 @@ TYPEINFO(/obj/tug_cart)
 			next_cart.Move(oldloc)
 		else if(next_cart)
 			next_cart = null
+		if(src.load)
+			src.load.dir = src.dir
 
 	disposing()
 		load = null
