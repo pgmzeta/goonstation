@@ -195,3 +195,43 @@
 	can_scramble = 0
 	curable_by_mutadone = 0
 	reclaim_fail = 100
+
+/datum/bioEffect/mutantrace/blob
+	name = "High-lipid Genetics"
+	desc = "Blob"
+	id = "blob"
+	mutantrace_option = "Blob"
+	mutantrace_path = /datum/mutantrace/blob
+	msgGain = "Your legs"
+	msgLose = ""
+	occur_in_genepools = FALSE
+	probability = 0
+	scanner_visibility = FALSE
+	can_research = FALSE
+	can_make_injector = FALSE
+	can_copy = FALSE
+	can_reclaim = FALSE
+	can_scramble = FALSE
+	curable_by_mutadone = FALSE
+	reclaim_fail = 100
+	icon_state = null
+
+/datum/bioEffect/mutantrace/martian
+	name = "Martian Genetics"
+	desc = "Martian"
+	id = "martian"
+	mutantrace_option = "Martian"
+	mutantrace_path = /datum/mutantrace/martian
+	msgGain = "You feel a strong connection to viscerite."
+	msgLose = "Viscerite loses its appeal."
+	occur_in_genepools = FALSE
+	probability = 0
+	scanner_visibility = FALSE
+	can_research = FALSE
+	can_make_injector = FALSE
+	can_copy = FALSE
+	can_reclaim = FALSE
+	can_scramble = FALSE
+	curable_by_mutadone = FALSE
+	reclaim_fail = 100
+	icon_state = null

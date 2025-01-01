@@ -697,6 +697,8 @@ TYPEINFO(/datum/mutantrace/blob)
 	voice_override = "bloop"
 	firevuln = 1.5
 	typevulns = list("cut" = 1.25, "stab" = 0.5, "blunt" = 0.75)
+	race_mutation = /datum/bioEffect/mutantrace/blob
+	genetics_removable = FALSE
 
 	say_verb()
 		return pick("burbles", "gurgles", "blurbs", "gloops")
@@ -1724,6 +1726,8 @@ TYPEINFO(/datum/mutantrace/seamonkey)
 	human_compatible = 0
 	uses_human_clothes = 0
 	override_language = "martian"
+	race_mutation = /datum/bioEffect/mutantrace/martian
+	genetics_removable = FALSE
 
 /datum/mutantrace/stupidbaby
 	name = "stupid alien baby"
