@@ -103,7 +103,7 @@
 		"Engineering",
 		"Catering",
 		"Hydroponics",
-		"Civilian",
+		"Services",
 		"Research",
 		"Security",
 	)
@@ -116,20 +116,18 @@
 
 	var/static/list/team_to_job_datum = list(
 		"Stationwide" = list(),
-		"Genetics" = list(/datum/job/research/geneticist),
-		"Robotics" = list(/datum/job/research/roboticist),
-		"Cargo" = list(/datum/job/engineering/quartermaster, /datum/job/civilian/mail_courier),
-		"Mining" = list(/datum/job/engineering/miner),
+		"Genetics" = list(/datum/job/biotech/geneticist),
+		"Robotics" = list(/datum/job/biotech/roboticist),
+		"Cargo" = list(/datum/job/logistics/quartermaster, /datum/job/logistics/mail_courier, /datum/job/command/logistics_coordinator),
+		"Mining" = list(/datum/job/logistics/miner),
 		"Engineering" = list(/datum/job/engineering/engineer, /datum/job/engineering/technical_assistant, /datum/job/command/chief_engineer),
-		"Research" = list(/datum/job/research/scientist, /datum/job/research/research_assistant, /datum/job/command/research_director),
-		"Catering" = list(/datum/job/civilian/chef, /datum/job/civilian/bartender, /datum/job/special/souschef, /datum/job/daily/waiter),
+		"Research" = list(/datum/job/research, , /datum/job/command/research_director),
+		"Catering" = list(/datum/job/civilian/chef, /datum/job/civilian/bartender, /datum/job/civilian/souschef, /datum/job/daily/waiter),
 		"Hydroponics" = list(/datum/job/civilian/botanist, /datum/job/civilian/rancher),
 		"Security" = list(/datum/job/security, /datum/job/command/head_of_security),
-		"Medical" = list(/datum/job/research/medical_doctor, /datum/job/research/medical_assistant, /datum/job/command/medical_director),
-		"Civilian" = list(/datum/job/civilian/janitor, /datum/job/civilian/chaplain, /datum/job/civilian/staff_assistant, /datum/job/civilian/clown,\
-		/datum/job/special), //Who really makes the world go round? At least one of these guys
-							//I can live with the sous chef getting paid in two categories
-							//If you have a special role and you're on the manifest everything is probably normal
+		"Medical" = list(/datum/job/medical, /datum/job/command/medical_director),
+		"Services" = list(/datum/job/civilian/janitor, /datum/job/civilian/chaplain, /datum/job/civilian/staff_assistant, /datum/job/civilian/clown,\
+		/datum/job/special),
 	)
 
 	// printer stuff

@@ -458,6 +458,25 @@ ABSTRACT_TYPE(/datum/job/command)
 	slot_poc1 = list(/obj/item/device/pda2/medical_director)
 	items_in_backpack = list(/obj/item/device/flash)
 
+/datum/job/command/logistics_coordinator
+	name = "Logistics Coordinator"
+	limit = 1
+	wages = PAY_IMPORTANT
+	access_string = "Logistics Coordinator"
+	allow_spy_theft = FALSE
+	cant_spawn_as_rev = TRUE
+	announce_on_join = TRUE
+
+	slot_back = list(/obj/item/storage/backpack/engineering)
+	slot_belt = list() // TODO: Belt?
+	slot_glov = list(/obj/item/clothing/gloves/black)
+	slot_foot = list(/obj/item/clothing/shoes/brown)
+	slot_jump = list(/obj/item/clothing/under/rank/logistics_coordinator)
+	slot_ears = list(/obj/item/device/radio/headset/command/lc)
+	slot_poc1 = list()
+	slot_poc2 = list(/obj/item/device/pda2/logistics_coordinator)
+	items_in_backpack = list(/obj/item/device/flash)
+
 #ifdef MAP_OVERRIDE_MANTA
 /datum/job/command/comm_officer
 	name = "Communications Officer"
@@ -492,8 +511,8 @@ ABSTRACT_TYPE(/datum/job/security)
 
 /datum/job/security/security_officer
 	name = "Security Officer"
-	limit = 5
-	lower_limit = 3
+	limit = 3
+	lower_limit = 2
 	variable_limit = TRUE
 	high_priority_job = TRUE
 	high_priority_limit = 2 //always try to make sure there's at least a couple of secoffs
@@ -524,8 +543,8 @@ ABSTRACT_TYPE(/datum/job/security)
 
 	assistant
 		name = "Security Assistant"
-		limit = 3
-		lower_limit = 2
+		limit = 2
+		lower_limit = 1
 		high_priority_job = FALSE //nope
 		cant_spawn_as_con = TRUE
 		wages = PAY_UNTRAINED
@@ -542,6 +561,14 @@ ABSTRACT_TYPE(/datum/job/security)
 		items_in_backpack = list(/obj/item/paper/book/from_file/space_law)
 		rounds_needed_to_play = ROUNDS_MIN_SECASS
 		wiki_link = "https://wiki.ss13.co/Security_Assistant"
+
+	dispatch
+		name = "Dispatch"
+		limit = 1
+
+	warden
+		name = "Warden"
+		limit = 1
 
 	derelict
 		//name = "NT-SO Officer"
@@ -599,58 +626,65 @@ ABSTRACT_TYPE(/datum/job/security)
 ABSTRACT_TYPE(/datum/job/research)
 /datum/job/research
 	linkcolor = "#9900FF"
-	slot_card = /obj/item/card/id/research
 	job_category = JOB_RESEARCH
+	slot_card = /obj/item/card/id/research
+	slot_back = list(/obj/item/storage/backpack/research)
 
-/datum/job/research/geneticist
-	name = "Geneticist"
-	limit = 2
-	wages = PAY_DOCTORATE
-	access_string = "Geneticist"
-	slot_back = list(/obj/item/storage/backpack/genetics)
-	slot_belt = list(/obj/item/device/pda2/genetics)
-	slot_jump = list(/obj/item/clothing/under/rank/geneticist)
-	slot_foot = list(/obj/item/clothing/shoes/white)
-	slot_suit = list(/obj/item/clothing/suit/labcoat/genetics)
-	slot_ears = list(/obj/item/device/radio/headset/medical)
-	slot_poc1 = list(/obj/item/device/analyzer/genetic)
-	wiki_link = "https://wiki.ss13.co/Geneticist"
-
-/datum/job/research/roboticist
-	name = "Roboticist"
+// chemistry
+/datum/job/research/chemist
+	name = "Chemist"
 	limit = 3
 	wages = PAY_DOCTORATE
-	trait_list = list("training_medical")
-	access_string = "Roboticist"
-	slot_back = list(/obj/item/storage/backpack/robotics)
-	slot_belt = list(/obj/item/storage/belt/roboticist/prepared)
-	slot_jump = list(/obj/item/clothing/under/rank/roboticist)
-	slot_foot = list(/obj/item/clothing/shoes/black)
-	slot_suit = list(/obj/item/clothing/suit/labcoat/robotics)
-	slot_glov = list(/obj/item/clothing/gloves/latex)
-	slot_eyes = list(/obj/item/clothing/glasses/healthgoggles/upgraded)
-	slot_ears = list(/obj/item/device/radio/headset/medical)
-	slot_poc1 = list(/obj/item/device/pda2/medical/robotics)
-	slot_poc2 = list(/obj/item/reagent_containers/mender/brute)
-	wiki_link = "https://wiki.ss13.co/Roboticist"
-
-/datum/job/research/scientist
-	name = "Scientist"
-	limit = 5
-	wages = PAY_DOCTORATE
-	trait_list = list("training_scientist")
-	access_string = "Scientist"
-	slot_back = list(/obj/item/storage/backpack/research)
+	trait_list = "training_scientist"
+	access_string = "Chemist"
 	slot_belt = list(/obj/item/device/pda2/toxins)
 	slot_jump = list(/obj/item/clothing/under/rank/scientist)
-	slot_suit = list(/obj/item/clothing/suit/labcoat/science)
+	slot_foot = list(/obj/item/clothing/shoes/white)
+	slot_ears = list(/obj/item/device/radio/headset/research)
+	wiki_link = "https://wiki.ss13.co/Chemist"
+
+// artlab
+/datum/job/research/xenoarcheologist
+	name = "Xeno-archeologist"
+	limit = 2
+	wages = PAY_DOCTORATE
+	trait_list = "training_scientist"
+	access_string = "Xenoarcheologist"
+	slot_belt = list(/obj/item/device/pda2/toxins)
+	slot_jump = list(/obj/item/clothing/under/rank/scientist)
+	slot_foot = list(/obj/item/clothing/shoes/white)
+	slot_ears = list(/obj/item/device/radio/headset/research)
+
+// telesci
+/datum/job/research/astrometrics
+	name = "Astrometrics"
+	limit = 3
+	wages = PAY_DOCTORATE
+	trait_list = "training_scientist"
+	access_string = "Astrometric Researcher"
+	slot_belt = list(/obj/item/device/pda2/toxins)
+	slot_jump = list(/obj/item/clothing/under/rank/scientist)
+	slot_foot = list(/obj/item/clothing/shoes/white)
+	slot_ears = list(/obj/item/device/radio/headset/research)
+
+
+// toxins
+/datum/job/research/toxins
+	name = "Toxins Researcher"
+	limit = 3
+	wages = PAY_DOCTORATE
+	trait_list = list("training_scientist")
+	access_string = "Toxins Researcher"
+	slot_belt = list(/obj/item/device/pda2/toxins)
+	slot_jump = list(/obj/item/clothing/under/rank/scientist)
 	slot_foot = list(/obj/item/clothing/shoes/white)
 	slot_mask = list(/obj/item/clothing/mask/gas)
 	slot_lhan = list(/obj/item/tank/air)
 	slot_ears = list(/obj/item/device/radio/headset/research)
-	slot_eyes = list(/obj/item/clothing/glasses/spectro)
-	slot_poc1 = list(/obj/item/pen = 50, /obj/item/pen/fancy = 25, /obj/item/pen/red = 5, /obj/item/pen/pencil = 20)
-	wiki_link = "https://wiki.ss13.co/Scientist"
+
+// // laser
+// /datum/job/research/optics
+// 	name = "Optics Researcher"
 
 /datum/job/research/research_assistant
 	name = "Research Trainee"
@@ -659,7 +693,6 @@ ABSTRACT_TYPE(/datum/job/research)
 	trait_list = list("training_scientist")
 	access_string = "Scientist"
 	rounds_allowed_to_play = ROUNDS_MAX_RESASS
-	slot_back = list(/obj/item/storage/backpack/research)
 	slot_ears = list(/obj/item/device/radio/headset/research)
 	slot_jump = list(/obj/item/clothing/under/color/purple)
 	slot_foot = list(/obj/item/clothing/shoes/white)
@@ -667,9 +700,17 @@ ABSTRACT_TYPE(/datum/job/research)
 	slot_poc1 = list(/obj/item/pen = 50, /obj/item/pen/fancy = 25, /obj/item/pen/red = 5, /obj/item/pen/pencil = 20)
 	wiki_link = "https://wiki.ss13.co/Research_Assistant"
 
-/datum/job/research/medical_doctor
+ABSTRACT_TYPE(/datum/job/medical)
+/datum/job/medical
+	linkcolor = "#0099FF"
+	slot_card = /obj/item/card/id/medical
+	job_category = JOB_MEDICAL
+	wiki_link = "https://wiki.ss13.co/Medical_Doctor"
+
+
+/datum/job/medical/medical_doctor
 	name = "Medical Doctor"
-	limit = 5
+	limit = 3
 	wages = PAY_DOCTORATE
 	trait_list = list("training_medical")
 	access_string = "Medical Doctor"
@@ -705,7 +746,67 @@ ABSTRACT_TYPE(/datum/job/research)
 			if (!M) return
 			M.show_text("<b>Something has gone terribly wrong here! Search for survivors and escape together.</b>", "blue")
 
-/datum/job/research/medical_assistant
+/datum/job/medical/nurse
+	name = "Nurse"
+	wages = PAY_TRADESMAN
+	limit = 2
+	trait_list = list("training_medical")
+	access_string = "Medical Trainee"
+	slot_back = list(/obj/item/storage/backpack/medic)
+	slot_belt = list(/obj/item/storage/belt/medical/prepared)
+	slot_foot = list(/obj/item/clothing/shoes/red)
+	slot_ears = list(/obj/item/device/radio/headset/medical)
+	slot_poc1 = list(/obj/item/device/pda2/medical)
+	slot_poc2 = list(/obj/item/paper/book/from_file/pocketguide/medical)
+	slot_jump = list(/obj/item/clothing/under/scrub = 30,/obj/item/clothing/under/scrub/teal = 14,/obj/item/clothing/under/scrub/blue = 14,/obj/item/clothing/under/scrub/purple = 14,/obj/item/clothing/under/scrub/orange = 14,/obj/item/clothing/under/scrub/pink = 14)
+
+
+/datum/job/medical/surgeon
+	name = "Surgeon"
+	limit = 1
+	wages = PAY_DOCTORATE
+	trait_list = list("training_medical", "training_partysurgeon")
+	access_string = "Medical Specialist"
+	slot_belt = list(/obj/item/storage/belt/medical/prepared)
+	slot_foot = list(/obj/item/clothing/shoes/brown)
+	slot_back = list(/obj/item/storage/backpack/medic)
+	slot_jump = list(/obj/item/clothing/under/scrub/maroon)
+	slot_suit = list(/obj/item/clothing/suit/apron/surgeon)
+	slot_head = list(/obj/item/clothing/head/bouffant)
+	slot_ears = list(/obj/item/device/radio/headset/medical)
+	slot_rhan = list(/obj/item/storage/firstaid/docbag)
+	slot_poc1 = list(/obj/item/device/pda2/medical_director)
+
+/datum/job/medical/pharmacist
+	name = "Pharmacist"
+	wages = PAY_DOCTORATE
+	limit = 1
+	trait_list = list("training_medical")
+	access_string = "Pharmacist"
+	slot_belt = list(/obj/item/device/pda2/medical)
+	slot_foot = list(/obj/item/clothing/shoes/brown)
+	slot_jump = list(/obj/item/clothing/under/shirt_pants)
+	slot_suit = list(/obj/item/clothing/suit/labcoat)
+	slot_ears = list(/obj/item/device/radio/headset/medical)
+	items_in_backpack = list(/obj/item/storage/box/beakerbox, /obj/item/storage/pill_bottle/cyberpunk)
+
+/datum/job/medical/psychiatrist
+	name = "Psychiatrist"
+	wages = PAY_DOCTORATE
+	limit = 1
+	access_string = "Psychiatrist"
+	slot_eyes = list(/obj/item/clothing/glasses/regular)
+	slot_belt = list(/obj/item/device/pda2/medical)
+	slot_foot = list(/obj/item/clothing/shoes/brown)
+	slot_jump = list(/obj/item/clothing/under/shirt_pants)
+	slot_suit = list(/obj/item/clothing/suit/labcoat)
+	slot_ears = list(/obj/item/device/radio/headset/medical)
+	slot_poc1 = list(/obj/item/reagent_containers/food/drinks/tea)
+	slot_poc2 = list(/obj/item/reagent_containers/food/drinks/bottle/gin)
+	items_in_backpack = list(/obj/item/luggable_computer/personal, /obj/item/clipboard/with_pen, /obj/item/paper_bin, /obj/item/stamp)
+	alt_names = list("Psychiatrist", "Psychologist", "Psychotherapist", "Therapist", "Counselor", "Life Coach") // All with slightly different connotations
+
+/datum/job/medical/medical_assistant
 	name = "Medical Trainee"
 	limit = 2
 	wages = PAY_UNTRAINED
@@ -721,6 +822,57 @@ ABSTRACT_TYPE(/datum/job/research)
 	slot_jump = list(/obj/item/clothing/under/scrub = 30,/obj/item/clothing/under/scrub/teal = 14,/obj/item/clothing/under/scrub/blue = 14,/obj/item/clothing/under/scrub/purple = 14,/obj/item/clothing/under/scrub/orange = 14,/obj/item/clothing/under/scrub/pink = 14)
 	wiki_link = "https://wiki.ss13.co/Medical_Assistant"
 
+// Biotech jobs
+
+ABSTRACT_TYPE(/datum/job/biotech)
+/datum/job/biotech
+	linkcolor = "#99FF00"
+	slot_card = /obj/item/card/id/biotech
+	job_category = JOB_BIOTECH
+
+/datum/job/biotech/geneticist
+	name = "Geneticist"
+	limit = 2
+	wages = PAY_DOCTORATE
+	access_string = "Geneticist"
+	slot_back = list(/obj/item/storage/backpack/genetics)
+	slot_belt = list(/obj/item/device/pda2/genetics)
+	slot_jump = list(/obj/item/clothing/under/rank/geneticist)
+	slot_foot = list(/obj/item/clothing/shoes/white)
+	slot_suit = list(/obj/item/clothing/suit/labcoat/genetics)
+	slot_ears = list(/obj/item/device/radio/headset/medical)
+	slot_poc1 = list(/obj/item/device/analyzer/genetic)
+	wiki_link = "https://wiki.ss13.co/Geneticist"
+
+/datum/job/biotech/roboticist
+	name = "Roboticist"
+	limit = 3
+	wages = PAY_DOCTORATE
+	trait_list = list("training_medical")
+	access_string = "Roboticist"
+	slot_back = list(/obj/item/storage/backpack/robotics)
+	slot_belt = list(/obj/item/storage/belt/roboticist/prepared)
+	slot_jump = list(/obj/item/clothing/under/rank/roboticist)
+	slot_foot = list(/obj/item/clothing/shoes/black)
+	slot_suit = list(/obj/item/clothing/suit/labcoat/robotics)
+	slot_glov = list(/obj/item/clothing/gloves/latex)
+	slot_eyes = list(/obj/item/clothing/glasses/healthgoggles/upgraded)
+	slot_ears = list(/obj/item/device/radio/headset/medical)
+	slot_poc1 = list(/obj/item/device/pda2/medical/robotics)
+	slot_poc2 = list(/obj/item/reagent_containers/mender/brute)
+	wiki_link = "https://wiki.ss13.co/Roboticist"
+
+/datum/job/biotech/pathologist
+	name = "Pathologist"
+	limit = 0
+	wages = PAY_DOCTORATE
+	access_string = "Pathologist"
+	slot_belt = list(/obj/item/device/pda2/genetics)
+	slot_jump = list(/obj/item/clothing/under/rank/pathologist)
+	slot_foot = list(/obj/item/clothing/shoes/white)
+	slot_suit = list(/obj/item/clothing/suit/labcoat/pathology)
+	slot_ears = list(/obj/item/device/radio/headset/medical)
+
 // Engineering Jobs
 
 ABSTRACT_TYPE(/datum/job/engineering)
@@ -729,57 +881,9 @@ ABSTRACT_TYPE(/datum/job/engineering)
 	slot_card = /obj/item/card/id/engineering
 	job_category = JOB_ENGINEERING
 
-/datum/job/engineering/quartermaster
-	name = "Quartermaster"
-	limit = 3
-	wages = PAY_TRADESMAN
-	trait_list = list("training_quartermaster")
-	access_string = "Quartermaster"
-	slot_glov = list(/obj/item/clothing/gloves/black)
-	slot_foot = list(/obj/item/clothing/shoes/black)
-	slot_jump = list(/obj/item/clothing/under/rank/cargo)
-	slot_belt = list(/obj/item/device/pda2/quartermaster)
-	slot_ears = list(/obj/item/device/radio/headset/shipping)
-	slot_poc1 = list(/obj/item/paper/book/from_file/pocketguide/quartermaster)
-	slot_poc2 = list(/obj/item/device/appraisal)
-	wiki_link = "https://wiki.ss13.co/Quartermaster"
-
-/datum/job/engineering/miner
-	name = "Miner"
-	#ifdef UNDERWATER_MAP
-	limit = 6
-	#else
-	limit = 5
-	#endif
-	wages = PAY_TRADESMAN
-	trait_list = list("training_miner")
-	access_string = "Miner"
-	slot_back = list(/obj/item/storage/backpack/engineering)
-	slot_mask = list(/obj/item/clothing/mask/breath)
-	slot_eyes = list(/obj/item/clothing/glasses/toggleable/meson)
-	slot_belt = list(/obj/item/storage/belt/mining/prepared)
-	slot_jump = list(/obj/item/clothing/under/rank/overalls)
-	slot_foot = list(/obj/item/clothing/shoes/orange)
-	slot_glov = list(/obj/item/clothing/gloves/black)
-	slot_ears = list(/obj/item/device/radio/headset/miner)
-	slot_poc1 = list(/obj/item/device/pda2/mining)
-	#ifdef UNDERWATER_MAP
-	slot_suit = list(/obj/item/clothing/suit/space/diving/engineering)
-	slot_head = list(/obj/item/clothing/head/helmet/space/engineer/diving/engineering)
-	items_in_backpack = list(/obj/item/paper/book/from_file/pocketguide/mining,
-							/obj/item/clothing/shoes/flippers,
-							/obj/item/item_box/glow_sticker)
-	#else
-	slot_suit = list(/obj/item/clothing/suit/space/engineer)
-	slot_head = list(/obj/item/clothing/head/helmet/space/engineer)
-	items_in_backpack = list(/obj/item/crowbar,
-							/obj/item/paper/book/from_file/pocketguide/mining)
-	#endif
-	wiki_link = "https://wiki.ss13.co/Miner"
-
 /datum/job/engineering/engineer
 	name = "Engineer"
-	limit = 8
+	limit = 5
 	wages = PAY_TRADESMAN
 	trait_list = list("training_engineer")
 	access_string = "Engineer"
@@ -814,6 +918,34 @@ ABSTRACT_TYPE(/datum/job/engineering)
 				return
 			M.show_text("<b>Something has gone terribly wrong here! Search for survivors and escape together.</b>", "blue")
 
+/datum/job/engineering/mechanic
+	name = "Mechanic"
+	limit = 3
+	trait_list = list("training_engineer")
+	access_string = "Engineer"
+	slot_back = list(/obj/item/storage/backpack/engineering)
+	slot_belt = list(/obj/item/storage/belt/utility/prepared)
+	slot_jump = list(/obj/item/clothing/under/rank/engineer)
+	slot_foot = list(/obj/item/clothing/shoes/orange)
+	slot_lhan = list(/obj/item/storage/toolbox/electrical/mechanic_spawn)
+	slot_glov = list(/obj/item/clothing/gloves/yellow)
+	slot_poc1 = list(/obj/item/device/pda2/engine)
+	slot_ears = list(/obj/item/device/radio/headset/engineer)
+
+/datum/job/engineering/maintenance
+	name = "Maintenance"
+	limit = 3
+	trait_list = list("training_engineer")
+	access_string = "Engineer"
+	slot_back = list(/obj/item/storage/backpack/engineering)
+	slot_belt = list(/obj/item/storage/belt/utility/prepared)
+	slot_jump = list(/obj/item/clothing/under/rank/engineer)
+	slot_foot = list(/obj/item/clothing/shoes/orange)
+	slot_lhan = list(/obj/item/storage/toolbox/mechanical/engineer_spawn)
+	slot_glov = list(/obj/item/clothing/gloves/yellow)
+	slot_poc1 = list(/obj/item/device/pda2/engine)
+	slot_ears = list(/obj/item/device/radio/headset/engineer)
+
 /datum/job/engineering/technical_assistant
 	name = "Technical Trainee"
 	limit = 2
@@ -830,11 +962,82 @@ ABSTRACT_TYPE(/datum/job/engineering)
 	slot_poc1 = list(/obj/item/paper/book/from_file/pocketguide/engineering)
 	wiki_link = "https://wiki.ss13.co/Technical_Assistant"
 
+// Logistics Jobs
+ABSTRACT_TYPE(/datum/job/logistics)
+/datum/job/logistics
+	linkcolor = "#BB8800"
+	slot_card = /obj/item/card/id/logistics
+	job_category = JOB_LOGISTICS
+/datum/job/logistics/quartermaster
+	name = "Quartermaster"
+	limit = 3
+	wages = PAY_TRADESMAN
+	trait_list = list("training_quartermaster")
+	access_string = "Quartermaster"
+	slot_glov = list(/obj/item/clothing/gloves/black)
+	slot_foot = list(/obj/item/clothing/shoes/black)
+	slot_jump = list(/obj/item/clothing/under/rank/cargo)
+	slot_belt = list(/obj/item/device/pda2/quartermaster)
+	slot_ears = list(/obj/item/device/radio/headset/shipping)
+	slot_poc1 = list(/obj/item/paper/book/from_file/pocketguide/quartermaster)
+	slot_poc2 = list(/obj/item/device/appraisal)
+	wiki_link = "https://wiki.ss13.co/Quartermaster"
+
+/datum/job/logistics/miner
+	name = "Miner"
+	#ifdef UNDERWATER_MAP
+	limit = 6
+	#else
+	limit = 5
+	#endif
+	wages = PAY_TRADESMAN
+	trait_list = list("training_miner")
+	access_string = "Miner"
+	slot_back = list(/obj/item/storage/backpack/engineering)
+	slot_mask = list(/obj/item/clothing/mask/breath)
+	slot_eyes = list(/obj/item/clothing/glasses/toggleable/meson)
+	slot_belt = list(/obj/item/storage/belt/mining/prepared)
+	slot_jump = list(/obj/item/clothing/under/rank/overalls)
+	slot_foot = list(/obj/item/clothing/shoes/orange)
+	slot_glov = list(/obj/item/clothing/gloves/black)
+	slot_ears = list(/obj/item/device/radio/headset/miner)
+	slot_poc1 = list(/obj/item/device/pda2/mining)
+	#ifdef UNDERWATER_MAP
+	slot_suit = list(/obj/item/clothing/suit/space/diving/engineering)
+	slot_head = list(/obj/item/clothing/head/helmet/space/engineer/diving/engineering)
+	items_in_backpack = list(/obj/item/paper/book/from_file/pocketguide/mining,
+							/obj/item/clothing/shoes/flippers,
+							/obj/item/item_box/glow_sticker)
+	#else
+	slot_suit = list(/obj/item/clothing/suit/space/engineer)
+	slot_head = list(/obj/item/clothing/head/helmet/space/engineer)
+	items_in_backpack = list(/obj/item/crowbar,
+							/obj/item/paper/book/from_file/pocketguide/mining)
+	#endif
+	wiki_link = "https://wiki.ss13.co/Miner"
+
+/datum/job/logistics/mail_courier
+	name = "Mail Courier"
+	alias_names = "Mailman"
+	wages = PAY_TRADESMAN
+	access_string = "Mail Courier"
+	limit = 1
+	slot_jump = list(/obj/item/clothing/under/misc/mail/syndicate)
+	slot_head = list(/obj/item/clothing/head/mailcap)
+	slot_foot = list(/obj/item/clothing/shoes/brown)
+	slot_back = list(/obj/item/storage/backpack/satchel)
+	slot_ears = list(/obj/item/device/radio/headset/mail)
+	slot_poc1 = list(/obj/item/pinpointer/mail_recepient)
+	slot_belt = list(/obj/item/device/pda2/quartermaster)
+	items_in_backpack = list(/obj/item/wrapping_paper, /obj/item/satchel/mail, /obj/item/scissors, /obj/item/stamp)
+	alt_names = list("Head of Deliverying", "Mail Bringer")
+	wiki_link = "https://wiki.ss13.co/Mailman"
+
 // Civilian Jobs
 
 ABSTRACT_TYPE(/datum/job/civilian)
 /datum/job/civilian
-	linkcolor = "#0099FF"
+	linkcolor = "#990099"
 	slot_card = /obj/item/card/id/civilian
 	job_category = JOB_CIVILIAN
 
@@ -851,6 +1054,21 @@ ABSTRACT_TYPE(/datum/job/civilian)
 	slot_suit = list(/obj/item/clothing/suit/chef)
 	slot_ears = list(/obj/item/device/radio/headset/civilian)
 	items_in_backpack = list(/obj/item/kitchen/rollingpin, /obj/item/kitchen/utensil/knife/cleaver, /obj/item/bell/kitchen)
+	wiki_link = "https://wiki.ss13.co/Chef"
+
+/datum/job/civilian/souschef
+	name = "Sous-Chef"
+	limit = 1
+	wages = PAY_UNTRAINED
+	trait_list = list("training_chef")
+	access_string = "Sous-Chef"
+	requires_supervisor_job = "Chef"
+	slot_belt = list(/obj/item/device/pda2/chef)
+	slot_jump = list(/obj/item/clothing/under/misc/souschef)
+	slot_foot = list(/obj/item/clothing/shoes/chef)
+	slot_head = list(/obj/item/clothing/head/souschefhat)
+	slot_suit = list(/obj/item/clothing/suit/apron)
+	slot_ears = list(/obj/item/device/radio/headset/civilian)
 	wiki_link = "https://wiki.ss13.co/Chef"
 
 /datum/job/civilian/bartender
@@ -954,25 +1172,6 @@ ABSTRACT_TYPE(/datum/job/civilian)
 		..()
 		if (prob(20))
 			M.stow_in_available(new /obj/item/paper/businesscard/seneca)
-
-
-/datum/job/civilian/mail_courier
-	name = "Mail Courier"
-	linkcolor = "#0099FF"
-	alias_names = "Mailman"
-	wages = PAY_TRADESMAN
-	access_string = "Mail Courier"
-	limit = 1
-	slot_jump = list(/obj/item/clothing/under/misc/mail/syndicate)
-	slot_head = list(/obj/item/clothing/head/mailcap)
-	slot_foot = list(/obj/item/clothing/shoes/brown)
-	slot_back = list(/obj/item/storage/backpack/satchel)
-	slot_ears = list(/obj/item/device/radio/headset/mail)
-	slot_poc1 = list(/obj/item/pinpointer/mail_recepient)
-	slot_belt = list(/obj/item/device/pda2/quartermaster)
-	items_in_backpack = list(/obj/item/wrapping_paper, /obj/item/satchel/mail, /obj/item/scissors, /obj/item/stamp)
-	alt_names = list("Head of Deliverying", "Mail Bringer")
-	wiki_link = "https://wiki.ss13.co/Mailman"
 
 /datum/job/civilian/clown
 	name = "Clown"
@@ -1201,34 +1400,6 @@ ABSTRACT_TYPE(/datum/job/civilian)
 	slot_poc2 = list(/obj/item/device/radio/hall_monitor)
 	items_in_backpack = list(/obj/item/instrument/whistle,/obj/item/device/ticket_writer/crust)
 
-
-/datum/job/special/toxins_researcher
-	name = "Toxins Researcher"
-	linkcolor = "#9900FF"
-	limit = 0
-	wages = PAY_DOCTORATE
-	trait_list = list("training_scientist")
-	access_string = "Toxins Researcher"
-	slot_belt = list(/obj/item/device/pda2/toxins)
-	slot_jump = list(/obj/item/clothing/under/rank/scientist)
-	slot_foot = list(/obj/item/clothing/shoes/white)
-	slot_mask = list(/obj/item/clothing/mask/gas)
-	slot_lhan = list(/obj/item/tank/air)
-	slot_ears = list(/obj/item/device/radio/headset/research)
-
-/datum/job/special/chemist
-	name = "Chemist"
-	linkcolor = "#9900FF"
-	limit = 0
-	wages = PAY_DOCTORATE
-	trait_list = "training_scientist"
-	access_string = "Chemist"
-	slot_belt = list(/obj/item/device/pda2/toxins)
-	slot_jump = list(/obj/item/clothing/under/rank/scientist)
-	slot_foot = list(/obj/item/clothing/shoes/white)
-	slot_ears = list(/obj/item/device/radio/headset/research)
-	wiki_link = "https://wiki.ss13.co/Chemist"
-
 /datum/job/special/atmospheric_technician
 	name = "Atmospherish Technician"
 	linkcolor = "#FF9900"
@@ -1352,22 +1523,7 @@ ABSTRACT_TYPE(/datum/job/civilian)
 	/obj/item/currency/buttcoin,
 	/obj/item/currency/spacecash/fivehundred)
 
-/datum/job/special/souschef
-	name = "Sous-Chef"
-	limit = 1
-	wages = PAY_UNTRAINED
-	trait_list = list("training_chef")
-	access_string = "Sous-Chef"
-	requires_supervisor_job = "Chef"
-	slot_belt = list(/obj/item/device/pda2/chef)
-	slot_jump = list(/obj/item/clothing/under/misc/souschef)
-	slot_foot = list(/obj/item/clothing/shoes/chef)
-	slot_head = list(/obj/item/clothing/head/souschefhat)
-	slot_suit = list(/obj/item/clothing/suit/apron)
-	slot_ears = list(/obj/item/device/radio/headset/civilian)
-	wiki_link = "https://wiki.ss13.co/Chef"
-
-// randomizd gimmick jobs
+// randomized gimmick jobs
 
 ABSTRACT_TYPE(/datum/job/special/random)
 /datum/job/special/random
@@ -1386,44 +1542,6 @@ ABSTRACT_TYPE(/datum/job/special/random)
 	wages = PAY_UNTRAINED
 	slot_foot = list(/obj/item/clothing/shoes/brown)
 	slot_jump = list(/obj/item/clothing/under/suit/purple)
-
-/datum/job/special/random/medical_specialist
-	name = "Medical Specialist"
-	linkcolor = "#9900FF"
-	wages = PAY_IMPORTANT
-	trait_list = list("training_medical", "training_partysurgeon")
-	access_string = "Medical Specialist"
-	slot_card = /obj/item/card/id/research
-	slot_belt = list(/obj/item/storage/belt/medical/prepared)
-	slot_foot = list(/obj/item/clothing/shoes/brown)
-	slot_back = list(/obj/item/storage/backpack/medic)
-	slot_jump = list(/obj/item/clothing/under/scrub/maroon)
-	slot_suit = list(/obj/item/clothing/suit/apron/surgeon)
-	slot_head = list(/obj/item/clothing/head/bouffant)
-	slot_ears = list(/obj/item/device/radio/headset/medical)
-	slot_rhan = list(/obj/item/storage/firstaid/docbag)
-	slot_poc1 = list(/obj/item/device/pda2/medical_director)
-	alt_names = list(
-		"Acupuncturist",
-	  	"Anesthesiologist",
-		"Cardiologist",
-		"Dental Specialist",
-		"Dermatologist",
-		"Emergency Medicine Specialist",
-		"Hematology Specialist",
-		"Hepatology Specialist",
-		"Immunology Specialist",
-		"Internal Medicine Specialist",
-		"Maxillofacial Specialist",
-		"Medical Director's Assistant",
-		"Neurological Specialist",
-		"Ophthalmic Specialist",
-		"Orthopaedic Specialist",
-		"Otorhinolaryngology Specialist",
-		"Plastic Surgeon",
-		"Thoracic Specialist",
-		"Vascular Specialist",
-	)
 
 /datum/job/special/random/vip
 	name = "VIP"
@@ -1650,20 +1768,6 @@ ABSTRACT_TYPE(/datum/job/special/random)
 	slot_ears = list(/obj/item/device/radio/headset/civilian)
 	items_in_backpack = list(/obj/item/fishing_rod/basic)
 
-
-/datum/job/special/random/pharmacist
-	name = "Pharmacist"
-	wages = PAY_DOCTORATE
-	trait_list = list("training_medical")
-	access_string = "Pharmacist"
-	slot_card = /obj/item/card/id/research
-	slot_belt = list(/obj/item/device/pda2/medical)
-	slot_foot = list(/obj/item/clothing/shoes/brown)
-	slot_jump = list(/obj/item/clothing/under/shirt_pants)
-	slot_suit = list(/obj/item/clothing/suit/labcoat)
-	slot_ears = list(/obj/item/device/radio/headset/medical)
-	items_in_backpack = list(/obj/item/storage/box/beakerbox, /obj/item/storage/pill_bottle/cyberpunk)
-
 /datum/job/special/random/radioshowhost
 	name = "Radio Show Host"
 	wages = PAY_TRADESMAN
@@ -1693,22 +1797,6 @@ ABSTRACT_TYPE(/datum/job/special/random)
 	alt_names = list("Radio Show Host", "Talk Show Host")
 	change_name_on_spawn = TRUE
 	wiki_link = "https://wiki.ss13.co/Radio_Host"
-
-/datum/job/special/random/psychiatrist
-	name = "Psychiatrist"
-	wages = PAY_DOCTORATE
-	access_string = "Psychiatrist"
-	slot_eyes = list(/obj/item/clothing/glasses/regular)
-	slot_card = /obj/item/card/id/research
-	slot_belt = list(/obj/item/device/pda2/medical)
-	slot_foot = list(/obj/item/clothing/shoes/brown)
-	slot_jump = list(/obj/item/clothing/under/shirt_pants)
-	slot_suit = list(/obj/item/clothing/suit/labcoat)
-	slot_ears = list(/obj/item/device/radio/headset/medical)
-	slot_poc1 = list(/obj/item/reagent_containers/food/drinks/tea)
-	slot_poc2 = list(/obj/item/reagent_containers/food/drinks/bottle/gin)
-	items_in_backpack = list(/obj/item/luggable_computer/personal, /obj/item/clipboard/with_pen, /obj/item/paper_bin, /obj/item/stamp)
-	alt_names = list("Psychiatrist", "Psychologist", "Psychotherapist", "Therapist", "Counselor", "Life Coach") // All with slightly different connotations
 
 /datum/job/special/random/artist
 	name = "Artist"
@@ -2974,17 +3062,6 @@ ABSTRACT_TYPE(/datum/job/special/pod_wars)
 			var/obj/item/device/pda2/pda = locate() in M
 			pda.assignment = "Staff Assistant"
 			pda.ownerAssignment = "Staff Assistant"
-
-/datum/job/special/pathologist
-	name = "Pathologist"
-	limit = 0
-	wages = PAY_DOCTORATE
-	access_string = "Pathologist"
-	slot_belt = list(/obj/item/device/pda2/genetics)
-	slot_jump = list(/obj/item/clothing/under/rank/pathologist)
-	slot_foot = list(/obj/item/clothing/shoes/white)
-	slot_suit = list(/obj/item/clothing/suit/labcoat/pathology)
-	slot_ears = list(/obj/item/device/radio/headset/medical)
 
 /datum/job/special/performer
 	name = "Performer"

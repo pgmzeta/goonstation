@@ -35,11 +35,11 @@ var/global/totally_random_jobs = FALSE
 
 	return candidates
 
-#define ASSIGN_STAFF_LISTS(JOB, player) if (istype(JOB, /datum/job/engineering/engineer))\
+#define ASSIGN_STAFF_LISTS(JOB, player) if (istype(JOB, /datum/job/engineering))\
 	{engineering_staff += player}\
-else if (istype(JOB, /datum/job/research/scientist))\
+else if (istype(JOB, /datum/job/research))\
 	{research_staff += player}\
-else if (istype(JOB, /datum/job/research/medical_doctor))\
+else if (istype(JOB, /datum/job/medical))\
 	{medical_staff += player}\
 else if (istype(JOB, /datum/job/security/security_officer))\
 	{security_officers += player}

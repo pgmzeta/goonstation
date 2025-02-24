@@ -34,6 +34,66 @@ var/list/assistant_occupations = list(
 //	"Mechanic",
 //	"Atmospheric Technician","Atmospheric Technician","Atmospheric Technician",
 
+var/jobs_per_team = list(
+	// security
+	"Security" = list(
+		/datum/job/security,
+	),
+	// medical
+	"Medbay" = list(
+		/datum/job/medical,
+	),
+	// biotech
+	"Genetics" = list(
+		/datum/job/biotech/geneticist
+	),
+	"Robotics" = list(
+		/datum/job/biotech/roboticist
+	),
+	// research
+	"Research" = list(
+		/datum/job/research,
+	),
+	// logistics
+	"Cargo" = list(
+		/datum/job/logistics/quartermaster,
+	),
+	"Mining" = list(
+		/datum/job/logistics/miner,
+	),
+	// engineering
+	"Engine" = list(
+		/datum/job/engineering/engineer,
+	),
+	"Mechanics" = list(
+		/datum/job/engineering/mechanic,
+	),
+	"Maintenance" = list(
+
+	),
+	// civilian
+	"Catering" = list(
+		/datum/job/civilian/chef,
+		/datum/job/civilian/bartender,
+		/datum/job/civilian/souschef,
+		/datum/job/daily/waiter,
+	),
+	"Hydroponics" = list(
+		/datum/job/civilian/botanist,
+		/datum/job/civilian/rancher,
+	),
+	"Services" = list(
+		/datum/job/civilian/janitor,
+		/datum/job/civilian/chaplain,
+		/datum/job/civilian/staff_assistant,
+		/datum/job/civilian/clown,
+		/datum/job/logistics/mail_courier,
+	),
+	"Other" = list(
+		/datum/job/special
+	),
+)
+
 var/list/job_mailgroup_list = list(
 	"Captain" = MGD_COMMAND,
 	"Head of Personnel" = MGD_COMMAND,
@@ -69,6 +129,8 @@ var/list/page_departments = list(
 	"Spiritual Affairs" = MGD_SPIRITUALAFFAIRS,
 	"Mining" = MGD_MINING)
 
+var/list/page_teams = list()
+
 /proc/get_all_jobs()
 	var/all_jobs = list()
 	all_jobs += command_jobs
@@ -100,17 +162,24 @@ var/list/security_jobs = list(
 var/list/engineering_jobs = list(
 	"Chief Engineer",
 	"Engineer",
-	"Miner",
-	"Quartermaster",
 	"Technical Trainee",
+)
+var/list/logistics_jobs = list(
+	"Logistics Coordinator",
+	"Quartermaster",
+	"Miner",
 )
 var/list/medical_jobs = list(
 	"Medical Director",
 	"Medical Doctor",
-	"Roboticist",
-	"Geneticist",
 	"Medical Trainee",
 )
+
+var/list/biotech_jobs = list(
+	"Roboticist",
+	"Geneticist",
+)
+
 var/list/science_jobs = list(
 	"Research Director",
 	"Scientist",
@@ -192,4 +261,3 @@ var/list/service_gimmicks = list(
 	"Stowaway",
 	"Hall Monitor",
 )
-

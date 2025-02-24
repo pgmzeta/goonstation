@@ -5,6 +5,7 @@
 #define RADIOC_SECURITY "#E00000"
 #define RADIOC_DETECTIVE "#A00000"
 #define RADIOC_ENGINEERING "#A86800"
+#define RADIOC_LOGISTICS "#B86300"
 #define RADIOC_MEDICAL "#3A88AC"
 #define RADIOC_RESEARCH "#732DCE"
 #define RADIOC_CIVILIAN "#A10082"
@@ -18,6 +19,7 @@
 #define RADIOCL_SECURITY "rsecurity"
 #define RADIOCL_DETECTIVE "rdetective"
 #define RADIOCL_ENGINEERING "rengineering"
+#define RADIOCL_LOGISTICS "rlogistics"
 #define RADIOCL_MEDICAL "rmedical"
 #define RADIOCL_RESEARCH "rresearch"
 #define RADIOCL_CIVILIAN "rcivilian"
@@ -35,6 +37,7 @@
 #define R_FREQ_SECURITY 1359
 #define R_FREQ_DETECTIVE 1351
 #define R_FREQ_ENGINEERING 1357
+#define R_FREQ_LOGISTICS 1350
 #define R_FREQ_RESEARCH 1354
 #define R_FREQ_MEDICAL 1356
 #define R_FREQ_CIVILIAN 1355
@@ -81,6 +84,8 @@ proc/default_frequency_color(freq)
 			return RADIOC_DETECTIVE
 		if(R_FREQ_ENGINEERING)
 			return RADIOC_ENGINEERING
+		if(R_FREQ_LOGISTICS)
+			return RADIOC_LOGISTICS
 		if(R_FREQ_RESEARCH)
 			return RADIOC_RESEARCH
 		if(R_FREQ_MEDICAL)

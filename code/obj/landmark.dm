@@ -99,6 +99,9 @@ var/global/list/job_start_locations = list()
 	name = "Chief Engineer"
 	icon_state = "chief_engineer"
 
+/obj/landmark/start/job/logistics_coordinator
+	name = "Logistics Coordinator"
+
 // Civillian
 
 /obj/landmark/start/job/assistant
@@ -133,19 +136,24 @@ var/global/list/job_start_locations = list()
 	name = "Chaplain"
 	icon_state = "chaplain"
 
-/obj/landmark/start/job/mail_courier
-	name = "Mail Courier"
-	icon_state = "mail_courier"
-
 // Engineering
-
 /obj/landmark/start/job/engineer
 	name = "Engineer"
+	icon_state = "engineer"
+
+/obj/landmark/start/job/mechanic
+	name = "Mechanic"
+	icon_state = "engineer"
+
+/obj/landmark/start/job/maintenance
+	name = "Maintenance"
 	icon_state = "engineer"
 
 /obj/landmark/start/job/technical_trainee
 	name = "Technical Trainee"
 	icon_state = "engineer"
+
+// Logistics
 /obj/landmark/start/job/miner
 	name = "Miner"
 	icon_state = "miner"
@@ -153,6 +161,10 @@ var/global/list/job_start_locations = list()
 /obj/landmark/start/job/quartermaster
 	name = "Quartermaster"
 	icon_state = "quartermaster"
+
+/obj/landmark/start/job/mail_courier
+	name = "Mail Courier"
+	icon_state = "mail_courier"
 
 // Med/Sci
 

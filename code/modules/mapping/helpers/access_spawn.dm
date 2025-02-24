@@ -81,11 +81,6 @@
 	color = MEDICAL
 
 //////////// Engineering ////
-/obj/mapping_helper/access/cargo
-	name = "cargo access spawn"
-	req_access = list(access_cargo)
-	color = CARGO
-
 /obj/mapping_helper/access/engineering
 	name = "engineering access spawn"
 	req_access = list(access_engineering)
@@ -125,6 +120,12 @@
 	name = "engineering control access spawn"
 	req_access = list(access_engineering_control)
 	color = ENGINEERING
+
+//////////// Logistics ////
+/obj/mapping_helper/access/cargo
+	name = "cargo access spawn"
+	req_access = list(access_cargo)
+	color = CARGO
 
 /obj/mapping_helper/access/mining
 	name = "mining EVA access spawn"

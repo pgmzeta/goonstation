@@ -129,6 +129,15 @@ TYPEINFO(/obj/item/card/emag)
 /obj/item/card/id/research
 	icon_state = "id_res"
 
+/obj/item/card/id/medical
+	icon_state = "id_med"
+
+/obj/item/card/id/logistics
+	icon_state = "id_log"
+
+/obj/item/card/id/biotech
+	icon_state = "id_bio"
+
 /obj/item/card/id/engineering
 	icon_state = "id_eng"
 

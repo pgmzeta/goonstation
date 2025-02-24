@@ -302,7 +302,7 @@
 	proc/generate_mail()
 		var/alive_players = 0
 		var/target_percentage = 0.375
-		for(var/datum/job/civilian/mail_courier/J in job_controls.staple_jobs)
+		for(var/datum/job/logistics/mail_courier/J in job_controls.staple_jobs)
 			if (J.assigned)
 				target_percentage = 0.5
 		for(var/client/C)

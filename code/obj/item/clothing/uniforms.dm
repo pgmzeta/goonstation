@@ -426,6 +426,25 @@ ABSTRACT_TYPE(/obj/item/clothing/under/rank)
 	icon_state = "comm_officer"
 	item_state = "comm_officer"
 
+// TODO: Icons
+/obj/item/clothing/under/rank/logistics_coordinator
+	name = "logistics cooridnator's uniform"
+	desc = "It's been neatly folded and unfolded an exact number of times."
+	icon_state = "chief"
+	item_state = "chief"
+
+	fancy // TODO: Icons
+		icon_state = "chief-fancy"
+		item_state = "chief-fancy"
+
+	april_fools // TODO: Icons
+		icon_state = "chief-alt"
+		item_state = "chief-alt"
+
+	dress // TODO: Icons
+		icon_state = "chief-dress"
+		item_state = "chief-dress"
+
 // Security
 
 /obj/item/clothing/under/rank/security

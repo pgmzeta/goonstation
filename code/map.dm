@@ -854,10 +854,6 @@ var/global/list/mapNames = list(
 		"the mining staff room" = list(/area/station/mining/staff_room))
 		//"the radio lab" = list(/area/station/crew_quarters/radio))
 
-	job_limits_override = list(
-		/datum/job/special/random/psychiatrist = 1
-	)
-
 /datum/map_settings/nadir
 	name = "NADIR"
 	display_name = "Nadir Extraction Site"
@@ -1001,11 +997,10 @@ var/global/list/mapNames = list(
 		/datum/job/civilian/clown = 2,
 		/datum/job/security/security_officer = 6,
 		/datum/job/security/detective = 1,
-		/datum/job/research/geneticist = 3,
-		/datum/job/research/roboticist = 3,
-		/datum/job/research/scientist = 6,
-		/datum/job/research/medical_doctor = 7,
-		/datum/job/engineering/miner = 4,
+		/datum/job/biotech/geneticist = 3,
+		/datum/job/biotech/roboticist = 3,
+		/datum/job/medical/medical_doctor = 7,
+		/datum/job/logistics/miner = 4,
 		/datum/job/engineering/engineer = 6,
 		/datum/job/civilian/chef = 2,
 		/datum/job/civilian/bartender = 2,
@@ -1136,8 +1131,6 @@ var/global/list/mapNames = list(
 	job_limits_override = list(
 		/datum/job/special/atmospheric_technician = 1,
 		/datum/job/special/hairdresser = 1,
-		/datum/job/research/research_assistant = 2,
-		/datum/job/research/medical_assistant = 2
 	)
 
 	windows = /obj/window/auto

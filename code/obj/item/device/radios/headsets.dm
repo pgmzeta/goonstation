@@ -306,6 +306,20 @@
 	icon_override = "ce"
 	icon_tooltip = "Chief Engineer"
 
+/obj/item/device/radio/headset/command/lc
+	name = "logistics coordinator's headset"
+	desc = "Everything has a place, a time, and an order number. Even this headset."
+	secure_frequencies = list(
+		"h" = R_FREQ_COMMAND,
+		"l" = RADIOCL_LOGISTICS,
+		)
+	secure_classes = list(
+		"h" = RADIOCL_COMMAND,
+		"l" = RADIOCL_LOGISTICS,
+		)
+	icon_override = "lc"
+	icon_tooltip = "Logistics Coordinator"
+
 /obj/item/device/radio/headset/security
 	name = "security headset"
 	desc = "Worn by security officers, this thing could cause real problems in the wrong ears."
@@ -387,10 +401,10 @@
 	desc = "Used by the station's quartermasters, who move freight and master the art of watching numbers go up and down."
 	icon_state = "shipping headset"
 	secure_frequencies = list(
-	"e" = R_FREQ_ENGINEERING,
+	"l" = R_FREQ_LOGISTICS,
 	"c" = R_FREQ_CIVILIAN)
 	secure_classes = list(
-		"e" = RADIOCL_ENGINEERING,
+		"l" = RADIOCL_LOGISTICS,
 		"c" = RADIOCL_CIVILIAN,
 		)
 	icon_override = "qm"
@@ -401,9 +415,9 @@
 	desc = "Rumor has it that these grow naturally in space, typically alongside discarded breath masks or space suits drenched in human blood. Nature is beautiful."
 	icon_state = "shipping headset"
 	secure_frequencies = list(
-	"e" = R_FREQ_ENGINEERING)
+	"l" = R_FREQ_LOGISTICS)
 	secure_classes = list(
-		"e" = RADIOCL_ENGINEERING,
+		"l" = RADIOCL_LOGISTICS,
 		)
 	icon_override = "Min"
 	icon_tooltip = "Miner"
@@ -414,10 +428,10 @@
 	icon_state = "command headset"
 	secure_frequencies = list(
 	"h" = R_FREQ_COMMAND,
-	"c" = R_FREQ_CIVILIAN)
+	"l" = R_FREQ_LOGISTICS)
 	secure_classes = list(
 		"h" = RADIOCL_COMMAND,
-		"c" = RADIOCL_CIVILIAN,
+		"l" = RADIOCL_LOGISTICS,
 		)
 	icon_override = "mail"
 	icon_tooltip = "Mail Courier"

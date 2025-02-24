@@ -287,7 +287,6 @@ TYPEINFO(/obj/item/disk/data/cartridge/syndicate)
 			..()
 			src.root.add_file( new /datum/computer/file/pda_program/scan/health_scan(src))
 			src.root.add_file( new /datum/computer/file/pda_program/scan/medrecord_scan(src))
-			src.root.add_file( new /datum/computer/file/pda_program/scan/reagent_scan(src))
 			src.root.add_file( new /datum/computer/file/pda_program/records/medical(src))
 			src.root.add_file( new /datum/computer/file/pda_program/genebooth_tracker(src))
 			src.read_only = 1
@@ -308,20 +307,35 @@ TYPEINFO(/obj/item/disk/data/cartridge/syndicate)
 		name = "\improper Engine-buddy Atmospherics cartridge"
 		desc = "Great for the enterprising engineer in everyone!"
 		icon_state = "cart-engine"
-		file_amount = 128
+
+		New()
+			..()
+			src.root.add_file( new /datum/computer/file/pda_program/power_checker(src))
+			src.root.add_file( new /datum/computer/file/pda_program/power_controller(src))
+			src.read_only = 1
+
+	mechanics
+		name = "\improper Mechanical Manipulator cartridge"
+		desc = ""
+		icon_state = "cart-engine"
 
 		New()
 			..()
 			src.root.add_file( new /datum/computer/file/pda_program/scan/electronics(src))
-			src.root.add_file( new /datum/computer/file/pda_program/scan/health_scan(src))
-			src.root.add_file( new /datum/computer/file/pda_program/power_checker(src))
-			src.root.add_file( new /datum/computer/file/pda_program/power_controller(src))
-			src.root.add_file( new /datum/computer/file/pda_program/atmos_alerts(src))
 			src.root.add_file( new /datum/computer/file/pda_program/signaler(src))
 			src.root.add_file( new /datum/computer/file/pda_program/pingtool(src))
 			src.root.add_file( new /datum/computer/file/pda_program/packet_sniffer(src))
 			src.root.add_file( new /datum/computer/file/pda_program/packet_sender(src))
 			src.root.add_file( new /datum/computer/file/text/diagnostic_readme(src))
+			src.read_only = 1
+
+	construction
+		name = "\improper Repair's Remedy cartridge"
+		desc = ""
+		icon_state = "cart-engine"
+		New()
+			..()
+			src.root.add_file( new /datum/computer/file/pda_program/atmos_alerts(src))
 			src.read_only = 1
 
 	chiefengineer

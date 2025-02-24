@@ -4,8 +4,15 @@
 #define MGD_PARTY "Party Line" //Is the clown the head of the Party department?
 #define MGD_COMMAND "command"
 #define MGD_SECURITY "security"
+#define MGD_CIVILIAN "civilian"
+#define MGD_MEDICAL "medical"
+#define MGD_BIOTECH "biotech"
+#define MGD_RESEARCH "research"
+#define MGD_LOGISTICS "logistics"
+#define MGD_ENGINEERING "engineering"
+
 #define MGD_MEDBAY "medbay"
-#define MGD_MEDRESEACH "medresearch"
+#define MGD_MEDRESEACH "medresearch" // deprecate
 #define MGD_SCIENCE "science"
 #define MGD_CARGO "cargo"
 #define MGD_STATIONREPAIR "stationrepair"
@@ -13,6 +20,34 @@
 #define MGD_KITCHEN "kitchen"
 #define MGD_SPIRITUALAFFAIRS "spiritualaffairs"
 #define MGD_MINING "mining"
+
+// Mail Groups (by Team)
+// civilian teams
+#define MGT_HYDROPONICS "hydroponics"
+#define MGT_CATERING "catering"
+#define MGT_JANITOR "janitor"
+
+// engineering teams
+#define MGT_ENGINE "engine"
+#define MGT_MECHANICS "mechanics"
+#define MGT_CONSTRUCTION "construction"
+
+// medical teams
+#define MGT_MEDBAY "medbay"
+
+// biotech team
+#define MGT_ROBOTICS "robotics"
+#define MGT_GENETICS "genetics"
+
+// research teams
+#define MGT_XENOARCH "artifacts"
+#define MGT_CHEMIST "chemistry"
+#define MGT_ASTROMETRIC "telesci"
+#define MGT_TOXINS "toxins"
+
+// logistics teams
+#define MGT_MINING "mining"
+#define MGT_CARGO "cargo"
 
 // Mail Groups (Other)
 // These cannot be joined or left.
@@ -47,6 +82,9 @@
 #define JOB_COMMAND "command"
 #define JOB_SECURITY "security"
 #define JOB_RESEARCH "research"
+#define JOB_MEDICAL	 "medical"
+#define JOB_BIOTECH "biotech"
+#define JOB_LOGISTICS "logistics"
 #define JOB_ENGINEERING "engineering"
 #define JOB_CIVILIAN "civilian"
 #define JOB_CREATED "created"

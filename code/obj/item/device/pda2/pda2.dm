@@ -224,6 +224,13 @@
 			alertgroups = list(MGA_MAIL, MGA_RADIO, MGA_DEATH, MGA_MEDCRIT, MGA_CLONER, MGA_CRISIS, MGA_SALES)
 			default_muted_mailgroups = list(MGA_SALES)
 
+	robotics
+		name = "Robotics PDA"
+		icon_state = "pda-m"
+		setup_default_cartridge = /obj/item/disk/data/cartridge/medical
+		mailgroups = list(MGD_MEDRESEACH, MGD_PARTY, MGO_SILICON)
+		alertgroups = list(MGA_MAIL, MGA_RADIO, MGA_DEATH, MGA_MEDCRIT, MGA_CLONER, MGA_CRISIS)
+
 	genetics
 		name = "Genetics PDA"
 		icon_state = "pda-gen"
@@ -251,6 +258,13 @@
 		icon_state = "pda-tox"
 		setup_default_cartridge = /obj/item/disk/data/cartridge/toxins
 		mailgroups = list(MGD_SCIENCE,MGD_PARTY)
+
+	logistics_coordinator
+		name = "Logistics Coordinator PDA"
+		icon_state = "pda-q"
+		setup_default_cartridge = /obj/item/disk/data/cartridge/quartermaster
+		mailgroups = list(MGD_CARGO,MGD_PARTY)
+		alertgroups = list(MGA_MAIL, MGA_RADIO, MGA_SALES, MGA_SHIPPING, MGA_CARGOREQUEST)
 
 	quartermaster
 		name = "Quartermaster PDA"
@@ -310,6 +324,30 @@
 		setup_default_module = /obj/item/device/pda_module/tray //mechanics used to have these
 		mailgroups = list(MGO_ENGINEER,MGD_STATIONREPAIR,MGD_PARTY)
 		alertgroups = list(MGA_MAIL, MGA_RADIO, MGA_ENGINE, MGA_RKIT, MGA_CRISIS)
+
+	engineer
+		name = "Engineer PDA"
+		icon_state = "pda-e"
+		setup_default_cartridge = /obj/item/disk/data/cartridge/engineer
+		setup_default_module = /obj/item/device/pda_module/flashlight
+		mailgroups = list(MGD_PARTY, MGD_ENGINEERING, MGT_ENGINE)
+		alertgroups = list(MGA_MAIL, MGA_RADIO, MGA_ENGINE, MGA_CRISIS)
+
+	mechanic
+		name = "Mechanic PDA"
+		icon_state = "pda-e"
+		setup_default_cartridge = /obj/item/disk/data/cartridge/engineer
+		setup_default_module = /obj/item/device/pda_module/tray
+		mailgroups = list(MGD_PARTY, MGD_ENGINEERING)
+		alertgroups = list(MGA_MAIL, MGA_RADIO, MGA_RKIT, MGA_CRISIS)
+
+	construction
+		name = "Construction PDA"
+		icon_state = "pda-e"
+		setup_default_cartridge = /obj/item/disk/data/cartridge/engineer
+		setup_default_module = /obj/item/device/pda_module/tray
+		mailgroups = list(MGD_PARTY, MGD_ENGINEERING, MGT_CONSTRUCTION)
+		alertgroups = list(MGA_MAIL, MGA_RADIO, MGA_CRISIS)
 
 	technical_assistant
 		name = "Technical Assistant PDA"

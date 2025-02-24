@@ -235,7 +235,10 @@
 						access_tech_storage, access_engineering_storage, access_engineering_eva, access_engineering_atmos,
 						access_engineering_power, access_engineering_engine,
 						access_engineering_control, access_engineering_mechanic, access_engineering_chief, access_mining, access_mining_outpost,
-						access_heads, access_ai_upload, access_eva, access_cargo, access_supply_console, access_teleporter)
+						access_heads, access_ai_upload, access_eva, access_teleporter)
+		if("Logistics Coordinator")
+			return list(access_logicistics_coordinator, access_maint_tunnels, access_cargo, access_mining, access_mining_outpost, access_supply_console,
+						access_heads, access_ai_upload, access_eva, access_teleporter)
 		if("Head of Mining", "Mining Supervisor")
 			return list(access_engineering, access_maint_tunnels,
 						access_engineering_eva, access_mining,
@@ -279,7 +282,9 @@
 						access_maint_tunnels, access_tech_storage, access_medical_lockers,
 						access_medlab) //Mdir minus head stuff
 
-		// --------------------------- Science
+		// --------------------------- Biotech
+
+		// --------------------------- Research
 		if("Scientist", "Research Trainee")
 			return list(access_tox, access_tox_storage, access_research, access_chemistry, access_researchfoyer, access_artlab, access_telesci, access_robotdepot)
 		if("Chemist")
@@ -295,15 +300,19 @@
 			return list(access_engineering, access_maint_tunnels, access_engineering_control,
 						access_engineering_storage, access_engineering_atmos, access_engineering_engine, access_engineering_power,
 						access_tech_storage, access_engineering_mechanic)
+
+		if("Construction Worker")
+			return list(access_engineering, access_maint_tunnels, access_engineering_control,
+						access_engineering_storage,access_engineering_atmos,access_engineering_engine,access_engineering_power)
+
+		// --------------------------- Logistics
+
 		if("Miner")
 			return list(access_maint_tunnels,
 						access_engineering_eva, access_mining,
 						access_mining_outpost)
 		if("Quartermaster")
 			return list(access_maint_tunnels, access_cargo, access_supply_console)
-		if("Construction Worker")
-			return list(access_engineering, access_maint_tunnels, access_engineering_control,
-						access_engineering_storage,access_engineering_atmos,access_engineering_engine,access_engineering_power)
 
 		// --------------------------- Civilian
 		if("Chaplain")

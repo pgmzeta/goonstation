@@ -401,6 +401,7 @@ var/global/mail_types_by_job = list(
 		/obj/item/reagent_containers/emergency_injector/random = 2,
 		),
 
+	// security
 
 	/datum/job/security/security_officer = list(
 		/obj/item/reagent_containers/food/drinks/coffee = 5,
@@ -440,19 +441,40 @@ var/global/mail_types_by_job = list(
 		/obj/item/cigpacket/random = 1,
 		),
 
+	// research
 
-
-	/datum/job/research/scientist = list(
+	/datum/job/research/xenoarcheologist = list(
 		/obj/item/parts/robot_parts/arm/right/light = 5,
 		/obj/item/cargotele = 5,
 		/obj/item/disk/data/tape = 5,
 		/obj/item/pinpointer/category/artifacts/safe = 8,
 		/obj/item/pinpointer/category/artifacts = 1,
+		),
+
+	/datum/job/research/chemist = list(
+		/obj/item/reagent_containers/glass/beaker/large/round = 1,
+		/obj/item/reagent_containers/glass/flask = 3,
+		/obj/item/reagent_containers/glass/flask/round = 1,
+		/obj/item/reagent_containers/glass/beaker = 5,
+		/obj/item/reagent_containers/glass/beaker/large = 5,
+		),
+
+	/datum/job/research/astrometrics = list(
 		/obj/item/device/gps = 3,
 		/obj/item/clothing/head/helmet/camera = 3,
 		),
 
-	/datum/job/research/medical_doctor = list(
+	/datum/job/research/toxins = list(
+		/obj/item/device/analyzer/atmospheric = 2,
+		/obj/item/device/analyzer/atmospheric/upgraded = 1,
+		/obj/item/device/analyzer/atmosanalyzer_upgrade = 2,
+		/obj/item/pressure_crystal = 3,
+		/obj/item/device/pressure_sensor = 1,
+		),
+
+	// medical
+
+	/datum/job/medical/medical_doctor = list(
 		/obj/item/reagent_containers/mender/brute = 5,
 		/obj/item/reagent_containers/mender/burn = 5,
 		/obj/item/reagent_containers/mender/both = 3,
@@ -470,7 +492,9 @@ var/global/mail_types_by_job = list(
 		/obj/item/reagent_containers/emergency_injector/random = 2,
 		),
 
-	/datum/job/research/roboticist = list(
+	// biotech
+
+	/datum/job/biotech/roboticist = list(
 		/obj/item/reagent_containers/mender/brute = 5,
 		/obj/item/reagent_containers/mender/burn = 5,
 		/obj/item/reagent_containers/mender/both = 3,
@@ -484,13 +508,13 @@ var/global/mail_types_by_job = list(
 		/obj/item/sheet/steel/fullstack = 2,
 		),
 
-	/datum/job/research/geneticist = list(
+	/datum/job/biotech/geneticist = list(
 		// so you can keep looking at your screen,
 		// even in the brightness of nuclear hellfire o7
 		/obj/item/clothing/glasses/sunglasses/tanning = 10,
 		),
 
-
+	// engineering
 
 	/datum/job/engineering/engineer = list(
 		/obj/item/chem_grenade/firefighting = 5,
@@ -505,7 +529,9 @@ var/global/mail_types_by_job = list(
 		/obj/item/tile/steel/fullstack = 2,
 		),
 
-	/datum/job/engineering/quartermaster = list(
+	// logistics
+
+	/datum/job/logistics/quartermaster = list(
 		/obj/item/currency/spacecash/hundred = 10,
 		/obj/item/currency/spacecash/fivehundred = 7,
 		/obj/item/currency/spacecash/tourist = 3,
@@ -514,7 +540,7 @@ var/global/mail_types_by_job = list(
 		/obj/item/device/appraisal = 4,
 		),
 
-	/datum/job/engineering/miner = list(
+	/datum/job/logistics/miner = list(
 		/obj/item/device/gps = 3,
 		/obj/item/satchel/mining = 3,
 		/obj/item/satchel/mining/large = 2,
@@ -523,7 +549,7 @@ var/global/mail_types_by_job = list(
 		/obj/item/currency/spacecash/tourist = 3,
 		),
 
-
+	// civilian
 
 	/datum/job/civilian/chef = list(
 		/obj/item/kitchen/utensil/knife/bread = 5,
@@ -634,8 +660,7 @@ var/global/mail_types_by_job = list(
 		/obj/item/rods/steel/fullstack = 2,
 		/obj/item/clothing/mask/balaclava = 1,
 		/obj/item/clothing/head/helmet/welding = 2,
-
-		)
+		),
 	)
 
 
