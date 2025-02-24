@@ -853,6 +853,21 @@ ABSTRACT_TYPE(/datum/job/civilian)
 	items_in_backpack = list(/obj/item/kitchen/rollingpin, /obj/item/kitchen/utensil/knife/cleaver, /obj/item/bell/kitchen)
 	wiki_link = "https://wiki.ss13.co/Chef"
 
+/datum/job/civilian/souschef
+	name = "Sous-Chef"
+	limit = 1
+	wages = PAY_UNTRAINED
+	trait_list = list("training_chef")
+	access_string = "Sous-Chef"
+	requires_supervisor_job = "Chef"
+	slot_belt = list(/obj/item/device/pda2/chef)
+	slot_jump = list(/obj/item/clothing/under/misc/souschef)
+	slot_foot = list(/obj/item/clothing/shoes/chef)
+	slot_head = list(/obj/item/clothing/head/souschefhat)
+	slot_suit = list(/obj/item/clothing/suit/apron)
+	slot_ears = list(/obj/item/device/radio/headset/civilian)
+	wiki_link = "https://wiki.ss13.co/Chef"
+
 /datum/job/civilian/bartender
 	name = "Bartender"
 	alias_names = list("Barman")
@@ -1352,20 +1367,6 @@ ABSTRACT_TYPE(/datum/job/civilian)
 	/obj/item/currency/buttcoin,
 	/obj/item/currency/spacecash/fivehundred)
 
-/datum/job/special/souschef
-	name = "Sous-Chef"
-	limit = 1
-	wages = PAY_UNTRAINED
-	trait_list = list("training_chef")
-	access_string = "Sous-Chef"
-	requires_supervisor_job = "Chef"
-	slot_belt = list(/obj/item/device/pda2/chef)
-	slot_jump = list(/obj/item/clothing/under/misc/souschef)
-	slot_foot = list(/obj/item/clothing/shoes/chef)
-	slot_head = list(/obj/item/clothing/head/souschefhat)
-	slot_suit = list(/obj/item/clothing/suit/apron)
-	slot_ears = list(/obj/item/device/radio/headset/civilian)
-	wiki_link = "https://wiki.ss13.co/Chef"
 
 // randomizd gimmick jobs
 
