@@ -28,12 +28,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: 'yarn'
           cache-dependency-path: ./tgui/yarn.lock
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: '3.10'
           cache: pip
 
       - name: Install Dependencies
@@ -53,6 +53,7 @@ jobs:
           tools/ci/check_filedirs.sh goonstation.dme
           tools/ci/check_grep.sh
           tools/bootstrap/python tools/ci/validate_dme.py <goonstation.dme
+          tools/ci/check_soundcache.sh
 
       - name: Check Maps
         run: |
@@ -80,9 +81,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: robinraju/release-downloader@v1.11
         with:
-          repository: "OpenDreamProject/OpenDream"
-          tag: "latest"
-          fileName: "DMCompiler_linux-x64.tar.gz"
+          repository: 'OpenDreamProject/OpenDream'
+          tag: 'latest'
+          fileName: 'DMCompiler_linux-x64.tar.gz'
           extract: true
       - run: ./DMCompiler_linux-x64/DMCompiler --suppress-unimplemented goonstation.dme --version=515.1635
 
@@ -126,7 +127,7 @@ jobs:
       #     path: ${{github.workspace}}/artifacts
 
   compile_full:
-    name: "Compile and Lint with Secret Submodule"
+    name: 'Compile and Lint with Secret Submodule'
     runs-on: ubuntu-latest
     if: |
       ((github.event_name == 'push' && github.repository == 'goonstation/goonstation') || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'goonstation/goonstation')) && !contains(github.event.head_commit.message, 'skip ci')
@@ -134,7 +135,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: true
-          token: "${{ secrets.ROBUDDYBOT_PAT }}"
+          token: '${{ secrets.ROBUDDYBOT_PAT }}'
 
       - name: Cache BYOND
         uses: actions/cache@v4
@@ -164,12 +165,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: 'yarn'
           cache-dependency-path: ./tgui/yarn.lock
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: '3.10'
           cache: pip
 
       - name: Install Dependencies
