@@ -2,7 +2,9 @@
 /* ==================================================== */
 /* -------------------- Dispensers -------------------- */
 /* ==================================================== */
+#define DISPENSER_LEAK_AMOUNT 15
 
+ABSTRACT_TYPE(/obj/reagent_dispensers)
 /obj/reagent_dispensers
 	name = "Dispenser"
 	desc = "..."
@@ -14,20 +16,38 @@
 	object_flags = NO_GHOSTCRITTER
 	pressure_resistance = 2*ONE_ATMOSPHERE
 	p_class = 1.5
+	/// Is this dispenser currently leaking
+	var/leaking = FALSE
+	/// icon state for the leak overlay
+	var/leak_overlay_state = "tank_spill"
+	HELP_MESSAGE_OVERRIDE("")
 
 	var/amount_per_transfer_from_this = 10
 	var/capacity = 4000
 
 	New()
 		..()
-		// TODO enable when I do leaking
-		// src.AddComponent(/datum/component/bullet_holes, 10, 5)
+		src.AddComponent(/datum/component/bullet_holes, 10, 5)
 		src.create_reagents(src.capacity)
-
 
 	get_desc(dist, mob/user)
 		if (dist <= 2 && reagents)
 			. += "<br>[SPAN_NOTICE("[reagents.get_description(user,RC_SCALE)]")]"
+
+	get_help_message(dist, mob/user)
+		. = ..()
+		if (src.leaking)
+			return "[src] is leaking. Use a sheet of metal or cloth material to patch it."
+
+	attackby(obj/item/W, mob/user)
+		if (src.leaking && istype(W, /obj/item/sheet))
+			var/obj/item/sheet/sheet = W
+			if (sheet.material.getMaterialFlags() & (MATERIAL_METAL | MATERIAL_CLOTH))
+				sheet.change_stack_amount(-1)
+				src.visible_message("\The [src] is patched up by [user] and stops leaking.")
+				src.stop_leak()
+				return
+		. = ..()
 
 	proc/smash()
 		var/turf/T = get_turf(src)
@@ -80,6 +100,20 @@
 			return TRUE
 		return ..()
 
+	bullet_act(obj/projectile/P)
+		. = ..()
+		if(P.proj_data.damage_type & D_PIERCING)
+			src.start_leak()
+			return
+		if(P.proj_data.damage_type & (D_KINETIC | D_SLASHING))
+			if(prob(P.power * P.proj_data?.ks_ratio))
+				src.start_leak()
+
+	on_reagent_change(add)
+		. = ..()
+		if(add && src.leaking)
+			global.processing_items |= src
+
 	proc/bolt_unbolt(mob/user)
 		if(!src.anchored)
 			var/turf/T = get_turf(src)
@@ -94,11 +128,39 @@
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			src.anchored = UNANCHORED
 
+	proc/start_leak()
+		if (!src.leaking)
+			src.leaking = TRUE
+			src.visible_message("\The [src] begins leaking its contents!")
+			if (src.leak_overlay_state)
+				var/image/leak = src.SafeGetOverlayImage("leak", 'icons/obj/objects.dmi', src.leak_overlay_state, color = src.reagents.get_average_rgb())
+				src.UpdateOverlays(leak, "leak")
+		if (src.reagents.total_volume == 0)
+			return
+		global.processing_items |= src
+
+	proc/stop_leak()
+		src.leaking = FALSE
+		src.ClearSpecificOverlays("leak")
+		global.processing_items -= src
+
+	proc/process()
+		if (src.reagents.total_volume <= 0 || !src.leaking)
+			global.processing_items -= src
+			return
+		var/turf/T = get_turf(src)
+		playsound(src, "sound/misc/spill_[rand(1,4)].ogg", 75, TRUE)
+		src.reagents.reaction(T, TOUCH, DISPENSER_LEAK_AMOUNT)
+		src.reagents.remove_any(DISPENSER_LEAK_AMOUNT)
+
 /* =================================================== */
 /* -------------------- Sub-Types -------------------- */
 /* =================================================== */
 /obj/reagent_dispensers/cleanable
 	flags = FLUID_SUBMERGE
+
+	start_leak()
+		return // these dont leak
 
 /obj/reagent_dispensers/cleanable/ants
 	name = "space ants"
@@ -211,6 +273,7 @@
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				src.anchored = UNANCHORED
 			return
+		..()
 
 	New()
 		..()
@@ -848,3 +911,5 @@ TYPEINFO(/obj/reagent_dispensers/watertank/fountain)
 			reagent_overlay_states = 15, \
 			reagent_overlay_scaling = RC_REAGENT_OVERLAY_SCALING_LINEAR, \
 		)
+
+#undef DISPENSER_LEAK_AMOUNT
