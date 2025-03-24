@@ -791,7 +791,7 @@
 
 	reaction_mob(var/mob/target, var/method=TOUCH, var/volume, var/paramslist = 0, var/raw_volume)
 		..()
-		var/reacted = 0
+		var/reacted = FALSE
 		var/mob/living/M = target
 		if(istype(M))
 			var/list/covered = holder.covered_turf()
@@ -811,37 +811,19 @@
 				burndmg = min(burndmg, 80) //cap burn at 110(80 now >:) so we can't instant-kill vampires. just crit em ok.
 				M.TakeDamage("chest", 0, burndmg, 0, DAMAGE_BURN)
 				M.change_vampire_blood(-burndmg)
-				reacted = 1
+				reacted = TRUE
 			else if (method == TOUCH)
-				if (M.traitHolder?.hasTrait("atheist"))
+				if (ishuman(M))
+					reacted = cure_wraith_curses(M)
+				if (isatheist(M))
 					boutput(M, SPAN_NOTICE("You feel insulted... and wet."))
-				else
-					if (ishuman(M))
-						var/mob/living/carbon/human/H = M
-						if(H.bioHolder?.HasEffect("blood_curse") || H.bioHolder?.HasEffect("blind_curse") || H.bioHolder?.HasEffect("weak_curse") || H.bioHolder?.HasEffect("rot_curse") || H.bioHolder?.HasEffect("death_curse"))
-							H.bioHolder.RemoveEffect("blood_curse")
-							H.bioHolder.RemoveEffect("blind_curse")
-							H.bioHolder.RemoveEffect("weak_curse")
-							H.bioHolder.RemoveEffect("rot_curse")
-							H.bioHolder.RemoveEffect("death_curse")
-							H.visible_message("[H] screams as some black smoke exits their body.")
-							H.emote("scream")
-							random_burn_damage(H, 5)
-							var/turf/T = get_turf(H)
-							if (T && isturf(T))
-								var/datum/effects/system/bad_smoke_spread/S = new /datum/effects/system/bad_smoke_spread/(T)
-								if (S)
-									S.set_up(5, 0, T, null, "#3b3b3b")
-									S.start()
-						else
-							boutput(M, SPAN_NOTICE("You feel somewhat purified... but mostly just wet."))
-					else
-						boutput(M, SPAN_NOTICE("You feel somewhat purified... but mostly just wet."))
-					M.take_brain_damage(0 - clamp(volume, 0, 10))
+					return !reacted
+				boutput(M, SPAN_NOTICE("You feel somewhat purified... but mostly just wet."))
+				M.take_brain_damage(0 - clamp(volume, 0, 10))
 				for (var/datum/ailment_data/disease/V in M.ailments)
 					if(prob(1))
 						M.cure_disease(V)
-				reacted = 1
+				reacted = TRUE
 		if(method == TOUCH)
 			var/mob/living/L = target
 			if(istype(L) && L.getStatusDuration("burning"))
