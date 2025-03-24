@@ -237,3 +237,40 @@ ABSTRACT_TYPE(/datum/targetable/wraithAbility/curse)
 				AH.corpsecount++
 				active = FALSE
 			sleep (1.5 SECONDS)
+
+proc/cure_wraith_curses(mob/user, mob/living/carbon/human/target)
+	. = FALSE
+	if (!istype(target) || !target.bioHolder)
+		return
+	if (target.bioHolder.HasEffect("blood_curse"))
+		target.bioHolder.RemoveEffect("blood_curse")
+		. = TRUE
+	if (target.bioHolder.HasEffect("blind_curse"))
+		target.bioHolder.RemoveEffect("blind_curse")
+		. = TRUE
+	if (target.bioHolder.HasEffect("weak_curse"))
+		target.bioHolder.RemoveEffect("weak_curse")
+		. = TRUE
+	if (target.bioHolder.HasEffect("rot_curse"))
+		target.bioHolder.RemoveEffect("rot_curse")
+		. = TRUE
+	if (target.bioHolder.HasEffect("death_curse"))
+		target.bioHolder.RemoveEffect("death_curse")
+		. = TRUE
+
+	if (!.)
+		return
+
+	var/burn_damage_amount = 5
+	if (isatheist(target))
+		burn_damage_amount = 15
+		target.setStatusMin("atheist_doubt", 3 MINUTES)
+	target.visible_message("[target] screams as some black smoke exits their body.")
+	target.emote("scream")
+	random_burn_damage(target, burn_damage_amount)
+	var/turf/T = get_turf(target)
+	if (T && isturf(T))
+		var/datum/effects/system/bad_smoke_spread/S = new /datum/effects/system/bad_smoke_spread/(T)
+		if (S)
+			S.set_up(5, 0, T, null, "#3b3b3b")
+			S.start()
