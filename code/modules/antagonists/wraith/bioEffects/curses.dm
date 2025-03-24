@@ -194,25 +194,17 @@ Causes some damage to the mob and spawns black smoke
 
  * @param `target` person getting cured
 
- * @return `TRUE` if any curse was removed, `FALSE`otherwise
+ * @return `TRUE` if any curse was removed, `FALSE` otherwise
  */
 proc/cure_wraith_curses(mob/user, mob/living/carbon/human/target)
 	. = FALSE
 	if (!istype(target) || !target.bioHolder)
 		return
-	if (target.bioHolder.HasEffect("blood_curse"))
+	if (target.bioHolder.HasOneOfTheseEffects("blood_curse", "blind_curse", "weak_curse", "rot_curse", "death_curse"))
 		target.bioHolder.RemoveEffect("blood_curse")
-		. = TRUE
-	if (target.bioHolder.HasEffect("blind_curse"))
 		target.bioHolder.RemoveEffect("blind_curse")
-		. = TRUE
-	if (target.bioHolder.HasEffect("weak_curse"))
 		target.bioHolder.RemoveEffect("weak_curse")
-		. = TRUE
-	if (target.bioHolder.HasEffect("rot_curse"))
 		target.bioHolder.RemoveEffect("rot_curse")
-		. = TRUE
-	if (target.bioHolder.HasEffect("death_curse"))
 		target.bioHolder.RemoveEffect("death_curse")
 		. = TRUE
 
