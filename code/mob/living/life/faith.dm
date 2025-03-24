@@ -12,7 +12,8 @@
 			// others need to be in the chapel
 		else if (isvampire(owner) || isvampiricthrall(owner) || iswraith(owner) || owner.bioHolder.HasEffect("revenant"))
 			// vampires are unholy and will not produce faith unless they are a chaplain
-		else if (owner.traitHolder.hasTrait("atheist"))
+		else if (isatheist(owner))
+			// atheists do not produce faith
 		else
 			add_faith(FAITH_GEN_BASE * mult)
 		..()
