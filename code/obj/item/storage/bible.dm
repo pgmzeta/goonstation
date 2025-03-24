@@ -74,6 +74,7 @@
 			if (is_undead)
 				blessing_actions += "damaged undead"
 			else if (is_evil_ghost)
+				target.visible_message(SPAN_ALERT("<B>[user] smites [target] with the [src]!</B>"))
 				blessing_actions += "smote"
 		else
 			var/mob/living/H = target
@@ -99,7 +100,7 @@
 
 		if(length(blessing_actions))
 			var/deity = is_target_atheist ? "a god you don't believe in" : "Christ"
-			var/blessing_text = "May the power of [deity] compel you to be healed!"
+			var/blessing_text = "May the power of [deity] compel you!"
 			if (prob(1))
 				user.say(blessing_text)
 			else
@@ -132,7 +133,6 @@
 			return
 
 		if (iswraith(target) || (target.bioHolder && target.bioHolder.HasEffect("revenant")))
-			target.visible_message(SPAN_ALERT("<B>[user] smites [target] with the [src]!</B>"))
 			bless(target, user)
 
 		else if (!isdead(target))
