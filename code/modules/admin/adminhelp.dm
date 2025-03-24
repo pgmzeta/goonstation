@@ -113,16 +113,17 @@
 	if (!msg)
 		return
 
-	var/in_chapel = 0
+	var/in_chapel = FALSE
 	if(istype(get_area(client.mob), /area/station/chapel))
-		in_chapel = 1
-	if (client.mob.mind && client.mob.traitHolder?.hasTrait("atheist"))
+		in_chapel = TRUE
+	var/is_atheist = isatheist(client.mob)
+	if (client.mob.mind && is_atheist)
 		src.add_karma(-1)
-	var/is_atheist = client.mob.traitHolder?.hasTrait("atheist")
 
 	if (is_atheist)
 		boutput(client.mob, "You feel ridiculous doing it, but manage to get through a silent prayer,</B> <I>\"[msg]\"</I>")
 		client.mob.take_oxygen_deprivation(10)
+		client.mob.setStatusMin("atheist_doubt", 1 MINUTE)
 		logTheThing(LOG_AHELP, client.mob, "PRAYER (atheist): [msg]")
 		logTheThing(LOG_DIARY, client.mob, "PRAYER (atheist): [msg]", "ahelp")
 	else
