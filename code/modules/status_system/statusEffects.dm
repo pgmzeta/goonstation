@@ -3678,3 +3678,28 @@
 	icon_state = "phoenix_revive_ready"
 	desc = "You will be resurrected upon death with full health."
 	effect_quality = STATUS_QUALITY_POSITIVE
+
+/datum/statusEffect/atheist_doubt
+	id = "atheist_doubt"
+	name = "Religous Crisis"
+	icon_state = "suffocating"
+	desc = "You feel as though your non-belief is being tested."
+	effect_quality = STATUS_QUALITY_NEGATIVE
+
+	var/mob/living/carbon/human/H
+
+	preCheck(atom/A)
+		. = ..()
+		if (!ishuman(A))
+			return FALSE
+
+	onAdd(optional)
+		. = ..()
+		H = src.owner
+		boutput(H, SPAN_ALERT("Your non-belief is shaken to its core. The world seems so much more mysterious now..."))
+
+	onUpdate(timePassed)
+		if (prob(1))
+			boutput(H, SPAN_ALERT("Doubt creeps into your mind..."))
+			H.take_brain_damage(1)
+			H.emote(pick("scowl", "grimace", "think", "ponder", "contemplate"))
