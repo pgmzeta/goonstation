@@ -174,7 +174,7 @@
 			user.visible_message(SPAN_ALERT("[user] farts on the bible.<br><b>The gods seem to approve.</b>"))
 			return FALSE
 
-		if (user.traitHolder?.hasTrait("atheist"))
+		if (isatheist(user))
 			user.visible_message(SPAN_ALERT("[user] farts on the bible with particular vindication.<br><b>Against all odds, [user] remains unharmed!</b>"))
 			return FALSE
 		else if (ishuman(user) && user:unkillable)
