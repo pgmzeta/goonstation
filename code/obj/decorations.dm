@@ -471,6 +471,7 @@ TYPEINFO(/obj/shrub/syndicateplant)
 	dir = EAST
 
 	destroy()
+		if(destroyed) return
 		src.set_dir(NORTHEAST)
 		src.destroyed = 1
 		src.set_density(0)
@@ -491,6 +492,7 @@ TYPEINFO(/obj/shrub/syndicateplant)
 				boutput(M, SPAN_ALERT("You suddenly feel hollow. Something very dear to you has been lost."))
 
 	graze(mob/user)
+		if (src.destroyed) return
 		user.lastattacked = get_weakref(src)
 		if (user.mind && user.mind.assigned_role == "Captain")
 			boutput(user, SPAN_NOTICE("You catch yourself almost taking a bite out of your precious bonzai but stop just in time!"))
@@ -525,12 +527,14 @@ TYPEINFO(/obj/shrub/syndicateplant)
 		return
 
 	meteorhit(obj/O as obj)
+		if (src.destroyed) return
 		src.visible_message(SPAN_ALERT("<b>The meteor smashes right through [src]!</b>"))
 		src.destroy()
 		src.interesting = "Looks like it was crushed by a giant fuck-off meteor."
 		return
 
 	ex_act(severity)
+		if (src.destroyed) return
 		src.visible_message(SPAN_ALERT("<b>[src] is ripped to pieces by the blast!</b>"))
 		src.destroy()
 		src.interesting = "Looks like it was blown to pieces by some sort of explosive."
