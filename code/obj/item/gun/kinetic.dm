@@ -3405,6 +3405,7 @@ ABSTRACT_TYPE(/obj/item/survival_rifle_barrel)
 	icon_state = "antiair"
 	item_state = "missile_launcher"
 	wear_image_icon = 'icons/mob/clothing/back.dmi'
+	wear_state = "cannon" // TODO: dedicated wear sprite?
 	force = 10
 	contraband = 50
 	rarity = 5
