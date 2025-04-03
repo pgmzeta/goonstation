@@ -10,6 +10,8 @@ var/regex/forbidden_character_regex = regex(@"[\u2028\u202a\u202b\u202c\u202d\u2
 	var/speaker_to_display = null
 	/// The text indicating where this message was spoken from, if it was spoken from inside of an object.
 	var/speaker_location_text = null
+	///  The location of where the message was sent, for logging.
+	var/loc = null
 	/// The sanitised and processed content of this message.
 	var/content = ""
 	/// The verb to display when this message is received, i.e: "Jeff [say_verb], [message]"
@@ -115,6 +117,7 @@ var/regex/forbidden_character_regex = regex(@"[\u2028\u202a\u202b\u202c\u202d\u2
 	src.speaker = speaker.speech_tree.speaker_parent
 	src.original_speaker = speaker.speech_tree.speaker_parent
 	src.message_origin = speaker.speech_tree.speaker_origin
+	src.loc = speaker.loc
 	src.id = "\ref[src]"
 	src.flags |= flags
 	src.atom_listeners_override = atom_listeners_override
@@ -393,6 +396,7 @@ var/regex/forbidden_character_regex = regex(@"[\u2028\u202a\u202b\u202c\u202d\u2
 	// Message Content & Format Variables:
 	copy.speaker_to_display = src.speaker_to_display
 	copy.speaker_location_text = src.speaker_location_text
+	copy.loc = src.loc
 	copy.content = src.content
 	copy.say_verb = src.say_verb
 	copy.whisper_verb = src.whisper_verb

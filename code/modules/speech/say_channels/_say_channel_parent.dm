@@ -30,6 +30,7 @@ ABSTRACT_TYPE(/datum/say_channel)
 
 /// The primary entry point for say message datums; they will be passed to this channel through this proc.
 /datum/say_channel/proc/PassToChannel(datum/say_message/message)
+	src.log_message(message)
 	src.PassToListeners(message, src.listeners)
 
 /// Pass a message to all listen modules in a specified list, indexed in sublists by type.
@@ -85,7 +86,17 @@ ABSTRACT_TYPE(/datum/say_channel)
 	if (!istype(M) || !M.client || !(message.flags & SAYFLAG_SPOKEN_BY_PLAYER))
 		return
 
-	logTheThing(LOG_SAY, message.speaker, "([src.channel_id]): [message.content]")
+	var/log_type = LOG_SAY
+	if (message.flags & SAYFLAG_WHISPER)
+		log_type = LOG_WHISPER
+
+	var/channel_name = src.channel_id
+	if (src.channel_id == SAY_CHANNEL_GLOBAL_OUTLOUD)
+		channel_name = "SAY"
+		if (message.flags & SAYFLAG_WHISPER)
+			channel_name = "WHISPER"
+
+	logTheThing(log_type, message.speaker, "[channel_name]: [message.prefix] [message.content] [log_loc(message.loc)]")
 	phrase_log.log_phrase("say", message.content)
 
 /// Set up an output module for sending messages over this channel.
@@ -135,12 +146,6 @@ ABSTRACT_TYPE(/datum/say_channel/global_channel)
 		return
 
 	src.delimited_channel.PassToListeners(message, src.delimited_channel.listeners, TRUE)
-
-/datum/say_channel/global_channel/log_message()
-	return
-
-
-
 
 
 ABSTRACT_TYPE(/datum/say_channel/delimited)
