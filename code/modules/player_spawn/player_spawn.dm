@@ -54,12 +54,11 @@
 	var/obj/item/slot_wear_id
 	var/obj/item/slot_back
 
-
 	var/obj/item/slot_l_hand
 	var/obj/item/slot_r_hand
 
 	/// Items that need to be given to the person, somewhere
-	var/list/loose_items = list()
+	var/list/obj/item/loose_items = list()
 
 	/// Things we spawn on the same turf as ourselves
 	var/list/spawn_on_turf = list()
@@ -84,50 +83,90 @@
 			src.pda.ID_card = src.id_card
 
 /// Find out what tank typepath to give the player
-/datum/equipment_set/proc/get_tank_typepath(tank_size, contents_type)
-	if (tank_size == TANK_SIZE_NONE)
-		return null
-	switch(contents_type)
-		if (TANK_CONTENTS_OXYGEN)
-			switch(tank_size)
-				if (TANK_SIZE_POCKET)
+/datum/equipment_set/proc/get_tank_typepath()
+	switch (src.bonus_tank_size)
+		if (TANK_SIZE_NONE)
+			return null
+		if (TANK_SIZE_POCKET)
+			switch (src.bonus_tank_contents)
+				if (TANK_CONTENTS_OXYGEN)
 					return /obj/item/tank/emergency_oxygen
-				if (TANK_SIZE_EXTENDED)
-					return /obj/item/tank/emergency_oxygen/extended
-				if (TANK_SIZE_MINI)
-					return /obj/item/tank/mini_oxygen
-				if (TANK_SIZE_NORMAL)
-					return /obj/item/tank/oxygen
-
-		if (TANK_CONTENTS_PLASMA)
-			switch(tank_size)
-				if (TANK_SIZE_POCKET) // does not exist
-					return /obj/item/tank/emergency_oxygen
-				if (TANK_SIZE_EXTENDED)
+				if (TANK_CONTENTS_PLASMA) // TODO: plasma pocket tank
 					return /obj/item/tank/emergency_oxygen/extended/plasma
-				if (TANK_SIZE_MINI)
-					return /obj/item/tank/mini_plasma
-				if (TANK_SIZE_NORMAL)
-					return /obj/item/tank/plasma
-
-		if (TANK_CONTENTS_AIR)
-			switch(tank_size)
-				if (TANK_SIZE_POCKET) // does not exist
+				if (TANK_CONTENTS_AIR) // TODO: air pocket tank
 					return /obj/item/tank/emergency_oxygen
-				if (TANK_SIZE_EXTENDED) // does not exist
+				if (TANK_CONTENTS_EMPTY) // TODO: empty pocket tank
+					return /obj/item/tank/emergency_oxygen
+		if (TANK_SIZE_EXTENDED)
+			switch (src.bonus_tank_contents)
+				if (TANK_CONTENTS_OXYGEN)
 					return /obj/item/tank/emergency_oxygen/extended
-				if (TANK_SIZE_MINI)
-					return /obj/item/tank/mini_oxygen
-				if (TANK_SIZE_NORMAL)
-					return /obj/item/tank/air
-
-		if (TANK_CONTENTS_EMPTY)
-			switch(tank_size)
-				if (TANK_SIZE_POCKET) // does not exist
-					return /obj/item/tank/emergency_oxygen
-				if (TANK_SIZE_EXTENDED)
+				if (TANK_CONTENTS_PLASMA)
+					return /obj/item/tank/emergency_oxygen/extended/plasma
+				if (TANK_CONTENTS_AIR) // TODO: air extended tank
+					return /obj/item/tank/emergency_oxygen/extended
+				if (TANK_CONTENTS_EMPTY)
 					return /obj/item/tank/emergency_oxygen/extended/empty
-				if (TANK_SIZE_MINI)
+		if (TANK_SIZE_MINI)
+			switch (src.bonus_tank_contents)
+				if (TANK_CONTENTS_OXYGEN)
+					return /obj/item/tank/mini_oxygen
+				if (TANK_CONTENTS_PLASMA)
+					return /obj/item/tank/mini_plasma
+				if (TANK_CONTENTS_AIR)
+					return /obj/item/tank/mini_oxygen
+				if (TANK_CONTENTS_EMPTY)
 					return /obj/item/tank/mini_oxygen/empty
-				if (TANK_SIZE_NORMAL)
+		if (TANK_SIZE_NORMAL)
+			switch (src.bonus_tank_contents)
+				if (TANK_CONTENTS_OXYGEN)
+					return /obj/item/tank/oxygen
+				if (TANK_CONTENTS_PLASMA)
+					return /obj/item/tank/plasma
+				if (TANK_CONTENTS_AIR)
+					return /obj/item/tank/air
+				if (TANK_CONTENTS_EMPTY)
 					return /obj/item/tank/empty
+
+
+
+
+/datum/equipment_set/proc/equip_mob(mob/living/carbon/human/H)
+	var/obj/item/tank/bonus_tank = get_tank_typepath()
+	if (!isnull(bonus_tank))
+		; // TODO: tank repathing :/
+
+
+	if(src.slot_w_uniform)
+		H.equip_new_if_possible(src.slot_w_uniform, SLOT_W_UNIFORM)
+	if(src.slot_wear_mask)
+		H.equip_new_if_possible(src.slot_wear_mask, SLOT_WEAR_MASK)
+	if(src.slot_back)
+		H.equip_new_if_possible(src.slot_back, SLOT_BACK)
+	if(src.slot_glasses)
+		H.equip_new_if_possible(src.slot_glasses, SLOT_GLASSES)
+	if(src.slot_gloves)
+		H.equip_new_if_possible(src.slot_gloves, SLOT_GLOVES)
+	if(src.slot_shoes)
+		H.equip_new_if_possible(src.slot_shoes, SLOT_SHOES)
+	if(src.slot_head)
+		H.equip_new_if_possible(src.slot_head, SLOT_HEAD)
+	if(src.slot_wear_suit)
+		H.equip_new_if_possible(src.slot_wear_suit, SLOT_WEAR_SUIT)
+	if(src.slot_ears)
+		H.equip_new_if_possible(src.slot_ears, SLOT_EARS)
+
+	if(src.slot_l_store)
+		H.equip_new_if_possible(src.slot_l_store, SLOT_L_STORE)
+	if(src.slot_r_store)
+		H.equip_new_if_possible(src.slot_r_store, SLOT_R_STORE)
+	if(src.slot_wear_id)
+		H.equip_new_if_possible(src.slot_wear_id, SLOT_WEAR_ID)
+	if(src.slot_belt)
+		H.equip_new_if_possible(src.slot_belt, SLOT_BELT)
+	if(src.slot_l_hand)
+		H.equip_new_if_possible(src.slot_l_hand, SLOT_L_HAND)
+	if(src.slot_r_hand)
+		H.equip_new_if_possible(src.slot_r_hand, SLOT_R_HAND)
+
+	for(var/obj/item in src.loose_items)
