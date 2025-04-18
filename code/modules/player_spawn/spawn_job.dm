@@ -94,12 +94,12 @@
 			C.assignment = JOB.name
 			C.name = "[C.registered]'s ID Card ([C.assignment])"
 			C.access = JOB.access.Copy()
-			C.pronouns = src.get_pronouns()
+			C.pronouns = M.get_pronouns()
 
 /datum/equipment_set/proc/spawn_credits(datum/job/JOB, mob/M)
 	if (JOB.wages > 0)
 		var/cash_mult = 1
-		if (src.traitHolder?.hasTrait("pawnstar"))
+		if (M.traitHolder?.hasTrait("pawnstar"))
 			cash_mult = 1.25
 
 		var/obj/item/currency/spacecash/starting_credits = new
