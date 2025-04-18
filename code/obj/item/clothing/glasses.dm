@@ -499,6 +499,10 @@ TYPEINFO(/obj/item/clothing/glasses/visor)
 				eye_covered = "R"
 			src.icon_state = "eyepatch-[eye_covered]"
 
+	left
+		block_eye = "L"
+		icon_state = "eyepatch-L"
+
 /obj/item/clothing/glasses/vr
 	name = "\improper VR goggles"
 	desc = "A pair of VR goggles running a personal simulation."
