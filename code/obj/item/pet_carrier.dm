@@ -208,18 +208,18 @@
 		if (!thing_to_trap)
 			return
 		if (thing_to_trap == user)
-			user.drop_item(src)
+			user?.drop_item(src)
 
 		if (istype(thing_to_trap, /mob))
 			var/mob/M = thing_to_trap
 			M.remove_pulling()
 		else
 			thing_to_trap.pulled_by = null
-			user.remove_pulling()
-			user.drop_item(thing_to_trap)
+			user?.remove_pulling()
+			user?.drop_item(thing_to_trap)
 
 		src.add_mob(thing_to_trap)
-		user.update_inhands()
+		user?.update_inhands()
 
 	/// Called when a given mob/user releases an mob after an actionbar.
 	proc/release_mob(atom/movable/thing_to_release, mob/user)
@@ -315,6 +315,19 @@
 			src.trap_mob(I, user)
 			return
 		..()
+
+/// For the Pet Person trait
+/obj/item/pet_carrier/with_pet
+/obj/item/pet_carrier/with_pet/New()
+	. = ..()
+	var/picked = pick(filtered_concrete_typesof(/mob/living/critter/small_animal/, GLOBAL_PROC_REF(filter_carrier_pets)))
+	var/mob/living/critter/small_animal/pet = new picked(src)
+	pet.ai_type = /datum/aiHolder/wanderer
+	pet.ai = new pet.ai_type(pet)
+	pet.aggressive = FALSE
+	pet.randomize_name()
+	pet.ai_retaliate_persistence = RETALIATE_ONCE
+	src.trap_mob(pet)
 
 /obj/item/pet_carrier/admin_crimes
 	name = "pet carrier (ADMIN CRIMES EDITION)"
