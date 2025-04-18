@@ -1,6 +1,3 @@
-/datum/equipment_set
-	var/list/trait_ids = list()
-
 /datum/equipment_set/proc/setup_trait_equipment(mob/living/carbon/human/H)
 	if (!H.traitHolder) return
 	if (H.traitHolder.hasTrait("allergic"))

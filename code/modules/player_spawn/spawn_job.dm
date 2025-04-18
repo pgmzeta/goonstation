@@ -47,15 +47,14 @@
 	src.items_in_backpack = JOB.items_in_backpack
 	src.items_in_belt = JOB.items_in_belt
 
-	if (JOB.receives_badge)
-		; // TODO: badge generation
+	src.implants = JOB.receives_implants
+	src.recieves_disk = JOB.receives_disk // has to be done later
+	src.badge = JOB.receives_badge
+	if (src.badge)
 		if (length(src.slot_wear_suit) == 0)
-			; // TODO: equip to suit slot
-	if (JOB.receives_disk)
-		; // TODO: setup disk
-
-	if (JOB.receives_implants)
-		; // TODO: setup implants
+			src.slot_wear_suit += src.badge
+		else
+			src.loose_items += src.badge
 
 /datum/equipment_set/proc/select_item_from_job_slot(list/job_items)
 	switch (length(job_items))

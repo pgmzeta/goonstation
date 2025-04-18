@@ -16,18 +16,26 @@
 	var/datum/equipment_set/equipment
 
 /datum/equipment_set
-	/// Starting PDA
+	/// Starting PDA, if one exists
 	var/obj/item/device/pda2/pda
-	/// Starting ID card
+	/// Starting ID card, if one exists
 	var/obj/item/card/id/id_card
-	/// Starting headset
+	/// Starting headset, if one exists
 	var/obj/item/device/radio/headset/headset
-	/// Starting backpack
+	/// Starting backpack, if one exists
 	var/obj/item/storage/backpack/backpack
-	/// Starting trinket
+	/// Starting trinket, if one exists
 	var/obj/trinket
+	/// List of implants to implant
+	var/implants = list()
+	/// Typepath of badge to give
+	var/obj/item/clothing/suit/security_badge/badge = null
+	/// Whether the person recieves a clone disk
+	var/recieves_disk = FALSE
 
+	/// Size of the bonus breathing tank. TANK_SIZE_NONE will not give them a bonus tank
 	var/bonus_tank_size = TANK_SIZE_NONE
+	/// Atmos content of the breathing tank
 	var/bonus_tank_contents = TANK_CONTENTS_OXYGEN
 
 	var/obj/item/clothing/slot_wear_mask
