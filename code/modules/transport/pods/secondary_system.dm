@@ -155,7 +155,6 @@
 	/obj/reagent_dispensers/beerkeg)
 
 	hud_state = "cargo"
-	f_active = 1
 
 	small
 		maxcap = 1

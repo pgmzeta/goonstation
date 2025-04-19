@@ -21,39 +21,76 @@
 		tracking
 		sensor_lock
 
+		fuel
+		fuel_needle
+		bottom_bar_bg
+		bottom_bar_southwest
+		bottom_bar_south
+		bottom_bar_east
+		// Only applies to the /tg/ hud.
+		bottom_bar_west
+		bottom_bar_southeast
+
 	click_check = 0
 	var/image/missing
 	var/datum/healthBar/health_bar
 	var/datum/healthBar/fuel_bar
 	var/obj/machinery/vehicle/master
 
+	var/icon/hud_icon = 'icons/mob/hud_pod.dmi'
+
 	New(P)
 		..()
 		master = P
-		missing = image('icons/mob/hud_pod.dmi', "marker")
-		engine = create_screen("engine", "Engine", 'icons/mob/hud_pod.dmi', "engine-off", "NORTH+1,WEST", tooltipTheme = "pod-alt", desc = "Turn the pod's engine on or off.")
-		wormhole = create_screen("wormhole", "Create Wormhole", 'icons/mob/hud_pod.dmi', "wormhole", "NORTH+1,WEST+1", tooltipTheme = "pod", desc = "Open a wormhole to a beacon that you can fly through")
-		life_support = create_screen("life_support", "Life Support", 'icons/mob/hud_pod.dmi', "life_support-off", "NORTH+1,WEST+2", tooltipTheme = "pod-alt", desc = "Turn life support on or off")
-		comms = create_screen("comms", "Comms", 'icons/mob/hud_pod.dmi', "comms-off", "NORTH+1,WEST+3", tooltipTheme = "pod-alt", desc = "Turn the pod's communications system on or off")
-		use_comms = create_screen("comms_system", "Use Comms System", 'icons/mob/hud_pod.dmi', "comms_system", "NORTH+1,WEST+4", tooltipTheme = "pod", desc = "Use the communications system to talk or whatever")
+
+		// For the top bar.
+		create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_bg", "NORTH+1, WEST to NORTH+1, WEST+13", HUD_LAYER)
+		create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_side", "NORTH, WEST to NORTH, WEST+13", HUD_LAYER, NORTH)
+		create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_side", "NORTH+1, WEST+14", HUD_LAYER, WEST)
+		create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_side", "NORTH, WEST+14", HUD_LAYER, NORTHWEST)
+		// Beams.
+		create_screen("", "", src.hud_icon, "beam", "NORTH+1, WEST+1 to NORTH+1, WEST+10", HUD_LAYER)
+		create_screen("", "", src.hud_icon, "beam-l", "NORTH+1, WEST", HUD_LAYER)
+		create_screen("", "", src.hud_icon, "beam-r", "NORTH+1, WEST+12", HUD_LAYER)
+
+		// For the bottom bar.
+		src.bottom_bar_bg = create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_bg", "SOUTH, EAST", HUD_LAYER)
+		src.bottom_bar_southwest = create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_side", "SOUTH+1, EAST-1", HUD_LAYER, SOUTHWEST)
+		src.bottom_bar_south = create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_side", "to SOUTH+1, EAST", HUD_LAYER, SOUTH)
+		src.bottom_bar_east = create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_side", "SOUTH, EAST-1", HUD_LAYER, EAST)
+
+		engine = create_screen("engine", "Engine", 'icons/mob/hud_pod.dmi', "engine-off", "NORTH+1,WEST", tooltipTheme = "pod-alt", desc = "Turn the vehicle's engine on or off.")
+		life_support = create_screen("life_support", "Life Support", 'icons/mob/hud_pod.dmi', "life_support-off", "NORTH+1,WEST+1", tooltipTheme = "pod-alt", desc = "Turn life support on or off")
+
+		comms = create_screen("comms", "Comms", 'icons/mob/hud_pod.dmi', "comms-off", "NORTH+1,WEST+2", tooltipTheme = "pod-alt", desc = "Turn the pod's communications system on or off")
+		use_comms = create_screen("comms_system", "Use Comms System", 'icons/mob/hud_pod.dmi', "comms_system", "NORTH+1,WEST+3", tooltipTheme = "pod", desc = "Use the communications system to talk or whatever")
+		rts = create_screen("return_to_station", "Return To [capitalize(station_or_ship())]", 'icons/mob/hud_pod.dmi', "return-to-station", "NORTH+1,WEST+4", tooltipTheme = "pod", desc = "Using this will place you on the station Z-level the next time you fly off the edge of the current level")
+
 		sensors = create_screen("sensors", "Sensors", 'icons/mob/hud_pod.dmi', "sensors-off", "NORTH+1,WEST+5", tooltipTheme = "pod-alt", desc = "Turn the pod's sensors on or off")
-		sensors_use = create_screen("sensors_use", "Activate Sensors", 'icons/mob/hud_pod.dmi', "sensors-use", "NORTH+1,WEST+6", tooltipTheme = "pod", desc = "Use the pod's sensors to search for vehicles and lifeforms nearby")
-		weapon = create_screen("weapon", "Main Weapon", 'icons/mob/hud_pod.dmi', "weapon-off", "NORTH+1,WEST+7", tooltipTheme = "pod-alt", desc = "Turn the main weapon on or off, if the pod is equipped with one")
-		lights = create_screen("lights", "Toggle Lights", 'icons/mob/hud_pod.dmi', "lights-off", "NORTH+1, WEST+8", tooltipTheme = "pod", desc = "Turn the pod's external lights on or off")
-		secondary = create_screen("secondary", "Secondary System", 'icons/mob/hud_pod.dmi', "blank", "NORTH+1,WEST+9", tooltipTheme = "pod", desc = "Activate the secondary system installed in the pod, if there is one")
-		lock = create_screen("lock", "Lock", 'icons/mob/hud_pod.dmi', "lock-locked", "NORTH+1,WEST+10", tooltipTheme = "pod-alt", desc = "Lock or unlock the pod.")
-		set_code = create_screen("set_code", "Set Lock code", 'icons/mob/hud_pod.dmi', "set-code", "NORTH+1,WEST+11", tooltipTheme = "pod", desc = "Set the code used to unlock the pod")
-		rts = create_screen("return_to_station", "Return To [capitalize(station_or_ship())]", 'icons/mob/hud_pod.dmi', "return-to-station", "NORTH+1,WEST+12", tooltipTheme = "pod", desc = "Using this will place you on the station Z-level the next time you fly off the edge of the current level")
-		leave = create_screen("leave", "Leave Pod", 'icons/mob/hud_pod.dmi', "leave", "SOUTH,EAST", tooltipTheme = "pod-alt", desc = "Get out of the pod")
+		sensors_use = create_screen("sensors_use", "Activate Sensors", 'icons/mob/hud_pod.dmi', "sensors_use", "NORTH+1,WEST+6", tooltipTheme = "pod", desc = "Use the pod's sensors to search for vehicles and lifeforms nearby")
+		wormhole = create_screen("wormhole", "Create Wormhole", 'icons/mob/hud_pod.dmi', "wormhole", "NORTH+1,WEST+7", tooltipTheme = "pod", desc = "Open a wormhole to a beacon that you can fly through")
+
+		weapon = create_screen("weapon", "Main Weapon", 'icons/mob/hud_pod.dmi', "weapon-off", "NORTH+1,WEST+8", tooltipTheme = "pod-alt", desc = "Turn the main weapon on or off, if the pod is equipped with one")
+		lights = create_screen("lights", "Toggle Lights", 'icons/mob/hud_pod.dmi', "lights-off", "NORTH+1, WEST+9", tooltipTheme = "pod", desc = "Turn the pod's external lights on or off")
+		secondary = create_screen("secondary", "Secondary System", 'icons/mob/hud_pod.dmi', "blank", "NORTH+1,WEST+10", tooltipTheme = "pod", desc = "Activate the secondary system installed in the pod, if there is one")
+		lock = create_screen("lock", "Lock", 'icons/mob/hud_pod.dmi', "lock-locked", "NORTH+1,WEST+11", tooltipTheme = "pod-alt", desc = "Lock or unlock the pod.")
+		set_code = create_screen("set_code", "Set Lock code", 'icons/mob/hud_pod.dmi', "set_code", "NORTH+1,WEST+12", tooltipTheme = "pod", desc = "Set the code used to unlock the pod")
 		rcs = create_screen("rcs", "Toggle RCS", 'icons/mob/hud_pod.dmi', "rcs-off", "NORTH+1,WEST+13", tooltipTheme = "pod-alt", desc = "Reduce the pod's relative velocity")
+
+		leave = create_screen("leave", "Leave Pod", 'icons/mob/hud_pod.dmi', "leave", "SOUTH,EAST", tooltipTheme = "pod-alt", desc = "Get out of the pod")
+
 		tracking = create_screen("tracking", "Tracking Indicator", 'icons/mob/hud_pod.dmi', "off", "CENTER, CENTER")
 		tracking.mouse_opacity = 0
-		sensor_lock = create_screen("sensor_lock", "Sensor Lock", 'icons/mob/hud_pod.dmi', "off", "SOUTH+1,EAST")
+		sensor_lock = create_screen("sensor_lock", "Sensor Lock", 'icons/mob/hud_pod.dmi', "blank", "SOUTH+1,EAST")
 		sensor_lock.mouse_opacity = 0	//maybe set to one, so that clicking on it will explain what it is
+
+		src.apply_button_overlay("text_leave", src.leave)
+
 		health_bar = new /datum/healthBar(barLength=3, index_from_top=1, bar_name=POD_BAR_HEALTH)
 		health_bar.add_to_hud(src)
 		fuel_bar = new /datum/healthBar(barLength=3, index_from_top=2, bar_name=POD_BAR_FUEL)
 		fuel_bar.add_to_hud(src)
+
 		if (master)
 			update_health()
 			update_systems()
@@ -82,9 +119,25 @@
 
 	proc/check_hud_layout(mob/user)
 		if (user.client.tg_layout)
-			leave.screen_loc = "SOUTH,EAST-6"
+			src.bottom_bar_bg.screen_loc = "SOUTH, EAST-5"
+			src.bottom_bar_southwest.screen_loc = "SOUTH+1, EAST-6"
+			src.bottom_bar_south.screen_loc = "SOUTH+1, EAST-5"
+			src.bottom_bar_east.screen_loc = "SOUTH, EAST-6"
+
+			src.bottom_bar_southeast = create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_side", "SOUTH+1, EAST-4", HUD_LAYER, SOUTHEAST)
+			src.bottom_bar_west = create_screen("", "", 'icons/mob/hud_common.dmi', "hotbar_side", "SOUTH, EAST-4", HUD_LAYER, WEST)
+
+			src.leave.screen_loc = "SOUTH, EAST-5"
 		else
-			leave.screen_loc = "SOUTH,EAST"
+			src.bottom_bar_bg.screen_loc = "SOUTH, EAST"
+			src.bottom_bar_southwest.screen_loc = "SOUTH+1, EAST-1"
+			src.bottom_bar_south.screen_loc = "SOUTH+1, EAST"
+			src.bottom_bar_east.screen_loc = "SOUTH, EAST-1"
+
+			src.bottom_bar_southeast = null
+			src.bottom_bar_west = null
+
+			src.leave.screen_loc = "SOUTH, EAST"
 
 	proc/update_health()
 		check_clients()
@@ -102,170 +155,204 @@
 		if (master.engine)
 			if (master.engine.active)
 				engine.icon_state = "engine-on"
+				src.apply_button_overlay("text_online-w", src.engine)
+				src.apply_button_overlay("text_lights", src.lights)
+				src.apply_button_overlay("text_brakes", src.rcs)
+				if (master.rcs)
+					src.rcs.icon_state = "toggle-on"
+					src.apply_button_overlay("text_on", src.rcs)
+					src.rcs.ClearSpecificOverlays("text_off")
+				else
+					src.rcs.icon_state = "toggle-off"
+					src.apply_button_overlay("text_off", src.rcs)
+					src.rcs.ClearSpecificOverlays("text_on")
 			else
 				engine.icon_state = "engine-off"
+				src.engine.ClearAllOverlays()
+				src.lights.icon_state = "toggle-nopower"
+				src.lights.ClearAllOverlays()
+				src.rcs.icon_state = "toggle-nopower"
+				src.rcs.ClearAllOverlays()
 
 		if (master.engine?.active && master.sensors?.active)
-			wormhole.overlays.len = 0
+			src.wormhole.icon_state = "wormhole-on"
+			src.apply_button_overlay("text_warp", src.wormhole)
 		else
-			if (!wormhole.overlays.len)
-				wormhole.overlays += missing
+			src.wormhole.icon_state = "wormhole-off"
+			src.wormhole.ClearAllOverlays()
 
 		if (master.life_support)
 			if (master.life_support.active)
-				life_support.icon_state = "life_support-on"
+				src.life_support.icon_state = "life_support-on"
+				src.apply_button_overlay("text_online", src.life_support)
 			else
-				life_support.icon_state = "life_support-off"
+				src.life_support.icon_state = "life_support-off"
+				src.life_support.ClearAllOverlays()
 
 		if (master.com_system)
 			if (master.com_system.active)
-				comms.icon_state = "comms-on"
-				rts.overlays.len = 0
-				use_comms.overlays.len = 0
+				src.comms.icon_state = "comms-on"
+				src.use_comms.icon_state = "comms_system"
+				src.apply_button_overlay("text_online", src.comms)
+				src.apply_button_overlay("text_comm", src.use_comms)
 			else
-				comms.icon_state = "comms-off"
-				if (!rts.overlays.len)
-					rts.overlays += missing
-				if (!use_comms.overlays.len)
-					use_comms.overlays += missing
+				src.comms.icon_state = "comms-off"
+				src.use_comms.icon_state = "comms_system-nopower"
+				src.comms.ClearAllOverlays()
+				src.use_comms.ClearAllOverlays()
 
 		if (master.m_w_system)
+			src.apply_button_overlay("text_weapons", src.weapon)
 			if (master.m_w_system.active)
-				weapon.icon_state = "weapon-on"
+				src.weapon.icon_state = "weapon-on"
+				src.apply_button_overlay("text_armed", src.weapon)
 			else
-				weapon.icon_state = "weapon-off"
+				src.weapon.icon_state = "weapon-off"
+				src.weapon.ClearSpecificOverlays("text_armed")
 
 		if (master.sec_system)
-			if (master.sec_system.f_active)
-				secondary.icon_state = master.sec_system.hud_state
-			else if (master.sec_system.active)
-				secondary.icon_state = "[master.sec_system.hud_state]-on"
+			if (master.engine?.active)
+				src.secondary.icon_state = master.sec_system.hud_state
+				if (master.sec_system.f_active) // uses active toggle
+					if (master.sec_system.active)
+						src.apply_button_overlay("blank-overlay-on", src.secondary)
+					else
+						src.apply_button_overlay("blank-overlay-off", src.secondary)
+				else
+					src.apply_button_overlay("blank-overlay-use", src.secondary)
 			else
-				secondary.icon_state = "[master.sec_system.hud_state]-off"
+				src.secondary.icon_state = "blank"
+				src.secondary.ClearAllOverlays()
+		else
+			src.secondary.icon_state = "blank"
+			src.secondary.ClearAllOverlays()
 
 		if (master.sensors)
 			if (master.sensors.active)
-				sensors.icon_state = "sensors-on"
-				sensors_use.overlays.len = 0
+				src.sensors.icon_state = "sensors-on"
+				src.apply_button_overlay("text_online", src.sensors)
+				src.sensors_use.icon_state = "sensors_use"
+				src.apply_button_overlay("sensors_use-overlay", src.sensors_use)
 			else
-				sensors.icon_state = "sensors-off"
-				if (!sensors_use.overlays.len)
-					sensors_use.overlays += missing
+				src.sensors.icon_state = "sensors-off"
+				src.sensors.ClearSpecificOverlays("text_online")
+				src.sensors_use.icon_state = "sensors_use-nopower"
+				src.sensors_use.ClearSpecificOverlays("sensors_use-overlay")
 
 		if (master.lock)
-			if (master.lock.is_set() && master.locked)
-				lock.icon_state = "lock-locked"
+			if (master.lock.code && master.locked)
+				src.lock.icon_state = "lock-locked"
+				src.apply_button_overlay("text_locked", src.lock)
+				src.lock.ClearSpecificOverlays("text_unlocked")
 			else
-				lock.icon_state = "lock-unlocked"
+				src.lock.icon_state = "lock-unlocked"
+				src.apply_button_overlay("text_unlocked", src.lock)
+				src.lock.ClearSpecificOverlays("text_locked")
 
 		if (master.lights)
-			if (master.lights.active)
-				lights.icon_state = "[master.lights.hud_state]-on"
+			if (master.engine?.active)
+				src.apply_button_overlay("text_lights", src.lights)
+				if (master.lights.active)
+					src.lights.icon_state = "toggle-on"
+					src.apply_button_overlay("text_on", src.lights)
+					src.lights.ClearSpecificOverlays("text_off")
+				else
+					src.lights.icon_state = "toggle-off"
+					src.apply_button_overlay("text_off", src.lights)
+					src.lights.ClearSpecificOverlays("text_on")
 			else
-				lights.icon_state = "[master.lights.hud_state]-off"
+				src.lights.icon_state = "toggle-nopower"
+				src.lights.ClearAllOverlays()
 
-		if (master.rcs)
-			rcs.icon_state = "rcs-on"
-		else
-			rcs.icon_state = "rcs-off"
+		// if (master.rcs)
+		// 	rcs.icon_state = "rcs-on"
+		// else
+		// 	rcs.icon_state = "rcs-off"
 
 
 	proc/update_systems()
 		check_clients()
 		if (master.engine)
-			engine.name = master.engine.name
-			engine.overlays.len = 0
+			src.engine.name = master.engine.name
 		else
-			engine.name = "Engine"
-			if (!engine.overlays.len)
-				engine.overlays += missing
-
-		if (master.life_support)
-			life_support.name = master.life_support.name
-			life_support.overlays.len = 0
-		else
-			life_support.name = "Life Support"
-			if (!life_support.overlays.len)
-				life_support.overlays += missing
+			src.engine.name = "Engine"
+			src.engine.icon_state = "engine-off"
+			src.engine.ClearAllOverlays()
 
 		if (master.com_system)
-			comms.name = master.com_system.name
-			comms.overlays.len = 0
+			src.comms.name = master.com_system.name
 			if (!master.com_system.active)
-				if (!rts.overlays.len)
-					rts.overlays += missing
-				if (!use_comms.overlays.len)
-					use_comms.overlays += missing
-			else
-				rts.overlays.len = 0
-				use_comms.overlays.len = 0
+				src.comms.icon_state = "comms-off"
+				src.use_comms.icon_state = "comms_system-nopower"
+				src.use_comms.ClearAllOverlays()
 		else
-			comms.name = "Comms"
-			if (!comms.overlays.len)
-				comms.overlays += missing
-			if (!rts.overlays.len)
-				rts.overlays += missing
-			if (!use_comms.overlays.len)
-				use_comms.overlays += missing
+			src.comms.name = "Comms"
+			src.comms.icon_state = "comms-off"
+			src.comms.ClearAllOverlays()
+			src.use_comms.icon_state = "comms_system-nopower"
+			src.use_comms.ClearAllOverlays()
 
 		if (master.m_w_system)
-			weapon.name = master.m_w_system.name
-			weapon.overlays.len = 0
+			src.weapon.name = master.m_w_system.name
 		else
-			weapon.name = "Main Weapon"
-			if (!weapon.overlays.len)
-				weapon.overlays += missing
+			src.weapon.name = "Main Weapon"
+			src.weapon.icon_state = "weapon-nopower"
+			src.weapon.ClearAllOverlays()
 
 		if (master.sec_system)
-			secondary.name = master.sec_system.name
-			secondary.overlays.len = 0
+			src.secondary.name = master.sec_system.name
 		else
-			secondary.name = "Secondary System"
-			if (!secondary.overlays.len)
-				secondary.overlays += missing
-			secondary.icon_state = "blank"
+			src.secondary.name = "Secondary System"
+			src.secondary.icon_state = "secondary-off"
+			src.secondary.ClearAllOverlays()
 
 		if (master.sensors)
-			sensors.name = master.sensors.name
-			sensors.overlays.len = 0
+			src.sensors.name = master.sensors.name
 			if (!master.sensors.active)
-				sensors_use.overlays.len = 0
-			else
-				if (!sensors_use.overlays.len)
-					sensors_use.overlays += missing
+				src.sensors_use.icon_state = "sensors_use-nopower"
+				src.sensors_use.ClearAllOverlays()
 		else
-			sensors.name = "Sensors"
-			if (!sensors.overlays.len)
-				sensors.overlays += missing
-			if (!sensors_use.overlays.len)
-				sensors_use.overlays += missing
+			src.sensors.name = "Sensors"
+			src.sensors.icon_state = "sensors-off"
+			src.sensors.ClearAllOverlays()
+			src.sensors_use.icon_state = "sensors_use-nopower"
+			src.sensors_use.ClearAllOverlays()
 
 		if (master.lock)
-			lock.name = master.lock.name
-			lock.overlays.len = 0
-			set_code.overlays.len = 0
-			if (master && master.locked)
-				lock.icon_state = "lock-locked"
+			src.lock.name = master.lock.name
+			src.apply_button_overlay("text_lock", src.lock)
+			src.set_code.icon_state = "set_code"
+			src.apply_button_overlay("text_set_code", src.set_code)
+			src.apply_button_overlay("text_code", src.set_code)
+			if (master.locked)
+				src.lock.icon_state = "lock-locked"
+				src.apply_button_overlay("text_locked", src.lock)
+				src.lock.ClearSpecificOverlays("text_unlocked")
 			else
-				lock.icon_state = "lock-unlocked"
+				src.lock.icon_state = "lock-unlocked"
+				src.apply_button_overlay("text_unlocked", src.lock)
+				src.lock.ClearSpecificOverlays("text_locked")
 		else
-			lock.name = "Lock"
-			lock.icon_state = "lock-locked"
-			if (!lock.overlays.len)
-				lock.overlays += missing
-			if (!set_code.overlays.len)
-				set_code.overlays += missing
+			src.lock.name = "Lock"
+			src.lock.icon_state = "lock-nopower"
+			src.lock.ClearSpecificOverlays(list("text_lock", "text_locked", "text_unlocked"))
+			src.set_code.icon_state = "set_code-nopower"
+			src.set_code.ClearAllOverlays()
+
 		if (master.lights)
-			lights.name = master.lights.name
-			lights.overlays.len = 0
+			src.lights.name = master.lights.name
 		else
-			lights.name = "Lights"
-			if (!lights.overlays.len)
-				lights.overlays += missing
+			src.lights.name = "Lights"
+			src.lights.icon_state = "toggle-nopower"
 
 	proc/switch_sound()
 		for (var/mob/M in src.master)
 			M.playsound_local(src.master, 'sound/machines/pod_switch.ogg', 60, TRUE, ignore_flag = SOUND_IGNORE_SPACE)
+
+	proc/apply_button_overlay(name, atom/movable/screen/target)
+		if (!istext(name) || target.GetOverlayImage(name))
+			return FALSE
+		. = target.UpdateOverlays(image(src.hud_icon, "[name]"), name)
 
 	relay_click(id, mob/user, list/params)
 		if (user.loc != master)
