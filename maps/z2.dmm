@@ -3507,7 +3507,7 @@
 /area/hospital/samostrel)
 "arA" = (
 /obj/machinery/vending/cola/red,
-/turf/unsimulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetW"
 	},
 /area/moon/museum/west)
@@ -3691,7 +3691,7 @@
 /obj/stool/chair{
 	dir = 8
 	},
-/turf/unsimulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetW"
 	},
 /area/moon/museum/west)
@@ -6618,7 +6618,7 @@
 /obj/item/pen{
 	desc = "It's a normal black ink pen. Looks like it has been chewed on."
 	},
-/turf/unsimulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetNW"
 	},
 /area/marsoutpost)
@@ -6720,12 +6720,12 @@
 /obj/machinery/light/worn{
 	dir = 8
 	},
-/turf/unsimulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetSW"
 	},
 /area/marsoutpost)
 "aIW" = (
-/turf/unsimulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetS"
 	},
 /area/marsoutpost)
@@ -8361,7 +8361,7 @@
 /area/upper_arctic/pod2)
 "aOx" = (
 /obj/table/auto,
-/obj/bedsheetbin,
+/obj/linen_bin/bedsheet,
 /turf/unsimulated/floor/carpet/grime,
 /area/upper_arctic/pod2)
 "aOy" = (
@@ -9440,7 +9440,7 @@
 /area/crater/biodome/crew)
 "aRY" = (
 /obj/table/reinforced/auto,
-/obj/bedsheetbin,
+/obj/linen_bin/bedsheet,
 /turf/unsimulated/floor/carpet{
 	dir = 1;
 	icon_state = "green2"
@@ -14431,7 +14431,7 @@
 /area/marsoutpost)
 "biv" = (
 /obj/table/auto,
-/obj/bedsheetbin,
+/obj/linen_bin/bedsheet,
 /turf/unsimulated/floor/blue/corner{
 	dir = 1
 	},
@@ -22867,7 +22867,7 @@
 /turf/unsimulated/floor/wood/three,
 /area/afterlife/heaven/hydroponics)
 "bNI" = (
-/obj/item/card/id/captains_spare{
+/obj/item/card/id/gold/captains_spare{
 	desc = "Look, sometimes you don't wanna bother figuring out how access works and all that crap so you do something like this. Try not to lose it, doofus.";
 	name = "\improper Gross Hack card"
 	},
@@ -23623,7 +23623,7 @@
 /area/crunch)
 "bQl" = (
 /obj/table/auto,
-/obj/item/card/id/blank_deluxe{
+/obj/item/card/id/gold{
 	desc = "Some type of microchipped payment card. Looks like it's designed to deal with catcoins.";
 	name = "deluxe debit card"
 	},
@@ -30464,7 +30464,7 @@
 /area/dojo)
 "cpJ" = (
 /obj/table/wood/round/auto,
-/obj/towelbin,
+/obj/linen_bin/towel,
 /turf/unsimulated/floor/wood/two,
 /area/dojo)
 "cpK" = (
@@ -38460,7 +38460,7 @@
 	pixel_x = -8;
 	pixel_y = 9
 	},
-/obj/towelbin,
+/obj/linen_bin/towel,
 /turf/unsimulated/floor/sanitary/white,
 /area/owlery/owleryhall)
 "cOy" = (
@@ -45441,7 +45441,7 @@
 /area/syndicate_station/battlecruiser)
 "dhZ" = (
 /obj/table/auto,
-/obj/bedsheetbin,
+/obj/linen_bin/bedsheet,
 /turf/unsimulated/floor/red/redblackchecker,
 /area/syndicate_station/battlecruiser)
 "dia" = (
@@ -51222,17 +51222,13 @@
 /area/centcom/lounge)
 "dJd" = (
 /obj/machinery/sim/vr_bed{
-	dir = 8;
-	name = "VR simulation pod";
-	network = "arcadevr"
+	dir = 8
 	},
 /turf/unsimulated/floor/specialroom/arcade,
 /area/centcom/lounge)
 "dJe" = (
 /obj/machinery/sim/vr_bed{
-	dir = 4;
-	name = "VR simulation pod";
-	network = "arcadevr"
+	dir = 4
 	},
 /turf/unsimulated/floor/specialroom/arcade,
 /area/centcom/lounge)
@@ -52233,7 +52229,7 @@
 /area/centcom/garden)
 "dLV" = (
 /obj/table/round/auto,
-/obj/towelbin{
+/obj/linen_bin/towel{
 	pixel_y = 2
 	},
 /turf/unsimulated/floor{
@@ -52642,7 +52638,7 @@
 /area/centcom/garden)
 "dNk" = (
 /obj/table/round/auto,
-/obj/towelbin{
+/obj/linen_bin/towel{
 	pixel_y = 2
 	},
 /turf/unsimulated/floor/wood,
@@ -54147,7 +54143,7 @@
 "dSI" = (
 /obj/map/light/brightwhite,
 /obj/table/auto,
-/obj/towelbin,
+/obj/linen_bin/towel,
 /turf/unsimulated/floor/wood/two,
 /area/afterlife/bar)
 "dSJ" = (
@@ -55125,6 +55121,12 @@
 	},
 /turf/unsimulated/floor/wood/two,
 /area/syndicate/minerva5/command)
+"ena" = (
+/obj/stool/chair/office/purple{
+	dir = 4
+	},
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "enf" = (
 /turf/unsimulated/wall/auto/lead/white,
 /area/moon/museum/west)
@@ -56254,6 +56256,25 @@
 /obj/item/bananapeel,
 /turf/unsimulated/floor/black/side,
 /area/iomoon/base)
+"fks" = (
+/obj/item/disk/data/floppy/read_only/bank_progs{
+	pixel_y = 4;
+	pixel_x = 8
+	},
+/obj/item/clothing/head/NTberet{
+	pixel_y = 11;
+	pixel_x = 5;
+	name = "shameful stolen counterfeit Nanotrasen beret";
+	contraband = 9;
+	desc = "They've been looking for this thing for a long time."
+	},
+/obj/item/storage/box/ic_cones{
+	pixel_x = -5;
+	pixel_y = 5
+	},
+/obj/table/wood/auto,
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "fkC" = (
 /obj/mesh/catwalk{
 	dir = 10;
@@ -57247,6 +57268,12 @@
 	dir = 8
 	},
 /area/sim/gunsim/arena)
+"gdN" = (
+/obj/machinery/bathtub{
+	default_reagent = "hemolymph"
+	},
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "gdS" = (
 /obj/fakeobject{
 	anchored = 1;
@@ -58673,6 +58700,9 @@
 /obj/critter/domestic_bee/trauma,
 /turf/unsimulated/floor/plating,
 /area/meat_derelict/entry)
+"hgf" = (
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "hgp" = (
 /obj/table/regal/auto,
 /obj/item/cigarbox/gold{
@@ -60009,6 +60039,26 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/iomoon/base)
+"ioa" = (
+/obj/machinery/light{
+	dir = 1;
+	pixel_y = 21
+	},
+/obj/item/storage/box/prosthesis_kit/eye_meson{
+	pixel_y = 8;
+	pixel_x = 7
+	},
+/obj/item/pen/crayon/infrared{
+	pixel_y = -1;
+	pixel_x = -8
+	},
+/obj/item/device/t_scanner{
+	pixel_x = -6;
+	pixel_y = 11
+	},
+/obj/table/wood/auto/desk,
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "iov" = (
 /mob/living/critter/small_animal/seal{
 	dir = 4
@@ -60190,7 +60240,7 @@
 	dir = 5
 	},
 /obj/rack,
-/obj/towelbin,
+/obj/linen_bin/towel,
 /turf/unsimulated/floor/plating,
 /area/owlery/Owlmait)
 "itY" = (
@@ -61172,6 +61222,13 @@
 /obj/fakeobject/shuttlethruster,
 /turf/space,
 /area/syndicate_station/assault_pod)
+"jgg" = (
+/obj/machinery/computer3/generic/personal{
+	pixel_y = 3
+	},
+/obj/table/wood/auto,
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "jgk" = (
 /obj/shrub{
 	desc = "It's probably not suspicious that this plant is not only still alive, but thriving.";
@@ -66101,6 +66158,22 @@
 	icon_state = "shore-4"
 	},
 /area/titlescreen)
+"nbv" = (
+/obj/decal/poster/flag/nb{
+	pixel_y = 32
+	},
+/obj/item/quiver/leather/stocked,
+/obj/item/gun/bow/crossbow/wooden{
+	pixel_y = -3;
+	pixel_x = 3
+	},
+/obj/item/gun/bow/crossbow/wooden{
+	pixel_y = 9;
+	pixel_x = -5
+	},
+/obj/table/wood/auto,
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "nbB" = (
 /obj/securearea{
 	desc = "A warning sign which reads 'Fire Hazard'";
@@ -66572,6 +66645,10 @@
 	dir = 1
 	},
 /area/meat_derelict/soviet)
+"nvg" = (
+/obj/machinery/light,
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "nvp" = (
 /obj/storage/crate/bin{
 	desc = "She'll get around to these. Eventually...";
@@ -74537,6 +74614,14 @@
 	opacity = 0
 	},
 /area/centcom/lobby)
+"tBM" = (
+/obj/machinery/door/unpowered/wood{
+	dir = 8;
+	icon = 'icons/obj/doors/door_office.dmi';
+	lock_dir = 4
+	},
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "tDJ" = (
 /turf/unsimulated/floor/blackwhite/whitegrime/other,
 /area/observatory)
@@ -74929,6 +75014,14 @@
 	name = "security door"
 	},
 /area/moon/museum)
+"tWJ" = (
+/obj/decal/cleanable/writing/infrared{
+	pixel_y = -10;
+	pixel_x = 6;
+	words = "Only 2048 bugs to go..."
+	},
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "tXu" = (
 /obj/stool/chair/office/syndie{
 	dir = 4;
@@ -75368,6 +75461,12 @@
 	},
 /turf/unsimulated/outdoors/grass,
 /area/centcom/outside)
+"upb" = (
+/obj/submachine/ice_cream_dispenser{
+	flavors = list("shirley_temple")
+	},
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "upc" = (
 /obj/decal/poster/wallsign/teleport_sign{
 	dir = 8
@@ -77177,7 +77276,7 @@
 	req_access = list(37);
 	admin_access_override = 1
 	},
-/obj/item/card/id/nt_specialist{
+/obj/item/card/id/nanotrasen{
 	pixel_y = 7;
 	desc = "It seems by punctually completing paperwork someone has gained recognition as a paperwork specialist.";
 	name = "Paperwork Specialist's ID"
@@ -77705,6 +77804,20 @@
 /obj/mapping_helper/wingrille_spawn/auto,
 /turf/unsimulated/floor/white,
 /area/owlery/staffhall)
+"waS" = (
+/obj/machinery/disposal{
+	status = 1;
+	name = "turbo-busted disposal unit"
+	},
+/obj/item/currency/buttcoin{
+	pixel_y = 2;
+	pixel_x = -6
+	},
+/obj/decoration/railyard/schedule{
+	pixel_y = 27
+	},
+/turf/unsimulated/floor/wood/two,
+/area/centcom/offices/glowbold)
 "wbs" = (
 /obj/death_button/clean_gunsim{
 	pixel_x = 32
@@ -80676,6 +80789,17 @@
 /obj/railing/velvet,
 /turf/unsimulated/floor/marble/black,
 /area/centcom/gallery)
+"yif" = (
+/obj/admin_plaque{
+	name = "Glowbold's Office";
+	pixel_x = 32
+	},
+/turf/unsimulated/floor/grey/side{
+	dir = 4
+	},
+/area/centcom/offices{
+	icon_state = "blue"
+	})
 "yiB" = (
 /obj/decal/tile_edge/stripe/extra_big{
 	dir = 5
@@ -157886,7 +158010,7 @@ rER
 rER
 rER
 rER
-rER
+yif
 rER
 dxn
 rER
@@ -158189,7 +158313,7 @@ oaN
 wel
 wel
 wel
-oaN
+tBM
 wel
 wel
 sJH
@@ -158490,9 +158614,9 @@ dvW
 dvW
 dvW
 wel
-dvW
-dvW
-dvW
+waS
+tWJ
+gdN
 wel
 dEH
 dEQ
@@ -158792,9 +158916,9 @@ dvW
 dvW
 dvW
 wel
-dvW
-dvW
-dvW
+hgf
+hgf
+nvg
 wel
 dEI
 dER
@@ -159094,9 +159218,9 @@ lRO
 dvW
 dvW
 wel
-lRO
-dvW
-dvW
+ioa
+ena
+upb
 wel
 dRD
 dEQ
@@ -159396,9 +159520,9 @@ dvW
 dvW
 dvW
 wel
-dvW
-dvW
-dvW
+nbv
+jgg
+fks
 wel
 dEK
 dES

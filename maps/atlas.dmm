@@ -3361,7 +3361,7 @@
 	pixel_x = -10
 	},
 /obj/table/wood/auto,
-/obj/item/card/id/captains_spare,
+/obj/item/card/id/gold/captains_spare,
 /obj/item/sticker/ribbon/first_place,
 /obj/item/stamp/cap,
 /turf/simulated/floor/carpet/arcade,
@@ -4697,11 +4697,13 @@
 	},
 /area/station/bridge/customs)
 "aup" = (
-/obj/machinery/computer3/generic/bank_data,
 /obj/cable{
 	icon_state = "0-4"
 	},
 /obj/machinery/power/data_terminal,
+/obj/machinery/computer3/generic/personnel_management{
+	dir = 1
+	},
 /turf/simulated/floor/carpet{
 	icon_state = "fblue2"
 	},
@@ -7516,9 +7518,7 @@
 /area/station/maintenance/east)
 "aES" = (
 /obj/machinery/sim/vr_bed{
-	dir = 4;
-	name = "VR simulation pod";
-	network = "arcadevr"
+	dir = 4
 	},
 /turf/simulated/floor/carpet{
 	dir = 8;
@@ -17119,7 +17119,7 @@
 /area/station/maintenance/west)
 "jLt" = (
 /obj/table/auto,
-/obj/bedsheetbin,
+/obj/linen_bin/bedsheet,
 /obj/machinery/firealarm/north,
 /turf/simulated/floor,
 /area/station/crew_quarters/lounge)

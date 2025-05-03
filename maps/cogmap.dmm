@@ -1118,7 +1118,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/bedsheetbin,
+/obj/linen_bin/bedsheet,
 /turf/simulated/floor/purple,
 /area/station/crew_quarters/quartersA)
 "afa" = (
@@ -1372,7 +1372,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/bedsheetbin,
+/obj/linen_bin/bedsheet,
 /turf/simulated/floor/blue,
 /area/station/crew_quarters/quartersB)
 "afR" = (
@@ -5145,9 +5145,7 @@
 /area/station/crew_quarters/kitchen/freezer)
 "auF" = (
 /obj/machinery/sim/vr_bed{
-	dir = 4;
-	name = "VR simulation pod";
-	network = "arcadevr"
+	dir = 4
 	},
 /turf/simulated/floor/carpet{
 	dir = 5;
@@ -5156,9 +5154,7 @@
 /area/station/crew_quarters/arcade)
 "auG" = (
 /obj/machinery/sim/vr_bed{
-	dir = 8;
-	name = "VR simulation pod";
-	network = "arcadevr"
+	dir = 8
 	},
 /turf/simulated/floor/carpet{
 	dir = 9;
@@ -5470,9 +5466,7 @@
 /area/station/crew_quarters/locker)
 "avN" = (
 /obj/machinery/sim/vr_bed{
-	dir = 4;
-	name = "VR simulation pod";
-	network = "arcadevr"
+	dir = 4
 	},
 /obj/machinery/light{
 	dir = 8;
@@ -5501,9 +5495,7 @@
 /area/station/crew_quarters/arcade)
 "avQ" = (
 /obj/machinery/sim/vr_bed{
-	dir = 8;
-	name = "VR simulation pod";
-	network = "arcadevr"
+	dir = 8
 	},
 /obj/machinery/light{
 	dir = 4
@@ -5908,9 +5900,7 @@
 /area/station/maintenance/northwest)
 "axj" = (
 /obj/machinery/sim/vr_bed{
-	dir = 4;
-	name = "VR simulation pod";
-	network = "arcadevr"
+	dir = 4
 	},
 /turf/simulated/floor/carpet{
 	dir = 6;
@@ -5919,9 +5909,7 @@
 /area/station/crew_quarters/arcade)
 "axk" = (
 /obj/machinery/sim/vr_bed{
-	dir = 8;
-	name = "VR simulation pod";
-	network = "arcadevr"
+	dir = 8
 	},
 /turf/simulated/floor/carpet{
 	dir = 10;
@@ -12576,7 +12564,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/towelbin,
+/obj/linen_bin/towel,
 /turf/simulated/floor/wood,
 /area/station/crew_quarters/pool)
 "aSq" = (
@@ -15833,7 +15821,7 @@
 /area/station/bridge/customs)
 "bbZ" = (
 /obj/table/auto,
-/obj/bedsheetbin{
+/obj/linen_bin/bedsheet{
 	pixel_x = 4
 	},
 /obj/item/clothing/suit/judgerobe{
@@ -17907,7 +17895,7 @@
 /area/station/maintenance/disposal)
 "biv" = (
 /obj/table/auto,
-/obj/item/card/id/captains_spare{
+/obj/item/card/id/gold/captains_spare{
 	pixel_x = 8;
 	pixel_y = 10
 	},
@@ -23365,7 +23353,7 @@
 	pixel_x = -1;
 	pixel_y = 2
 	},
-/obj/bedsheetbin,
+/obj/linen_bin/bedsheet,
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_x = 12
@@ -51182,7 +51170,7 @@
 /obj/cable{
 	icon_state = "0-2"
 	},
-/obj/machinery/computer3/generic/bank_data{
+/obj/machinery/computer3/generic/personnel_management{
 	dir = 8
 	},
 /turf/simulated/floor/black,

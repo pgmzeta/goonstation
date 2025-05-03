@@ -504,7 +504,7 @@
 /area/pod_wars/team1/bar)
 "bO" = (
 /obj/table/reinforced/auto,
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetSE"
 	},
 /area/pod_wars/spacejunk/nancy)
@@ -1427,8 +1427,8 @@
 "eK" = (
 /obj/machinery/power/smes{
 	charge = 1e+006;
-	chargelevel = 15000;
-	output = 10000
+	chargelevel = 60000;
+	output = 40000
 	},
 /obj/cable,
 /turf/simulated/floor/engine,
@@ -2746,7 +2746,7 @@
 /obj/cable{
 	icon_state = "0-8"
 	},
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetNE"
 	},
 /area/pod_wars/spacejunk/nancy)
@@ -3352,6 +3352,11 @@
 /obj/cable,
 /turf/simulated/floor/white,
 /area/pod_wars/spacejunk/brightwell)
+"lb" = (
+/obj/machinery/light/incandescent,
+/obj/storage/crate/furnacefuel,
+/turf/simulated/floor/engine,
+/area/pod_wars/team2/power)
 "lc" = (
 /obj/surgery_tray,
 /obj/item/scalpel,
@@ -3809,8 +3814,8 @@
 "mq" = (
 /obj/machinery/power/smes{
 	charge = 1e+006;
-	chargelevel = 15000;
-	output = 10000
+	chargelevel = 60000;
+	output = 40000
 	},
 /obj/cable,
 /obj/decal/tile_edge/stripe/extra_big{
@@ -4029,7 +4034,7 @@
 /area/pod_wars/spacejunk/nancy/warehouse)
 "ne" = (
 /obj/table/reinforced/auto,
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetSW"
 	},
 /area/pod_wars/spacejunk/nancy)
@@ -5686,11 +5691,10 @@
 /turf/unsimulated/floor/wood/seven,
 /area/pod_wars/spacejunk/fstation/bar)
 "sp" = (
-/obj/machinery/computer/announcement{
+/obj/machinery/computer/announcement/syndicate{
 	dir = 8;
-	icon_state = "datasec";
-	name = "Syndicate Announcement Computer";
-	req_access = null
+	req_access = null;
+	area_name = null
 	},
 /turf/unsimulated/floor/red,
 /area/pod_wars/team2/bridge)
@@ -7041,6 +7045,10 @@
 	tag = "icon-catwalk (WEST)"
 	},
 /area/pod_wars/spacejunk/miningoutpost)
+"wE" = (
+/obj/storage/crate/furnacefuel,
+/turf/simulated/floor/engine,
+/area/pod_wars/team2/power)
 "wF" = (
 /obj/decal/tile_edge/stripe/extra_big{
 	dir = 8;
@@ -8249,7 +8257,7 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetNW"
 	},
 /area/pod_wars/spacejunk/nancy)
@@ -11578,7 +11586,7 @@
 "KQ" = (
 /obj/table/reinforced/auto,
 /obj/machinery/recharger,
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetS"
 	},
 /area/pod_wars/spacejunk/nancy)
@@ -11761,6 +11769,9 @@
 /obj/forcefield/energyshield/perma/doorlink,
 /turf/simulated/floor/yellow,
 /area/pod_wars/spacejunk/fstation/maintdock)
+"Ls" = (
+/turf/simulated/wall/auto/asteroid,
+/area/pod_wars/asteroid/minor)
 "Lt" = (
 /obj/item/storage/toilet{
 	dir = 4
@@ -12386,7 +12397,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/light/incandescent/netural,
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	icon_state = "carpetN"
 	},
 /area/pod_wars/spacejunk/nancy)
@@ -79774,9 +79785,9 @@ eC
 eC
 Uo
 eC
-eC
-eC
-eC
+Uo
+Uo
+Uo
 eC
 eC
 eC
@@ -79977,7 +79988,7 @@ Uo
 Uo
 Uo
 Uo
-eC
+Uo
 Uo
 Uo
 eC
@@ -80177,11 +80188,11 @@ eC
 Uo
 Uo
 Uo
-Uo
-Uo
-Uo
-Uo
-Uo
+Ls
+eC
+eC
+eC
+Ls
 Uo
 eC
 eC
@@ -80379,11 +80390,11 @@ eC
 eC
 Uo
 Uo
-Uo
-Uo
-Uo
-Uo
-Uo
+eC
+eC
+eC
+eC
+eC
 Uo
 Uo
 eC
@@ -80579,13 +80590,13 @@ eC
 eC
 eC
 eC
+Uo
+Uo
+eC
+Ls
 eC
 eC
-Uo
-Uo
-Uo
-Uo
-Uo
+Ls
 Uo
 Uo
 eC
@@ -80781,13 +80792,13 @@ eC
 eC
 eC
 eC
+Uo
+Uo
+eC
+Ls
 eC
 eC
-Uo
-Uo
-Uo
-Uo
-Uo
+eC
 Uo
 eC
 eC
@@ -80984,13 +80995,13 @@ eC
 eC
 eC
 eC
-eC
-eC
 Uo
 Uo
 Uo
 Uo
-eC
+Uo
+Uo
+Uo
 eC
 eC
 eC
@@ -81187,11 +81198,11 @@ eC
 eC
 eC
 eC
-eC
-eC
-eC
-eC
-eC
+Uo
+Uo
+Uo
+Uo
+Uo
 eC
 eC
 eC
@@ -85807,7 +85818,7 @@ eC
 eC
 za
 za
-za
+eC
 za
 eC
 za
@@ -127296,7 +127307,7 @@ jC
 nV
 Dx
 gq
-xg
+wE
 pP
 fv
 We
@@ -127700,7 +127711,7 @@ uV
 nV
 Sg
 gq
-pP
+lb
 xg
 cv
 sJ
@@ -128104,7 +128115,7 @@ rK
 ye
 xc
 oN
-xg
+wE
 xg
 Nz
 xg
@@ -128710,7 +128721,7 @@ OL
 OL
 aX
 OA
-xg
+wE
 pP
 xg
 xg
