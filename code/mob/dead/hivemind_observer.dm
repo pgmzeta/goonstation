@@ -20,6 +20,8 @@ TYPEINFO(/mob/dead/target_observer)
 		. = ..()
 		if (!point_img)
 			point_img = image('icons/mob/screen1.dmi', icon_state = "arrow")
+		src.listen_tree.RemoveListenInput(LISTEN_INPUT_DEADCHAT)
+		src.speech_tree.RemoveSpeechOutput(SPEECH_OUTPUT_DEADCHAT_GHOST)
 		REMOVE_ATOM_PROPERTY(src, PROP_MOB_EXAMINE_ALL_NAMES, src)
 
 	stop_observing()
