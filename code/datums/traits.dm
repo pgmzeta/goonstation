@@ -108,25 +108,10 @@
 
 	proc/getTraits(var/mob/user)
 		. = list()
-
-		var/skipUnlocks = 0
 		for(var/X in traitList)
 			var/datum/trait/C = getTraitById(X)
 
 			if(C.unselectable) continue
-
-			if(C.requiredUnlock != null && skipUnlocks) continue
-
-			if(C.requiredUnlock != null && user.client) //If this needs an xp unlock, check against the pre-generated list of related xp unlocks for this person.
-				if(!isnull(user.client.qualifiedXpRewards))
-					if(!(C.requiredUnlock in user.client.qualifiedXpRewards))
-						continue
-				else
-					boutput(user, SPAN_ALERT("<b>WARNING: XP unlocks failed to update. Some traits may not be available. Please try again in a moment.</b>"))
-					SPAWN(0)
-						user.client.updateXpRewards()
-					skipUnlocks = 1
-					continue
 
 			. += C
 
@@ -227,7 +212,6 @@
 	var/points = 0	   //The change in points when this is selected.
 	var/list/category = null //If set to a non-null string, People will only be able to pick one trait of any given category
 	var/unselectable = FALSE //If TRUE, trait can not be select at char setup
-	var/requiredUnlock = null //If set to a string, the xp unlock of that name is required for this to be selectable.
 	var/isMoveTrait = FALSE // If TRUE, onMove will be called each movement step from the holder's mob
 	var/datum/mutantrace/mutantRace = null //If set, should be in the "species" category.
 	var/afterlife_blacklisted = FALSE // If TRUE, trait will not be added in the Afterlife Bar

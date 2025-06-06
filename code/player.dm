@@ -58,6 +58,10 @@
 	var/antag_tokens = null
 	/// Newbee Tutorial
 	var/datum/tutorial_base/regional/newbee/tutorial = null
+	/// JobXP Cache list("Job1" = xp1, "Job2" = xp2)
+	var/list/cached_jobxp
+	/// Medal Cache list("medal1", "medal2")
+	var/list/cached_medals
 
 	/// sets up vars, caches player stats, adds by_type list entry for this datum
 	New(key)

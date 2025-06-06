@@ -102,6 +102,7 @@
 #include "defines\radio.dm"
 #include "defines\ranch.dm"
 #include "defines\RCD.dm"
+#include "defines\rewards.dm"
 #include "defines\speech_pro.dm"
 #include "defines\reagents.dm"
 #include "defines\robot.dm"
