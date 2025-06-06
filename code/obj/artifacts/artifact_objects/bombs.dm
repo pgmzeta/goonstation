@@ -541,6 +541,92 @@ ABSTRACT_TYPE(/datum/artifact/bomb)
 				O.ArtifactDestroyed()
 
 
+/obj/machinery/artifact/bomb/whitehole
+	name = "artifact white hole bomb"
+	associated_datum = /datum/artifact/bomb/whitehole
+
+/datum/artifact/bomb/whitehole
+	associated_object = /obj/machinery/artifact/bomb/whitehole
+	type_name = "Bomb (white hole)"
+	rarity_weight = 200
+	react_xray = list(88,25,70,89,"ULTRALIGHT")
+	warning_initial = "begins swirling with inverted energy!"
+	warning_final = "begins to uncollapse itself!"
+	var/origin = "asteroid"
+
+	post_setup()
+		. = ..()
+		switch(src.artitype.name)
+			if("ancient")
+				src.origin = pick(
+					1;"nukies",
+					5;"artlab",
+					10;"ore",
+					10;"asteroid",
+					50;"cargo",
+					50;"maint",
+					50;"nuclear",
+					100;"singulo",
+					100;"ai",
+				)
+			if("martian")
+				src.origin = pick(
+					1;"nukies",
+					5;"artlab",
+					10;"asteroid",
+					10;"ore",
+					50;"security",
+					50;"chapel",
+					50;"botany",
+					100;"trench",
+					100;"cafeteria",
+				)
+			if("wizard")
+				src.origin = pick(
+					1;"nukies",
+					5;"artlab",
+					10;"ore",
+					10;"asteroid",
+					50;"clown",
+					50;"chapel",
+					50;"janitorial",
+					100;"wizard",
+					100;"spacemas",
+				)
+			if("eldritch")
+				src.origin = pick(
+					1;"nukies",
+					5;"artlab",
+					10;"ore",
+					10;"asteroid",
+					50;"flock",
+					50;"clown",
+					50;"teg",
+					100;"plasma",
+					100;"hell",
+				)
+			if("precursor")
+				src.origin = pick(
+					1;"nukies",
+					5;"artlab",
+					10;"asteroid",
+					10;"ore",
+					50;"hell",
+					50;"clown",
+					50;"medbay",
+					100;"flock",
+					100;"bridge",
+				)
+
+	deploy_payload(var/obj/O)
+		if (..())
+			return
+		var/turf/T = get_turf(O)
+		new /obj/whitehole(T, rand(100,300), triggered_by_event=TRUE)
+
+		if (O)
+			O.ArtifactDestroyed()
+
 #undef NO_EFFECT
 #undef MAKE_HUMAN_MATERIAL
 #undef MAKE_HUMAN_STATUE
