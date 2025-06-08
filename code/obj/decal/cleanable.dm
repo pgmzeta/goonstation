@@ -566,6 +566,9 @@ var/list/blood_decal_violent_icon_states = list("floor1", "floor2", "floor3", "f
 	hurting2
 		icon_state = "hurting2"
 
+/obj/decal/cleanable/blood/changeling
+	sample_reagent = "bloodc"
+
 /obj/decal/cleanable/blood/gibs
 	name = "gibs"
 	desc = "Grisly..."

@@ -296,8 +296,6 @@
 				return
 		return
 
-#define LIMB_IS_ARM 1
-#define LIMB_IS_LEG 2
 /datum/bioEffect/funky_limb
 	name = "Motor Neuron Signal Enhancement" // heh
 	desc = "Causes involuntary muscle contractions in limbs, due to a loss of inhibition of motor neurons."
@@ -381,15 +379,10 @@
 
 		src.limb = pick(possible_limbs)
 
-		if (istype(src.limb, /obj/item/parts/human_parts/arm) || istype(src.limb, /obj/item/parts/robot_parts/arm))
+		if (src.limb & LIMB_IS_ARM)
 			src.limb_type = LIMB_IS_ARM
-			return 1
-		else if (istype(src.limb, /obj/item/parts/human_parts/leg) || istype(src.limb, /obj/item/parts/robot_parts/leg))
+		if (src.limb & LIMB_IS_LEG)
 			src.limb_type = LIMB_IS_LEG
-			return 1
-
-#undef LIMB_IS_ARM
-#undef LIMB_IS_LEG
 
 ///////////////////////////////////////
 // Harmful to others as well as self //

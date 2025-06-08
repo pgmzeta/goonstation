@@ -307,6 +307,7 @@
 	name = "placeholder item (don't use this!)"
 	desc = "A human arm."
 	can_hold_items = 1
+	kind_of_limb = (LIMB_IS_ARM)
 	var/rebelliousness = 0
 	var/strangling = FALSE
 
@@ -398,6 +399,7 @@
 	name = "placeholder item (don't use this!)"
 	desc = "A human leg, pretty important for mobility."
 	object_flags = NO_ARM_ATTACH
+	kind_of_limb = (LIMB_IS_LEG)
 	var/rebelliousness = 0
 	var/datum/fluid_group/last_fluid_group = null //! Used to tell when the fluid has changed to reduce absorbtion message spam
 
@@ -506,7 +508,7 @@
 	random_limb_blacklisted = TRUE
 	/// No more yee eating csaber arms
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_ITEM)
+	kind_of_limb = (LIMB_ITEM | LIMB_IS_ARM)
 
 	New(new_holder, var/obj/item/I)
 		..()
@@ -652,7 +654,7 @@
 	random_limb_blacklisted = TRUE
 	/// Also, item arms are supposedly junk jammed into a severed limb's socket
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_ITEM)
+	kind_of_limb = (LIMB_ITEM | LIMB_IS_ARM)
 
 	New(new_holder, var/obj/item/I)
 		..()
@@ -772,7 +774,7 @@
 	show_on_examine = TRUE
 	/// Brullbar are pretty unnatural, and most people'd miss em if they suddenly turned into a lizard arm
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_BRULLBAR)
+	kind_of_limb = (LIMB_BRULLBAR | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -798,7 +800,7 @@
 	show_on_examine = TRUE
 	/// If you went through the trouble to get yourself a wendy arm, you should keep it no matter how inhuman you become
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_BRULLBAR)
+	kind_of_limb = (LIMB_BRULLBAR | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -822,7 +824,7 @@
 	handlistPart = "hand_left"
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_HOT)
+	kind_of_limb = (LIMB_HOT | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -841,7 +843,7 @@
 	handlistPart = "hand_right"
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_HOT)
+	kind_of_limb = (LIMB_HOT | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -863,7 +865,7 @@
 	partIconModifier = "bear"
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_BEAR)
+	kind_of_limb = (LIMB_BEAR | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -885,7 +887,7 @@
 	partIconModifier = "bear"
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_BEAR)
+	kind_of_limb = (LIMB_BEAR | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -906,7 +908,7 @@
 	easy_attach = TRUE
 	/// Plants are pretty unnatural
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_PLANT)
+	kind_of_limb = (LIMB_PLANT | LIMB_IS_ARM)
 	fingertip_color = "#3fb54f"
 
 	New(var/atom/holder)
@@ -927,7 +929,7 @@
 	show_on_examine = TRUE
 	easy_attach = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_PLANT)
+	kind_of_limb = (LIMB_PLANT | LIMB_IS_ARM)
 	fingertip_color = "#3fb54f"
 
 	New(var/atom/holder)
@@ -948,7 +950,7 @@
 	show_on_examine = TRUE
 	easy_attach = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_PLANT)
+	kind_of_limb = (LIMB_PLANT | LIMB_IS_LEG)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -973,7 +975,7 @@
 	show_on_examine = TRUE
 	easy_attach = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_PLANT)
+	kind_of_limb = (LIMB_PLANT | LIMB_IS_LEG)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1023,7 +1025,7 @@
 	show_on_examine = TRUE
 	/// About as unnatural as it gets
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_ABOM)
+	kind_of_limb = (LIMB_ABOM | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1061,7 +1063,7 @@
 	partIconModifier = "abomination"
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_ABOM)
+	kind_of_limb = (LIMB_ABOM | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1100,7 +1102,7 @@
 	streak_descriptor = "undeadly"
 	/// Supernatural if not abnormally gross
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_ZOMBIE)
+	kind_of_limb = (LIMB_ZOMBIE | LIMB_IS_ARM)
 	breaks_cuffs = TRUE
 
 	New(var/atom/holder)
@@ -1121,7 +1123,7 @@
 	skintoned = TRUE
 	streak_descriptor = "undeadly"
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_ZOMBIE)
+	kind_of_limb = (LIMB_ZOMBIE | LIMB_IS_ARM)
 	breaks_cuffs = TRUE
 
 	New(var/atom/holder)
@@ -1144,7 +1146,7 @@
 	siemens_coefficient = 0
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_BRULLBAR)
+	kind_of_limb = (LIMB_BRULLBAR | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1165,7 +1167,7 @@
 	siemens_coefficient = 0
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_BRULLBAR)
+	kind_of_limb = (LIMB_BRULLBAR | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1173,7 +1175,7 @@
 		..()
 
 /obj/item/parts/human_parts/arm/right/stone
-	name = "synthetic right arm"
+	name = "stone right arm"
 	desc = "A right arm. Looks like it's made out of stone. How is that even possible?"
 	icon_state = "arm_right_stone"
 	slot = "r_arm"
@@ -1184,7 +1186,7 @@
 	partIconModifier = "stone"
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_STONE)
+	kind_of_limb = (LIMB_STONE | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1192,8 +1194,8 @@
 		..()
 
 /obj/item/parts/human_parts/arm/left/stone
-	name = "synthetic left arm"
-	desc = "A left arm. Looks like a rope composed of vines. And tofu??"
+	name = "stone left arm"
+	desc = "A left arm. Looks like it's made out of stone. How is that even possible?"
 	icon_state = "arm_left_stone"
 	slot = "l_arm"
 	side = "left"
@@ -1203,7 +1205,7 @@
 	partIconModifier = "stone"
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_STONE)
+	kind_of_limb = (LIMB_STONE | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1211,8 +1213,8 @@
 		..()
 
 /obj/item/parts/human_parts/leg/left/stone
-	name = "synthetic left leg"
-	desc = "A right arm. Looks like it's made out of stone. How is that even possible?"
+	name = "stone left leg"
+	desc = "A right leg. Looks like it's made out of stone. How is that even possible?"
 	icon_state = "leg_left_stone"
 	slot = "l_leg"
 	side = "left"
@@ -1222,7 +1224,7 @@
 	partIconModifier = "stone"
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_STONE)
+	kind_of_limb = (LIMB_STONE | LIMB_IS_LEG)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1230,8 +1232,8 @@
 		..()
 
 /obj/item/parts/human_parts/leg/right/stone
-	name = "synthetic right leg"
-	desc = "A right arm. Looks like it's made out of stone. How is that even possible?"
+	name = "stone right leg"
+	desc = "A right leg. Looks like it's made out of stone. How is that even possible?"
 	icon_state = "leg_right_stone"
 	slot = "r_leg"
 	side = "right"
@@ -1241,7 +1243,7 @@
 	partIconModifier = "stone"
 	show_on_examine = TRUE
 	limb_is_unnatural = TRUE
-	kind_of_limb = (LIMB_STONE)
+	kind_of_limb = (LIMB_STONE | LIMB_IS_LEG)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1260,7 +1262,7 @@
 	side = "left"
 	handlistPart = "hand_left"
 	skintoned = FALSE
-	kind_of_limb = (LIMB_MUTANT)
+	kind_of_limb = (LIMB_MUTANT | LIMB_IS_ARM)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1278,7 +1280,7 @@
 	partlistPart = "foot_left"
 	step_image_state = "footprintsL"
 	skintoned = FALSE
-	kind_of_limb = (LIMB_MUTANT)
+	kind_of_limb = (LIMB_MUTANT | LIMB_IS_LEG)
 
 	New(var/atom/holder)
 		if (holder != null)
@@ -1673,13 +1675,13 @@
 /obj/item/parts/human_parts/leg/mutant/werewolf
 	icon = 'icons/mob/werewolf.dmi'
 	partIcon = 'icons/mob/werewolf.dmi'
-	kind_of_limb = (LIMB_MUTANT | LIMB_WOLF)
+	kind_of_limb = (LIMB_MUTANT | LIMB_WOLF | LIMB_IS_LEG)
 
 /obj/item/parts/human_parts/arm/mutant/werewolf
 	icon = 'icons/mob/werewolf.dmi'
 	partIcon = 'icons/mob/werewolf.dmi'
 	limb_type = /datum/limb/abomination/werewolf
-	kind_of_limb = (LIMB_MUTANT | LIMB_WOLF)
+	kind_of_limb = (LIMB_MUTANT | LIMB_WOLF | LIMB_IS_ARM)
 	fingertip_color = "#895d37"
 
 	sever(mob/user)
@@ -1752,12 +1754,12 @@
 /obj/item/parts/human_parts/arm/mutant/vampiric_thrall
 	icon = 'icons/mob/vampiric_thrall.dmi'
 	partIcon = 'icons/mob/vampiric_thrall.dmi'
-	kind_of_limb = LIMB_MUTANT
+	kind_of_limb = (LIMB_MUTANT | LIMB_IS_ARM)
 
 /obj/item/parts/human_parts/leg/mutant/vampiric_thrall
 	icon = 'icons/mob/vampiric_thrall.dmi'
 	partIcon = 'icons/mob/vampiric_thrall.dmi'
-	kind_of_limb = LIMB_MUTANT
+	kind_of_limb = (LIMB_MUTANT | LIMB_IS_LEG)
 
 //// LIMBS ////
 /obj/item/parts/human_parts/arm/mutant/vampiric_thrall/left
@@ -1801,7 +1803,7 @@
 	icon = 'icons/mob/skeleton.dmi'
 	partIcon = 'icons/mob/skeleton.dmi'
 	easy_attach = TRUE // Its just a bone... full of meat. Kind of.
-	kind_of_limb = (LIMB_MUTANT | LIMB_SKELLY)
+	kind_of_limb = (LIMB_MUTANT | LIMB_SKELLY | LIMB_IS_ARM)
 	force = 10
 	throw_return = TRUE
 	fingertip_color = "#aa9987"
@@ -1810,7 +1812,7 @@
 	icon = 'icons/mob/skeleton.dmi'
 	partIcon = 'icons/mob/skeleton.dmi'
 	easy_attach = TRUE
-	kind_of_limb = (LIMB_MUTANT | LIMB_SKELLY)
+	kind_of_limb = (LIMB_MUTANT | LIMB_SKELLY | LIMB_IS_LEG)
 	force = 10
 	throw_return = TRUE
 
@@ -2002,7 +2004,7 @@
 	handfoot_overlay_1_color = null
 	severed_overlay_1_color = null
 	easy_attach = TRUE // These plants really like humanoid flesh
-	kind_of_limb = (LIMB_MUTANT | LIMB_PLANT)
+	kind_of_limb = (LIMB_MUTANT | LIMB_PLANT | LIMB_IS_ARM)
 
 	New()
 		limb_overlay_1_state = "[src.slot]_kudzu"
@@ -2021,7 +2023,7 @@
 	handfoot_overlay_1_color = null
 	severed_overlay_1_color = null
 	easy_attach = TRUE
-	kind_of_limb = (LIMB_MUTANT | LIMB_PLANT)
+	kind_of_limb = (LIMB_MUTANT | LIMB_PLANT | LIMB_IS_LEG)
 
 	on_life()
 		. = ..()

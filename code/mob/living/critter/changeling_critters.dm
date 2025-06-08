@@ -698,12 +698,12 @@ TYPEINFO(/mob/living/critter/changeling)
 		src.visible_message("<font color='#FF0000'><B>\The [src]</B> crawls down [H.name]'s throat!</font>")
 		playsound(src, 'sound/misc/headspiderability.ogg', 60)
 		src.set_loc(H)
-		H.setStatusMin("unconscious", 10 SECONDS)
+		// H.setStatusMin("unconscious", 10 SECONDS) // less obvious during High Stress Situations
 
-		var/datum/ailment_data/parasite/ailment_data = get_disease_from_path(/datum/ailment/parasite/headspider).setup_strain()
-		ailment_data.affected_mob = H
-		ailment_data.source = src
-		H.contract_disease(/datum/ailment/parasite/headspider, null, ailment_data, TRUE)
+		var/obj/item/organ/heart/headspider/hs_heart = new(H)
+		hs_heart.source = src
+		src.set_loc(hs_heart)
+		H.organHolder.receive_organ(hs_heart, "heart", 0, TRUE)
 
 		logTheThing(LOG_COMBAT, src.mind, "'s headspider enters [constructTarget(H,"combat")] at [log_loc(src)].")
 

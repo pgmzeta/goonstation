@@ -530,6 +530,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/arm)
 	max_health = 60
 	can_hold_items = 1
 	accepts_normal_human_overlays = TRUE
+	kind_of_limb = (LIMB_ROBOT | LIMB_IS_ARM)
 	var/emagged = FALSE //contains: technical debt
 	var/add_to_tools = FALSE
 
@@ -710,7 +711,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/arm/left)
 	max_health = 115
 	weight = 0.2
 	robot_movement_modifier = /datum/movement_modifier/robot_part/sturdy_arm_left
-	kind_of_limb = (LIMB_ROBOT | LIMB_HEAVY)
+	kind_of_limb = (LIMB_ROBOT | LIMB_HEAVY | LIMB_IS_ARM)
 
 	attackby(obj/item/W, mob/user)
 		if(istype(W,/obj/item/sheet))
@@ -726,7 +727,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/arm/left)
 	max_health = 175
 	weight = 0.4
 	robot_movement_modifier = /datum/movement_modifier/robot_part/heavy_arm_left
-	kind_of_limb = (LIMB_ROBOT | LIMB_HEAVIER)
+	kind_of_limb = (LIMB_ROBOT | LIMB_HEAVIER | LIMB_IS_ARM)
 
 /obj/item/parts/robot_parts/arm/left/light
 	name = "light cyborg left arm"
@@ -736,7 +737,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/arm/left)
 	max_health = 25
 	handlistPart = "armL-light"
 	robot_movement_modifier = /datum/movement_modifier/robot_part/light_arm_left
-	kind_of_limb = (LIMB_ROBOT | LIMB_LIGHT)
+	kind_of_limb = (LIMB_ROBOT | LIMB_LIGHT | LIMB_IS_ARM)
 	breaks_cuffs = FALSE
 
 ABSTRACT_TYPE(/obj/item/parts/robot_parts/arm/right)
@@ -765,7 +766,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/arm/right)
 	max_health = 115
 	weight = 0.2
 	robot_movement_modifier = /datum/movement_modifier/robot_part/sturdy_arm_right
-	kind_of_limb = (LIMB_ROBOT | LIMB_HEAVY)
+	kind_of_limb = (LIMB_ROBOT | LIMB_HEAVY | LIMB_IS_ARM)
 
 	attackby(obj/item/W, mob/user)
 		if(istype(W,/obj/item/sheet))
@@ -781,7 +782,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/arm/right)
 	max_health = 175
 	weight = 0.4
 	robot_movement_modifier = /datum/movement_modifier/robot_part/heavy_arm_right
-	kind_of_limb = (LIMB_ROBOT | LIMB_HEAVIER)
+	kind_of_limb = (LIMB_ROBOT | LIMB_HEAVIER | LIMB_IS_ARM)
 
 /obj/item/parts/robot_parts/arm/right/light
 	name = "light cyborg right arm"
@@ -791,7 +792,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/arm/right)
 	max_health = 25
 	handlistPart = "armR-light"
 	robot_movement_modifier = /datum/movement_modifier/robot_part/light_arm_right
-	kind_of_limb = (LIMB_ROBOT | LIMB_LIGHT)
+	kind_of_limb = (LIMB_ROBOT | LIMB_LIGHT | LIMB_IS_ARM)
 	breaks_cuffs = FALSE
 
 ABSTRACT_TYPE(/obj/item/parts/robot_parts/leg)
@@ -801,6 +802,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/leg)
 	icon_state_base = "legs" // effectively the prefix for items that go on both legs at once.
 	material_amt = ROBOT_LIMB_COST
 	max_health = 60
+	kind_of_limb = (LIMB_ROBOT | LIMB_IS_LEG)
 	var/step_sound = "step_robo"
 	var/step_priority = STEP_PRIORITY_LOW
 
@@ -902,7 +904,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/leg/left)
 	max_health = 25
 	movement_modifier = null
 	robot_movement_modifier = /datum/movement_modifier/robot_part/light_leg_left
-	kind_of_limb = (LIMB_ROBOT | LIMB_LIGHT)
+	kind_of_limb = (LIMB_ROBOT | LIMB_LIGHT | LIMB_IS_LEG)
 	breaks_cuffs = FALSE
 
 /obj/item/parts/robot_parts/leg/left/treads
@@ -916,7 +918,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/leg/left)
 	step_image_state = "tracksL"
 	movement_modifier = /datum/movement_modifier/robottread_left
 	robot_movement_modifier = /datum/movement_modifier/robot_part/tread_left
-	kind_of_limb = (LIMB_ROBOT | LIMB_TREADS)
+	kind_of_limb = (LIMB_ROBOT | LIMB_TREADS | LIMB_IS_LEG)
 
 ABSTRACT_TYPE(/obj/item/parts/robot_parts/leg/right)
 /obj/item/parts/robot_parts/leg/right
@@ -941,7 +943,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/leg/right)
 	max_health = 25
 	movement_modifier = null
 	robot_movement_modifier = /datum/movement_modifier/robot_part/light_leg_right
-	kind_of_limb = (LIMB_ROBOT | LIMB_LIGHT)
+	kind_of_limb = (LIMB_ROBOT | LIMB_LIGHT | LIMB_IS_LEG)
 	breaks_cuffs = FALSE
 
 /obj/item/parts/robot_parts/leg/right/treads
@@ -955,7 +957,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/leg/right)
 	step_image_state = "tracksR"
 	movement_modifier = /datum/movement_modifier/robottread_right
 	robot_movement_modifier = /datum/movement_modifier/robot_part/tread_right
-	kind_of_limb = (LIMB_ROBOT | LIMB_TREADS)
+	kind_of_limb = (LIMB_ROBOT | LIMB_TREADS | LIMB_IS_LEG)
 
 /obj/item/parts/robot_parts/leg/left/thruster
 	name = "left thruster assembly"
@@ -967,7 +969,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/leg/right)
 	powerdrain = 5
 	step_image_state = null //It's flying so no need for this.
 	robot_movement_modifier = /datum/movement_modifier/robot_part/thruster_left
-	kind_of_limb = (LIMB_ROBOT | LIMB_TREADS | LIMB_LIGHT)
+	kind_of_limb = (LIMB_ROBOT | LIMB_TREADS | LIMB_LIGHT | LIMB_IS_LEG)
 
 	on_life()
 		var/turf/T = get_turf(src.holder)
@@ -984,7 +986,7 @@ ABSTRACT_TYPE(/obj/item/parts/robot_parts/leg/right)
 	powerdrain = 5
 	step_image_state = null //It's flying so no need for this.
 	robot_movement_modifier = /datum/movement_modifier/robot_part/thruster_right
-	kind_of_limb = (LIMB_ROBOT | LIMB_TREADS | LIMB_LIGHT)
+	kind_of_limb = (LIMB_ROBOT | LIMB_TREADS | LIMB_LIGHT | LIMB_IS_LEG)
 
 	on_life()
 		var/turf/T = get_turf(src.holder)

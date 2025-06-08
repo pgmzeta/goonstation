@@ -169,7 +169,7 @@
 			if (HS.disposed || !HS.mind || HS.mind.disposed || isdead(HS)) // we went somewhere else, or suicided, or something idk
 				return
 			HS.UnregisterSignal(src, COMSIG_PARENT_PRE_DISPOSING) // We no longer want to disappear if the body gets del'd
-			boutput(HS, "<b class = 'hint'>We released a headspider, using up some of our DNA reserves.</b>")
+			boutput(HS, SPAN_HINT("<b>We released a headspider, using up some of our DNA reserves.</b>"))
 			HS.set_loc(get_turf(body)) //be free!!!
 			body.visible_message(SPAN_ALERT("<B>[body]</B>'s head detaches, sprouts legs and wanders off looking for food!"))
 			// make a headspider, have it crawl to find a host, give the host the disease, hand control to the player again afterwards
@@ -177,7 +177,7 @@
 
 			if (body.client)
 				body.ghostize()
-				boutput(src.owner, "Something went wrong, and we couldn't transfer you into a handspider! Please adminhelp this.")
+				boutput(src.owner, "Something went wrong, and we couldn't transfer you into a headspider! Please adminhelp this.")
 
 			logTheThing(LOG_COMBAT, body, "became a headspider at [log_loc(body)].")
 

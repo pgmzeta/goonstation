@@ -175,6 +175,10 @@
 #define LIMB_SKELLY   (1<<16)
 /// Limb is an artifact limb
 #define LIMB_ARTIFACT (1<<17)
+/// Limb is an arm
+#define LIMB_IS_ARM   (1<<18)
+/// Limb is a leg
+#define LIMB_IS_LEG   (1<<19)
 
 // islimb macros
 #define ismutantlimb(x)   HAS_FLAG(x:kind_of_limb, LIMB_MUTANT)
@@ -205,6 +209,9 @@
                        HAS_FLAG(x:kind_of_limb, LIMB_HEAVY) |\
                        HAS_FLAG(x:kind_of_limb, LIMB_HEAVIER) |\
                        HAS_FLAG(x:kind_of_limb, LIMB_TREADS))
+
+#define isarm(x) (HAS_FLAG(x:kind_of_limb, LIMB_IS_ARM))
+#define isleg(x) (HAS_FLAG(x:kind_of_limb, LIMB_IS_LEG))
 
 #define W_CLASS_TINY 1
 #define W_CLASS_SMALL 2

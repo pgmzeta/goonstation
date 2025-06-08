@@ -8,7 +8,7 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts)
 	decomp_affected = FALSE
 	accepts_normal_human_overlays = FALSE
 	limb_is_unnatural = TRUE
-	kind_of_limb = LIMB_ARTIFACT
+	kind_of_limb = (LIMB_ARTIFACT)
 	var/artifact_type = null
 
 	// surgery messages (for lists, first message appears to performer, second to person who owns/will own limb)
@@ -149,6 +149,7 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts)
 ABSTRACT_TYPE(/obj/item/parts/artifact_parts/arm)
 /obj/item/parts/artifact_parts/arm
 	can_hold_items = TRUE
+	kind_of_limb = (LIMB_ARTIFACT | LIMB_IS_ARM)
 	var/update_with_clothing = FALSE
 
 	getMobIcon()
@@ -161,6 +162,7 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/arm)
 
 ABSTRACT_TYPE(/obj/item/parts/artifact_parts/leg)
 /obj/item/parts/artifact_parts/leg
+	kind_of_limb = (LIMB_ARTIFACT | LIMB_IS_LEG)
 
 ABSTRACT_TYPE(/obj/item/parts/artifact_parts/arm/eldritch)
 /obj/item/parts/artifact_parts/arm/eldritch
