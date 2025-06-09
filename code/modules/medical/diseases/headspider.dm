@@ -1,10 +1,10 @@
 /datum/ailment/parasite/headspider
 	name = "Unidentified Foreign Body"
-	max_stages = 4 // takes too goddamn long
+	max_stages = 5
 	affected_species = list("Human", "Monkey")
 	cure_flags = CURE_SURGERY
 	stage_prob = 13
-//
+	strain_type = /datum/ailment_data/parasite/headspider
 
 /datum/ailment/parasite/headspider/surgery(var/mob/living/surgeon, var/mob/living/affected_mob, var/datum/ailment_data/D)
 	if (D.disposed)
@@ -60,7 +60,11 @@
 	JOB_XP(surgeon, "Medical Doctor", 15)
 
 
-/datum/ailment/parasite/headspider/stage_act(var/mob/living/affected_mob, var/datum/ailment_data/parasite/D, mult)
+/datum/ailment/parasite/headspider/on_infection(mob/living/affected_mob, datum/ailment_data/parasite/headspider/D)
+	. = ..()
+	D.last_stage_advance_time = TIME
+
+/datum/ailment/parasite/headspider/stage_act(var/mob/living/affected_mob, var/datum/ailment_data/parasite/headspider/D, mult)
 	if (..())
 		return
 
@@ -70,6 +74,8 @@
 		return
 
 	switch(D.stage)
+		if(1)
+
 		if(2)
 			if(probmult(15))
 				if(affected_mob.canmove && isturf(affected_mob.loc))
@@ -95,7 +101,8 @@
 			if(probmult(2))
 				boutput(affected_mob, SPAN_ALERT("Your stomach hurts."))
 				affected_mob.emote("groan")
-		if(4)
+		if (4) //
+		if (5) //
 			boutput(affected_mob, SPAN_ALERT("You feel something pushing at your spine..."))
 			if(probmult(40))
 				if(!D.source.changeling)
@@ -139,7 +146,7 @@
 				SPAWN(2 MINUTES) //Disease stays for two minutes after a complete infection, then it removes itself.
 					affected_mob.cure_disease_by_path(/datum/ailment/parasite/headspider)
 
-/datum/ailment/parasite/headspider/on_remove(mob/living/affected_mob, datum/ailment_data/parasite/D)
+/datum/ailment/parasite/headspider/on_remove(mob/living/affected_mob, datum/ailment_data/parasite/headspider/D)
 	if(!QDELETED(D?.source))
 		if(isalive(D.source))
 			D.source.death(FALSE)
@@ -149,3 +156,62 @@
 		qdel(D.source)
 		D.source = null
 	. = ..()
+
+/datum/ailment_data/parasite/headspider
+	/// Headspider source mob
+	var/mob/living/critter/changeling/headspider/source = null
+
+	/// If TRUE, this disease does not act but does appear in the disease list
+	var/stealth_asymptomatic = FALSE
+
+	/// Time since last stage advance
+	var/last_stage_advance_time
+
+	copy_other(datum/ailment_data/parasite/headspider/other)
+		..()
+		src.stealth_asymptomatic = other.stealth_asymptomatic
+
+	/// Headspider custom stage act to handle advancement
+	stage_act(mult)
+		if (!src.affected_mob)
+			return
+
+		if (!istype(master, /datum/ailment/))
+			src.affected_mob.cure_disease(src)
+			return
+
+		if (istype(master, /datum/ailment/parasite/headspider) && !ismind(source?.mind))
+			src.affected_mob.cure_disease(src)
+			return
+
+		if (!src.was_setup)
+			src.setup()
+
+		if (src.stage > master.max_stages)
+			src.stage = src.master.max_stages
+
+		if (src.stage < master.max_stages)
+			switch(TIME - src.last_stage_advance_time)
+				if (0 to 30 SECONDS) // no-op
+				if (30 SECONDS to 60 SECONDS) // roll for change starting at 30 seconds
+					if (probmult(src.stage_prob))
+						src.advance_stage()
+				if (60 SECONDS to INFINITY) // after a minute always advance
+					src.advance_stage()
+
+		if(!src.stealth_asymptomatic)
+			src.master.stage_act(affected_mob,src,mult)
+
+	proc/advance_stage()
+		src.stage++
+		switch(src.stage)
+			if(2)
+				boutput(src.source, SPAN_ALERT("We embed into the limbs."))
+				boutput(src.affected_mob, SPAN_ALERT("Your arms and legs feel like they have minds of their own."))
+			if(3)
+				boutput(src.source, SPAN_ALERT("Our tendrils spread up the spine."))
+				boutput(src.affected_mob, SPAN_ALERT("You're overcome with a sense of disassociation."))
+			if(4)
+				boutput(src.source, SPAN_ALERT("We entwine the brainstem."))
+				boutput(src.affected_mob, SPAN_ALERT("You feel your consciousness fading..."))
+		src.last_stage_advance_time = TIME

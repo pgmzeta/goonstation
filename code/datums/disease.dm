@@ -28,10 +28,14 @@
 	///If we need a specific ailment_data type
 	var/datum/ailment_data/strain_type = /datum/ailment_data
 
-	//MALstrainY STUFF ONLY
-	var/min_advance_ticks = 0//delay the evolution of stuff like shock if it rolls badly for us
+	/// Minimum number of ticks required before the disease can advance for delaying the evolution
+	var/min_advance_ticks = 0
+	/// Maxmimum number of ticks after which the disease will automatically advance
+	var/max_advance_ticks = 0
+
+
 	var/tickcount = 0
-	//IM SORRY
+
 
 	proc/stage_act(var/mob/living/affected_mob, var/datum/ailment_data/D, mult)
 		if (QDELETED(affected_mob) || !D)
@@ -122,6 +126,8 @@
 	var/recureprob = 8						// probability per tick that the reagent will cure the disease
 	var/temperature_cure = 406				// this temp or higher will cure the disease
 	var/resistance_prob = 0					// how likely this disease is to grant immunity once cured
+	/// Tick count since the last stage advance
+	var/ticks_since_advance = 0
 
 	proc/copy_other(datum/ailment_data/other)
 		SHOULD_CALL_PARENT(TRUE)
@@ -140,6 +146,10 @@
 		src.temperature_cure = other.temperature_cure
 		src.resistance_prob = other.resistance_prob
 		//phew
+
+	New()
+		. = ..()
+		src.ticks_since_advance = TIME
 
 	disposing()
 		if (affected_mob)
@@ -333,13 +343,10 @@
 /datum/ailment_data/parasite
 	var/was_setup = 0
 	var/surgery_prob = 50
-	var/mob/living/critter/changeling/headspider/source = null // for headspiders
-	var/stealth_asymptomatic = 0
 
 	copy_other(datum/ailment_data/parasite/other)
 		..()
 		src.surgery_prob = other.surgery_prob
-		src.stealth_asymptomatic = other.stealth_asymptomatic
 
 	proc/setup()
 		src.stage_prob = master.stage_prob
@@ -348,15 +355,11 @@
 
 	stage_act(var/mult)
 		if (!affected_mob)
-			return
+			return 1
 
 		if (!istype(master, /datum/ailment/))
 			affected_mob.cure_disease(src)
-			return
-
-		if (istype(master, /datum/ailment/parasite/headspider) && !ismind(source?.mind))
-			affected_mob.cure_disease(src)
-			return
+			return 1
 
 		if (!was_setup)
 			src.setup()
@@ -367,9 +370,7 @@
 		if (probmult(stage_prob) && stage < master.max_stages)
 			stage++
 
-
-		if(!stealth_asymptomatic)
-			master.stage_act(affected_mob,src,mult)
+		master.stage_act(affected_mob, src, mult)
 
 		return
 
