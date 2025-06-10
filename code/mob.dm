@@ -3506,24 +3506,3 @@ TYPEINFO(/mob)
 
 /mob/proc/frostburn_temp()
 	return src.base_body_temp - (src.temp_tolerance * 4)
-
-/mob/relaymove(mob/user, direction, delay, running)
-	. = ..()
-	if (!istype(user, /mob/living/critter/changeling/headspider))
-		return
-
-	var/datum/ailment_data/parasite/headspider/ailment_data
-	for (var/datum/ailment_data/parasite/headspider/ailment in src.ailments)
-		if (ailment.source == user)
-			ailment_data = ailment
-			break
-
-	if (!ailment_data)
-		return
-
-	if (prob(ailment_data.stage*20)) // 20%->80% as stages advance
-		var/mob/M = ailment_data.affected_mob
-		var/turf/T = get_turf(get_step(M, direction))
-		M.step_towards_movedelay(T)
-	// delay between forced steps reduces as it becomes more advanced; the headspider is getting more control
-	. = 5 SECONDS - (1 SECOND * ailment_data.stage)

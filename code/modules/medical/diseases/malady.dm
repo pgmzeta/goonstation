@@ -16,7 +16,7 @@
 	New()
 		..()
 		master = get_disease_from_path(/datum/ailment/malady)
-		master.tickcount = 0
+		src.ticks_since_advance = 0
 
 	stage_act(mult)
 		if (!affected_mob || disposed)
@@ -45,8 +45,8 @@
 					affected_mob.cure_disease(src)
 				return 1
 			else if (stage < master.max_stages)
-				if (master.tickcount >= master.min_advance_ticks)
-					master.tickcount = 0
+				if (src.ticks_since_advance >= master.min_advance_ticks)
+					src.ticks_since_advance = 0
 					stage++
 
 		// Common cures
@@ -85,7 +85,7 @@
 			if (master)
 				master.stage_act(affected_mob, src, mult)
 
-		master.tickcount++
+		src.ticks_since_advance++
 
 		return 0
 

@@ -648,7 +648,6 @@ TYPEINFO(/mob/living/critter/changeling)
 	hand_count = 1
 	hat_y_offset = 5
 
-
 	var/datum/abilityHolder/changeling/changeling = null
 
 	specific_emotes(var/act, var/param = null, var/voluntary = 0)
@@ -738,6 +737,41 @@ TYPEINFO(/mob/living/critter/changeling)
 			obs.mind?.remove_antagonist(ROLE_CHANGELING_HIVEMIND_MEMBER)
 		changeling.hivemind.Cut()
 
+/// Can the headspider assume control of their host mob
+/mob/living/critter/changeling/headspider/proc/can_assume_control()
+	if (isalive(src) && istype(src.loc, /mob/living/carbon/human))
+		return TRUE // I Am In Control.
+	return FALSE
+
+/mob/living/critter/changeling/headspider/emote(act, voluntary)
+	if (src.can_assume_control())
+		var/mob/living/carbon/human/H = src.loc
+		return H.emote(name)
+	. = ..()
+
+/mob/living/critter/changeling/headspider/hotkey(name)
+	if (src.can_assume_control())
+		var/mob/living/carbon/human/H = src.loc
+		return H.hotkey(name)
+	. = ..(name)
+
+/mob/living/critter/changeling/headspider/internal_process_move(keys)
+	if (keys && src.can_assume_control())
+		var/mob/living/carbon/human/H = src.loc
+		H.move_dir = src.move_dir
+		var/delay = H.process_move(keys)
+		if (isnull(delay))
+			return FALSE
+		if (client)
+			return TRUE
+		return TRUE
+	. = ..(keys)
+
+/mob/living/critter/changeling/headspider/click(atom/target, list/params)
+	if (src.can_assume_control())
+		var/mob/living/carbon/human/H = src.loc
+		return H.click(target, params)
+	. = ..(target, params)
 
 /mob/living/critter/changeling/headspider/ai_controlled
 	ai_type = /datum/aiHolder/aggressive

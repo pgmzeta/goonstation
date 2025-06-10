@@ -164,9 +164,6 @@
 	/// If TRUE, this disease does not act but does appear in the disease list
 	var/stealth_asymptomatic = FALSE
 
-	/// Time since last stage advance
-	var/last_stage_advance_time
-
 	copy_other(datum/ailment_data/parasite/headspider/other)
 		..()
 		src.stealth_asymptomatic = other.stealth_asymptomatic
@@ -206,12 +203,15 @@
 		src.stage++
 		switch(src.stage)
 			if(2)
+				boutput(src.source, SPAN_ALERT("We begin diffusing throughout the body."))
+				boutput(src.affected_mob, SPAN_ALERT("Your heart skips a beat. Or was that two beats?"))
+			if(3)
 				boutput(src.source, SPAN_ALERT("We embed into the limbs."))
 				boutput(src.affected_mob, SPAN_ALERT("Your arms and legs feel like they have minds of their own."))
-			if(3)
+			if(4)
 				boutput(src.source, SPAN_ALERT("Our tendrils spread up the spine."))
 				boutput(src.affected_mob, SPAN_ALERT("You're overcome with a sense of disassociation."))
-			if(4)
+			if(5)
 				boutput(src.source, SPAN_ALERT("We entwine the brainstem."))
 				boutput(src.affected_mob, SPAN_ALERT("You feel your consciousness fading..."))
 		src.last_stage_advance_time = TIME
