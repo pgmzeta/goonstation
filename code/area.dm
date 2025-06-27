@@ -4260,6 +4260,7 @@ ABSTRACT_TYPE(/area/mining)
 
 /area/regina
 	name = "Regina Anchorage"
+	icon_state = "purple"
 	requires_power = 0
 	sound_environment = 2
 	teleport_blocked = AREA_TELEPORT_BLOCKED

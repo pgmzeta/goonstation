@@ -237,3 +237,26 @@ TYPEINFO(/obj/strip_door)
 	invisibility = INVIS_ALWAYS
 	anchored = ANCHORED
 	opacity = 0
+
+/obj/submachine/shipping_packager
+	name = "long-range shipping teleporter"
+	desc = "Ships its contents to the station."
+	icon = 'icons/misc/32x64.dmi'
+	icon_state = "englrt"
+	density = FALSE
+	anchored = ANCHORED_ALWAYS
+	layer = DECAL_LAYER
+
+	attack_hand(mob/user)
+		. = ..()
+		send_to_station()
+
+	proc/send_to_station()
+		FLICK("englrt-act", src)
+		SPAWN(0.5 SECONDS)
+			playsound(src, 'sound/machines/lrteleport.ogg', 60, 1)
+			for (var/atom/movable/AM in loc)
+				if (AM == src) continue
+				if (isobserver(AM)) continue
+				if (AM.anchored) continue
+				shippingmarket.receive_crate(AM, TRUE)

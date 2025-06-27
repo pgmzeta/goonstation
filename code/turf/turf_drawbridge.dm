@@ -32,3 +32,14 @@
 	icon_state = "airbridge"
 	name = "airbridge wall"
 	occlude_foreground_parallax_layers = TRUE
+
+/turf/unsimulated/floor/airbridge
+	// regular white steel floor for now but a good candidate for new sprites!
+	icon_state = "airbridge"
+	name = "airbridge floor"
+	occlude_foreground_parallax_layers = TRUE
+
+/turf/unsimulated/wall/airbridge
+	icon_state = "airbridge"
+	name = "airbridge wall"
+	occlude_foreground_parallax_layers = TRUE
