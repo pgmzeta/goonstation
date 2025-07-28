@@ -36216,14 +36216,6 @@
 /obj/item/instrument/large/piano,
 /turf/unsimulated/floor/wood/two,
 /area/owlery/owleryhall)
-"cIo" = (
-/obj/machinery/light,
-/obj/decal/stage_edge{
-	dir = 2
-	},
-/obj/loudspeaker,
-/turf/unsimulated/floor/white,
-/area/owlery/owleryhall)
 "cIp" = (
 /obj/cable{
 	icon_state = "2-4"
@@ -37063,14 +37055,6 @@
 	name = "table"
 	},
 /turf/unsimulated/floor/wood/two,
-/area/owlery/owleryhall)
-"cKY" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/decal/stage_edge,
-/obj/loudspeaker,
-/turf/unsimulated/floor/white,
 /area/owlery/owleryhall)
 "cKZ" = (
 /turf/unsimulated/floor/greenwhite/corner,
@@ -39880,6 +39864,18 @@
 "cSK" = (
 /turf/unsimulated/floor/specialroom/arcade,
 /area/owlery/owllock)
+"cSL" = (
+/obj/rack/lunar{
+	dir = 1;
+	icon_state = "aisleshelfend"
+	},
+/obj/item/paper/postcard/moonfootprint,
+/obj/item/paper/postcard/moonfootprint,
+/obj/item/paper/postcard/moonfootprint,
+/obj/item/paper/postcard/moonfootprint,
+/obj/item/paper/postcard/moonfootprint,
+/turf/unsimulated/floor,
+/area/moon/museum/giftshop)
 "cSM" = (
 /obj/window{
 	desc = "A window.  For a museum exhibit.";
@@ -44402,11 +44398,6 @@
 	icon_state = "cairngorm17"
 	},
 /area/syndicate_station/battlecruiser)
-"dfW" = (
-/obj/decal/stage_edge,
-/obj/loudspeaker,
-/turf/unsimulated/floor/wood/two,
-/area/afterlife/bar)
 "dfX" = (
 /obj/decal/tile_edge/line/black{
 	dir = 1;
@@ -46076,6 +46067,14 @@
 /mob/living/critter/zombie/scientist,
 /turf/unsimulated/floor/white/grime,
 /area/crypt/sigma/lab)
+"dmG" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/decal/stage_edge,
+/obj/machinery/loudspeaker,
+/turf/unsimulated/floor/white,
+/area/owlery/owleryhall)
 "dmJ" = (
 /turf/unsimulated/floor/orangeblack/side{
 	dir = 8
@@ -71242,6 +71241,11 @@
 	},
 /turf/unsimulated/floor/lava,
 /area/iomoon)
+"rnX" = (
+/obj/decal/stage_edge,
+/obj/machinery/loudspeaker,
+/turf/unsimulated/floor/wood/two,
+/area/afterlife/bar)
 "rol" = (
 /obj/fakeobject/pipe{
 	desc = "It is not working.";
@@ -76835,6 +76839,18 @@
 /area/sim/tdome/tdomea{
 	name = "Thunderdome Lounge"
 	})
+"vMw" = (
+/obj/rack/lunar{
+	dir = 1;
+	icon_state = "aisleshelfend"
+	},
+/obj/item/paper/postcard/apollo,
+/obj/item/paper/postcard/apollo,
+/obj/item/paper/postcard/apollo,
+/obj/item/paper/postcard/apollo,
+/obj/item/paper/postcard/apollo,
+/turf/unsimulated/floor,
+/area/moon/museum/giftshop)
 "vMW" = (
 /obj/cable{
 	icon_state = "2-4"
@@ -78387,6 +78403,14 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/iomoon/base/underground)
+"wOk" = (
+/obj/machinery/light,
+/obj/decal/stage_edge{
+	dir = 2
+	},
+/obj/machinery/loudspeaker,
+/turf/unsimulated/floor/white,
+/area/owlery/owleryhall)
 "wOp" = (
 /turf/unsimulated/floor/orange,
 /area/iomoon/base)
@@ -78893,6 +78917,12 @@
 	},
 /turf/unsimulated/floor/circuit/red,
 /area/syndicate_station/assault_pod)
+"xlE" = (
+/obj/landmark{
+	name = 3
+	},
+/turf/unsimulated/wall/auto/lead/blue,
+/area/centcom)
 "xlJ" = (
 /obj/cable{
 	icon_state = "1-2"
@@ -79985,12 +80015,6 @@
 	temperature = 313.15
 	},
 /area/iomoon/caves)
-"xUS" = (
-/obj/landmark{
-	name = 3
-	},
-/turf/unsimulated/wall/auto/lead/blue,
-/area/centcom)
 "xUZ" = (
 /obj/disposalpipe/trunk{
 	dir = 8
@@ -88972,11 +88996,11 @@ cFq
 cFq
 cFq
 cFq
-cIo
+wOk
 cJL
 cJN
 cLs
-cKY
+dmG
 cFq
 cMa
 qrz
@@ -103106,7 +103130,7 @@ daN
 dSd
 daA
 ddQ
-dfW
+rnX
 dSb
 cwC
 dSm
@@ -104432,7 +104456,7 @@ aCO
 aCx
 aDN
 aCN
-aCN
+vMw
 eyo
 aCu
 aaa
@@ -104734,7 +104758,7 @@ aCN
 aCN
 aCN
 aCN
-aCN
+cSL
 eyo
 aCu
 aaa
@@ -135532,7 +135556,7 @@ gcn
 gZQ
 gcn
 gcn
-xUS
+xlE
 dnv
 dny
 dmu
