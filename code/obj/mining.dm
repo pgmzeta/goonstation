@@ -76,7 +76,7 @@
 			master = user
 		if (ishuman(user))
 			var/mob/living/carbon/human/H = user
-			if (H.traitHolder.hasTrait("carpenter") || H.traitHolder.hasTrait("training_engineer"))
+			if (isgoodwithtools(H))
 				duration = round(duration / 2)
 
 	onStart()

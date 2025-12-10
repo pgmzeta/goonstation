@@ -563,7 +563,7 @@ TYPEINFO(/obj/item/mechanics)
 					work_time *= 0.5
 				if(src.material.getMaterialFlags() & MATERIAL_CRYSTAL)
 					work_time *= 2
-				if(user.traitHolder && (user.traitHolder.hasTrait("carpenter") || user.traitHolder.hasTrait("training_engineer")))
+				if(isgoodwithtools(user))
 					work_time *= 0.5
 				// now, let's keep the result in reasonable values, even if you are untrained and should have no business working with this
 				work_time = clamp(work_time, 1 SECONDS, 10 SECONDS)

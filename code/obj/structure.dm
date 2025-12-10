@@ -511,7 +511,7 @@ TYPEINFO(/obj/structure/woodwall)
 			duration = duration_i
 		if (ishuman(owner))
 			var/mob/living/carbon/human/H = owner
-			if (H.traitHolder.hasTrait("carpenter") || H.traitHolder.hasTrait("training_engineer"))
+			if (isgoodwithtools(H))
 				duration = round(duration / 2)
 
 	onUpdate()

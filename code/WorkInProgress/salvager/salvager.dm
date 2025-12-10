@@ -112,7 +112,7 @@
 			. += decon_complexity * 3 SECONDS
 			boutput(user, "You start to destructively deconstruct [A].")
 
-		if(user.traitHolder.hasTrait("carpenter") || user.traitHolder.hasTrait("training_engineer"))
+		if(isgoodwithtools(user))
 			. = round(. * 0.75)
 
 		. *= src.decon_time_mult

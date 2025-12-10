@@ -430,7 +430,7 @@ ADMIN_INTERACT_PROCS(/obj/window, proc/smash)
 					var/total_decon_time = deconstruct_time
 					if(ishuman(user))
 						var/mob/living/carbon/human/H = user
-						if (H.traitHolder.hasTrait("carpenter") || H.traitHolder.hasTrait("training_engineer"))
+						if (isgoodwithtools(H))
 							total_decon_time = round(total_decon_time / 2)
 					user.show_text("You begin to [state == 1 ? "fasten the window to" : "unfasten the window from"] the frame...", "red")
 					SETUP_GENERIC_ACTIONBAR(user, src, total_decon_time, /obj/window/proc/assembly_handler, list(user,W), W.icon, W.icon_state,null,null)
@@ -442,7 +442,7 @@ ADMIN_INTERACT_PROCS(/obj/window, proc/smash)
 					var/total_decon_time = deconstruct_time
 					if(ishuman(user))
 						var/mob/living/carbon/human/H = user
-						if (H.traitHolder.hasTrait("carpenter") || H.traitHolder.hasTrait("training_engineer"))
+						if (isgoodwithtools(H))
 							total_decon_time = round(total_decon_time / 2)
 					user.show_text("You begin to [src.anchored ? "unfasten the frame from" : "fasten the frame to"] the floor...", "red")
 					SETUP_GENERIC_ACTIONBAR(user, src, total_decon_time, /obj/window/proc/assembly_handler, list(user,W), W.icon, W.icon_state,null,null)
@@ -458,7 +458,7 @@ ADMIN_INTERACT_PROCS(/obj/window, proc/smash)
 					var/total_decon_time = deconstruct_time
 					if(ishuman(user))
 						var/mob/living/carbon/human/H = user
-						if (H.traitHolder.hasTrait("carpenter") || H.traitHolder.hasTrait("training_engineer"))
+						if (isgoodwithtools(H))
 							total_decon_time = round(total_decon_time / 2)
 					user.show_text("You begin to [src.state ? "pry the window out of" : "pry the window into"] the frame...", "red")
 					SETUP_GENERIC_ACTIONBAR(user, src, total_decon_time, /obj/window/proc/assembly_handler, list(user,W), W.icon, W.icon_state,null,null)
@@ -469,7 +469,7 @@ ADMIN_INTERACT_PROCS(/obj/window, proc/smash)
 			actions.start(new /datum/action/bar/icon/deconstruct_window(src, W), user)
 		else if (src.health < src.health_max && istype(W, /obj/item/sheet) && W.material.isSameMaterial(src.material))
 			var/time = 4 SECONDS
-			if (user.traitHolder.hasTrait("carpenter") || user.traitHolder.hasTrait("training_engineer"))
+			if (isgoodwithtools(user))
 				time = 2 SECONDS
 			SETUP_GENERIC_ACTIONBAR(user, src, time, /obj/window/proc/fix_window, list(W), null, null, SPAN_NOTICE(" [user] repairs \the [src] with \the [W] "), null)
 		else
