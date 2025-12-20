@@ -52,6 +52,7 @@
 #define SPEECH_OUTPUT_SPOKEN_FLOCKMIND "flockmind_spoken"
 #define SPEECH_OUTPUT_SPOKEN_HIVEMIND "hivemind_spoken"
 #define SPEECH_OUTPUT_SPOKEN_LOCAL "local_spoken"
+#define SPEECH_OUTPUT_SPOKEN_POD_COMMS "pod_comms_spoken"
 #define SPEECH_OUTPUT_SPOKEN_RADIO "radio_spoken"
 #define SPEECH_OUTPUT_SPOKEN_SOUND_CARD "sound_card_spoken"
 #define SPEECH_OUTPUT_SPOKEN_SUBTLE "subtle_spoken"

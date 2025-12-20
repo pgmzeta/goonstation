@@ -2112,6 +2112,7 @@
 #include "code\modules\speech\modules\speech\outputs\spoken\flockmind.dm"
 #include "code\modules\speech\modules\speech\outputs\spoken\hivemind.dm"
 #include "code\modules\speech\modules\speech\outputs\spoken\local.dm"
+#include "code\modules\speech\modules\speech\outputs\spoken\pod_comms.dm"
 #include "code\modules\speech\modules\speech\outputs\spoken\radio.dm"
 #include "code\modules\speech\modules\speech\outputs\spoken\sound_card.dm"
 #include "code\modules\speech\modules\speech\outputs\spoken\subtle.dm"

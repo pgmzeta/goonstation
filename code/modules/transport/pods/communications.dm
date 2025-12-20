@@ -98,29 +98,33 @@ TYPEINFO(/obj/item/device/radio/intercom/ship)
 		rc_ship.com = src
 		return
 
-	proc/External()
-		var/broadcast = copytext(html_encode(input(usr, "Please enter what you want to say over the external speaker.", "[src.name]")), 1, MAX_MESSAGE_LEN)
-		if(!broadcast || usr.loc != src.ship) // need to check if something wasn't entered or if user isn't in a vehicle
+	//TODO: Use proper speech trees
+	proc/External(mob/user)
+		if (isdead(user) || !can_act(user))
 			return
-		logTheThing(LOG_DIARY, usr, "(POD) : [broadcast]", "say")
-		if (ishuman(usr))//istype(usr:wear_mask, /obj/item/clothing/mask/gas/voice))
-			var/mob/living/carbon/human/H = usr
+		if (isghostcritter(user))
+			boutput(user, SPAN_ALERT("You can't use this!"))
+			return
+
+		var/broadcast = trimtext(copytext(sanitize(html_encode(tgui_input_text(user, "Please enter what you want to say over the external speaker", "[src.name]"))), 1, MAX_MESSAGE_LEN))
+		if(!broadcast || user.loc != src.ship) // need to check if something wasn't entered or if user isn't in a vehicle
+			return
+		logTheThing(LOG_SAY, user, "makes [src] broadcast, \"[broadcast]\"")
+
+		var/speak_name = "Unknown"
+		if (ishuman(user))//istype(usr:wear_mask, /obj/item/clothing/mask/gas/voice))
+			var/mob/living/carbon/human/H = user
 			if (H.wear_mask && H.wear_mask.vchange && H.wear_id && length(H.wear_id:registered))
-				. = H.wear_id:registered
+				speak_name = H.wear_id:registered
 			else if (H.vdisfigured)
-				. = "Unknown"
+				speak_name = "Unknown"
 
 			else
-				. = usr.name
+				speak_name = user.name
 		else
-			. = usr.real_name
+			speak_name = user.real_name
 
-		for(var/mob/M in ship)
-			M.show_message("<font color='green'><b>[bicon(ship)]\[[.]\]</b> says, \"[broadcast]\"</font>")
-		for(var/mob/O in hearers(ship, null))
-			O.show_message("<font color='green'><b>[bicon(ship)]\[[.]\]</b> says, \"[broadcast]\"</font>")
-
-		return null
+		src.ship.say(broadcast, flags = SAYFLAG_IGNORE_POSITION, message_params = list("speaker_to_display" = speak_name))
 
 	proc/go_home()
 		return FALSE

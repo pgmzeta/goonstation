@@ -16,5 +16,5 @@
 		boutput(user, "[src.pod_hud.master.ship_message("SYSTEM OFFLINE")]")
 		return FALSE
 
-	comms_part.External()
+	comms_part.External(user)
 	return TRUE
