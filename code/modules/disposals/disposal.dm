@@ -1,12 +1,67 @@
+#define PIPEC_DISPOSAL "#aaaaaa00"
 #define PIPEC_MAIL "#8dc2f4"
 #define PIPEC_BRIG "#ff6666"
-#define PIPEC_EJECTION "#f2a673"
+#define PIPEC_EJECTION "#a29643"
 #define PIPEC_MORGUE "#696969"
 #define PIPEC_FOOD "#fbed92"
 #define PIPEC_PRODUCE "#b2ff4f"
 #define PIPEC_TRANSPORT "#ffbef6"
 #define PIPEC_MINERAL "#a5fffc"
-#define PIPEC_CARGO "#f4ff53"
+#define PIPEC_CARGO "#f2a673"
+
+
+#define DEFINE_DISPOSAL_PIPE(_PATH, _VARS) \
+	/obj/disposalpipe/segment/_PATH{_VARS};\
+	/obj/disposalpipe/segment/horizontal/_PATH{_VARS};\
+	/obj/disposalpipe/segment/vertical/_PATH{_VARS};\
+	/obj/disposalpipe/segment/bent/north/_PATH{_VARS};\
+	/obj/disposalpipe/segment/bent/east/_PATH{_VARS};\
+	/obj/disposalpipe/segment/bent/south/_PATH{_VARS};\
+	/obj/disposalpipe/segment/bent/west/_PATH{_VARS};\
+	/obj/disposalpipe/segment/auto/_PATH{_VARS};\
+	/obj/disposalpipe/junction/auto/_PATH{_VARS};\
+	/obj/disposalpipe/junction/left/_PATH{_VARS};\
+	/obj/disposalpipe/junction/middle/_PATH{_VARS};\
+	/obj/disposalpipe/junction/right/_PATH{_VARS};\
+	/obj/disposalpipe/switch_junction/left/north/_PATH{_VARS};\
+	/obj/disposalpipe/switch_junction/left/south/_PATH{_VARS};\
+	/obj/disposalpipe/switch_junction/left/east/_PATH{_VARS};\
+	/obj/disposalpipe/switch_junction/left/west/_PATH{_VARS};\
+	/obj/disposalpipe/switch_junction/right/north/_PATH{_VARS};\
+	/obj/disposalpipe/switch_junction/right/south/_PATH{_VARS};\
+	/obj/disposalpipe/switch_junction/right/east/_PATH{_VARS};\
+	/obj/disposalpipe/switch_junction/right/west/_PATH{_VARS};\
+	/obj/disposalpipe/trunk/_PATH{_VARS};\
+	/obj/disposalpipe/trunk/north/_PATH{_VARS};\
+	/obj/disposalpipe/trunk/south/_PATH{_VARS};\
+	/obj/disposalpipe/trunk/east/_PATH{_VARS};\
+	/obj/disposalpipe/trunk/west/_PATH{_VARS};\
+	/obj/disposalpipe/broken/north/_PATH{_VARS};\
+	/obj/disposalpipe/broken/south/_PATH{_VARS};\
+	/obj/disposalpipe/broken/east/_PATH{_VARS};\
+	/obj/disposalpipe/broken/west/_PATH{_VARS}
+
+DEFINE_DISPOSAL_PIPE(disposal,
+	color=PIPEC_DISPOSAL)
+DEFINE_DISPOSAL_PIPE(mail,
+	color=PIPEC_MAIL)
+DEFINE_DISPOSAL_PIPE(brig,
+	color=PIPEC_BRIG)
+DEFINE_DISPOSAL_PIPE(ejection,
+	color=PIPEC_EJECTION)
+DEFINE_DISPOSAL_PIPE(morgue,
+	color=PIPEC_MORGUE)
+DEFINE_DISPOSAL_PIPE(food,
+	color=PIPEC_FOOD)
+DEFINE_DISPOSAL_PIPE(produce,
+	color=PIPEC_PRODUCE)
+DEFINE_DISPOSAL_PIPE(transport,
+	color=PIPEC_TRANSPORT)
+DEFINE_DISPOSAL_PIPE(mineral,
+	color=PIPEC_MINERAL)
+DEFINE_DISPOSAL_PIPE(cargo,
+	color=PIPEC_CARGO)
+
 
 // virtual disposal object
 // travels through pipes in lieu of actual items
@@ -2202,11 +2257,6 @@ TYPEINFO(/obj/disposaloutlet)
 	throw_range = 10
 	throw_speed = 10
 
-// -------------------- VR --------------------
-/obj/disposaloutlet/virtual
-	name = "gauntlet outlet"
-	desc = "For disposing of pixel junk, one would suppose."
-	icon = 'icons/effects/VR.dmi'
 // --------------------------------------------
 
 // takes a pipe and changes one of its disconnected directions to new_dir, or makes a junction if all are connected and make_junctions=1
@@ -2249,3 +2299,13 @@ proc/pipe_reconnect_disconnected(var/obj/disposalpipe/pipe, var/new_dir, var/mak
 				break
 	pipe.fix_sprite()
 
+#undef PIPEC_DISPOSAL
+#undef PIPEC_MAIL
+#undef PIPEC_BRIG
+#undef PIPEC_EJECTION
+#undef PIPEC_MORGUE
+#undef PIPEC_FOOD
+#undef PIPEC_PRODUCE
+#undef PIPEC_TRANSPORT
+#undef PIPEC_MINERAL
+#undef PIPEC_CARGO
