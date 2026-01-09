@@ -206,7 +206,8 @@ TYPEINFO(/obj/item/device/detective_scanner)
 	hide_attack = ATTACK_PARTIALLY_HIDDEN
 	var/active = 0
 	var/distancescan = 0
-	var/target = null
+	var/bloodtrack = FALSE
+	var/dna_target = null
 
 	var/list/scans
 	var/maximum_scans = 25
@@ -278,7 +279,7 @@ TYPEINFO(/obj/item/device/detective_scanner)
 		scan_target(A, user)
 
 
-	proc/scan_target(var/atom/target, var/mob/user)
+	proc/scan_target(atom/target, mob/user)
 		if (scans == null)
 			scans = new/list(maximum_scans)
 		var/datum/forensic_scan/scan = scan_forensic(target, visible = TRUE)
@@ -289,14 +290,14 @@ TYPEINFO(/obj/item/device/detective_scanner)
 		number_of_scans += 1
 		boutput(user, scan_output)
 
-		if(!active && istype(target, /obj/decal/cleanable/blood))
+		if(bloodtrack && !active && istype(target, /obj/decal/cleanable/blood))
 			var/obj/decal/cleanable/blood/B = target
 			if(B.dry > 0) //Fresh blood is -1
 				boutput(user, SPAN_ALERT("Targeted blood is too dry to be useful!"))
 				return
 			for(var/mob/living/carbon/human/H in mobs)
 				if(B.blood_DNA == H.bioHolder.Uid)
-					target = H
+					src.dna_target = H
 					break
 			active = 1
 			work()
@@ -310,12 +311,12 @@ TYPEINFO(/obj/item/device/detective_scanner)
 			active = 0
 			boutput(usr, SPAN_ALERT("[src] shuts down because you moved!"))
 			return
-		if(!target)
+		if(!src.dna_target)
 			icon_state = "fs"
 			active = 0
 			return
-		src.set_dir(get_dir(src,target))
-		switch(GET_DIST(src,target))
+		src.set_dir(get_dir(src,src.dna_target))
+		switch(GET_DIST(src,src.dna_target))
 			if(0)
 				icon_state = "fs_pindirect"
 			if(1 to 8)
@@ -332,6 +333,7 @@ TYPEINFO(/obj/item/device/detective_scanner)
 	name = "cool forensic scanner"
 	desc = "Used to scan objects for DNA and fingerprints. This model seems to have an upgrade that lets it scan for prints at a distance. You feel cool holding it."
 	distancescan = 1
+	bloodtrack = TRUE
 
 ///////////////////////////////////// Health analyzer ////////////////////////////////////////
 
