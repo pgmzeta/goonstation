@@ -821,75 +821,78 @@
 
 	reaction_mob(var/mob/target, var/method=TOUCH, var/volume, var/paramslist = 0, var/raw_volume)
 		..()
-		var/reacted = 0
+		var/reacted = FALSE
 		var/mob/living/M = target
 		if(istype(M))
 			var/list/covered = holder.covered_turf()
 			if (isvampire(M))
-				M.emote("scream")
-				for(var/mob/O in AIviewers(M, null))
-					O.show_message(SPAN_ALERT("<b>[M] begins to crisp and burn!</b>"), 1)
-				boutput(M, SPAN_ALERT("Holy Water! It burns!"))
-				var/burndmg = raw_volume * 1.25 / (length(covered) || 1) //the sanctification inflicts the pain, not the water that carries it.
-				burndmg = min(burndmg, 80) //cap burn at 110(80 now >:) so we can't instant-kill vampires. just crit em ok.
-				M.TakeDamage("chest", 0, burndmg, 0, DAMAGE_BURN)
-				M.change_vampire_blood(-burndmg)
-				reacted = 1
+				if (src.try_dispel(M, method, raw_volume, paramslist))
+					var/burndmg = raw_volume * 1.25 / (length(covered) || 1) //the sanctification inflicts the pain, not the water that carries it.
+					burndmg = min(burndmg, 80) //cap burn at 110(80 now >:) so we can't instant-kill vampires. just crit em ok.
+					M.TakeDamage("chest", 0, burndmg, 0, DAMAGE_BURN)
+					M.change_vampire_blood(-burndmg)
+					reacted = TRUE
 			else if (method == TOUCH)
 				if (M.traitHolder?.hasTrait("atheist"))
 					boutput(M, SPAN_NOTICE("You feel insulted... and wet."))
 				else
 					if (ishuman(M))
 						var/mob/living/carbon/human/H = M
-						var/removed_curse = FALSE
 						if(H.bioHolder?.HasEffect("blood_curse") || H.bioHolder?.HasEffect("blind_curse") || H.bioHolder?.HasEffect("weak_curse") || H.bioHolder?.HasEffect("rot_curse") || H.bioHolder?.HasEffect("death_curse"))
-							if(raw_volume < 10)
-								H.visible_message("The liquid sizzles a bit as it touches [M], then stops.")
-								playsound(H, 'sound/impact_sounds/burn_sizzle.ogg', 100, TRUE)
-							else
+							if (src.try_dispel(H, method, raw_volume))
 								H.bioHolder.RemoveEffect("blood_curse")
 								H.bioHolder.RemoveEffect("blind_curse")
 								H.bioHolder.RemoveEffect("weak_curse")
 								H.bioHolder.RemoveEffect("rot_curse")
 								H.bioHolder.RemoveEffect("death_curse")
-								removed_curse = TRUE
 						else if(M.hasStatus("art_blood_curse") || M.hasStatus("art_aging_curse") || M.hasStatus("art_nightmare_curse") || M.hasStatus("art_maze_curse") || M.hasStatus("art_displacement_curse") || M.hasStatus("art_light_curse"))
-							if(raw_volume < 10)
-								H.visible_message("The liquid sizzles a bit as it touches [M], then stops.")
-								playsound(H, 'sound/impact_sounds/burn_sizzle.ogg', 100, TRUE)
-							else
+							if (src.try_dispel(H, method, raw_volume))
 								M.delStatus("art_blood_curse")
 								M.delStatus("art_aging_curse")
 								M.delStatus("art_nightmare_curse")
 								M.delStatus("art_maze_curse")
 								M.delStatus("art_displacement_curse")
 								M.delStatus("art_light_curse")
-								playsound(H, 'sound/effects/lit.ogg', 100, TRUE)
-								removed_curse = TRUE
 						else
 							boutput(M, SPAN_NOTICE("You feel somewhat purified... but mostly just wet."))
-						if(removed_curse)
-							H.visible_message("[H] screams as some black smoke exits their body.")
-							H.emote("scream")
-							random_burn_damage(H, 5)
-							var/turf/T = get_turf(H)
-							if (T && isturf(T))
-								var/datum/effects/system/bad_smoke_spread/S = new /datum/effects/system/bad_smoke_spread/(T)
-								if (S)
-									S.set_up(5, 0, T, null, "#3b3b3b")
-									S.start()
 					else
 						boutput(M, SPAN_NOTICE("You feel somewhat purified... but mostly just wet."))
 					M.take_brain_damage(0 - clamp(volume, 0, 10))
 				for (var/datum/ailment_data/disease/V in M.ailments)
 					if(prob(1))
 						M.cure_disease(V)
-				reacted = 1
+				reacted = TRUE
 		if(method == TOUCH)
 			var/mob/living/L = target
 			if(istype(L) && L.getStatusDuration("burning"))
 				L.changeStatus("burning", -20 SECONDS)
 		return !reacted
+
+	/// Checks volume and sets up effects for dispelling curses/vampoires. Returns TRUE if removing the effects should occur.
+	proc/try_dispel(mob/target, method, volume, paramslist)
+		if (method==TOUCH)
+			if (!ON_COOLDOWN(target, "dispel_patch_burn", LIFE_PROCESS_TICK_SPACING))
+				for (var/atom/A as anything in target.contents)
+					if (A.event_handler_flags & HANDLE_STICKER)
+						if (A:active)
+							target.visible_message(SPAN_ALERT("<b>[A]</b> is burnt to a crisp and destroyed!"))
+							qdel(A)
+				target.set_clothing_icon_dirty()
+		if (volume < 10)
+			target.visible_message("The liquid sizzles a bit as it touches [target], then stops.")
+			playsound(target, 'sound/impact_sounds/burn_sizzle.ogg', 100, TRUE)
+			return FALSE
+		target.visible_message("[target] screams as some black smoke exits their body.")
+		target.emote("scream")
+		playsound(target, 'sound/effects/lit.ogg', 100, TRUE)
+		target.setStatusMin("burning", 0.5 SECONDS)
+		var/turf/T = get_turf(target)
+		if (T && isturf(T))
+			var/datum/effects/system/bad_smoke_spread/S = new /datum/effects/system/bad_smoke_spread(T)
+			if (S)
+				S.set_up(5, 0, T, null, "#3b3b3b")
+				S.start()
+		return TRUE
 
 /datum/reagent/water/tonic
 	name = "tonic water"
