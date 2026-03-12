@@ -308,7 +308,7 @@
 	dir = 4;
 	pixel_x = 10
 	},
-/obj/loudspeaker,
+/obj/machinery/loudspeaker,
 /turf/unsimulated/floor/wood/three,
 /area/shuttle/escape/centcom)
 "jS" = (
@@ -379,7 +379,7 @@
 /turf/unsimulated/floor/grey,
 /area/shuttle/escape/centcom)
 "lk" = (
-/obj/decal/boxingropeenter,
+/obj/railing/boxing,
 /turf/unsimulated/floor/specialroom/gym,
 /area/shuttle/escape/centcom)
 "lK" = (
@@ -769,7 +769,7 @@
 /turf/unsimulated/floor/shuttlebay,
 /area/centcom/outside)
 "zx" = (
-/obj/decal/boxingropeenter,
+/obj/railing/boxing,
 /turf/unsimulated/floor/stairs{
 	dir = 1
 	},
@@ -972,7 +972,7 @@
 	pixel_x = 10
 	},
 /obj/decal/stage_edge,
-/obj/loudspeaker,
+/obj/machinery/loudspeaker,
 /turf/unsimulated/floor/wood/three,
 /area/shuttle/escape/centcom)
 "If" = (
@@ -1041,7 +1041,7 @@
 /area/shuttle/escape/centcom)
 "JK" = (
 /obj/table/auto,
-/obj/item/wrestlingbell,
+/obj/machinery/wrestlingbell,
 /turf/unsimulated/floor/white,
 /area/shuttle/escape/centcom)
 "JP" = (

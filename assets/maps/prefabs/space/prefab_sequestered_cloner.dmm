@@ -1015,6 +1015,10 @@
 /obj/machinery/atmospherics/pipe/manifold/overfloor,
 /turf/simulated/floor/plating,
 /area/prefab/sequestered_cloner)
+"WW" = (
+/obj/item/device/multitool/orange,
+/turf/simulated/floor/plating,
+/area/prefab/sequestered_cloner)
 "WX" = (
 /turf/simulated/floor/yellow/side{
 	dir = 4
@@ -1255,7 +1259,7 @@ rk
 pT
 RZ
 WS
-tJ
+WW
 tI
 "}
 (12,1,1) = {"

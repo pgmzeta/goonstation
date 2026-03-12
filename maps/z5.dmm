@@ -11,7 +11,7 @@
 /turf/simulated/floor/martian,
 /area/evilreaver/security)
 "ao" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 5
 	},
 /obj/disposalpipe/segment/transport,
@@ -27,13 +27,10 @@
 /turf/simulated/floor,
 /area/mining/quarters)
 "ar" = (
-/obj/machinery/light_switch{
-	name = "S light switch";
-	pixel_y = -24
-	},
 /obj/disposalpipe/segment/transport{
 	dir = 4
 	},
+/obj/machinery/light_switch/south,
 /turf/simulated/floor/yellow/side,
 /area/mining/dock)
 "at" = (
@@ -44,11 +41,8 @@
 /turf/simulated/wall/auto/martian,
 /area/noGenerate)
 "ax" = (
-/obj/machinery/light_switch{
-	name = "N light switch";
-	pixel_y = 24
-	},
 /obj/machinery/vending/air_vendor/plasma,
+/obj/machinery/light_switch/north,
 /turf/simulated/floor/orangeblack/side{
 	dir = 1
 	},
@@ -153,7 +147,7 @@
 /obj/item/scrap,
 /obj/landmark/spawner/artifact,
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "ce" = (
 /obj/lattice{
 	dir = 4;
@@ -223,6 +217,14 @@
 	},
 /turf/space,
 /area/noGenerate)
+"cX" = (
+/obj/lattice{
+	dir = 4;
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/mining_outpost/delay3,
+/turf/space,
+/area/noGenerate)
 "du" = (
 /obj/lattice,
 /mob/living/critter/martian/soldier,
@@ -281,6 +283,13 @@
 "eT" = (
 /turf/simulated/floor/grime,
 /area/mining/dock)
+"eV" = (
+/obj/lattice{
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/john_outpost/delay5,
+/turf/space,
+/area/noGenerate)
 "fc" = (
 /obj/effects/background_objects/regina,
 /turf/space,
@@ -292,7 +301,7 @@
 /obj/landmark/spawner/artifact,
 /obj/lattice,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "fA" = (
 /obj/fakeobject/lighttube_broken,
 /obj/decal/cleanable/dirt,
@@ -353,6 +362,13 @@
 /mob/living/critter/martian/warrior,
 /turf/simulated/floor/martian,
 /area/evilreaver/storage/tools)
+"gN" = (
+/obj/lattice{
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/mining_outpost/delay3,
+/turf/space,
+/area/noGenerate)
 "gO" = (
 /obj/indestructible/shuttle_corner{
 	dir = 6;
@@ -377,6 +393,10 @@
 "gX" = (
 /turf/simulated/floor/plating,
 /area/spyshack)
+"ht" = (
+/obj/machinery/gravity_tether/multi_area/mining_outpost,
+/turf/simulated/floor/plating,
+/area/tech_outpost)
 "hv" = (
 /obj/lattice,
 /obj/fakeobject/lighttube_broken{
@@ -387,15 +407,6 @@
 "hA" = (
 /obj/machinery/conveyor/NS{
 	id = "MINSouth"
-	},
-/obj/machinery/door/poddoor{
-	id = "MINdoorS";
-	name = "South Conveyor Door"
-	},
-/obj/forcefield/energyshield/perma/doorlink{
-	desc = "A door-linked force field that prevents gasses from passing through it.";
-	name = "Door-linked Atmospheric Forcefield";
-	powerlevel = 1
 	},
 /turf/simulated/floor/plating,
 /area/mining/manufacturing)
@@ -440,6 +451,14 @@
 	},
 /turf/simulated/floor/plating/damaged3,
 /area/evilreaver/security)
+"iv" = (
+/obj/lattice{
+	dir = 8;
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/mining_outpost/delay4,
+/turf/space,
+/area/noGenerate)
 "jn" = (
 /obj/lattice,
 /obj/fakeobject/pipe{
@@ -448,6 +467,13 @@
 /mob/living/critter/martian/mutant,
 /turf/simulated/floor/martian,
 /area/evilreaver/bridge)
+"jC" = (
+/obj/lattice{
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/john_outpost/delay4,
+/turf/space,
+/area/noGenerate)
 "jS" = (
 /obj/lattice,
 /mob/living/critter/martian/warrior,
@@ -507,6 +533,14 @@
 /mob/living/critter/martian/soldier,
 /turf/simulated/floor/martian,
 /area/evilreaver/chapel)
+"kN" = (
+/obj/lattice{
+	dir = 1;
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/john_outpost,
+/turf/space,
+/area/noGenerate)
 "lp" = (
 /obj/machinery/conveyor/NS{
 	id = "MINSouth"
@@ -597,10 +631,9 @@
 /turf/simulated/floor/shuttlebay,
 /area/mining/hangar)
 "nq" = (
-/obj/machinery/door_control{
+/obj/machinery/door_control/podbay/miningoutpost/new_walls/east{
 	id = "MINdoorS";
-	name = "South Door Switch";
-	pixel_x = 24
+	name = "South Door Switch"
 	},
 /turf/simulated/floor/caution/south,
 /area/mining/manufacturing)
@@ -657,17 +690,17 @@
 "nR" = (
 /obj/machinery/door/unpowered/martian,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "nV" = (
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "nW" = (
 /obj/decal/cleanable/oil,
 /obj/item/clothing/suit/space/old,
 /obj/item/clothing/head/helmet/space/old,
 /obj/storage/crate,
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "nX" = (
 /obj/rail{
 	dir = 8;
@@ -724,6 +757,7 @@
 	noalerts = 1;
 	pixel_x = -24
 	},
+/obj/storage/crate/furnacefuel,
 /turf/simulated/floor/plating,
 /area/tech_outpost)
 "ol" = (
@@ -776,7 +810,7 @@
 	icon_state = "diagonal"
 	},
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "oB" = (
 /obj/decal/cleanable/rust,
 /turf/simulated/wall/auto/reinforced/old,
@@ -788,7 +822,7 @@
 	icon_state = "diagonal"
 	},
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "oH" = (
 /obj/table/reinforced/auto,
 /obj/machinery/light/incandescent,
@@ -806,7 +840,7 @@
 /obj/item/furniture_parts/table,
 /obj/item/furniture_parts/table,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "oN" = (
 /obj/machinery/door/airlock/pyro/classic{
 	dir = 4;
@@ -894,6 +928,11 @@
 /obj/item/tank/jetpack/micro,
 /turf/simulated/floor/black,
 /area/mining/quarters)
+"pp" = (
+/obj/lattice,
+/obj/machinery/light/traffic_light/mining_outpost/delay5,
+/turf/space,
+/area/noGenerate)
 "pq" = (
 /turf/simulated/floor/stairs{
 	dir = 1
@@ -917,12 +956,8 @@
 /turf/simulated/floor/caution/west,
 /area/mining/quarters)
 "px" = (
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 1;
-	name = "autoname - Mining";
-	network = "Mining";
-	tag = ""
+/obj/machinery/camera/mining/directional/south{
+	pixel_x = -10
 	},
 /turf/simulated/floor/plating/airless,
 /area/mining/mainasteroid)
@@ -991,11 +1026,11 @@
 /obj/item/cigpacket/propuffs,
 /obj/item/clothing/head/XComHair,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "pN" = (
 /obj/item/sheet/glass/reinforced,
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "pO" = (
 /obj/item/old_grenade/spawner/banana,
 /obj/item/bananapeel,
@@ -1003,15 +1038,10 @@
 /obj/storage/cart/trash,
 /obj/lattice,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "pP" = (
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 6;
-	name = "autoname -  Mining";
-	network = "Mining";
-	pixel_y = 20;
-	tag = ""
+/obj/machinery/camera/mining/directional/north{
+	pixel_x = 10
 	},
 /obj/stool/chair{
 	dir = 4
@@ -1027,7 +1057,7 @@
 /obj/map/light/dimred,
 /obj/marker/supplymarker,
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "pT" = (
 /obj/machinery/portable_reclaimer,
 /turf/simulated/floor/caution/east,
@@ -1043,7 +1073,7 @@
 "qd" = (
 /obj/item/beach_ball,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "qe" = (
 /obj/cable{
 	icon_state = "2-4"
@@ -1066,7 +1096,7 @@
 "qg" = (
 /obj/item/tile/steel,
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "qi" = (
 /obj/computerframe{
 	anchored = 1;
@@ -1098,6 +1128,13 @@
 /obj/machinery/recharger,
 /turf/simulated/floor/caution/west,
 /area/mining/miningoutpost)
+"qn" = (
+/obj/lattice{
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/john_outpost/delay3,
+/turf/space,
+/area/noGenerate)
 "qo" = (
 /turf/simulated/floor/orangeblack/side{
 	dir = 8
@@ -1140,7 +1177,7 @@
 	name = "rusty airlock"
 	},
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "qw" = (
 /obj/table/wood/auto,
 /obj/random_item_spawner/desk_stuff,
@@ -1188,10 +1225,7 @@
 /turf/simulated/floor/martian,
 /area/evilreaver/security)
 "qK" = (
-/obj/machinery/firealarm{
-	pixel_y = 24;
-	text = "NF"
-	},
+/obj/machinery/firealarm/directional/north,
 /turf/simulated/floor/grime,
 /area/mining/miningoutpost)
 "qP" = (
@@ -1325,7 +1359,7 @@
 /turf/simulated/floor/carpet/office,
 /area/mining/hangar)
 "rD" = (
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	dir = 8;
 	icon_state = "carpetS"
 	},
@@ -1400,7 +1434,7 @@
 /turf/simulated/floor/grime,
 /area/mining/comms)
 "rY" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 4
 	},
 /obj/rail{
@@ -1423,6 +1457,9 @@
 /obj/mapping_helper/access/mining_outpost,
 /turf/simulated/floor,
 /area/mining/miningoutpost)
+"se" = (
+/turf/simulated/wall/auto/martian,
+/area/evilreaver/crew)
 "sf" = (
 /obj/cable{
 	icon_state = "1-2"
@@ -1493,7 +1530,7 @@
 /turf/space,
 /area/noGenerate)
 "sD" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 10
 	},
 /turf/simulated/floor/airless/plating/catwalk{
@@ -1502,7 +1539,7 @@
 	},
 /area/mining/mainasteroid)
 "sE" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /obj/rail{
 	dir = 1;
 	layer = 3
@@ -1720,6 +1757,7 @@
 /area/mining/miningoutpost)
 "uc" = (
 /obj/rack,
+/obj/item/device/camera_viewer/outpost/mining,
 /obj/item/disk/data/floppy/read_only/communications,
 /turf/simulated/floor/grime,
 /area/mining/comms)
@@ -1748,7 +1786,7 @@
 /turf/simulated/floor/caution/south,
 /area/mining/hangar)
 "uu" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 4
 	},
 /obj/cable{
@@ -1811,7 +1849,7 @@
 	dir = 8;
 	layer = 3
 	},
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/airless/plating/catwalk{
 	dir = 5;
 	icon_state = "catwalk_cross"
@@ -1870,7 +1908,7 @@
 /turf/simulated/floor/grime,
 /area/mining/magnet_control)
 "vs" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /obj/rail{
 	dir = 1;
 	layer = 3
@@ -1892,7 +1930,7 @@
 /turf/simulated/wall/auto/martian,
 /area/evilreaver/chapel)
 "vz" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 5
 	},
 /obj/cable{
@@ -1937,16 +1975,11 @@
 /obj/lattice,
 /turf/simulated/floor/martian,
 /area/evilreaver/bridge)
-"vL" = (
-/turf/simulated/floor/plating,
-/area/spyshack{
-	lightswitch = 0
-	})
 "vM" = (
 /turf/simulated/wall/auto/reinforced/old,
 /area/evilreaver/chapel)
 "vN" = (
-/obj/machinery/computer/security/wooden_tv{
+/obj/machinery/computer/television{
 	desc = "Looks like it's tuned to your station."
 	},
 /turf/simulated/floor/plating/damaged3,
@@ -1977,10 +2010,7 @@
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
+/obj/machinery/firealarm/directional/west,
 /turf/simulated/floor/grime,
 /area/mining/magnet_control)
 "wc" = (
@@ -1990,24 +2020,16 @@
 /turf/simulated/floor/plating,
 /area/tech_outpost)
 "wd" = (
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 5;
-	name = "autoname - Mining";
-	network = "Mining";
-	pixel_x = -10;
-	tag = ""
+/obj/machinery/camera/mining/directional/west{
+	pixel_y = -10
 	},
 /obj/machinery/vending/coffee,
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
 /obj/decal/stripe_caution,
+/obj/machinery/firealarm/directional/west,
 /turf/simulated/floor,
 /area/mining/manufacturing)
 "we" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 5
 	},
 /turf/simulated/floor/airless/plating/catwalk{
@@ -2023,13 +2045,13 @@
 /turf/simulated/floor/martian,
 /area/evilreaver/storage/tools)
 "wg" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/airless/plating/catwalk{
 	dir = 10
 	},
 /area/mining/mainasteroid)
 "wj" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /obj/cable{
 	icon_state = "1-2"
 	},
@@ -2054,7 +2076,7 @@
 	},
 /area/mining/power)
 "wt" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 9
 	},
 /obj/cable{
@@ -2076,6 +2098,7 @@
 "ww" = (
 /obj/machinery/ore_cloud_storage_container,
 /obj/machinery/light/incandescent,
+/obj/mapping_helper/access/mining_outpost,
 /turf/simulated/floor/grime,
 /area/mining/magnet_control)
 "wx" = (
@@ -2090,7 +2113,7 @@
 /area/noGenerate)
 "wz" = (
 /obj/table/auto,
-/obj/machinery/computer/security/wooden_tv/small{
+/obj/machinery/computer/television/small{
 	pixel_y = 8
 	},
 /obj/machinery/light/small/sticky,
@@ -2161,11 +2184,7 @@
 /turf/simulated/wall/auto/martian,
 /area/evilreaver/atmospherics)
 "xb" = (
-/obj/machinery/firealarm{
-	dir = 1;
-	layer = 3.5;
-	pixel_y = -24
-	},
+/obj/machinery/firealarm/directional/south,
 /turf/simulated/floor/yellow/side,
 /area/mining/dock)
 "xc" = (
@@ -2330,7 +2349,7 @@
 /turf/simulated/floor/plating/damaged3,
 /area/evilreaver/atmospherics)
 "xQ" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 5
 	},
 /obj/cable{
@@ -2410,10 +2429,7 @@
 /obj/table/reinforced/auto,
 /obj/item/shipcomponent/sensor/mining,
 /obj/item/shipcomponent/sensor/mining,
-/obj/machinery/firealarm{
-	pixel_y = 24;
-	text = "NF"
-	},
+/obj/machinery/firealarm/directional/north,
 /turf/simulated/floor/orangeblack/side{
 	dir = 1
 	},
@@ -2431,7 +2447,7 @@
 /turf/simulated/floor/plating/damaged2,
 /area/evilreaver/atmospherics)
 "yp" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/airless/plating/catwalk{
 	dir = 6
 	},
@@ -2488,12 +2504,7 @@
 /turf/simulated/floor/red/side,
 /area/evilreaver/security)
 "za" = (
-/obj/machinery/light_switch{
-	icon_state = "light0";
-	name = "W light switch";
-	on = 0;
-	pixel_x = -24
-	},
+/obj/machinery/light_switch/west,
 /turf/simulated/floor/plating/damaged3,
 /area/spyshack)
 "zb" = (
@@ -2556,7 +2567,7 @@
 	dir = 9;
 	layer = 3
 	},
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/plating/airless/asteroid,
 /area/mining/mainasteroid)
 "zs" = (
@@ -2571,10 +2582,7 @@
 /turf/simulated/floor/grime,
 /area/tech_outpost)
 "zv" = (
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
-	},
+/obj/machinery/firealarm/directional/east,
 /turf/simulated/floor/black,
 /area/mining/quarters)
 "zw" = (
@@ -2687,14 +2695,11 @@
 /area/mining/refinery)
 "Al" = (
 /obj/machinery/vending/coffee,
-/obj/machinery/light_switch{
-	name = "N light switch";
-	pixel_y = 24
-	},
 /obj/item/paper/businesscard/josh{
 	pixel_x = 15;
 	pixel_y = 27
 	},
+/obj/machinery/light_switch/north,
 /turf/simulated/floor/grime,
 /area/tech_outpost)
 "Am" = (
@@ -2716,10 +2721,7 @@
 /turf/space,
 /area/noGenerate)
 "As" = (
-/obj/machinery/firealarm{
-	pixel_y = 24;
-	text = "NF"
-	},
+/obj/machinery/firealarm/directional/north,
 /turf/simulated/floor/caution/south,
 /area/mining/manufacturing)
 "Au" = (
@@ -2744,7 +2746,7 @@
 /area/mining/hangar)
 "AA" = (
 /obj/machinery/power/tracker/small_backup4,
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 10
 	},
 /obj/cable{
@@ -2867,12 +2869,8 @@
 /turf/simulated/wall/auto/reinforced/old,
 /area/evilreaver/bridge)
 "Bp" = (
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 1;
-	name = "autoname - Mining";
-	network = "Mining";
-	tag = ""
+/obj/machinery/camera/mining/directional/south{
+	pixel_x = -10
 	},
 /obj/machinery/light/incandescent,
 /turf/simulated/floor/shuttlebay,
@@ -2968,7 +2966,7 @@
 	layer = 3
 	},
 /obj/disposalpipe/segment/transport,
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/airless/plating/catwalk{
 	dir = 5;
 	icon_state = "catwalk_cross"
@@ -2979,7 +2977,7 @@
 	dir = 6;
 	layer = 3
 	},
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/airless/plating/catwalk{
 	dir = 1;
 	icon_state = "catwalk_cross"
@@ -2997,6 +2995,13 @@
 "BU" = (
 /turf/simulated/floor/caution/east,
 /area/mining/quarters)
+"Cc" = (
+/obj/lattice{
+	icon_state = "lattice-dir-b"
+	},
+/obj/machinery/light/traffic_light/mining_outpost,
+/turf/space,
+/area/noGenerate)
 "Cd" = (
 /obj/machinery/door/poddoor/blast{
 	autoclose = 1;
@@ -3041,6 +3046,7 @@
 	icon_state = "1-2"
 	},
 /obj/random_item_spawner/junk/one_or_zero,
+/obj/item/rods/steel,
 /turf/simulated/floor/grime,
 /area/mining/comms)
 "Ci" = (
@@ -3087,7 +3093,7 @@
 /area/tech_outpost)
 "CC" = (
 /obj/storage/secure/closet/engineering/mechanic,
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	dir = 4;
 	icon_state = "carpetNE"
 	},
@@ -3102,6 +3108,14 @@
 /obj/machinery/door/unpowered/wood/stall,
 /turf/simulated/floor/black,
 /area/mining/quarters)
+"CT" = (
+/obj/lattice{
+	dir = 8;
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/mining_outpost/delay3,
+/turf/space,
+/area/noGenerate)
 "CV" = (
 /obj/decal/cleanable/dirt,
 /obj/random_item_spawner/junk/one_or_zero,
@@ -3198,13 +3212,11 @@
 	},
 /area/evilreaver/security)
 "Dz" = (
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 5;
-	name = "autoname - Mining";
-	network = "Mining";
-	pixel_x = -10;
-	tag = ""
+/obj/machinery/camera/mining/directional/west{
+	pixel_y = -10
+	},
+/obj/item/device/radio/intercom/mining{
+	dir = 4
 	},
 /turf/simulated/floor/carpet/office,
 /area/mining/hangar)
@@ -3222,6 +3234,7 @@
 /area/evilreaver/security)
 "DT" = (
 /obj/machinery/light/incandescent,
+/obj/item/rods/steel,
 /turf/simulated/floor/grime,
 /area/mining/comms)
 "DW" = (
@@ -3256,6 +3269,14 @@
 /obj/item/clothing/under/misc/mobster/alt,
 /turf/simulated/floor/plating/damaged3,
 /area/spyshack)
+"Eb" = (
+/obj/lattice{
+	dir = 8;
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/mining_outpost,
+/turf/space,
+/area/noGenerate)
 "Ec" = (
 /obj/machinery/door/airlock/pyro/external{
 	dir = 8
@@ -3279,7 +3300,7 @@
 /turf/simulated/wall/auto/martian,
 /area/evilreaver/security)
 "Ek" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/plating/airless/asteroid,
 /area/mining/mainasteroid)
 "En" = (
@@ -3348,11 +3369,8 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/light_switch{
-	name = "N light switch";
-	pixel_y = 24
-	},
 /obj/decal/stripe_delivery,
+/obj/machinery/light_switch/north,
 /turf/simulated/floor,
 /area/mining/miningoutpost)
 "EM" = (
@@ -3453,22 +3471,14 @@
 /turf/simulated/floor/plating/damaged3,
 /area/evilreaver/security)
 "Fq" = (
-/obj/machinery/light_switch{
-	name = "W light switch";
-	on = 0;
-	pixel_x = -24
-	},
 /obj/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 4;
-	name = "autoname - Mining";
-	network = "Mining";
-	tag = ""
+/obj/machinery/camera/mining/directional/west{
+	pixel_y = 10
 	},
 /obj/random_item_spawner/junk/one_or_zero,
+/obj/machinery/light_switch/west,
 /turf/simulated/floor/grime,
 /area/mining/magnet_control)
 "Fr" = (
@@ -3543,7 +3553,7 @@
 /turf/simulated/floor/red/side,
 /area/evilreaver/security)
 "FP" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 10
 	},
 /turf/simulated/floor/airless/plating/catwalk{
@@ -3552,7 +3562,7 @@
 	},
 /area/mining/mainasteroid)
 "FR" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 6
 	},
 /turf/simulated/floor/airless/plating/catwalk{
@@ -3606,6 +3616,10 @@
 /obj/mapping_helper/mob_spawn/corpse/critter/random/martian,
 /turf/simulated/floor/martian,
 /area/evilreaver/security)
+"Gg" = (
+/obj/disposalpipe/segment/transport,
+/turf/simulated/floor/plating,
+/area/mining/manufacturing)
 "Gh" = (
 /obj/cable{
 	icon_state = "1-2"
@@ -3616,7 +3630,7 @@
 /obj/cable{
 	icon_state = "2-4"
 	},
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/airless/plating/catwalk{
 	dir = 5;
 	icon_state = "catwalk_cross"
@@ -3635,17 +3649,17 @@
 	dir = 8
 	},
 /area/mining/miningoutpost)
+"Gn" = (
+/obj/disposalpipe/segment/transport,
+/obj/mapping_helper/wingrille_spawn/auto/reinforced,
+/turf/simulated/floor/plating/airless,
+/area/mining/manufacturing)
 "Gq" = (
 /obj/machinery/computer/transit_shuttle/mining{
 	dir = 4
 	},
 /turf/simulated/floor/grime,
 /area/mining/dock)
-"Gr" = (
-/obj/lattice,
-/obj/item/device/infra_sensor,
-/turf/simulated/floor/martian,
-/area/evilreaver/bridge)
 "Gs" = (
 /obj/cable{
 	icon_state = "1-4"
@@ -3707,7 +3721,7 @@
 "GN" = (
 /obj/stool/bed,
 /obj/item/clothing/suit/bedsheet,
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	dir = 4;
 	icon_state = "carpetN"
 	},
@@ -3746,7 +3760,7 @@
 /turf/simulated/floor/martian,
 /area/evilreaver/security)
 "GY" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /obj/disposalpipe/segment/transport,
 /turf/simulated/floor/plating/airless/asteroid,
 /area/mining/mainasteroid)
@@ -3777,7 +3791,7 @@
 /turf/simulated/floor/black,
 /area/mining/quarters)
 "Hp" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /obj/disposalpipe/segment/transport,
 /turf/simulated/floor/airless/plating/catwalk,
 /area/mining/mainasteroid)
@@ -3836,13 +3850,8 @@
 /obj/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 6;
-	name = "autoname -  Mining";
-	network = "Mining";
-	pixel_y = 20;
-	tag = ""
+/obj/machinery/camera/mining/directional/north{
+	pixel_x = 10
 	},
 /turf/simulated/floor/yellow/side{
 	dir = 1
@@ -3927,6 +3936,13 @@
 	},
 /turf/simulated/floor,
 /area/mining/manufacturing)
+"Il" = (
+/obj/lattice{
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/john_outpost/delay2,
+/turf/space,
+/area/noGenerate)
 "Im" = (
 /obj/cable{
 	icon_state = "1-8"
@@ -3998,7 +4014,7 @@
 /turf/simulated/floor/grime,
 /area/mining/dock)
 "IE" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 5
 	},
 /turf/simulated/floor/plating/airless/asteroid,
@@ -4008,7 +4024,7 @@
 /turf/simulated/floor/plating,
 /area/spyshack)
 "IG" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 9
 	},
 /obj/rail{
@@ -4018,16 +4034,20 @@
 /turf/simulated/floor/plating/airless/asteroid,
 /area/mining/mainasteroid)
 "IL" = (
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 26;
-	pixel_y = 1
-	},
+/obj/machinery/firealarm/directional/east,
 /turf/simulated/floor,
 /area/mining/miningoutpost)
 "IO" = (
 /turf/simulated/floor/caution/east,
 /area/mining/refinery)
+"IQ" = (
+/obj/lattice{
+	dir = 6;
+	icon_state = "lattice-dir-b"
+	},
+/obj/machinery/light/traffic_light/mining_outpost/delay5,
+/turf/space,
+/area/noGenerate)
 "IS" = (
 /obj/decal/aliencomputer,
 /obj/map/light/dimred,
@@ -4111,7 +4131,7 @@
 /turf/simulated/bar,
 /area/evilreaver/bar)
 "Js" = (
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	dir = 4;
 	icon_state = "carpetSE"
 	},
@@ -4161,7 +4181,7 @@
 /area/mining/hangar)
 "JJ" = (
 /obj/disposalpipe/segment/transport,
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/plating/airless/asteroid,
 /area/mining/mainasteroid)
 "JK" = (
@@ -4216,10 +4236,7 @@
 /turf/simulated/floor/carpet/office,
 /area/mining/hangar)
 "Kh" = (
-/obj/machinery/light_switch{
-	name = "E light switch";
-	pixel_x = 24
-	},
+/obj/machinery/light_switch/east,
 /turf/simulated/floor/grime,
 /area/mining/miningoutpost)
 "Kk" = (
@@ -4275,7 +4292,7 @@
 /turf/simulated/floor/caution/south,
 /area/mining/refinery)
 "KH" = (
-/obj/submachine/chef_sink/chem_sink{
+/obj/machinery/sink/slim{
 	desc = "A water-filled unit intended for hand-washing purposes.";
 	dir = 1
 	},
@@ -4347,6 +4364,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/tech_outpost)
+"Le" = (
+/obj/lattice{
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/mining_outpost/delay2,
+/turf/space,
+/area/noGenerate)
 "Li" = (
 /obj/table/wood/auto,
 /obj/item/device/radio/headset,
@@ -4359,10 +4383,7 @@
 	desc = "Caution! Construction Zone!";
 	name = "caution sign"
 	},
-/obj/machinery/light_switch{
-	name = "E light switch";
-	pixel_x = 24
-	},
+/obj/machinery/light_switch/east,
 /turf/simulated/floor/yellow/side{
 	dir = 5
 	},
@@ -4393,9 +4414,6 @@
 /turf/simulated/floor,
 /area/mining/miningoutpost)
 "Lw" = (
-/obj/item/rods/steel,
-/obj/item/rods/steel,
-/obj/item/rods/steel,
 /turf/simulated/floor/grime,
 /area/mining/comms)
 "Lx" = (
@@ -4439,13 +4457,8 @@
 /turf/simulated/floor,
 /area/mining/miningoutpost)
 "LG" = (
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 8;
-	name = "autoname - Mining";
-	network = "Mining";
-	pixel_x = 10;
-	tag = ""
+/obj/machinery/camera/mining/directional/east{
+	pixel_y = 10
 	},
 /turf/simulated/floor/plating/airless/asteroid,
 /area/noGenerate)
@@ -4467,14 +4480,11 @@
 /turf/simulated/floor/grime,
 /area/mining/hangar)
 "LK" = (
-/obj/machinery/light_switch{
-	name = "S light switch";
-	pixel_y = -24
-	},
 /obj/item/rods/steel,
 /obj/item/rods/steel,
 /obj/item/rods/steel,
 /obj/random_item_spawner/junk/one_or_zero,
+/obj/machinery/light_switch/south,
 /turf/simulated/floor/grime,
 /area/mining/comms)
 "LL" = (
@@ -4510,13 +4520,8 @@
 /turf/simulated/wall/auto/supernorn,
 /area/mining/refinery)
 "LR" = (
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 5;
-	name = "autoname - Mining";
-	network = "Mining";
-	pixel_x = -10;
-	tag = ""
+/obj/machinery/camera/mining/directional/west{
+	pixel_y = -10
 	},
 /turf/simulated/floor,
 /area/mining/miningoutpost)
@@ -4571,11 +4576,11 @@
 /area/noGenerate)
 "Mo" = (
 /obj/table/auto,
-/obj/item/storage/firstaid/regular,
 /obj/decal/cleanable/cobweb,
 /obj/cable{
 	icon_state = "1-4"
 	},
+/obj/item/storage/firstaid/regular,
 /turf/simulated/floor/grime,
 /area/mining/comms)
 "Mq" = (
@@ -4624,7 +4629,7 @@
 /obj/item/parts/robot_parts/head/antique,
 /obj/item/parts/robot_parts/head/antique,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "ME" = (
 /obj/decal/cleanable/gangtag{
 	desc = "A hastily-scrawled sequence of numbers: 1-949-415-6298. What does it mean?";
@@ -4634,7 +4639,7 @@
 	pixel_x = -32
 	},
 /obj/item/reagent_containers/food/drinks/bottle/fancy_beer,
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	dir = 4;
 	icon_state = "carpetNW"
 	},
@@ -4660,7 +4665,7 @@
 	},
 /obj/lattice,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "MJ" = (
 /obj/structure/girder,
 /turf/simulated/floor/plating,
@@ -4801,8 +4806,12 @@
 /obj/storage/crate,
 /turf/simulated/floor/plating/airless/asteroid,
 /area/noGenerate)
+"NP" = (
+/obj/map/light/white,
+/turf/simulated/wall/auto/martian,
+/area/evilreaver/crew)
 "NQ" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 4
 	},
 /turf/simulated/floor/airless/plating/catwalk{
@@ -4810,7 +4819,7 @@
 	},
 /area/mining/mainasteroid)
 "NU" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/airless/plating/catwalk{
 	dir = 9
 	},
@@ -4885,7 +4894,7 @@
 	name = "crab"
 	},
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "Or" = (
 /obj/machinery/door/airlock/pyro/external{
 	name = "Mining Outpost Airlock"
@@ -4905,7 +4914,7 @@
 /obj/npc/trader/martian,
 /obj/map/light/dimred,
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "Ox" = (
 /obj/cable{
 	icon_state = "1-8"
@@ -4915,7 +4924,7 @@
 "OA" = (
 /obj/item/cable_coil/cut,
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "OD" = (
 /obj/overlay{
 	density = 1;
@@ -4925,7 +4934,7 @@
 	name = "old busted turbine thingy"
 	},
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "OG" = (
 /turf/simulated/floor/caution/east,
 /area/mining/hangar)
@@ -4984,7 +4993,7 @@
 /turf/simulated/floor/plating/damaged3,
 /area/evilreaver/genetics)
 "Pl" = (
-/obj/grille/steel,
+/obj/mesh/grille/steel,
 /turf/simulated/floor/plating/airless,
 /area/station/solar/small_backup3)
 "Pm" = (
@@ -5004,7 +5013,7 @@
 /turf/simulated/floor/grime,
 /area/mining/power)
 "Py" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 9
 	},
 /obj/cable{
@@ -5082,7 +5091,7 @@
 	},
 /obj/lattice,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "Qh" = (
 /obj/machinery/manufacturer/hangar,
 /turf/simulated/floor/caution/east,
@@ -5092,7 +5101,7 @@
 /turf/simulated/wall/auto/martian,
 /area/noGenerate)
 "Qm" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 4
 	},
 /obj/rail{
@@ -5108,6 +5117,9 @@
 /obj/machinery/power/apc/autoname_south,
 /turf/simulated/floor,
 /area/mining/quarters)
+"Qq" = (
+/turf/simulated/floor/martian,
+/area/evilreaver/crew)
 "Qv" = (
 /mob/living/critter/martian/warrior,
 /turf/simulated/floor/martian,
@@ -5132,7 +5144,7 @@
 /obj/item/seed/cannabis,
 /obj/item/seed/cannabis,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "QE" = (
 /obj/fakeobject{
 	anchored = 1;
@@ -5274,6 +5286,14 @@
 /obj/decal/cleanable/dirt,
 /turf/simulated/floor/grime,
 /area/mining/refinery)
+"Rw" = (
+/obj/lattice{
+	dir = 6;
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/mining_outpost/delay5,
+/turf/space,
+/area/noGenerate)
 "Rx" = (
 /obj/cable{
 	icon_state = "4-8"
@@ -5288,7 +5308,7 @@
 /turf/simulated/floor/plating/damaged3,
 /area/mining/miningoutpost)
 "Rz" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 9
 	},
 /obj/machinery/magnet_chassis{
@@ -5300,15 +5320,12 @@
 	},
 /area/mining/mainasteroid)
 "RD" = (
-/obj/machinery/light_switch{
-	name = "N light switch";
-	pixel_y = 24
-	},
 /obj/machinery/light/incandescent,
 /obj/cable{
 	icon_state = "4-8"
 	},
 /obj/decal/stripe_delivery,
+/obj/machinery/light_switch/north,
 /turf/simulated/floor,
 /area/mining/magnet_control)
 "RJ" = (
@@ -5406,7 +5423,7 @@
 /turf/simulated/floor/plating/damaged3,
 /area/evilreaver/bar)
 "Sw" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/airless/plating/catwalk{
 	dir = 5
 	},
@@ -5444,17 +5461,15 @@
 /turf/simulated/floor/carpet/office,
 /area/mining/hangar)
 "SN" = (
-/obj/machinery/light_switch{
-	name = "N light switch";
-	pixel_y = 24
-	},
 /obj/machinery/bot/medbot,
+/obj/machinery/light_switch/north,
 /turf/simulated/floor/caution/south,
 /area/mining/manufacturing)
 "SP" = (
 /obj/machinery/computer/magnet{
 	dir = 8
 	},
+/obj/mapping_helper/access/mining_outpost,
 /turf/simulated/floor/scorched2,
 /area/mining/magnet_control)
 "SR" = (
@@ -5506,17 +5521,11 @@
 /area/evilreaver/genetics)
 "Tf" = (
 /obj/storage/closet/wardrobe/yellow,
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
+/obj/machinery/firealarm/directional/west,
 /turf/simulated/floor/black,
 /area/mining/quarters)
 "Th" = (
-/obj/machinery/light_switch{
-	name = "S light switch";
-	pixel_y = -24
-	},
+/obj/machinery/light_switch/south,
 /turf/simulated/floor/caution/east,
 /area/mining/quarters)
 "Tj" = (
@@ -5524,18 +5533,10 @@
 /turf/simulated/wall/auto/reinforced/old,
 /area/evilreaver/genetics)
 "Tl" = (
-/obj/machinery/camera{
-	c_tag = "autotag";
-	dir = 4;
-	name = "autoname - Mining";
-	network = "Mining";
-	pixel_x = -10;
-	tag = ""
+/obj/machinery/camera/mining/directional/west{
+	pixel_y = 10
 	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
+/obj/machinery/firealarm/directional/west,
 /turf/simulated/floor/grime,
 /area/mining/magnet_control)
 "Tn" = (
@@ -5549,7 +5550,7 @@
 	},
 /area/noGenerate)
 "Tz" = (
-/obj/grille/catwalk,
+/obj/mesh/catwalk,
 /turf/simulated/floor/airless/plating/catwalk,
 /area/mining/mainasteroid)
 "TC" = (
@@ -5592,7 +5593,7 @@
 /obj/cable{
 	icon_state = "1-8"
 	},
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 10
 	},
 /turf/simulated/floor/airless/plating/catwalk{
@@ -5639,7 +5640,7 @@
 	},
 /obj/landmark/spawner/loot,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "Ub" = (
 /obj/machinery/door/airlock/pyro/external{
 	dir = 8
@@ -5660,13 +5661,21 @@
 "Ug" = (
 /obj/lattice,
 /turf/simulated/floor/martian,
-/area/noGenerate)
+/area/evilreaver/crew)
 "Uk" = (
 /obj/stool/bed,
 /obj/item/clothing/suit/bedsheet,
 /obj/decal/cleanable/dirt,
 /turf/simulated/floor/grime,
 /area/mining/quarters)
+"Ul" = (
+/obj/indestructible/shuttle_corner{
+	dir = 9;
+	icon = 'icons/turf/walls/martian.dmi';
+	icon_state = "diagonal"
+	},
+/turf/simulated/floor/martian,
+/area/evilreaver/crew)
 "Up" = (
 /obj/decal/cleanable/blood/tracks{
 	dir = 6
@@ -5881,7 +5890,7 @@
 /area/mining/manufacturing)
 "Vz" = (
 /obj/item/cigbutt,
-/turf/simulated/floor{
+/turf/simulated/floor/carpet{
 	dir = 8;
 	icon_state = "carpetSW"
 	},
@@ -5914,7 +5923,7 @@
 /obj/fakeobject/robot,
 /obj/decal/cleanable/oil,
 /turf/simulated/floor/plating/damaged3,
-/area/noGenerate)
+/area/evilreaver/crew)
 "VK" = (
 /obj/cable{
 	icon_state = "1-2"
@@ -5934,7 +5943,9 @@
 	dir = 8;
 	layer = 3
 	},
-/obj/strip_door,
+/obj/strip_door{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/mining/manufacturing)
 "VT" = (
@@ -6076,7 +6087,7 @@
 /turf/simulated/floor/martian,
 /area/evilreaver/bridge)
 "WY" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 4
 	},
 /obj/cable{
@@ -6192,9 +6203,24 @@
 /obj/mapping_helper/wingrille_spawn/auto/reinforced,
 /turf/simulated/floor/plating,
 /area/mining/dock)
+"XG" = (
+/obj/machinery/conveyor/NS{
+	id = "MINSouth"
+	},
+/obj/machinery/door/poddoor{
+	id = "MINdoorS";
+	name = "South Conveyor Door"
+	},
+/obj/forcefield/energyshield/perma/doorlink{
+	desc = "A door-linked force field that prevents gasses from passing through it.";
+	name = "Door-linked Atmospheric Forcefield";
+	powerlevel = 1
+	},
+/turf/simulated/floor/plating/airless,
+/area/mining/manufacturing)
 "XJ" = (
 /turf/simulated/wall/auto/reinforced/old,
-/area/noGenerate)
+/area/evilreaver/crew)
 "XL" = (
 /obj/decal/cleanable/dirt,
 /turf/simulated/floor/caution/south,
@@ -6206,6 +6232,14 @@
 /obj/lattice,
 /turf/simulated/floor/martian,
 /area/evilreaver/bridge)
+"XP" = (
+/obj/lattice{
+	dir = 4;
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/mining_outpost,
+/turf/space,
+/area/noGenerate)
 "XR" = (
 /obj/lattice{
 	dir = 4;
@@ -6229,7 +6263,7 @@
 /turf/simulated/wall/auto/reinforced/old,
 /area/spyshack)
 "XX" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 4
 	},
 /obj/cable{
@@ -6277,6 +6311,14 @@
 /obj/landmark/spawner/loot,
 /turf/simulated/floor/plating/damaged3,
 /area/evilreaver/storage/tools)
+"Yi" = (
+/obj/lattice{
+	dir = 6;
+	icon_state = "lattice-dir"
+	},
+/obj/machinery/light/traffic_light/john_outpost,
+/turf/space,
+/area/noGenerate)
 "Yk" = (
 /obj/lattice{
 	icon_state = "lattice-dir"
@@ -6434,10 +6476,7 @@
 /turf/simulated/floor/martian,
 /area/evilreaver/security)
 "Zh" = (
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
+/obj/machinery/firealarm/directional/west,
 /turf/simulated/floor/grime,
 /area/mining/refinery)
 "Zi" = (
@@ -6529,7 +6568,7 @@
 	},
 /area/noGenerate)
 "ZT" = (
-/obj/grille/catwalk{
+/obj/mesh/catwalk{
 	dir = 9
 	},
 /turf/simulated/floor/airless/plating/catwalk{
@@ -16927,12 +16966,12 @@ ab
 ab
 ab
 aw
-aw
-aw
+se
+se
 nR
-aw
-aw
-aw
+se
+se
+se
 XJ
 Xr
 Yr
@@ -17229,12 +17268,12 @@ ab
 ab
 NG
 aw
-aw
-Qc
-UM
+se
+Ul
+Qq
 oz
-Qi
-aw
+NP
+se
 XJ
 Xx
 Yf
@@ -17530,11 +17569,11 @@ ab
 ab
 NG
 aw
-aw
-Qc
+se
+Ul
 Oq
-UM
-UM
+Qq
+Qq
 Ua
 pM
 XJ
@@ -17832,7 +17871,7 @@ ab
 ab
 aw
 aw
-aw
+se
 MA
 Ug
 Ug
@@ -18134,13 +18173,13 @@ ab
 ab
 aw
 aw
-Qi
+NP
 MI
 Ou
 nV
 nV
 oM
-UM
+Qq
 pR
 XJ
 YW
@@ -18436,13 +18475,13 @@ ab
 ab
 aw
 aw
-aw
+se
 fz
 OA
 nW
-UM
-UM
-UM
+Qq
+Qq
+Qq
 qd
 XJ
 Yn
@@ -18743,8 +18782,8 @@ cc
 OD
 Qe
 QC
-UM
-UM
+Qq
+Qq
 qg
 qv
 Yr
@@ -19042,10 +19081,10 @@ ab
 Rk
 XJ
 XJ
-aw
-Qi
+se
+NP
 oD
-UM
+Qq
 pN
 VI
 XJ
@@ -19344,11 +19383,11 @@ ab
 ab
 SX
 XJ
-aw
-aw
-aw
-UM
-aw
+se
+se
+se
+Qq
+se
 XJ
 XJ
 YW
@@ -21473,7 +21512,7 @@ zp
 Ac
 Ac
 Ey
-Gr
+GU
 bf
 XN
 GU
@@ -43883,7 +43922,7 @@ Kc
 Kc
 Pz
 RN
-ON
+ht
 oj
 ON
 QB
@@ -44800,7 +44839,7 @@ oZ
 oB
 Sq
 Ud
-vL
+gX
 gX
 gX
 DZ
@@ -45959,12 +45998,12 @@ ab
 ab
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ab
+Cc
+cs
+Le
+cs
+gN
+bt
 aY
 BP
 sE
@@ -46266,7 +46305,7 @@ ab
 ab
 ab
 ab
-ab
+iv
 sW
 rY
 aY
@@ -46870,7 +46909,7 @@ Wc
 Wc
 Wc
 ab
-aY
+pp
 HW
 wO
 HW
@@ -48674,13 +48713,13 @@ ab
 ab
 ab
 ab
-ex
+IQ
 YO
 Br
 Br
 EU
 YO
-bt
+Rw
 cs
 DW
 DW
@@ -48976,13 +49015,13 @@ ab
 ab
 ab
 ab
-aX
+CT
 XD
 Fu
 eT
 Gq
 XD
-ce
+cX
 ab
 RK
 Kc
@@ -49278,13 +49317,13 @@ ab
 ab
 ab
 ab
-aX
+Eb
 XD
 ID
 eT
 Lz
 XD
-ce
+XP
 ab
 RK
 Kc
@@ -51746,15 +51785,15 @@ FM
 NH
 cs
 aY
+eV
 cs
-cs
-cs
+jC
 bu
+qn
 cs
+Il
 cs
-cs
-cs
-bt
+Yi
 gB
 ab
 ab
@@ -53221,8 +53260,8 @@ YZ
 tU
 sI
 sB
-sB
-sU
+Gg
+Gn
 sU
 sU
 sU
@@ -53524,7 +53563,7 @@ nq
 Ij
 zs
 hA
-lp
+XG
 lp
 lp
 lp
@@ -55372,13 +55411,13 @@ Kc
 Kc
 Kc
 cs
+jC
 cs
+qn
 cs
+Il
 cs
-cs
-cs
-cs
-bu
+kN
 gB
 ab
 ab

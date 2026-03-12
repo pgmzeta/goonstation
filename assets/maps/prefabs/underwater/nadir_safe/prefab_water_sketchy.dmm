@@ -114,10 +114,7 @@
 /area/prefab/sea_sketch)
 "az" = (
 /obj/table/wood/round/auto,
-/obj/machinery/computer/security/wooden_tv{
-	desc = "These channels seem to mostly be about robuddies. What is this, some kind of reality show?";
-	name = "Television";
-	network = "Zeta";
+/obj/machinery/computer/television/public{
 	pixel_y = 4
 	},
 /turf/simulated/floor/grime,
@@ -323,6 +320,7 @@
 /area/prefab/sea_sketch)
 "br" = (
 /obj/machinery/chem_dispenser/alcohol,
+/obj/mapping_helper/glassware_spawn,
 /turf/simulated/floor/grime,
 /area/prefab/sea_sketch)
 "bs" = (
@@ -398,7 +396,6 @@
 /turf/simulated/floor/scorched2,
 /area/prefab/sea_sketch)
 "bK" = (
-/obj/item/implant/robotalk,
 /turf/simulated/floor/plating/scorched,
 /area/prefab/sea_sketch)
 "bL" = (
@@ -420,9 +417,9 @@
 /area/prefab/sea_sketch)
 "bQ" = (
 /obj/machinery/door/airlock/pyro/classic{
-	dir = 4;
-	req_access_txt = "12"
+	dir = 4
 	},
+/obj/mapping_helper/access/maint,
 /turf/simulated/floor/plating,
 /area/prefab/sea_sketch)
 "bR" = (
