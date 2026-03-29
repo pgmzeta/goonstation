@@ -38,6 +38,9 @@ TYPEINFO(/datum/mapPrefab/engine_room)
 			if("singularity", "singularitydevtest")
 				comp1type = /obj/machinery/computer3/generic/engine
 				comp2type = /obj/machinery/computer/power_monitor/smes
+			if("LPA", "LPAdevtest") // TODO: Cogmap1 prefab
+				comp1type = /obj/machinery/computer3/generic/engine
+				comp2type = /obj/machinery/computer/power_monitor/smes
 			else
 				CRASH("Selected an unknown engine type - did you forget to put it here?")
 

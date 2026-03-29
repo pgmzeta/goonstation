@@ -1,4 +1,6 @@
 /obj/item/heat_sink
+	icon = 'icons/obj/items/items.dmi'
+	icon_state = "large_coil"
 	/// Max health to set melt_health to on init
 	_max_health = 100
 	/// a
@@ -31,30 +33,30 @@
 		parent.MarkGridForUpdate()
 		parent.UpdateIcon()
 
-/obj/item/heat_sink/proc/processHeat()
-	//heat transfer with magnetic endcap
-	var/obj/machinery/nuclear_reactor/holder = src.loc
-	if(istype(holder))
-		var/deltaT = src.temperature - holder.temperature
-		var/k = calculateHeatTransferCoefficient(holder.material,src.material)
-		var/A = 100 // TODO: Math
-		src.temperature = src.temperature - (k * A * (MACHINE_PROC_INTERVAL*8)/src.thermal_mass)*deltaT
-		holder.temperature = holder.temperature - (k * A * (MACHINE_PROC_INTERVAL*8)/holder.thermal_mass)*-deltaT
-		if(holder.temperature < 0 || src.temperature < 0)
-			CRASH("TEMP WENT NEGATIVE")
+// /obj/item/heat_sink/proc/processHeat()
+// 	//heat transfer with magnetic endcap
+// 	var/obj/holder = src.loc
+// 	if(istype(holder))
+// 		var/deltaT = src.temperature - holder.temperature
+// 		var/k = calculateHeatTransferCoefficient(holder.material,src.material)
+// 		var/A = 100 // TODO: Math
+// 		src.temperature = src.temperature - (k * A * (MACHINE_PROC_INTERVAL*8)/src.thermal_mass)*deltaT
+// 		holder.temperature = holder.temperature - (k * A * (MACHINE_PROC_INTERVAL*8)/holder.thermal_mass)*-deltaT
+// 		if(holder.temperature < 0 || src.temperature < 0)
+// 			CRASH("TEMP WENT NEGATIVE")
 
-		holder.material_trigger_on_temp(holder.temperature)
-		src.material_trigger_on_temp(src.temperature)
-		if((src.temperature > src.melting_point) && (src.melt_health > 0))
-			src.melt_health -= rand(10,50)
-		if(src.melt_health <= 0)
-			src.melt() //oh no
+// 		holder.material_trigger_on_temp(holder.temperature)
+// 		src.material_trigger_on_temp(src.temperature)
+// 		if((src.temperature > src.melting_point) && (src.melt_health > 0))
+// 			src.melt_health -= rand(10,50)
+// 		if(src.melt_health <= 0)
+// 			src.melt() //oh no
 
 
 /obj/item/heat_sink/proc/mob_holding_temp_react(mob/user, mult)
 	if(src.temperature < T0C + 80)
 		return FALSE
-	if(ON_COOLDOWN(user, "reactor_comp_burn", 2 SECONDS))
+	if(ON_COOLDOWN(user, "reactor_comp_burn", 2 SECONDS)) // yeah its stolen, but at least we share burn cooldowns
 		return
 
 	if(user.equipped(src))
