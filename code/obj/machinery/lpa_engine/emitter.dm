@@ -148,6 +148,10 @@ TYPEINFO(/obj/machinery/atmospherics/unary/lpa_emitter)
 /obj/machinery/atmospherics/unary/lpa_emitter/proc/set_firing(var/turn_on, mob/user)
 	if (turn_on == is_firing)
 		return
+	if (turn_on && !fuel_tank)
+		if (user)
+			boutput(user, SPAN_ALERT("\The [src] has no fuel tank slotted."))
+		return
 	is_firing = turn_on
 	if (!is_firing)
 		if (beam && !QDELETED(beam))
@@ -210,13 +214,13 @@ TYPEINFO(/obj/machinery/atmospherics/unary/lpa_emitter)
 		unstable_energy += beam.get_source_power()
 
 		if (unstable_energy >= LPA_FAILURE_THRESHOLD * 0.33)
-			playsound(src, 'sound/machines/alarm.ogg', 50, TRUE)
+			src.playsound(src, 'sound/machines/alarm_a.ogg', 50, TRUE)
 		if (unstable_energy >= LPA_FAILURE_THRESHOLD * 0.66)
-			visible_message(SPAN_ALERT("\The [src] emits a dangerous plasma discharge warning!"))
+			src.visible_message(SPAN_ALERT("\The [src] emits a dangerous plasma discharge warning!"))
 		if (unstable_energy >= LPA_FAILURE_THRESHOLD)
-			spawn_failure_projectile()
-			set_firing(FALSE, null)
-			visible_message(SPAN_ALERT("\The [src] suffers a catastrophic beam failure!"))
+			src.spawn_failure_projectile()
+			src.set_firing(FALSE, null)
+			src.visible_message(SPAN_ALERT("\The [src] suffers a catastrophic beam failure!"))
 
 #undef LPA_FAILURE_THRESHOLD
 
@@ -226,6 +230,21 @@ TYPEINFO(/obj/machinery/atmospherics/unary/lpa_emitter)
 	name = "Ionized Plasma Filamenter (DEBUG)"
 	/// Overrides computed channel quality when >= 0. Set via attack_hand menu.
 	var/forced_channel_quality = 1.0
+
+/obj/machinery/atmospherics/unary/lpa_emitter/cheat/set_firing(var/turn_on, mob/user)
+	// Skip tank requirement check for debug subtype.
+	if (turn_on == is_firing)
+		return
+	is_firing = turn_on
+	if (!is_firing)
+		if (beam && !QDELETED(beam))
+			qdel(beam)
+		beam = null
+		beam_age = 0
+		endcap_connections = 0
+		unstable_energy = 0
+	if (user)
+		boutput(user, SPAN_NOTICE("\The [src] [is_firing ? "begins ionizing." : "shuts down."]"))
 
 /obj/machinery/atmospherics/unary/lpa_emitter/cheat/get_fuel_gas()
 	// Return a synthetic gas mixture with reasonable toxins-like values so get_source_power() works without a tank.
