@@ -1,4 +1,4 @@
-/datum/random_event/major/blowout
+/datum/random_event/weather/blowout
 	name = "Radioactive Blowout"
 	var/list/space_color = list(
 		2,  2,  2,  0,

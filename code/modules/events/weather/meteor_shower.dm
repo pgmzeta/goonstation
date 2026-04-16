@@ -1,6 +1,6 @@
 var/global/meteor_shower_active = 0
 
-/datum/random_event/major/meteor_shower
+/datum/random_event/weather/meteor_shower
 	name = "Meteor Shower"
 	// centcom message handled modularly here
 #ifdef APRIL_FOOLS
@@ -12,6 +12,8 @@ var/global/meteor_shower_active = 0
 	required_elapsed_round_time = 26.6 MINUTES
 #endif
 	customization_available = 1
+	incompatible_maps = list("NADIR")
+
 	var/wave_direction = 1
 	var/meteors_in_wave = 20
 	var/delay_between_meteors = 5
@@ -32,8 +34,6 @@ var/global/meteor_shower_active = 0
 	is_event_available(var/ignore_time_lock = 0)
 		. = ..()
 		if(.)
-			if ( map_setting == "NADIR" ) // Nadir can have a counterpart to this event with acid hailstones, but it will need to function differently
-				. = FALSE
 			if (global.is_map_on_ground_terrain)
 				. = FALSE
 

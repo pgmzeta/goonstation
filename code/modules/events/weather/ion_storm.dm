@@ -1,4 +1,4 @@
-/datum/random_event/major/ion_storm
+/datum/random_event/weather/ion_storm
 	name = "Ion Storm"
 	centcom_headline = "Equipment Malfunction"
 	centcom_message = "An electromagnetic storm recently passed by the station. Sensitive electrical equipment may require maintenance."

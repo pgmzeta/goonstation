@@ -1,4 +1,4 @@
-/datum/random_event/major/radiation
+/datum/random_event/weather/radiation
 	name = "Radiation Storm"
 	centcom_headline = "Radioactive Anomaly"
 	centcom_message = {"Radioactive anomalies have been detected on the station. Evacuate any areas containing abnormal green or blue energy fields. Medical personnel are advised to prepare potassium iodide and anti-toxin treatments, and remain on standby to treat cases of irradiation."}

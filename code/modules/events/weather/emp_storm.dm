@@ -1,4 +1,4 @@
-/datum/random_event/major/emp_storm
+/datum/random_event/weather/emp_storm
 	name = "EMP Storm"
 	weight = 80
 	centcom_headline = "Electromagnetic Storm"

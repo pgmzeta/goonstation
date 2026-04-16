@@ -1,4 +1,4 @@
-/datum/random_event/major/solarflare
+/datum/random_event/weather/solarflare
 	name = "Solar Flare"
 	var/space_color = "#FFD446"
 
