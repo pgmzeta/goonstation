@@ -68649,6 +68649,12 @@
 	icon_state = "floorgrime-w"
 	},
 /area/sim/racing_track)
+"oRb" = (
+/obj/table/nanotrasen/auto,
+/obj/machinery/networked/printer,
+/obj/machinery/power/data_terminal,
+/turf/unsimulated/floor/plating,
+/area/watchful_eye_sensor)
 "oSa" = (
 /obj/fakeobject/skeleton,
 /turf/unsimulated/floor/arctic/snow,
@@ -149704,7 +149710,7 @@ lVt
 lVt
 tuc
 nJg
-yfl
+oRb
 hpB
 mef
 eji
