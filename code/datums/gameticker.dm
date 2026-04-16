@@ -96,6 +96,7 @@ var/global/game_force_started = FALSE
 
 		if(pregame_timeleft <= 0)
 			current_state = GAME_STATE_SETTING_UP
+			random_events.generate_weather()
 			qdel(title_countdown)
 			qdel(game_start_countdown)
 

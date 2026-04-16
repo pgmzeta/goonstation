@@ -14,6 +14,10 @@ ABSTRACT_TYPE(/datum/storyteller)
 
 	var/spawn_event_start = 23 MINUTES
 	var/spawn_time_range = list(8 MINUTES, 12 MINUTES)
+
+	var/weather_event_start = 18 MINUTES
+	var/weather_time_range = list(13 MINUTES, 22 MINUTES)
+
 	var/dead_players_threshold = 0.3
 #ifdef RP_MODE
 	var/alive_antags_threshold = 0.04
@@ -32,6 +36,10 @@ ABSTRACT_TYPE(/datum/storyteller)
 		random_events.time_between_minor_events_lower = src.minor_time_range[1]
 		random_events.time_between_minor_events_upper = src.minor_time_range[2]
 
+		random_events.weather_events_begin = src.weather_event_start
+		random_events.time_between_weather_events_lower = src.weather_time_range[1]
+		random_events.time_between_weather_events_upper = src.weather_time_range[2]
+
 		random_events.spawn_events_begin = src.spawn_event_start
 		random_events.time_between_spawn_events_lower = src.spawn_time_range[1]
 		random_events.time_between_spawn_events_upper = src.spawn_time_range[2]
@@ -41,7 +49,7 @@ ABSTRACT_TYPE(/datum/storyteller)
 		random_events.minimum_population = src.minimum_population
 
 	proc/process()
-		check_scheduled()
+		check_scheduled() // weather events are scheduled
 
 		if (ticker.round_elapsed_ticks >= major_event_start)
 			if (ticker.round_elapsed_ticks >= random_events.next_major_event)
@@ -62,7 +70,7 @@ ABSTRACT_TYPE(/datum/storyteller)
 				var/event_time = random_events.queued_events[queue][queued_id][2]
 				if(istype(RE) && event_time && ticker.round_elapsed_ticks >= event_time)
 					random_events.queued_events[queue] -= queued_id
-					RE.event_effect("Triggered by Queued Event")
+					RE.event_effect("Triggered by Queued Event ([queue] queue)")
 
 	proc/major_event_cycle()
 		random_events.major_event_cycle_count++
@@ -125,6 +133,9 @@ ABSTRACT_TYPE(/datum/storyteller)
 	minor_event_start = 3 MINUTES
 	minor_time_range = list(3 MINUTES, 6 MINUTES)
 
+	weather_event_start = 3 MINUTES
+	weather_time_range = list(4 MINUTES, 8 MINUTES)
+
 	spawn_event_start = 10 MINUTES
 	spawn_time_range = list(4 MINUTES, 6 MINUTES)
 
@@ -173,3 +184,8 @@ ABSTRACT_TYPE(/datum/storyteller)
 				random_events.next_major_event += rand(1 MINUTE, 2 MINUTES)
 
 		..()
+
+/// Weather events are closer to minor event timing instead of major event timing
+/datum/storyteller/bad_weather
+	weather_event_start = 12 MINUTES
+	weather_time_range = list(8 MINUTES, 12 MINUTES)

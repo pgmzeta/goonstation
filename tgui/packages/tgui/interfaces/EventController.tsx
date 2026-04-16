@@ -139,7 +139,7 @@ interface EventData {
 }
 
 const getMinutes = (time: number) => {
-  return time / 60 / 10;
+  return Math.round(time / 60 / 10);
 };
 
 const toMinutes = (time: number) => {

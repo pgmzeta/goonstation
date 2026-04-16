@@ -18,6 +18,11 @@ var/datum/event_controller/random_events
 	var/minor_events_enabled = TRUE
 	var/minor_event_cycle_count = 0
 
+	var/list/weather_events = list()
+	var/weather_events_begin = 20 MINUTES
+	var/time_between_weather_events_lower = 13 MINUTES
+	var/time_between_weather_events_upper = 22 MINUTES
+
 	var/list/antag_spawn_events = list()
 #ifdef RP_MODE
 	var/alive_antags_threshold = 0.04
@@ -68,6 +73,10 @@ var/datum/event_controller/random_events
 			var/datum/random_event/RE = new X
 			minor_events += RE
 
+		for (var/X in concrete_typesof(/datum/random_event/weather))
+			var/datum/random_event/RE = new X
+			weather_events += RE
+
 		for (var/X in concrete_typesof(/datum/random_event/special))
 			var/datum/random_event/RE = new X
 			special_events += RE
@@ -76,7 +85,7 @@ var/datum/event_controller/random_events
 			var/datum/random_event/RE = new X
 			start_events += RE
 
-		queued_events = list("major"=list(),"minor"=list(),"special_events"=list(),"spawn"=list(),"start_events"=list())
+		queued_events = list("major"=list(),"minor"=list(),"special_events"=list(),"spawn"=list(),"start_events"=list(),"weather"=list())
 
 		src.active_storyteller = new/datum/storyteller/basic()
 		src.active_storyteller.set_active(src)
@@ -142,10 +151,19 @@ var/datum/event_controller/random_events
 		if (current_state <= GAME_STATE_PREGAME)
 			dat += "<b>Random Events begin at: <a href='byond://?src=\ref[src];EventBegin=1'>[round(major_events_begin / 600)] minutes</a><br>"
 			dat += "<b>Minor Events begin at: <a href='byond://?src=\ref[src];MEventBegin=1'>[round(minor_events_begin / 600)] minutes</a><br>"
-			dat += "<b>Spawn Events begin at: <a href='byond://?src=\ref[src];MEventBegin=1'>[round(spawn_events_begin / 600)] minutes</a><br>"
+			dat += "<b>Weather Events begin at: <a href='byond://?src=\ref[src];WEventBegin=1'>[round(weather_events_begin / 600)] minutes</a><br>"
+			dat += "<b>Spawn Events begin at: <a href='byond://?src=\ref[src];SEventBegin=1'>[round(spawn_events_begin / 600)] minutes</a><br>"
 		else
 			dat += "Next major random event at [round(next_major_event / 600)] minutes into the round.<br>"
 			dat += "Next minor event at [round(next_minor_event / 600)] minutes into the round.<br>"
+			if (length(global.random_events.queued_events["weather"]))
+				var/next_weather_time
+				for (var/event_id in global.random_events.queued_events["weather"])
+					if (global.random_events.queued_events["weather"][event_id][2] < next_weather_time)
+						next_weather_time = global.random_events.queued_events["weather"][event_id][2]
+				dat += "Next weather event at [round(next_weather_time / 600)] minutes into the round.<br>"
+			else
+				dat += "No weather events queued.<br>"
 			dat += "Next spawn event at [round(next_spawn_event / 600)] minutes into the round.<br>"
 
 		dat += "<b><a href='byond://?src=\ref[src];EnableEvents=1'>Random Events Enabled:</a></b> [events_enabled ? "Yes" : "No"]<br>"
@@ -182,6 +200,17 @@ var/datum/event_controller/random_events
 			dat += "<br></small>"
 		dat += "<BR>"
 
+		dat += "<b><u>Weather Random Events</u></b><BR>"
+		for(var/datum/random_event/RE in weather_events)
+			dat += "<a href='byond://?src=\ref[src];TriggerWEvent=\ref[RE]'><b>[RE.name]</b></a>"
+			dat += " <small><a href='byond://?src=\ref[src];DisableWEvent=\ref[RE]'>([RE.disabled ? "Disabled" : "Enabled"])</a>"
+			if(!RE.always_custom)
+				dat += " <a href='byond://?src=\ref[src];ScheduleWEvent=\ref[RE]'><i>Schedule</i></a>"
+			if (RE.is_event_available())
+				dat += " (Active)"
+			dat += "<br></small>"
+		dat += "<BR>"
+
 		dat += "<b><u>Gimmick Events</u></b><BR>"
 		for(var/datum/random_event/RE in special_events)
 			dat += "<a href='byond://?src=\ref[src];TriggerSEvent=\ref[RE]'><b>[RE.name]</b></a>"
@@ -209,6 +238,8 @@ var/datum/event_controller/random_events
 				RE = locate(href_list["TriggerEvent"]) in major_events
 			else if(href_list["TriggerMEvent"])
 				RE = locate(href_list["TriggerMEvent"]) in minor_events
+			else if(href_list["TriggerWEvent"])
+				RE = locate(href_list["TriggerWEvent"]) in weather_events
 			else if(href_list["TriggerSEvent"])
 				RE = locate(href_list["TriggerSEvent"]) in special_events
 			else if(href_list["TriggerStartEvent"])
@@ -226,7 +257,7 @@ var/datum/event_controller/random_events
 				else
 					RE.event_effect("Triggered by [key_name(usr)]")
 
-		if (href_list["ScheduleEvent"] || href_list["ScheduleMEvent"] || href_list["ScheduleSEvent"] || href_list["ScheduleStartEvent"])
+		if (href_list["ScheduleEvent"] || href_list["ScheduleMEvent"] || href_list["ScheduleWEvent"] || href_list["ScheduleSEvent"] || href_list["ScheduleStartEvent"])
 			var/queue_string
 			if(href_list["ScheduleEvent"])
 				RE = locate(href_list["ScheduleEvent"]) in major_events
@@ -237,6 +268,9 @@ var/datum/event_controller/random_events
 			else if(href_list["ScheduleSEvent"])
 				RE = locate(href_list["ScheduleSEvent"]) in special_events
 				queue_string = "special_events"
+			else if (href_list["ScheduleWEvent"])
+				RE = locate(href_list["ScheduleWEvent"]) in weather_events
+				queue_string = "weather"
 			if (!istype(RE,/datum/random_event/))
 				return
 			if(RE.always_custom)
@@ -261,6 +295,15 @@ var/datum/event_controller/random_events
 
 		else if(href_list["DisableMEvent"])
 			RE = locate(href_list["DisableMEvent"]) in minor_events
+			if (!istype(RE,/datum/random_event/))
+				return
+			RE.disabled = !RE.disabled
+			message_admins("Admin [key_name(usr)] switched [RE.name] event [RE.disabled ? "Off" : "On"]")
+			logTheThing(LOG_ADMIN, usr, "switched [RE.name] event [RE.disabled ? "Off" : "On"]")
+			logTheThing(LOG_DIARY, usr, "switched [RE.name] event [RE.disabled ? "Off" : "On"]", "admin")
+
+		else if(href_list["DisableWEvent"])
+			RE = locate(href_list["DisableWEvent"]) in weather_events
 			if (!istype(RE,/datum/random_event/))
 				return
 			RE.disabled = !RE.disabled
@@ -297,6 +340,22 @@ var/datum/event_controller/random_events
 			message_admins("Admin [key_name(usr)] set minor events to begin at [time] minutes")
 			logTheThing(LOG_ADMIN, usr, "set minor events to begin at [time] minutes")
 			logTheThing(LOG_DIARY, usr, "set minor events to begin at [time] minutes", "admin")
+
+		else if(href_list["SEventBegin"])
+			var/time = input("How many minutes into the round until spawn events begin?","Random Events") as num
+			spawn_events_begin = time * 600
+
+			message_admins("Admin [key_name(usr)] set spawn events to begin at [time] minutes")
+			logTheThing(LOG_ADMIN, usr, "set spawn events to begin at [time] minutes")
+			logTheThing(LOG_DIARY, usr, "set spawn events to begin at [time] minutes", "admin")
+
+		else if(href_list["WEventBegin"])
+			var/time = input("How many minutes into the round until weather events begin?","Random Events") as num
+			weather_events_begin = time * 600
+
+			message_admins("Admin [key_name(usr)] set weather events to begin at [time] minutes")
+			logTheThing(LOG_ADMIN, usr, "set weather events to begin at [time] minutes")
+			logTheThing(LOG_DIARY, usr, "set weather events to begin at [time] minutes", "admin")
 
 		else if(href_list["Storyteller"])
 			var/datum/storyteller/new_teller = tgui_input_list(usr,"Choose Storyteller", "Storyteller", concrete_typesof(/datum/storyteller))
@@ -469,6 +528,34 @@ var/datum/event_controller/random_events
 		"delayHigh" = src.time_between_minor_events_upper,
 		"nextEvent" = src.next_minor_event,
 		"eventList" = minorEventData
+	))
+
+	var/list/weatherEventData = list()
+	for (RE in src.weather_events)
+		weatherEventData += list(list(
+			"byondRef" = ref(RE),
+			"name" = RE.name,
+			"description" = "Foo",//RE.description,
+			"customizable" = RE.customization_available,
+			"alwaysCustom" = RE.always_custom,
+			"available" = RE.is_event_available(),
+			"enabled" =  !RE.disabled
+		))
+	var/next_weather_time = INFINITY
+	if (length(global.random_events.queued_events["weather"]))
+		for (var/event_id in global.random_events.queued_events["weather"])
+			if (global.random_events.queued_events["weather"][event_id][2] < next_weather_time)
+				next_weather_time = global.random_events.queued_events["weather"][event_id][2]
+	if (next_weather_time == INFINITY)
+		next_weather_time = 0
+
+	.["eventData"] += list(list(
+		"name" = "weather",
+		"startTime" = src.weather_events_begin,
+		"delayLow" = src.time_between_weather_events_lower,
+		"delayHigh" = src.time_between_weather_events_upper,
+		"nextEvent" = next_weather_time,
+		"eventList" = weatherEventData
 	))
 
 	var/list/specialEventData = list()
@@ -713,6 +800,83 @@ var/datum/event_controller/random_events
 		else
 			tgui_process.close_uis(src)
 			. = TRUE
+
+/datum/event_controller/proc/generate_weather()
+	if (global.random_events.time_between_weather_events_lower < 1 || global.random_events.time_between_weather_events_upper < 1)
+		CRASH("Time between weather events must be postive, got [global.random_events.time_between_weather_events_lower] to [global.random_events.time_between_weather_events_upper]")
+
+	for (var/old_weather in random_events.queued_events["weather"])
+		random_events.queued_events["weather"] -= old_weather
+
+	var/schedule_time = src.weather_events_begin + (rand(-2 MINUTES, 2 MINUTES)) // small initial weather event chain start
+
+	var/list/valid_weather_events = list()
+	for (var/datum/random_event/weather/RE in src.weather_events)
+		if (RE.is_event_available(ignore_time_lock=TRUE))
+			valid_weather_events += RE
+
+	if (length(valid_weather_events) < 1)
+		CRASH("No valid weather events defined!")
+
+	while (schedule_time < (2 HOURS))
+		shuffle_list(valid_weather_events) // shuffle order between iterations
+		for (var/datum/random_event/weather/RE in valid_weather_events)
+			if (schedule_time < RE.required_elapsed_round_time)
+				continue
+			if (global.ticker && schedule_time > global.ticker.round_elapsed_ticks)
+				global.random_events.queued_events["weather"]["[RE.name]_[schedule_time]_ec"] += list(RE, schedule_time)
+			schedule_time += rand(global.random_events.time_between_weather_events_lower, global.random_events.time_between_weather_events_upper)
+
+	src.generate_weather_report()
+
+/datum/event_controller/proc/generate_weather_report()
+	var/start_time = world.timeofday
+	var/dat = "<h2><center><b>Updated Weather Forecast</b></center></h2>"
+	#if defined(MAP_OVERRIDE_OSHAN) || defined(MAP_OVERRIDE_NEON)
+	dat += "<h5><center>Produced by the Abzu Treaty Weather Station</center></h5>"
+	#else
+	dat += "<h5><center>Produced by the Watchful-Eye Sensor Array</center></h5><hr>"
+	#endif
+
+	dat += "<h4><center><i>All Listed Times Are Estimates!</center></i></h4></center>"
+	if (length(global.random_events.queued_events["weather"]))
+		dat += "<table><tr><th>Weather Event</th><th>Shift Time</th><th>Local Time</th></tr>"
+		for (var/event_id in global.random_events.queued_events["weather"])
+			var/event_pair = global.random_events.queued_events["weather"][event_id]
+			var/datum/random_event/weather/RE = event_pair[1]
+
+			var/drift = rand(-1 MINUTES, 1 MINUTES)
+			var/shift_time = round((event_pair[2] + drift) / 600)
+			var/local_time = time2text(round(start_time + event_pair[2] + drift), "hh:mm")
+			dat += "<tr><td>[RE.name]</td><td>[shift_time] minutes</td><td>[local_time]</td></tr>"
+	else
+		dat += "No Weather Events Detected!"
+	dat += "</table>"
+	dat += "<hr><h5><center>Printed on [time2text(start_time, "YYYY-MM-DD at hh:mm Local Time")].</center></h5>"
+
+
+	for_by_tcl(printer, /obj/machinery/networked/printer)
+		var/area/A = get_area(printer)
+		if (A)
+			var/do_printout = FALSE
+			if (istype(A, /area/listeningpost)) // Syndicate Listening Post
+				do_printout = TRUE
+			else if (istype(A, /area/watchful_eye_sensor)) // Watching Eye AZONE
+				do_printout = TRUE
+			else if (istype(A, /area/radiostation)) // Radio Station
+				do_printout = TRUE
+
+			if (do_printout)
+				if (printer.status & (NOPOWER|BROKEN))
+					continue
+				FLICK("printer-printing", printer)
+				playsound(printer.loc, 'sound/machines/printer_dotmatrix.ogg', 50, 1)
+				SPAWN(3.2 SECONDS)
+					var/obj/item/paper/P = new /obj/item/paper
+					P.set_loc(printer.loc)
+
+					P.name = "paper - 'updated weather forecast'"
+					P.info = dat
 
 /client/proc/cmd_event_controller()
 	SET_ADMIN_CAT(ADMIN_CAT_FUN)
