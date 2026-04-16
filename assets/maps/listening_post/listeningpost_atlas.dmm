@@ -527,14 +527,13 @@
 	},
 /area/listeningpost/general)
 "ux" = (
-/obj/machinery/computer3/terminal{
-	dir = 1
-	},
 /obj/machinery/power/data_terminal,
 /obj/cable/yellow{
 	icon_state = "0-2"
 	},
 /obj/cable/black,
+/obj/table/syndicate/auto,
+/obj/machinery/networked/storage/scanner,
 /turf/simulated/floor/circuit/red,
 /area/listeningpost/tech_room)
 "uP" = (
@@ -912,11 +911,10 @@
 /turf/simulated/floor/white/checker,
 /area/listeningpost/break_room)
 "Nv" = (
-/obj/machinery/computer3/terminal{
-	dir = 1
-	},
 /obj/machinery/power/data_terminal,
 /obj/cable/black,
+/obj/table/syndicate/auto,
+/obj/machinery/networked/printer,
 /turf/simulated/floor/circuit/red,
 /area/listeningpost/tech_room)
 "NE" = (

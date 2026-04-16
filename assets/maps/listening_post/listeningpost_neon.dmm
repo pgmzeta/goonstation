@@ -680,6 +680,8 @@
 	},
 /obj/machinery/light/incandescent/warm,
 /obj/machinery/power/data_terminal,
+/obj/table/glass/reinforced/auto,
+/obj/machinery/networked/printer,
 /turf/simulated/floor/plating,
 /area/listeningpost/tech_room)
 "zH" = (

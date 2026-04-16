@@ -74,6 +74,9 @@
 	icon_state = "0-4"
 	},
 /obj/machinery/power/apc/autoname_north/hardened,
+/obj/cable/black{
+	icon_state = "0-8"
+	},
 /turf/simulated/floor/plating,
 /area/listeningpost/power)
 "eT" = (
@@ -199,6 +202,11 @@
 "kk" = (
 /obj/table/auto,
 /obj/decal/cleanable/cobweb,
+/obj/machinery/networked/printer,
+/obj/machinery/power/data_terminal,
+/obj/cable/black{
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/plating,
 /area/listeningpost/power)
 "km" = (

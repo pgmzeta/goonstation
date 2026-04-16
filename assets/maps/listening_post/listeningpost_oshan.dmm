@@ -64,6 +64,9 @@
 /obj/cable/black{
 	icon_state = "1-2"
 	},
+/obj/cable/black{
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/caution/east,
 /area/listeningpost/power)
 "fc" = (
@@ -335,6 +338,9 @@
 /area/listeningpost/barracks)
 "Ac" = (
 /obj/machinery/light/incandescent/greenish,
+/obj/cable/black{
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/circuit/red,
 /area/listeningpost/power)
 "Al" = (
@@ -372,14 +378,12 @@
 	},
 /area/listeningpost/general)
 "BZ" = (
-/obj/fakeobject{
-	anchored = 1;
-	density = 1;
-	desc = "A large rack of server modules.  It doesn't seem to be in service.";
-	icon = 'icons/obj/networked.dmi';
-	icon_state = "server0";
-	name = "downed server"
+/obj/machinery/networked/printer,
+/obj/table/glass/reinforced/auto,
+/obj/cable/black{
+	icon_state = "0-8"
 	},
+/obj/machinery/power/data_terminal,
 /turf/simulated/floor/circuit/red,
 /area/listeningpost/power)
 "CE" = (
