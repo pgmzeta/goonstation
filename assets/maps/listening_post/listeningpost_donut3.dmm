@@ -441,15 +441,6 @@
 	},
 /turf/simulated/floor/caution/south,
 /area/listeningpost/power)
-"tn" = (
-/obj/cable/black{
-	icon_state = "4-8"
-	},
-/obj/cable/black{
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/black,
-/area/listeningpost/break_room)
 "tu" = (
 /obj/machinery/light{
 	dir = 8
@@ -568,10 +559,6 @@
 /area/listeningpost/break_room)
 "zs" = (
 /obj/machinery/light_switch/east,
-/obj/table/glass/reinforced/auto,
-/obj/cable/black,
-/obj/machinery/networked/printer,
-/obj/machinery/power/data_terminal,
 /turf/simulated/floor/black,
 /area/listeningpost/break_room)
 "zI" = (
@@ -1904,7 +1891,7 @@ bi
 eE
 mX
 mX
-tn
+SA
 zs
 fW
 RO

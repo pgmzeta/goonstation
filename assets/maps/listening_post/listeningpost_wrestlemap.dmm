@@ -119,6 +119,10 @@
 	},
 /turf/simulated/floor/plating/airless,
 /area/listeningpost/landing_bay)
+"eD" = (
+/obj/machinery/gravity_tether/multi_area/listening_post,
+/turf/simulated/floor/plating,
+/area/listeningpost/power)
 "eY" = (
 /obj/table/auto,
 /obj/item/reagent_containers/bath_bomb,
@@ -280,20 +284,14 @@
 /area/listeningpost/syndicate_teleporter)
 "nY" = (
 /obj/machinery/light_switch/east,
-/obj/machinery/power/terminal{
-	dir = 1
-	},
-/obj/cable/orange{
-	icon_state = "0-2"
-	},
 /turf/simulated/floor/plating,
 /area/listeningpost/power)
 "oz" = (
-/obj/table/reinforced/auto,
-/obj/cable{
-	icon_state = "0-8"
+/obj/cable/orange,
+/obj/machinery/power/furnace{
+	active = 1;
+	fuel = 600
 	},
-/obj/machinery/networked/printer,
 /turf/simulated/floor/caution/north,
 /area/listeningpost/power)
 "oU" = (
@@ -454,9 +452,6 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/power/apc/autoname_south/hardened,
-/obj/cable{
-	icon_state = "1-4"
-	},
 /turf/simulated/floor/caution/north,
 /area/listeningpost/power)
 "CR" = (
@@ -724,6 +719,15 @@
 /obj/machinery/light_switch/east,
 /turf/simulated/floor/black,
 /area/listeningpost/barracks)
+"Ud" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/cable/orange{
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/plating,
+/area/listeningpost/power)
 "Um" = (
 /obj/machinery/light/incandescent/harsh{
 	dir = 4;
@@ -772,14 +776,6 @@
 	},
 /turf/simulated/floor/black,
 /area/listeningpost/general)
-"Xb" = (
-/obj/machinery/power/furnace{
-	active = 1;
-	fuel = 600
-	},
-/obj/cable/orange,
-/turf/simulated/floor/caution/north,
-/area/listeningpost/power)
 "Xl" = (
 /obj/cable{
 	icon_state = "0-8"
@@ -799,13 +795,6 @@
 	dir = 4
 	},
 /area/listeningpost/syndicate_teleporter)
-"XN" = (
-/obj/cable{
-	icon_state = "4-8"
-	},
-/obj/machinery/gravity_tether/multi_area/listening_post,
-/turf/simulated/floor/plating,
-/area/listeningpost/power)
 "XV" = (
 /obj/storage/closet/syndicate/personal,
 /obj/item/clothing/under/misc/clown,
@@ -1586,8 +1575,8 @@ Cn
 Cn
 Cn
 RR
-XN
-zY
+Xl
+Ud
 oz
 RR
 Cn
@@ -1620,9 +1609,9 @@ Cn
 Cn
 Cn
 RR
-Xl
+eD
 nY
-Xb
+zY
 RR
 Cn
 Cn

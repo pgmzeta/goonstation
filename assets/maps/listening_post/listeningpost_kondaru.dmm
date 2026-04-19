@@ -708,20 +708,9 @@
 /area/listeningpost/general)
 "Lf" = (
 /obj/table/wood/auto,
-/obj/item/paper_bin{
-	pixel_x = -10
-	},
-/obj/item/pen{
-	pixel_x = -10
-	},
-/obj/item/paper/printout/emerg1{
-	pixel_x = -10
-	},
-/obj/machinery/networked/printer{
-	pixel_x = 6
-	},
-/obj/cable/black,
-/obj/machinery/power/data_terminal,
+/obj/item/paper_bin,
+/obj/item/pen,
+/obj/item/paper/printout/emerg1,
 /turf/simulated/floor/black,
 /area/listeningpost/tech_room)
 "Lu" = (
@@ -760,9 +749,6 @@
 	},
 /obj/cable/black{
 	icon_state = "4-8"
-	},
-/obj/cable/black{
-	icon_state = "2-8"
 	},
 /turf/simulated/floor/black,
 /area/listeningpost/tech_room)

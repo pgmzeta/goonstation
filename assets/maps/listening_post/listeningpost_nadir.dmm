@@ -873,12 +873,7 @@
 /turf/simulated/floor/red,
 /area/listeningpost/general)
 "IC" = (
-/obj/table/syndicate/auto,
-/obj/machinery/networked/printer,
-/obj/machinery/power/data_terminal,
-/obj/cable/black{
-	icon_state = "0-2"
-	},
+/obj/machinery/computer/camera_viewer,
 /turf/simulated/floor/redblack,
 /area/listeningpost/general)
 "Jk" = (
@@ -948,15 +943,6 @@
 /obj/machinery/light/runway_light,
 /turf/space/fluid/acid/clear,
 /area/space)
-"KF" = (
-/obj/cable/black{
-	icon_state = "4-8"
-	},
-/obj/cable/black{
-	icon_state = "1-8"
-	},
-/turf/simulated/floor/red,
-/area/listeningpost/general)
 "Ly" = (
 /turf/unsimulated/wall/setpieces/leadwall/gray{
 	dir = 10
@@ -1895,7 +1881,7 @@ qi
 Zx
 jp
 IC
-KF
+Ie
 yN
 Tj
 xL

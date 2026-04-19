@@ -8,7 +8,6 @@
 /obj/item/storage/toolbox/mechanical{
 	pixel_y = 10
 	},
-/obj/machinery/recharger/wall/sticky,
 /turf/simulated/floor/black,
 /area/listeningpost/general)
 "eo" = (
@@ -25,13 +24,8 @@
 /obj/table/wood/auto{
 	dir = 5
 	},
+/obj/machinery/recharger,
 /obj/machinery/light_switch/west,
-/obj/cable{
-	icon_state = "0-4";
-	pixel_y = 0
-	},
-/obj/machinery/networked/printer,
-/obj/machinery/power/data_terminal,
 /turf/simulated/floor/black,
 /area/listeningpost/general)
 "jD" = (
@@ -110,9 +104,6 @@
 /obj/cable{
 	icon_state = "1-4"
 	},
-/obj/cable{
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/black,
 /area/listeningpost/general)
 "si" = (
@@ -145,9 +136,6 @@
 "tC" = (
 /obj/cable{
 	icon_state = "2-4"
-	},
-/obj/cable{
-	icon_state = "1-2"
 	},
 /turf/simulated/floor/black,
 /area/listeningpost/general)
@@ -264,9 +252,6 @@
 /area/listeningpost/tech_room)
 "GV" = (
 /obj/machinery/computer/power_monitor,
-/obj/cable{
-	icon_state = "0-2"
-	},
 /turf/simulated/floor/black,
 /area/listeningpost/general)
 "Hg" = (
@@ -284,9 +269,6 @@
 	id = "Sleeper_Access";
 	name = "Dubious Hand Scanner";
 	pixel_y = -24
-	},
-/obj/cable{
-	icon_state = "4-8"
 	},
 /turf/simulated/floor/black,
 /area/listeningpost/general)
@@ -940,8 +922,8 @@ Nt
 DL
 lv
 rX
-DL
-Ru
+Vb
+Vb
 jD
 Vb
 EV
