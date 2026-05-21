@@ -6,6 +6,13 @@
 	minimap_type = MAP_NATIONS_UN
 	minimap_marker = "dot_blue"
 	custom_name = TRUE
+	document_type = "Laissez-Passer"
+
+/obj/item/passport/clown
+	icon_state = "passport-clown"
+	nation_type = /datum/nation/clown
+	minimap_type = 0
+	minimap_marker = "dot_pink"
 
 /obj/item/passport/engineering
 	icon_state = "passport-engineering"

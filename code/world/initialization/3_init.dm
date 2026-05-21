@@ -83,6 +83,7 @@
 		"[R_FREQ_ENGINEERING]" = "Engineering",
 		"[R_FREQ_SUPPLY]" = "Supply",
 		"[R_FREQ_NANOTRASEN]" = "NanoTrasen",
+		"[R_FREQ_CLOWN]" = "Clown",
 		"[R_FREQ_COMMAND]" = "Command",
 		"[R_FREQ_SECURITY]" = "Security",
 		"[R_FREQ_CIVILIAN]" = "Civilian",

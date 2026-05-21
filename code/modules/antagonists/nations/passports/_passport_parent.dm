@@ -3,12 +3,18 @@
 	var/obj/item/passport/passport = null
 
 /datum/mind/proc/set_passport(obj/item/passport/passport)
-	qdel(src.passport)
+	if (src.passport)
+		astype(src.passport.loc, /mob)?.u_equip(src.passport)
+		src.passport.set_loc(null)
+		qdel(src.passport)
+
 	src.passport = passport
 
+
+ABSTRACT_TYPE(/obj/item/passport)
 /obj/item/passport
 	name = "passport"
-	desc = "An identity document confirming its owner's citizenship or lack thereof."
+	desc = "An identity document confirming its owner's citizenship."
 	icon = 'icons/obj/items/passport.dmi'
 	icon_state = "passport-base"
 	inhand_image_icon = 'icons/mob/inhand/hand_books.dmi'
@@ -22,41 +28,48 @@
 	var/datum/nation/nation_type = null
 	var/datum/nation/nation = null
 	var/datum/mind/owner = null
+
 	var/minimap_type = 0
 	var/minimap_marker = null
-	var/custom_name = FALSE
 
+	var/custom_name = FALSE
+	var/document_type = "Passport"
 	var/base_name = ""
+
 	var/owner_name = ""
 	var/icon/owner_icon = null
 
 /obj/item/passport/New(newLoc, datum/mind/owner_to_assign, give_antag_role = TRUE)
 	. = ..()
 
+	if (!ispath(src.nation_type))
+		qdel(src)
+		CRASH("Cannot instantiate a nationless passport.")
+
+	if (!istype(owner_to_assign))
+		qdel(src)
+		CRASH("Cannot instantiate passport without an owner.")
+
+	src.nation = global.get_singleton(src.nation_type)
+
 	if (src.minimap_marker)
 		src.AddComponent(/datum/component/minimap_marker/minimap, (MAP_NATIONS_UN | src.minimap_type), src.minimap_marker, list_on_ui = FALSE)
 
-	if (src.nation_type)
-		src.nation = global.get_singleton(src.nation_type)
-
-	if (!src.custom_name && src.nation)
+	if (src.custom_name)
+		src.base_name = src.name
+	else
 		src.base_name = "passport ([src.nation.name])"
-
-	if (!ismind(owner_to_assign))
-		return
 
 	src.owner = owner_to_assign
 	src.owner.set_passport(src)
+	src.set_owner_name()
+	src.owner_icon = src.owner.current.build_flat_icon(SOUTH)
 
 	if (give_antag_role)
 		src.owner.add_antagonist(src.nation.citizen_role, respect_mutual_exclusives = FALSE)
 
-	src.set_owner_name()
-
-	src.owner_icon = src.owner.current.build_flat_icon(SOUTH)
-
 /obj/item/passport/disposing()
-	if (src.owner && (src.owner.passport == src))
+	if (src.owner.passport == src)
 		src.owner.set_passport(null)
 
 	. = ..()
@@ -83,19 +96,20 @@
 
 /obj/item/passport/ui_data(mob/user)
 	. = list(
-		"isLeader" = src.nation?.leader == user.mind ? TRUE : FALSE,
-		"isOwner" = src.owner == user.mind ? TRUE : FALSE,
-		"nationColor" = src.nation?.passport_color,
-		"nationName" = src.nation?.name,
-		"nationShortName" = src.nation?.short_name,
-		"ownerRoleType" = src.get_owner_role_type(),
+		"isLeader" = src.nation.is_leader(user.mind),
 	)
 
 /obj/item/passport/ui_static_data(mob/user)
 	. = list(
+		"documentType" = src.document_type,
+		"isOwner" = (src.owner == user.mind),
 		"name" = src.name,
-		"ownerName" = src.owner_name,
+		"nationColor" = src.nation.nation_color,
+		"nationName" = src.nation.name,
+		"nationShortName" = src.nation.get_short_name(),
 		"ownerIcon" = icon2base64(src.owner_icon),
+		"ownerName" = src.owner_name,
+		"ownerRoleType" = src.nation.get_role_type(owner),
 	)
 
 /obj/item/passport/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -113,11 +127,5 @@
 	actions.start(new /datum/action/show_item(user, src, "passport", 5, 3), user)
 
 /obj/item/passport/proc/set_owner_name()
-	if (!src.owner)
-		return
 	src.owner_name = src.owner.current?.real_name
 	src.name = "[src.owner_name]’s [src.base_name]"
-
-// todo: extract the role type from /datum/antagonist/nation/var/role_type
-/obj/item/passport/proc/get_owner_role_type()
-	. = ""
