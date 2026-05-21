@@ -103,7 +103,8 @@
 	passport_type = /obj/item/passport/supply
 	passport_color = "#4a301b"
 	citizen_role = ROLE_NATION_SUP
+	leader_jobs = list(/datum/job/command/supply_coordinator)
 	citizen_jobs = list(
-		/datum/job/engineering/miner,
-		/datum/job/engineering/quartermaster,
+		/datum/job/supply/miner,
+		/datum/job/supply/quartermaster,
 	)
