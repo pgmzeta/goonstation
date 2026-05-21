@@ -23,7 +23,7 @@ ABSTRACT_TYPE(/datum/job/neutral)
 
 /datum/job/neutral/clown
 	name = "Clown"
-	limit = 1
+	limit = 4
 	wages = PAY_DUMBCLOWN
 	request_limit = 3 //this is definitely a bad idea
 	request_cost = PAY_TRADESMAN*4
@@ -45,3 +45,9 @@ ABSTRACT_TYPE(/datum/job/neutral)
 	wiki_link = "https://wiki.ss13.co/Clown"
 
 	faction = list(FACTION_CLOWN)
+
+
+/datum/job/neutral/clown/ringmaster
+	name = "THE RINGMASTER"
+	limit = 1
+	items_in_belt = list(/obj/item/cloth/towel/clown, /obj/item/stamp/clown)
