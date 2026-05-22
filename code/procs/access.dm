@@ -195,7 +195,7 @@
 		if("Geneticist")
 			return list(access_medical, access_medical_lockers, access_morgue, access_medlab, access_maint_tunnels)
 		if("Roboticist")
-			return list(access_robotics, access_tech_storage, access_medical, access_medical_lockers, access_morgue, access_maint_tunnels)
+			return list(access_robotics, access_medical, access_medical_lockers, access_morgue, access_maint_tunnels)
 		if("Pharmacist")
 			return list(access_maint_tunnels, access_pharmacy,
 						access_medical_lockers, access_medical, access_morgue)
@@ -203,7 +203,7 @@
 			return list(access_medical, access_maint_tunnels)
 		if("Medical Specialist")
 			return list(access_robotics, access_medical, access_morgue,
-						access_maint_tunnels, access_tech_storage, access_medical_lockers,
+						access_maint_tunnels, access_medical_lockers,
 						access_medlab, access_pharmacy) //Mdir minus head stuff
 
 		// --------------------------- Science
@@ -250,9 +250,9 @@
 		if("Boxer", "Barber", "Mime", "Dungeoneer")
 			return list(access_maint_tunnels)
 		if("Assistant", "Staff Assistant", "Radio Show Host")
-			return list(access_maint_tunnels, access_tech_storage)
+			return list(access_maint_tunnels)
 		if("Mail Courier")
-			return list(access_heads, access_supply_general, access_medical, access_researchfoyer, access_research, access_engineering, access_tech_storage)
+			return list(access_heads, access_supply_general, access_medical, access_researchfoyer, access_research, access_engineering)
 
 		// --------------------------- Other or gimmick
 		if("VIP")
