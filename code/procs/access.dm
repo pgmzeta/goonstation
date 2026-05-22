@@ -146,27 +146,27 @@
 						access_engineering_storage, access_engineering_mechanic)
 		if("Research Director")
 			return list(access_research, access_research_director, access_sysadmin,
-						access_tech_storage, access_maint_tunnels, access_heads, access_eva, access_tox,
-						access_tox_storage, access_chemistry, access_teleporter, access_ai_upload, access_researchfoyer, access_telesci,
+						access_maint_tunnels, access_heads, access_tox,
+						access_tox_storage, access_chemistry, access_researchfoyer, access_telesci,
 						access_artlab, access_robotdepot,
 						)
 		if("Medical Director")
 			return list(access_robotics, access_medical, access_morgue,
-						access_maint_tunnels, access_tech_storage, access_sysadmin, access_medical_lockers, access_pharmacy,
-						access_medlab, access_heads, access_eva, access_medical_director, access_ai_upload, access_teleporter
+						access_maint_tunnels, access_sysadmin, access_medical_lockers, access_pharmacy,
+						access_medlab, access_heads, access_medical_director,
 						)
 		if("Chief Engineer")
 			return list(access_engineering, access_maint_tunnels,
 						access_tech_storage, access_sysadmin, access_engineering_storage, access_engineering_atmos,
 						access_engineering_power, access_engineering_engine,
 						access_engineering_control, access_engineering_mechanic, access_engineering_chief,
-						access_heads, access_ai_upload, access_eva, access_teleporter)
+						access_heads)
 		if("Supply Coordinator")
-			return list(access_maint_tunnels, access_sysadmin, access_tech_storage,
-						access_supply_head, access_mining, access_mining_outpost, access_cargo, access_supply_console,
-						access_heads, access_ai_upload, access_eva, access_teleporter)
+			return list(access_maint_tunnels, access_sysadmin,
+						access_supply_general, access_supply_head, access_mining, access_mining_outpost, access_cargo, access_supply_console,
+						access_heads)
 		if("Head of Mining", "Mining Supervisor")
-			return list(access_engineering, access_maint_tunnels, access_mining,
+			return list(access_engineering, access_maint_tunnels, access_mining, access_supply_general,
 						access_mining_outpost, access_heads, access_ai_upload, access_eva)
 
 		// --------------------------- Security
@@ -174,8 +174,9 @@
 			return get_access("Security Officer") + list(access_heads, access_eva, access_fine_large)
 		if("Security Officer")
 			return list(access_security, access_carrypermit, access_contrabandpermit, access_securitylockers, access_brig,  access_ticket,
-			access_maint_tunnels, access_medical, access_morgue, access_research, access_cargo, access_engineering, access_engineering_control,
-			access_fine_small, access_chemistry, access_bar, access_kitchen, access_hydro, access_researchfoyer, access_mining
+			access_maint_tunnels, access_medical, access_morgue, access_research, access_cargo, access_supply_general, access_engineering,
+			access_engineering_control,	access_fine_small, access_chemistry, access_bar, access_kitchen, access_hydro, access_researchfoyer,
+			access_mining, access_eva
 			)
 		if("Vice Officer")
 			return list(access_security, access_carrypermit, access_contrabandpermit, access_brig, access_ticket, access_maint_tunnels,
@@ -222,18 +223,18 @@
 						access_engineering_storage, access_engineering_atmos, access_engineering_engine, access_engineering_power,
 						access_tech_storage, access_engineering_mechanic)
 		if("Miner")
-			return list(access_maint_tunnels, access_mining, access_mining_outpost)
+			return list(access_maint_tunnels, access_supply_general, access_mining, access_mining_outpost)
 		if("Quartermaster")
-			return list(access_maint_tunnels, access_cargo, access_supply_console)
+			return list(access_maint_tunnels, access_supply_general, access_cargo, access_supply_console)
 		if("Construction Worker")
 			return list(access_engineering, access_maint_tunnels, access_engineering_control,
 						access_engineering_storage,access_engineering_atmos,access_engineering_engine,access_engineering_power)
 
 		// --------------------------- Civilian
 		if("Chaplain")
-			return list(access_morgue, access_chapel_office, access_crematorium)
+			return list(access_chapel_office, access_crematorium)
 		if("Janitor")
-			return list(access_janitor, access_maint_tunnels, access_medical, access_morgue, access_crematorium)
+			return list(access_janitor, access_maint_tunnels, access_crematorium)
 		if("Botanist", "Apiculturist")
 			return list(access_maint_tunnels, access_hydro)
 		if("Rancher")
@@ -251,7 +252,7 @@
 		if("Assistant", "Staff Assistant", "Radio Show Host")
 			return list(access_maint_tunnels, access_tech_storage)
 		if("Mail Courier")
-			return list(access_heads, access_cargo, access_medical, access_researchfoyer, access_research, access_tech_storage)
+			return list(access_heads, access_supply_general, access_medical, access_researchfoyer, access_research, access_engineering, access_tech_storage)
 
 		// --------------------------- Other or gimmick
 		if("VIP")
@@ -436,6 +437,10 @@ var/list/access_all_actually = null
 			return "Fines (Large)"
 		if (access_pharmacy)
 			return "Pharmacy"
+		if (access_supply_head)
+			return "Supply Coordinator's Office"
+		if (access_supply_general)
+			return "Supply"
 
 
 proc/colorAirlock(access)
