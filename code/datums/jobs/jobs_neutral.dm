@@ -1,6 +1,6 @@
 ABSTRACT_TYPE(/datum/job/neutral)
 /datum/job/neutral
-	ui_colour = TGUI_COLOUR_NAVY
+	ui_colour = TGUI_COLOUR_OLIVE
 	slot_card = /obj/item/card/id
 	job_category = JOB_NEUTRAL
 
