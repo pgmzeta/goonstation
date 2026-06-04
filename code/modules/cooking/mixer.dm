@@ -28,6 +28,7 @@ TYPEINFO(/obj/machinery/mixer)
 	var/static/datum/recipe_instructions/cooking/mixer/default_instructions
 	var/allowed = list(/obj/item/reagent_containers/food/, /obj/item/parts/robot_parts/head, /obj/item/clothing/head/butt, /obj/item/organ/brain)
 	var/working = 0
+	var/mob/mixing_user = null //! The mob who pushed the mix button
 	var/timeMixEnd = 0
 
 	New()
@@ -120,7 +121,7 @@ TYPEINFO(/obj/machinery/mixer)
 			else
 				target.set_loc(src.loc)
 
-	ui_act(action, params)
+	ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 		. = ..()
 		if (.)
 			return
@@ -135,7 +136,7 @@ TYPEINFO(/obj/machinery/mixer)
 				. = TRUE
 
 			if ("mix")
-				src.mix()
+				src.mix(ui.user)
 				. = TRUE
 
 			if ("ejectAll")
@@ -160,13 +161,14 @@ TYPEINFO(/obj/machinery/mixer)
 				return R
 		return null
 
-	proc/mix()
+	proc/mix(mob/user)
 
 		var/amount = length(src.contents)
 		if (!amount)
 			boutput(usr, SPAN_ALERT("There's nothing in the mixer."))
 			return
 		src.working = 1
+		src.mixing_user = user
 		src.timeMixEnd = TIME + MIX_TIME
 		src.power_usage = MIXER_MIXING_POWER_USAGE
 
@@ -195,7 +197,7 @@ TYPEINFO(/obj/machinery/mixer)
 		if (!instructions)
 			instructions = src.default_instructions
 		var/list/content = src.contents.Copy()
-		if (recipe && recipe.try_get_output(content, output, src))
+		if (recipe && recipe.try_get_output(content, output, src, src.mixing_user))
 			instructions.output_post_process(content, output, src)
 
 			for(var/atom/movable/out in output)
@@ -214,6 +216,7 @@ TYPEINFO(/obj/machinery/mixer)
 			I.throw_at(edge, 25, 4)
 
 		src.working = 0
+		src.mixing_user = null
 		src.UpdateIcon()
 		playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 		tgui_process.update_uis(src)

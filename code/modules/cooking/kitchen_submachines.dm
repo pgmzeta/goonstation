@@ -49,7 +49,7 @@ TYPEINFO(/obj/submachine/ice_cream_dispenser)
 			"has_cone" = src.cone ? TRUE : FALSE
 		)
 
-	ui_act(action, params)
+	ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 		. = ..()
 		if (.)
 			return
@@ -272,7 +272,7 @@ TYPEINFO(/obj/submachine/chef_oven)
 			if ("set_heat")
 				src.heat = params["heat"]
 			if ("start")
-				src.start_cooking_food()
+				src.start_cooking_food(ui.user)
 			if ("eject_all")
 				for (var/obj/item/I in src.contents)
 					I.set_loc(src.loc)
@@ -512,6 +512,7 @@ TYPEINFO(/obj/submachine/chef_oven)
 			src.recipes += new /datum/recipe/macguffin(src)
 			src.recipes += new /datum/recipe/eggsalad(src)
 			src.recipes += new /datum/recipe/lipstick(src)
+			src.recipes += new /datum/recipe/shrimpfriedrice(src)
 			src.recipes += new /datum/recipe/friedrice(src)
 			src.recipes += new /datum/recipe/risotto(src)
 			src.recipes += new /datum/recipe/omurice(src)
@@ -562,7 +563,7 @@ TYPEINFO(/obj/submachine/chef_oven)
 			oven_recipes = src.recipes
 
 
-	proc/start_cooking_food()
+	proc/start_cooking_food(mob/user)
 		if (!length(src.contents))
 			boutput(usr, SPAN_ALERT("There's nothing in \the [src] to cook."))
 			return
@@ -574,9 +575,9 @@ TYPEINFO(/obj/submachine/chef_oven)
 		// and it seems pretty silly to make it take twice as long
 		// instead of, idk, just giving the oven 20 buttons
 		SPAWN(src.time SECONDS)
-			src.cook_food()
+			src.cook_food(user)
 
-	proc/cook_food()
+	proc/cook_food(mob/user)
 		var/list/output = list() /// what path / item is (getting) created
 		var/cook_amt = src.time * (src.heat == "High" ? 2 : 1) /// time the oven is set to cook
 		var/bonus = 0 /// correct-cook-time bonus
@@ -601,7 +602,7 @@ TYPEINFO(/obj/submachine/chef_oven)
 				// Pick a random recipe
 			var/datum/recipe/xrecipe = pick(src.recipes)
 			// Bail out to a mess if we didn't get a valid recipe
-			if (!contentsok || !xrecipe.try_get_output(src.contents, output, src))
+			if (!contentsok || !xrecipe.try_get_output(src.contents, output, src, user))
 				for (var/I as anything in output)
 					qdel(I)
 				output.Cut(0, length(output))
@@ -623,7 +624,7 @@ TYPEINFO(/obj/submachine/chef_oven)
 			if (R && cook_amt >= recipebonus + 5)
 				output += new /obj/item/reagent_containers/food/snacks/yuck/burn()
 				bonus = 0
-			else if (R && R.try_get_output(src.contents, output, src))
+			else if (R && R.try_get_output(src.contents, output, src, user))
 				instructions.output_post_process(src, output, src)
 				// derive the bonus amount from cooking
 				// being off by one in either direction is OK

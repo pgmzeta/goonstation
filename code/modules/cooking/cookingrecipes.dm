@@ -1796,6 +1796,16 @@ ABSTRACT_TYPE(/datum/recipe/sandwich)
 	/obj/item/reagent_containers/food/snacks/ingredient/rice = 1)
 	output = /obj/item/reagent_containers/food/snacks/riceandbeans
 
+/datum/recipe/shrimpfriedrice
+	recipe_instructions = list(/datum/recipe_instructions/cooking/oven/shrimpfriedrice)
+	ingredients = list(\
+	/obj/item/reagent_containers/food/snacks/ingredient/rice = 1,
+	/obj/item/reagent_containers/food/snacks/ingredient/egg = 1,
+	/obj/item/reagent_containers/food/snacks/plant/onion = 1,
+	/obj/item/reagent_containers/food/snacks/plant/garlic = 1,
+	/obj/item/reagent_containers/food/snacks/ingredient/meat/fish/shrimp = 1)
+	output = /obj/item/reagent_containers/food/snacks/shrimpfriedrice
+
 /datum/recipe/friedrice
 	recipe_instructions = list(/datum/recipe_instructions/cooking/oven/friedrice)
 	ingredients = list(\
@@ -1804,6 +1814,15 @@ ABSTRACT_TYPE(/datum/recipe/sandwich)
 	/obj/item/reagent_containers/food/snacks/plant/onion = 1,
 	/obj/item/reagent_containers/food/snacks/plant/garlic = 1)
 	output = /obj/item/reagent_containers/food/snacks/friedrice
+
+	get_output(list/input_list, list/output_list, atom/source, mob/user)
+		. = ..()
+		if (isnull(user))
+			user = usr
+		if (ishuman(user))
+			var/mob/living/carbon/human/H = user
+			if(istype(H.mutantrace, /datum/mutantrace/roach))
+				output = /obj/item/reagent_containers/food/snacks/shrimpfriedrice
 
 /datum/recipe/omurice
 	recipe_instructions = list(/datum/recipe_instructions/cooking/oven/omurice)

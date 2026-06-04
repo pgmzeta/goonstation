@@ -485,6 +485,9 @@ ABSTRACT_TYPE(/datum/recipe_instructions/cooking/oven)
 /datum/recipe_instructions/cooking/oven/riceandbeans
 	cookbonus = 10
 
+/datum/recipe_instructions/cooking/oven/shrimpfriedrice
+	cookbonus = 10
+
 /datum/recipe_instructions/cooking/oven/friedrice
 	cookbonus = 10
 

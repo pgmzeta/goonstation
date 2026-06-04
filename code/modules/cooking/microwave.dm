@@ -267,7 +267,7 @@ TYPEINFO(/obj/machinery/microwave)
 			. = ""
 		base64_preview_cache[original_name] = .
 
-/obj/machinery/microwave/ui_act(action, params)
+/obj/machinery/microwave/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if (.)
 		return
@@ -275,7 +275,7 @@ TYPEINFO(/obj/machinery/microwave)
 		if ("start_microwave")
 			if(src.operating)
 				return FALSE
-			src.try_cook()
+			src.try_cook(ui.user)
 			return TRUE
 		if ("eject_contents")
 			if(src.operating)
@@ -331,7 +331,7 @@ TYPEINFO(/obj/machinery/microwave)
 	*  Microwave Cooking
 	*/
 
-/obj/machinery/microwave/proc/try_cook()
+/obj/machinery/microwave/proc/try_cook(mob/user)
 	if(src.operating)
 		return
 
@@ -351,7 +351,7 @@ TYPEINFO(/obj/machinery/microwave)
 		var/datum/recipe_instructions/microwave/instructions = recipe.get_recipe_instructions("microwave")
 		if (!istype(instructions))
 			instructions = src.default_instructions
-		src.cook(instructions, recipe)
+		src.cook(instructions, recipe, user)
 
 
 /obj/machinery/microwave/proc/get_recipe(var/input, var/list/possible_recipes)
@@ -361,7 +361,7 @@ TYPEINFO(/obj/machinery/microwave)
 	return null
 
 /// Cooks a recipe
-/obj/machinery/microwave/proc/cook(var/datum/recipe_instructions/microwave/instruction, var/datum/recipe/recipe)
+/obj/machinery/microwave/proc/cook(var/datum/recipe_instructions/microwave/instruction, var/datum/recipe/recipe, mob/user)
 	sleep((instruction.cook_time / 2))
 	if (isnull(src))
 		return
@@ -373,7 +373,7 @@ TYPEINFO(/obj/machinery/microwave)
 		src.visible_message(SPAN_ALERT("The microwave breaks!"))
 		src.set_broken()
 	var/obj/results = list()
-	recipe.try_get_output(src.contents, results)
+	recipe.try_get_output(src.contents, results, src, user)
 	if(instruction.delete_ingredient)
 		for(var/atom/thing in src.contents)
 			qdel(thing)
@@ -393,7 +393,7 @@ TYPEINFO(/obj/machinery/microwave)
 	src.stop_cooking()
 
 /// warm up the contents
-/obj/machinery/microwave/proc/heat_up(var/datum/recipe_instructions/microwave/instructions)
+/obj/machinery/microwave/proc/heat_up(var/datum/recipe_instructions/microwave/instructions, mob/user)
 	// it seems fairly feasible to make the microwave heat up the contents of containers, but it would have to take into account where the
 	// outputs are meant to go, whether they go back in the container or not, what the size of the container is, if it can hold the results when there
 	// are multiple, and I just can't be arsed
@@ -409,7 +409,7 @@ TYPEINFO(/obj/machinery/microwave)
 			return
 		var/datum/recipe/recipe = src.get_recipe(src_contents, src.single_input_recipes)
 		var/datum/recipe_instructions/microwave/sequential_instructions = instructions
-		if (recipe && recipe.try_get_output(src_contents, output, src))
+		if (recipe && recipe.try_get_output(src_contents, output, src, user))
 			sequential_instructions = recipe.get_recipe_instructions(RECIPE_ID_MICROWAVE) || instructions
 			if (sequential_instructions.force_dirtiness != null)
 				src.set_dirtiness(sequential_instructions.force_dirtiness)

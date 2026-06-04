@@ -2544,6 +2544,18 @@ ABSTRACT_TYPE(/obj/item/reagent_containers/food/snacks/soup)
 	food_effects = list("food_brute", "food_all")
 	meal_time_flags = MEAL_TIME_DINNER
 
+/obj/item/reagent_containers/food/snacks/shrimpfriedrice
+	name = "shrimp fried rice"
+	desc = "A plate of fried rice, with shrimp. There's even an egg!"
+	icon = 'icons/obj/foodNdrink/food_meals.dmi'
+	icon_state = "friedrice" // TODO: Unique Sprite
+	required_utensil = REQUIRED_UTENSIL_SPOON
+	fill_amt = 3
+	bites_left = 6
+	heal_amt = 3
+	food_effects = list("food_brute", "food_all")
+	meal_time_flags = MEAL_TIME_DINNER
+
 /obj/item/reagent_containers/food/snacks/omurice
 	name = "omurice"
 	desc = "The ketchup drawing looks like George."
