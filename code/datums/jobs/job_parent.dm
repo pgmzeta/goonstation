@@ -36,7 +36,6 @@ ABSTRACT_TYPE(/datum/job)
 	var/high_priority_limit = INFINITY
 	//should a job be considered last for selection, but also as a last resort fallback job? NOTE: ignores other requirements such as round min/max
 	var/low_priority_job = FALSE
-	var/order_priority = 1 //! What order jobs are filled in within their priority tier, lower number = higher priority
 	var/cant_allocate_unwanted = FALSE //! Job cannot be set to "unwanted" in player preferences.
 	var/receives_miranda = FALSE
 	var/list/receives_implants = null //! List of object paths of implant types given on spawn.

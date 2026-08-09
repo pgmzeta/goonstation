@@ -105,9 +105,6 @@ else if (istype(JOB, /datum/job/security/security_officer))\
 	// Wiggle the players too so that priority isn't determined by key alphabetization
 	shuffle_list(unassigned)
 
-	//Shuffle them and *then* sort them according to their order priority
-	sortList(high_priority_jobs, GLOBAL_PROC_REF(cmp_job_order_priority))
-
 	// First we deal with high-priority jobs like Captain or AI which generally will always
 	// be present on the station - we want these assigned first just to be sure
 	// Though we don't want to do this in sandbox mode where it won't matter anyway
