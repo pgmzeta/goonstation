@@ -13,9 +13,6 @@ ABSTRACT_TYPE(/datum/job/security)
 	limit = 5
 	lower_limit = 3
 	variable_limit = TRUE
-	high_priority_job = TRUE
-	high_priority_limit = 2 //always try to make sure there's at least a couple of secoffs
-	order_priority = 2 //fill secoffs after captain and AI
 	wages = PAY::TRADESMAN
 	trait_list = list("training_security")
 	access_string = "Security Officer"
@@ -40,7 +37,6 @@ ABSTRACT_TYPE(/datum/job/security)
 		name = "Security Assistant"
 		limit = 3
 		lower_limit = 2
-		high_priority_job = FALSE //nope
 		wages = PAY::UNTRAINED
 		access_string = "Security Assistant"
 		receives_implants = list(/obj/item/implant/health/security)
