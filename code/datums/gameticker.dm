@@ -358,7 +358,12 @@ var/global/game_force_started = FALSE
 		qdel(monke)
 #endif
 
-	SPAWN(10 MINUTES) // standard engine warning
+// standard engine warning, 1/6th round duration
+#ifdef RP_MODE
+	SPAWN(15 MINUTES) // 15/90
+#else
+	SPAWN(10 MINUTES) // 10/60
+#endif
 		for_by_tcl(E, /obj/machinery/computer/power_monitor/smes)
 			LAGCHECK(LAG_LOW)
 			var/area/A = get_area(E) // only check the main (engine) pnet
