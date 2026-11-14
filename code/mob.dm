@@ -731,7 +731,7 @@ TYPEINFO(/mob)
 				&& !(src.pulling && src.pulling.density) && !(tmob.pulling && tmob.pulling.density)) // mutual brohugs all around!
 				var/turf/oldloc = src.loc
 				var/turf/newloc = tmob.loc
-				if(!oldloc.Enter(tmob) || !newloc.Enter(src))
+				if(!oldloc.Enter(tmob, newloc) || !newloc.Enter(src, oldloc))
 					src.now_pushing = 0
 					return
 				for(var/atom/movable/obstacle in oldloc)
@@ -1622,9 +1622,9 @@ TYPEINFO(/mob)
 		var/mob/moving_mob = mover
 		if ((src.other_mobs && moving_mob.other_mobs))
 			return 1
-		return (!mover.density || !src.density || src.lying)
+		return (!mover.density || !src.density || src.lying || (HAS_ATOM_PROPERTY(src, PROP_MOVABLE_IN_DIGGABLE_TRENCH) != HAS_ATOM_PROPERTY(mover, PROP_MOVABLE_IN_DIGGABLE_TRENCH)))
 	else
-		return (!mover.density || !src.density || src.lying)
+		return (!mover.density || !src.density || src.lying || (HAS_ATOM_PROPERTY(src, PROP_MOVABLE_IN_DIGGABLE_TRENCH) != HAS_ATOM_PROPERTY(mover, PROP_MOVABLE_IN_DIGGABLE_TRENCH)))
 
 /mob/Crossed(atom/movable/AM)
 	. = ..()

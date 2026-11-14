@@ -359,6 +359,11 @@ TYPEINFO(/atom)
 /atom/Cross(atom/movable/mover)
 	return (!density)
 
+/atom/movable/Cross(atom/movable/mover)
+	if (HAS_ATOM_PROPERTY(src, PROP_MOVABLE_IN_DIGGABLE_TRENCH) != HAS_ATOM_PROPERTY(mover, PROP_MOVABLE_IN_DIGGABLE_TRENCH))
+		return TRUE
+	. = ..()
+
 /// called when atom AM crosses onto where this atom is
 /atom/Crossed(atom/movable/AM)
 	SHOULD_CALL_PARENT(TRUE)
@@ -1052,6 +1057,9 @@ TYPEINFO(/obj/item/disk)
   */
 /atom/movable/proc/set_loc(atom/newloc)
 	SHOULD_CALL_PARENT(TRUE)
+	if (istrench(newloc) && !HAS_ATOM_PROPERTY(src, PROP_TURF_TRENCH_CATWALKED))
+		APPLY_ATOM_PROPERTY(src, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+		src.plane = PLANE_IN_TRENCH
 	if(QDELETED(src) && !isnull(newloc))
 		CRASH("Tried to call set_loc on disposed movable [identify_object(src)] to non-null location: [identify_object(newloc)]")
 

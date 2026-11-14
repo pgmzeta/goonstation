@@ -196,6 +196,13 @@
 			src.affecting.pixel_x = src.assailant.pixel_x + pxo
 			src.affecting.pixel_y = src.assailant.pixel_y + pyo
 		src.affecting.set_loc(src.assailant.loc)
+		// match assailant trench status
+		if (HAS_ATOM_PROPERTY(src.assailant, PROP_MOVABLE_IN_DIGGABLE_TRENCH))
+			APPLY_ATOM_PROPERTY(src.affecting, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+			src.affecting.plane = PLANE_IN_TRENCH
+		else if (HAS_ATOM_PROPERTY(src.affecting, PROP_MOVABLE_IN_DIGGABLE_TRENCH))
+			REMOVE_ATOM_PROPERTY(src.affecting, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+			src.affecting.plane = initial(src.affecting.plane)
 		src.affecting.layer = src.assailant.layer + (src.assailant.dir == NORTH ? -0.1 : 0.1)
 		src.affecting.set_dir(src.assailant.dir)
 		src.affecting.set_density(0)

@@ -206,36 +206,146 @@
 		. = ..()
 
 	Cross(atom/movable/AM)
-		var/turf/T = get_turf(AM)
-		if (T && ismob(AM) && !HAS_ATOM_PROPERTY(AM, PROP_ATOM_FLOATING) && !istype(T, /turf/simulated/floor/auto/trench))
-			return FALSE
+		if (HAS_ATOM_PROPERTY(src, PROP_TURF_TRENCH_CATWALKED))
+			return ..()
 
-		. = ..()
+		if (HAS_ATOM_PROPERTY(AM, PROP_MOVABLE_IN_DIGGABLE_TRENCH) || HAS_ATOM_PROPERTY(AM, PROP_ATOM_FLOATING) || HAS_ATOM_PROPERTY(AM, PROP_ATOM_GRAVITY_IMMUNE))
+			return ..()
 
-	Enter(atom/AM)
-		var/mob/M = AM
-		var/turf/T = get_turf(M)
-		if (T && ismob(M) && !HAS_ATOM_PROPERTY(AM, PROP_ATOM_FLOATING) && !istype(T, /turf/simulated/floor/auto/trench))
-			if (!M.throwing && isalive(M))
-				if (M.client && !M.client.check_key(KEY_RUN) && !M.client.check_key(KEY_BOLT))
-					return
-				actions.start(new /datum/action/bar/climb_trench(M, src), M)
+		if (isobj(AM))
+			return ..()
 
-			else
+		return FALSE
+
+	Enter(atom/movable/AM, atom/oldloc)
+		// catwalked trenches have no additional restrictions regardless of on top or below
+		if (HAS_ATOM_PROPERTY(src, PROP_TURF_TRENCH_CATWALKED))
+			return ..()
+
+		if(isintangible(AM))
+			return ..()
+
+		// you are in a trench or simply do not care
+		if (HAS_ATOM_PROPERTY(AM, PROP_MOVABLE_IN_DIGGABLE_TRENCH) || HAS_ATOM_PROPERTY(AM, PROP_ATOM_FLOATING) || HAS_ATOM_PROPERTY(AM, PROP_ATOM_GRAVITY_IMMUNE))
+			return ..()
+
+		// you exited something already in the trench
+		if (oldloc) // not everything calls this ???
+			if (HAS_ATOM_PROPERTY(oldloc, PROP_MOVABLE_IN_DIGGABLE_TRENCH))
+				APPLY_ATOM_PROPERTY(AM, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null) // one of us
+				AM.plane = PLANE_IN_TRENCH
+				return ..()
+
+		if (ismob(AM))
+			var/mob/M = AM
+
+			if (M.throwing || isdead(M) || !global.can_act(M, ignore_no_power=TRUE))
 				src.fall_down_trench(M)
+				return
 
+			if (M.client && !M.client.check_key(KEY_RUN) && !M.client.check_key(KEY_BOLT))
+				return
+
+			if (isturf(oldloc))
+				actions.start(new /datum/action/bar/climb_trench/into(M, src, src), M)
+				return
+
+		if (isobj(AM))
+			var/obj/O = AM
+			if (O.throwing && !(O.throwing & THROW_DELIVERY))
+				if (O.density)
+					src.fall_down_trench(O)
+					return
+				else
+					return ..() // thrown things aren't automatically put into the trench
+
+			if (!O.density)
+				return ..()
+
+			actions.start(new /datum/action/bar/climb_trench/into(O, src, src), O)
 			return
 
 		. = ..()
 
-	Exit(atom/AM, turf/T)
-		var/mob/M = AM
-		if (T && ismob(M) && !HAS_ATOM_PROPERTY(AM, PROP_ATOM_FLOATING) && !istype(T, /turf/simulated/floor/auto/trench))
-			if (!M.throwing && isalive(M))
+	Exit(atom/movable/AM, atom/newloc)
+		// not in a trench
+		if (!HAS_ATOM_PROPERTY(AM, PROP_MOVABLE_IN_DIGGABLE_TRENCH))
+			return ..()
+
+		 // not trying to exit the trench
+		if (istrench(newloc))
+			return ..()
+
+		 // safety, clear up the property
+		if(isintangible(AM))
+			AM.plane = initial(AM.plane)
+			REMOVE_ATOM_PROPERTY(AM, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+			return ..()
+		if (HAS_ATOM_PROPERTY(AM, PROP_ATOM_FLOATING) || HAS_ATOM_PROPERTY(AM, PROP_ATOM_GRAVITY_IMMUNE))
+			AM.plane = initial(AM.plane)
+			REMOVE_ATOM_PROPERTY(AM, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+			return ..()
+
+		// can't exit, catwalk's over you
+		if (HAS_ATOM_PROPERTY(src, PROP_TURF_TRENCH_CATWALKED))
+			if (!ON_COOLDOWN(AM, "catwalk_bonk", 2 SECONDS))
+				playsound(src, 'sound/impact_sounds/Metal_Hit_Light_1.ogg', 50, 1)
+				var/damage_roll = rand(3,5)
+				if (ismob(AM))
+					var/mob/M = AM
+					M.TakeDamageAccountArmor("head", damage_roll, 0, 0, DAMAGE_BLUNT)
+					if (ishuman(M))
+						var/mob/living/carbon/human/H = M
+						if(!istype(H.head, /obj/item/clothing/head/helmet))
+							H.take_brain_damage(2) // bonk
+				else
+					AM.damage_blunt(damage_roll)
+
+				for (var/obj/mesh/catwalk/catwalk in src)
+					if (!catwalk.ruined)
+						catwalk.damage_blunt(damage_roll) // bonk
+
+				if (ismob(AM))
+					AM.visible_message(SPAN_ALERT("[AM] smacks [his_or_her(AM)] head against the catwalk!"))
+				else
+					AM.visible_message(SPAN_NOTICE("[AM] smacks against the catwalk!"))
+			return
+
+		if (ismob(AM))
+			var/mob/M = AM
+
+			if (M.throwing)
+				REMOVE_ATOM_PROPERTY(AM, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+				AM.plane = initial(AM.plane)
+				return ..() // whee
+
+			if (isturf(newloc))
+				// TODO: add action bar on being pushed
+
 				if (M.client && !M.client.check_key(KEY_RUN) && !M.client.check_key(KEY_BOLT))
 					return
-				actions.start(new /datum/action/bar/climb_trench(M, T), M)
 
+				if (isdead(M) || !global.can_act(M, ignore_no_power=TRUE))
+					return
+
+				actions.start(new /datum/action/bar/climb_trench/out_of(M, newloc, src), M)
+				return
+			else
+				REMOVE_ATOM_PROPERTY(AM, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+				AM.plane = initial(AM.plane)
+				..()
+
+		if (isobj(AM))
+			var/obj/O = AM
+			if (O.throwing && !(O.throwing & THROW_DELIVERY))
+				if (O.density)
+					src.fall_down_trench(O)
+					return
+
+			if (!O.density)
+				return ..()
+
+			actions.start(new /datum/action/bar/climb_trench/out_of(O, newloc, src), O)
 			return
 
 		. = ..()
@@ -243,6 +353,14 @@
 	attackby(obj/item/I, mob/user, params, is_special)
 		if (src.can_fill && isdiggingtool(I))
 			actions.start(new/datum/action/bar/dig_trench(src), user)
+			return
+		if (istype(I, /obj/item/rods))
+			var/obj/mesh/catwalk/catwalk = locate() in src
+			if (!istype(catwalk))
+				user?.visible_message("[user] begins constructing a catwalk over \the [src].")
+				SETUP_GENERIC_ACTIONBAR(user, src, 0.5 SECONDS, PROC_REF(MakeCatwalk), list(I), I.icon, I.icon_state, null, null)
+			else
+				user?.show_message(SPAN_NOTICE("\The [src] already has a catwalk!"))
 			return
 
 		. = ..()
@@ -291,16 +409,27 @@
 
 		src.icon_state = "[src.base_icon_state]-[connected_directions]"
 
-	proc/fall_down_trench(mob/M)
-		M.set_loc(src)
-		M.visible_message(SPAN_ALERT("[M] falls into the trench!"))
-		M.TakeDamage("All", 15, 0, 0, DAMAGE_BLUNT)
-		M.changeStatus("stunned", 2 SECONDS)
+	proc/fall_down_trench(atom/movable/AM)
+		AM.set_loc(src)
+		AM.visible_message(SPAN_ALERT("[AM] falls into the trench!"))
+		APPLY_ATOM_PROPERTY(AM, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+		AM.plane = PLANE_IN_TRENCH
+		if (AM.throwing)
+			AM.throwing = FALSE
 
-		if (isliving(M) && !M.stat)
-			var/mob/living/L = M
-			playsound(L.loc, L.sound_scream, 100, 0, 0, L.get_age_pitch(), channel=VOLUME_CHANNEL_EMOTE)
+		if (ismob(AM))
+			var/mob/M = AM
+			M.TakeDamage("All", 15, 0, 0, DAMAGE_BLUNT)
+			M.setStatus("resting", duration = INFINITE_STATUS)
+			M.force_laydown_standup()
+			M.emote("scream")
 
+		if (isobj(AM))
+			var/obj/O = AM
+			O.damage_blunt(3)
+			if (istype(O, /obj/machinery/vending))
+				var/obj/machinery/vending/vendor = O
+				vendor.fall() // oh no
 
 /turf
 	var/can_dig = FALSE

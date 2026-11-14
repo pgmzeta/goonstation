@@ -91,62 +91,72 @@
 			SPAWN((rand(11, 14) / 10) SECONDS)
 				src.play_digging_sound()
 
-
-
 /datum/action/bar/climb_trench
 	duration = 1 SECOND
 	interrupt_flags = INTERRUPT_MOVE | INTERRUPT_ACT | INTERRUPT_STUNNED | INTERRUPT_ACTION
 	id = "climb_trench"
 	resumable = TRUE
-	var/mob/owner_mob
+
+	var/mob/mover
+	var/atom/movable/moving_thing
+	var/turf/destination_turf
 	var/turf/trench
 	var/list/collision_whitelist = null
+	var/action_text = "into"
 
-	New(owner, trench)
+	New(mob_owner, destination, trench)
 		..()
-		collision_whitelist = typesof(/obj/railing, /obj/decal/stage_edge, /obj/sec_tape)
-		owner = owner
-		src.owner_mob = owner
+		src.collision_whitelist = typesof(/obj/railing, /obj/decal/stage_edge, /obj/sec_tape)
+		src.mover = mob_owner
 		src.trench = trench
+		src.destination_turf = destination
 
 	onUpdate()
 		..()
-		if (BOUNDS_DIST(src.owner_mob, src.trench) > 0)
+		if (BOUNDS_DIST(src.owner, src.destination_turf) > 0)
+			interrupt(INTERRUPT_ALWAYS)
+			return
+
+		if (BOUNDS_DIST(src.owner, src.mover) > 0)
+			interrupt(INTERRUPT_ALWAYS)
+			return
+
+		if (isunconscious(src.mover) || isdead(src.mover))
 			interrupt(INTERRUPT_ALWAYS)
 			return
 
 	onStart()
 		..()
-		if (BOUNDS_DIST(src.owner_mob, src.trench) > 0 || !src.trench || !src.owner_mob)
+		if (BOUNDS_DIST(src.owner, src.destination_turf) > 0 || !src.destination_turf || !src.mover)
 			interrupt(INTERRUPT_ALWAYS)
 			return
 
-		if (check_for_obstruction())
-			boutput(src.owner_mob, SPAN_ALERT("Something is obstructing [src.trench]!"))
+		if (src.check_for_obstruction())
+			if (ismob(src.mover))
+				boutput(src.mover, SPAN_ALERT("Something is obstructing [src.destination_turf]!"))
 			interrupt(INTERRUPT_ALWAYS)
 			return
 
-		src.owner_mob.visible_message(SPAN_NOTICE("[src.owner_mob] begins to climb [src.into_or_out_of()] the hole."))
-
+		if (ismob(src.mover))
+			if (src.owner == src.mover)
+				src.mover.visible_message(SPAN_NOTICE("[src.mover] begins to climb [action_text] \the [src.trench]."))
+			else
+				src.mover.visible_message(SPAN_NOTICE("[src.mover] begins to push [src.owner] [action_text] \the [src.trench]."))
+		else
+			src.owner.visible_message(SPAN_NOTICE("\The [src.owner] begins to go [action_text] \the [src.trench]"))
 	onEnd()
 		..()
 		sendOwner()
 
-	proc/into_or_out_of()
-		if (istype(src.trench, /turf/simulated/floor/auto/trench))
-			return "into"
-
-		return "out of"
-
 	proc/check_for_obstruction()
 		var/obj/obstacle = null
-		var/direction = get_dir(get_turf(owner), src.trench)
+		var/direction = get_dir(get_turf(owner), src.destination_turf)
 
-		if (src.trench.density)
-			obstacle = src.trench.name
+		if (src.destination_turf.density)
+			obstacle = src.destination_turf.name
 		else
 			// Is the trench blocked?
-			obstacle = check_turf_obstacles(src.trench)
+			obstacle = check_turf_obstacles(src.destination_turf)
 
 			// If the trench is not blocked, is the owner moving in an ordinal direction? If so, consider corners.
 			if (!obstacle && (direction in ordinal))
@@ -156,7 +166,6 @@
 				if (obstacle) // T1 was blocked, but was T2 also blocked?
 					var/turf/T2 = get_step(get_turf(owner), turn(direction, -45))
 					obstacle = check_turf_obstacles(T2)
-
 
 		if(obstacle)
 			return TRUE
@@ -172,5 +181,35 @@
 			return O
 
 	proc/sendOwner()
-		src.owner_mob.set_loc(src.trench)
-		src.owner_mob.visible_message(SPAN_NOTICE("[src.owner_mob] climbs [src.into_or_out_of()] the trench."))
+		if (!ismovable(src.owner))
+			return
+
+		var/atom/movable/AM = src.owner
+		AM.set_loc(src.destination_turf)
+
+		if (ismob(src.mover))
+			if (src.owner == src.mover)
+				src.mover.visible_message(SPAN_NOTICE("[src.mover] climbs [src.action_text] \the [src.trench.name]."))
+			else
+				src.mover.visible_message(SPAN_NOTICE("[src.mover] pushes [src.owner] [src.action_text] \the [src.trench.name]."))
+		else
+			src.mover.visible_message(SPAN_NOTICE("\The [src.owner] goes [src.action_text] \the [src.trench]"))
+
+/datum/action/bar/climb_trench/into
+	action_text = "into"
+	sendOwner()
+		. = ..()
+		if (src.owner != src.mover || isobj(src.owner)) // you got moved in or you're an object (sorry objcritters)
+			if (istrench(src.trench)) // safety check
+				src.trench:fall_down_trench(src.owner) // HACK: sim/unsim floor dirty hack
+		else
+			APPLY_ATOM_PROPERTY(src.owner, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+			src.owner.plane = PLANE_IN_TRENCH
+
+/datum/action/bar/climb_trench/out_of
+	action_text = "out of"
+
+	sendOwner()
+		. = ..()
+		REMOVE_ATOM_PROPERTY(src.owner, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+		src.owner.plane = initial(src.owner.plane)

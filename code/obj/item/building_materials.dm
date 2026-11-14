@@ -764,7 +764,7 @@ MATERIAL
 				if (G.ruined)
 					G.health = G.health_max
 					G.set_density(TRUE)
-					G.ruined = FALSE
+					G.set_fixed()
 					G.UpdateIcon()
 					if(src.material)
 						G.setMaterial(src.material)

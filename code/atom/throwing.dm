@@ -110,6 +110,9 @@
 
 	reagents?.physical_shock(14)
 	src.throwing = throw_type
+	if (thrown_by && HAS_ATOM_PROPERTY(thrown_by, PROP_MOVABLE_IN_DIGGABLE_TRENCH))
+		APPLY_ATOM_PROPERTY(src, PROP_MOVABLE_IN_DIGGABLE_TRENCH, null)
+		src.plane = PLANE_IN_TRENCH
 
 	if (src.throwing & (THROW_CHAIRFLIP | THROW_GUNIMPACT | THROW_SLIP))
 		if (ismob(src))

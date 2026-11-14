@@ -71,7 +71,7 @@ TYPEINFO(/obj/mesh)
 	if (src.health == 0)
 		src.special_update_icon("cut")
 		src.set_density(FALSE)
-		src.ruined = TRUE
+		src.set_ruined()
 	else
 		src.UpdateIcon()
 
@@ -90,7 +90,7 @@ TYPEINFO(/obj/mesh)
 	if (src.health == 0)
 		src.special_update_icon("cut")
 		src.set_density(0)
-		src.ruined = 1
+		src.set_ruined()
 	else
 		UpdateIcon()
 
@@ -107,7 +107,7 @@ TYPEINFO(/obj/mesh)
 	if (src.health == 0)
 		src.special_update_icon("corroded")
 		src.set_density(FALSE)
-		src.ruined = TRUE
+		src.set_ruined()
 	else
 		UpdateIcon()
 
@@ -123,7 +123,7 @@ TYPEINFO(/obj/mesh)
 	if (src.health == 0)
 		src.special_update_icon("melted")
 		src.set_density(FALSE)
-		src.ruined = TRUE
+		src.set_ruined()
 	else
 		UpdateIcon()
 
@@ -265,6 +265,17 @@ TYPEINFO(/obj/mesh)
 	else
 		var/datum/material/M = getMaterial("steel")
 		R.setMaterial(M)
+
+/obj/mesh/proc/set_ruined()
+	src.ruined = TRUE
+
+/obj/mesh/proc/set_fixed(obj/item/rods)
+	if (rods)
+		rods.change_stack_amount(-1)
+
+	src.setMaterial(rods?.material)
+	src.health = src.health_max
+	src.ruined = FALSE
 
 TYPEINFO(/obj/mesh/grille)
 TYPEINFO_NEW(/obj/mesh/grille)
@@ -501,7 +512,7 @@ TYPEINFO_NEW(/obj/mesh/catwalk)
 	icon = 'icons/obj/catwalk.dmi'
 	icon_state = "C15-0"
 	layer = CATWALK_LAYER
-	plane = PLANE_FLOOR
+	plane = PLANE_CATWALK
 	event_handler_flags = IMMUNE_MINERAL_MAGNET
 	default_material = "steel"
 	uses_default_material_appearance = FALSE
@@ -517,6 +528,19 @@ TYPEINFO_NEW(/obj/mesh/catwalk)
 	. = ..()
 	APPLY_ATOM_PROPERTY(src, PROP_ATOM_DO_LIQUID_CLICKS, src) // fuck this object
 
+/obj/mesh/catwalk/set_loc(newloc)
+	. = ..()
+	if (istrench(src.loc))
+		REMOVE_ATOM_PROPERTY(src.loc, PROP_TURF_TRENCH_CATWALKED, src)
+	if (istrench(newloc) && !src.ruined)
+		var/turf/T = newloc
+		APPLY_ATOM_PROPERTY(T, PROP_TURF_TRENCH_CATWALKED, src)
+
+/obj/mesh/catwalk/disposing()
+	if (istrench(src.loc))
+		REMOVE_ATOM_PROPERTY(src.loc, PROP_TURF_TRENCH_CATWALKED, src)
+	. = ..()
+
 /obj/mesh/catwalk/attackby(obj/item/I, mob/user)
 	if (issnippingtool(I))
 		src.damage_slashing(src.health_max)
@@ -525,6 +549,9 @@ TYPEINFO_NEW(/obj/mesh/catwalk)
 		return
 	if (istype(I, /obj/item/cable_coil))
 		src.loc.Attackby(user.equipped(), user)
+		return
+	if (src.ruined && istype(I, /obj/item/rods))
+		src.set_fixed(I)
 		return
 	if (istype(I,/obj/item/mop))
 		I.AfterAttack(get_turf(src), user)
@@ -541,6 +568,16 @@ TYPEINFO_NEW(/obj/mesh/catwalk)
 
 /obj/mesh/catwalk/get_icon_direction()
 	return src.get_icon_connectdir()
+
+/obj/mesh/catwalk/set_ruined()
+	. = ..()
+	if (istrench(src.loc))
+		REMOVE_ATOM_PROPERTY(src.loc, PROP_TURF_TRENCH_CATWALKED, src)
+
+/obj/mesh/catwalk/set_fixed()
+	. = ..()
+	if (istrench(src.loc))
+		APPLY_ATOM_PROPERTY(src.loc, PROP_TURF_TRENCH_CATWALKED, src)
 
 /obj/mesh/catwalk/jen // ^^ no i made my own because i am epic
 	name = "maintenance catwalk"
@@ -676,6 +713,6 @@ TYPEINFO(/obj/mesh/flock/barricade)
 	src.health += health_given
 	if (src.ruined)
 		src.set_density(TRUE)
-		src.ruined = FALSE
+		src.set_fixed()
 	src.UpdateIcon()
 	return ceil(health_given / src.repair_per_resource)
